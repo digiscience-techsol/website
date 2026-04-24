@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiScience Tech Solutions | Cloud, Platform Engineering & AIOps Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: #1a1a2e; color: white; padding: 20px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 700; color: #00d4ff; }
+        nav a { color: white; text-decoration: none; margin-left: 30px; transition: color 0.3s; }
+        nav a:hover { color: #00d4ff; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 120px 0; text-align: center; }
+        .hero h1 { font-size: 56px; margin-bottom: 20px; line-height: 1.2; }
+        .hero h1 .highlight { color: #ff6b35; }
+        .hero p { font-size: 20px; margin-bottom: 40px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .cta-button { display: inline-block; background: #ff6b35; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,107,53,0.3); }
+        
+        /* Services Section */
+        .services { padding: 100px 0; background: #f8f9fa; }
+        .section-title { text-align: center; font-size: 42px; margin-bottom: 60px; color: #1a1a2e; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .service-card { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .service-number { font-size: 14px; color: #ff6b35; font-weight: 700; margin-bottom: 10px; }
+        .service-card h3 { font-size: 26px; margin-bottom: 15px; color: #1a1a2e; }
+        .service-card p { color: #666; margin-bottom: 20px; line-height: 1.8; }
+        .service-features { list-style: none; }
+        .service-features li { padding: 8px 0; color: #555; padding-left: 25px; position: relative; }
+        .service-features li:before { content: "✓"; position: absolute; left: 0; color: #00d4ff; font-weight: bold; }
+        .delivery-time { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 20px; font-size: 14px; margin-top: 15px; }
+        
+        /* Footer */
+        footer { background: #1a1a2e; color: white; padding: 40px 0; text-align: center; }
+        footer p { opacity: 0.8; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">DigiScience Tech Solutions</div>
+                <nav>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Architect, modernize, and <span class="highlight">optimize</span> your cloud and AI journey</h1>
+            <p>AI-agent driven IT services company delivering production-ready cloud foundations, platform engineering excellence, and intelligent operations with zero human employees.</p>
+            <a href="#services" class="cta-button">Explore Our Services</a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Core Services</h2>
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <div class="service-number">01. CORE SERVICE</div>
+                    <h3>Cloud Landing Zone + Governance Accelerator</h3>
+                    <p><strong>What it is:</strong> A production-ready, secure, compliant cloud foundation for AWS and/or Azure covering multi-account/subscription structure, IAM baselines, policy guardrails, networking patterns, and Infrastructure-as-Code templates.</p>
+                    <ul class="service-features">
+                        <li>Multi-cloud architecture (AWS & Azure)</li>
+                        <li>Security & compliance baselines</li>
+                        <li>IaC templates & automation</li>
+                        <li>Team enablement & runbooks</li>
+                    </ul>
+                    <p><strong>Target:</strong> Mid-market companies, fast-growing startups, enterprises without strong internal platform team</p>
+                    <span class="delivery-time">⏱ Delivery: 2-4 weeks</span>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-number">02. CORE SERVICE</div>
+                    <h3>Platform Engineering Accelerator</h3>
+                    <p><strong>What it is:</strong> Internal Developer Platform (IDP) with paved roads, golden paths, self-service workflows, standardized CI/CD, developer portals, and deployment guardrails.</p>
+                    <ul class="service-features">
+                        <li>Self-service developer workflows</li>
+                        <li>Golden path templates & standards</li>
+                        <li>CI/CD pipeline automation</li>
+                        <li>Developer portal & documentation</li>
+                    </ul>
+                    <p><strong>Target:</strong> Mid-market tech/SaaS companies, enterprises with growing engineering teams</p>
+                    <span class="delivery-time">⏱ Delivery: 3-5 weeks</span>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-number">03. CORE SERVICE</div>
+                    <h3>Hybrid / Multi-Cloud AIOps Control Plane</h3>
+                    <p><strong>What it is:</strong> Unified operational intelligence across hybrid/multi-cloud with observability, AI-powered root cause analysis, noise reduction, anomaly detection, and automated remediation for AWS, Azure, on-prem, K8s, and SaaS.</p>
+                    <ul class="service-features">
+                        <li>AI-powered incident analysis</li>
+                        <li>Alert noise reduction (70%+)</li>
+                        <li>Automated remediation workflows</li>
+                        <li>Unified multi-cloud visibility</li>
+                    </ul>
+                    <p><strong>Target:</strong> Enterprises with hybrid/multi-cloud infrastructure (AWS/Azure/on-prem)</p>
+                    <span class="delivery-time">⏱ Delivery: 4-6 weeks</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2026 DigiScience Tech Solutions. 100% AI-agent driven IT services company.</p>
+            <p style="margin-top: 10px;">Greater Noida, Uttar Pradesh, India</p>
+        </div>
+    </footer>
+</body>
+</html>
