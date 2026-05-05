@@ -1,130 +1,565 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiScience Tech Solutions | Cloud, Platform Engineering & AIOps Consulting</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Header */
-        header { background: #1a1a2e; color: white; padding: 20px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 700; color: #00d4ff; }
-        nav a { color: white; text-decoration: none; margin-left: 30px; transition: color 0.3s; }
-        nav a:hover { color: #00d4ff; }
-        
-        /* Hero Section */
-        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 120px 0; text-align: center; }
-        .hero h1 { font-size: 56px; margin-bottom: 20px; line-height: 1.2; }
-        .hero h1 .highlight { color: #ff6b35; }
-        .hero p { font-size: 20px; margin-bottom: 40px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .cta-button { display: inline-block; background: #ff6b35; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s; }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,107,53,0.3); }
-        
-        /* Services Section */
-        .services { padding: 100px 0; background: #f8f9fa; }
-        .section-title { text-align: center; font-size: 42px; margin-bottom: 60px; color: #1a1a2e; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-        .service-card { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-        .service-number { font-size: 14px; color: #ff6b35; font-weight: 700; margin-bottom: 10px; }
-        .service-card h3 { font-size: 26px; margin-bottom: 15px; color: #1a1a2e; }
-        .service-card p { color: #666; margin-bottom: 20px; line-height: 1.8; }
-        .service-features { list-style: none; }
-        .service-features li { padding: 8px 0; color: #555; padding-left: 25px; position: relative; }
-        .service-features li:before { content: "✓"; position: absolute; left: 0; color: #00d4ff; font-weight: bold; }
-        .delivery-time { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 20px; font-size: 14px; margin-top: 15px; }
-        
-        /* Footer */
-        footer { background: #1a1a2e; color: white; padding: 40px 0; text-align: center; }
-        footer p { opacity: 0.8; }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .services-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CZXKFZ365"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9CZXKFZ365');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiScience Techsol | Cloud Cost Governance, Landing Zones, Platform Engineering & AI Automation</title>
+  <meta name="description" content="DigiScience Techsol helps SaaS and technology companies reduce AWS and Azure waste, install cloud governance guardrails, rescue landing zones, build platform engineering foundations, and automate workflows with AI." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#07101d" />
+  <meta name="author" content="DigiScience Tech Solutions" />
+  <link rel="canonical" href="https://digisciencetechsol.com/" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:site_name" content="DigiScience Tech Solutions" />
+  <meta property="og:title" content="DigiScience Techsol | Cloud Governance, Platform Engineering & AI Automation" />
+  <meta property="og:description" content="Senior cloud consulting for cost governance, landing-zone rescue, platform engineering, AI-agent workflow automation, and monthly cloud governance." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://digisciencetechsol.com/" />
+  <meta property="og:image" content="https://digisciencetechsol.com/assets/social-share.svg" />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="DigiScience Tech Solutions - AI, Cloud, FinOps, Observability and AIOps Consulting" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DigiScience Techsol | Cloud Governance, Platform Engineering & AI Automation" />
+  <meta name="twitter:description" content="Senior cloud consulting for cost governance, landing-zone rescue, platform engineering, AI-agent workflow automation, and monthly cloud governance." />
+  <meta name="twitter:image" content="https://digisciencetechsol.com/assets/social-share.svg" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DigiScience Tech Solutions",
+    "url": "https://digisciencetechsol.com/",
+    "image": "https://digisciencetechsol.com/assets/social-share.svg",
+    "logo": "https://digisciencetechsol.com/assets/favicon.svg",
+    "description": "Senior cloud consulting for cost governance, landing-zone rescue, platform engineering, AI-agent workflow automation, and monthly cloud governance.",
+    "email": "rajiv.gupta@digisciencetechsol.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "NSIC Metro, 94, Old Ishwar Nagar, Shambhu Dayal Bagh, Bahapur, Okhla",
+      "addressLocality": "New Delhi",
+      "addressRegion": "Delhi",
+      "postalCode": "110065",
+      "addressCountry": "IN"
+    },
+    "areaServed": "Global",
+    "sameAs": [
+      "https://digisciencetechsol.com/"
+    ]
+  }
+  </script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">DigiScience Tech Solutions</div>
-                <nav>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="DigiScience Tech Solutions home">
+        <img class="brand-mark" src="assets/favicon.svg" alt="DigiScience logo" width="42" height="42" decoding="async" />
+        <span class="brand-text">DigiScience Techsol</span>
+      </a>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Architect, modernize, and <span class="highlight">optimize</span> your cloud and AI journey</h1>
-            <p>AI-agent driven IT services company delivering production-ready cloud foundations, platform engineering excellence, and intelligent operations with zero human employees.</p>
-            <a href="#services" class="cta-button">Explore Our Services</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="services.html">Catalog</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#offers">Offers</a>
+        <a href="#trust">Trust Assets</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#approach">Approach</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-secondary nav-cta">Book a Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero bg-grid">
+      <div class="container hero-grid">
+        <div class="reveal visible">
+          <div class="eyebrow">Senior cloud consulting with AI-accelerated delivery</div>
+          <h1>
+            Reduce cloud waste and build stronger
+            <span class="gradient-text">platform foundations</span>
+          </h1>
+          <p>
+            DigiScience Techsol helps SaaS and technology companies reduce AWS and Azure waste, install practical
+            governance guardrails, rescue cloud landing zones, standardize platform engineering, and automate operational
+            workflows without hiring a full internal cloud and platform team.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Book a Free Cloud Snapshot</a>
+            <a class="btn btn-secondary" href="services.html">Explore Service Catalog</a>
+            <a class="btn btn-ghost" href="pricing.html">See Pricing Guidance</a>
+          </div>
+          <div class="hero-badges">
+            <span class="chip">AWS / Azure Cost Governance</span>
+            <span class="chip">Landing Zone Rescue</span>
+            <span class="chip">Platform Engineering</span>
+            <span class="chip">AI-Agent Automation</span>
+            <span class="chip">Monthly Governance</span>
+          </div>
         </div>
+
+        <div class="hero-panel reveal">
+          <h2 class="panel-title">Start with visibility, then move to governed execution</h2>
+          <p class="panel-copy">Packaged services give buyers a clear entry point while leaving room for deeper implementation and retainer work.</p>
+          <div class="hero-diagram">
+            <a class="flow-box flow-link" href="#solutions" aria-label="Go to solution areas and priorities">
+              <div>
+                <strong>Find Waste & Risk</strong>
+                <span>Spend leaks, tagging gaps, IAM risk, ownership gaps</span>
+              </div>
+              <span class="arrow">→</span>
+            </a>
+            <a class="flow-box flow-link" href="#approach" aria-label="Go to engagement approach and roadmap design">
+              <div>
+                <strong>Install Guardrails</strong>
+                <span>Budgets, alerts, policies, landing-zone standards</span>
+              </div>
+              <span class="arrow">→</span>
+            </a>
+            <a class="flow-box flow-link" href="#contact" aria-label="Go to contact section to start an engagement">
+              <div>
+                <strong>Operate Better</strong>
+                <span>Golden paths, runbooks, automation, monthly reviews</span>
+              </div>
+              <span class="arrow">✓</span>
+            </a>
+          </div>
+          <div class="cta-banner">
+            <strong>Ideal starting point</strong>
+            <span>Book a free Cloud Waste & Governance Snapshot, then convert the findings into a sprint or monthly governance cadence.</span>
+            <a class="cta-inline-link" href="#contact">Request the free snapshot →</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">Our Core Services</h2>
-            <div class="services-grid">
-                
-                <div class="service-card">
-                    <div class="service-number">01. CORE SERVICE</div>
-                    <h3>Cloud Landing Zone + Governance Accelerator</h3>
-                    <p><strong>What it is:</strong> A production-ready, secure, compliant cloud foundation for AWS and/or Azure covering multi-account/subscription structure, IAM baselines, policy guardrails, networking patterns, and Infrastructure-as-Code templates.</p>
-                    <ul class="service-features">
-                        <li>Multi-cloud architecture (AWS & Azure)</li>
-                        <li>Security & compliance baselines</li>
-                        <li>IaC templates & automation</li>
-                        <li>Team enablement & runbooks</li>
-                    </ul>
-                    <p><strong>Target:</strong> Mid-market companies, fast-growing startups, enterprises without strong internal platform team</p>
-                    <span class="delivery-time">⏱ Delivery: 2-4 weeks</span>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-number">02. CORE SERVICE</div>
-                    <h3>Platform Engineering Accelerator</h3>
-                    <p><strong>What it is:</strong> Internal Developer Platform (IDP) with paved roads, golden paths, self-service workflows, standardized CI/CD, developer portals, and deployment guardrails.</p>
-                    <ul class="service-features">
-                        <li>Self-service developer workflows</li>
-                        <li>Golden path templates & standards</li>
-                        <li>CI/CD pipeline automation</li>
-                        <li>Developer portal & documentation</li>
-                    </ul>
-                    <p><strong>Target:</strong> Mid-market tech/SaaS companies, enterprises with growing engineering teams</p>
-                    <span class="delivery-time">⏱ Delivery: 3-5 weeks</span>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-number">03. CORE SERVICE</div>
-                    <h3>Hybrid / Multi-Cloud AIOps Control Plane</h3>
-                    <p><strong>What it is:</strong> Unified operational intelligence across hybrid/multi-cloud with observability, AI-powered root cause analysis, noise reduction, anomaly detection, and automated remediation for AWS, Azure, on-prem, K8s, and SaaS.</p>
-                    <ul class="service-features">
-                        <li>AI-powered incident analysis</li>
-                        <li>Alert noise reduction (70%+)</li>
-                        <li>Automated remediation workflows</li>
-                        <li>Unified multi-cloud visibility</li>
-                    </ul>
-                    <p><strong>Target:</strong> Enterprises with hybrid/multi-cloud infrastructure (AWS/Azure/on-prem)</p>
-                    <span class="delivery-time">⏱ Delivery: 4-6 weeks</span>
-                </div>
-
-            </div>
-        </div>
+    <section class="service-strip" aria-label="Primary Services">
+      <div class="container service-strip-inner">
+        <a class="service-link" href="#offer-cost-governance">Cloud + AI Cost Governance</a>
+        <a class="service-link" href="#offer-landing-zone">Landing Zone Rescue</a>
+        <a class="service-link" href="#offer-platform">Platform Engineering</a>
+        <a class="service-link" href="#offer-ai-agent">AI-Agent Automation</a>
+        <a class="service-link" href="#offer-retainer">Monthly Governance</a>
+        <a class="service-link" href="#contact">Free Snapshot</a>
+      </div>
     </section>
 
-    <footer id="contact">
-        <div class="container">
-            <p>&copy; 2026 DigiScience Tech Solutions. 100% AI-agent driven IT services company.</p>
-            <p style="margin-top: 10px;">Greater Noida, Uttar Pradesh, India</p>
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="section-title reveal">What DigiScience Techsol does</h2>
+        <p class="section-subtitle reveal">Senior cloud consulting for SaaS and technology companies that need cost control, cloud governance, platform standards, and selective AI automation with practical delivery accountability.</p>
+        <div class="cards">
+          <article class="card reveal" id="service-ai-architecture">
+            <div class="card-icon">AI</div>
+            <h3>Cloud + AI Cost Governance</h3>
+            <p>Identify AWS, Azure, and AI/API spend leaks, fix ownership gaps, and create a prioritized 30-day savings and governance roadmap.</p>
+            <div class="tags"><span class="tag">Spend analysis</span><span class="tag">Budgets and alerts</span><span class="tag">AI usage controls</span></div>
+            <a class="card-link" href="#offer-cost-governance" data-service="Cloud + AI Cost Governance Sprint">View the sprint <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="service-cloud-journey">
+            <div class="card-icon">CL</div>
+            <h3>Cloud Landing Zone Rescue</h3>
+            <p>Improve existing AWS accounts or Azure subscriptions with IAM, networking, logging, backup, monitoring, and policy guardrails.</p>
+            <div class="tags"><span class="tag">IAM baseline</span><span class="tag">Policy guardrails</span><span class="tag">Runbooks</span></div>
+            <a class="card-link" href="#offer-landing-zone" data-service="Cloud Landing Zone Rescue">View the rescue offer <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="service-finops">
+            <div class="card-icon">FO</div>
+            <h3>Platform Engineering Accelerator</h3>
+            <p>Build lightweight golden paths, GitHub Actions templates, environment promotion standards, and onboarding runbooks.</p>
+            <div class="tags"><span class="tag">Golden paths</span><span class="tag">Reusable CI/CD</span><span class="tag">Developer onboarding</span></div>
+            <a class="card-link" href="#offer-platform" data-service="Platform Engineering Accelerator">View the accelerator <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="service-observability">
+            <div class="card-icon">OB</div>
+            <h3>AI-Agent Workflow Automation</h3>
+            <p>Automate internal operations, cloud reporting, support triage, sales operations, and customer success workflows after trust is established.</p>
+            <div class="tags"><span class="tag">Ops automation</span><span class="tag">Cloud reporting</span><span class="tag">Support triage</span></div>
+            <a class="card-link" href="#offer-ai-agent" data-service="AI-Agent Workflow Automation">Explore automation <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="service-aiops">
+            <div class="card-icon">AO</div>
+            <h3>Monthly Cloud Governance Retainer</h3>
+            <p>Keep cost, governance, architecture, rightsizing, and cloud drift under monthly review with executive-ready reporting.</p>
+            <div class="tags"><span class="tag">Monthly review</span><span class="tag">Savings backlog</span><span class="tag">Executive report</span></div>
+            <a class="card-link" href="#offer-retainer" data-service="Monthly Cloud Governance Retainer">View the retainer <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="service-advisory">
+            <div class="card-icon">TA</div>
+            <h3>Cloud, DevOps & AI Advisory</h3>
+            <p>Use senior guidance for architecture decisions, modernization sequencing, tooling choices, governance, and executive alignment.</p>
+            <div class="tags"><span class="tag">Architecture review</span><span class="tag">Roadmap</span><span class="tag">Decision support</span></div>
+            <a class="card-link" href="#contact" data-service="Cloud, DevOps and AI Advisory">Discuss advisory <span>→</span></a>
+          </article>
         </div>
-    </footer>
+      </div>
+    </section>
+
+    <section class="section" id="offers">
+      <div class="container">
+        <h2 class="section-title reveal">Packaged offers and deliverables</h2>
+        <p class="section-subtitle reveal">Clear entry points for quick buyer conversations. Each offer can stay advisory-only or move into implementation support depending on the environment and urgency.</p>
+        <div class="cards">
+          <article class="card reveal" id="offer-cost-governance">
+            <div class="card-icon">01</div>
+            <h3>Cloud + AI Cost Governance Sprint</h3>
+            <p>In 7 to 14 days, identify cloud and AI spend leaks, install practical controls, and create a prioritized savings and governance roadmap.</p>
+            <div class="list">
+              <div class="list-item"><span class="dot"></span><div><strong>Deliverables</strong><br><span>Spend and waste analysis, tagging review, budgets and alert recommendations, IAM quick-risk review, rightsizing backlog, AI/API usage checklist, and 30-day executive action plan.</span></div></div>
+              <div class="list-item"><span class="dot"></span><div><strong>Investment range</strong><br><span>India audit: INR 49K-99K. Global audit: USD 750-1,500. Implementation sprint: INR 2.5L-6L or USD 7.5K-15K.</span></div></div>
+            </div>
+            <a class="card-link" href="#contact" data-service="Cloud + AI Cost Governance Sprint">Book the free snapshot <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="offer-landing-zone">
+            <div class="card-icon">02</div>
+            <h3>Cloud Landing Zone Rescue</h3>
+            <p>Fix an existing cloud foundation without a full rebuild by adding practical landing-zone guardrails, IaC baselines, and operational runbooks.</p>
+            <div class="list">
+              <div class="list-item"><span class="dot"></span><div><strong>Deliverables</strong><br><span>Current-state assessment, account or subscription structure, IAM baseline, logging, monitoring, backup, policy guardrails, Terraform/OpenTofu starter modules, and handover runbooks.</span></div></div>
+              <div class="list-item"><span class="dot"></span><div><strong>Investment range</strong><br><span>India sprint: INR 3L-8L. Global sprint: USD 10K-25K.</span></div></div>
+            </div>
+            <a class="card-link" href="#contact" data-service="Cloud Landing Zone Rescue">Discuss landing zone rescue <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="offer-platform">
+            <div class="card-icon">03</div>
+            <h3>Platform Engineering Accelerator</h3>
+            <p>Create a lightweight internal platform foundation so teams can deploy through consistent, governed, repeatable golden paths.</p>
+            <div class="list">
+              <div class="list-item"><span class="dot"></span><div><strong>Deliverables</strong><br><span>Golden-path repo templates, reusable GitHub Actions workflows, environment promotion pattern, deployment approvals, rollback guidance, developer onboarding, and platform backlog.</span></div></div>
+              <div class="list-item"><span class="dot"></span><div><strong>Investment range</strong><br><span>India accelerator: INR 6L-18L. Global accelerator: USD 25K-60K.</span></div></div>
+            </div>
+            <a class="card-link" href="#contact" data-service="Platform Engineering Accelerator">Plan the accelerator <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="offer-ai-agent">
+            <div class="card-icon">04</div>
+            <h3>AI-Agent Workflow Automation</h3>
+            <p>Use AI agents carefully where they create measurable operational leverage, especially after governance and trust are already established.</p>
+            <div class="tags"><span class="tag">Internal ops</span><span class="tag">Cloud reporting</span><span class="tag">Support triage</span><span class="tag">Sales operations</span><span class="tag">Customer success</span></div>
+            <a class="card-link" href="#contact" data-service="AI-Agent Workflow Automation">Explore an automation use case <span>→</span></a>
+          </article>
+
+          <article class="card reveal" id="offer-retainer">
+            <div class="card-icon">05</div>
+            <h3>Monthly Cloud Governance Retainer</h3>
+            <p>Keep cloud cost, governance drift, architecture choices, and optimization actions visible with a recurring senior review rhythm.</p>
+            <div class="list">
+              <div class="list-item"><span class="dot"></span><div><strong>Deliverables</strong><br><span>Monthly cost and governance review, spend anomaly review, rightsizing backlog, drift review, architecture advisory, and executive monthly report.</span></div></div>
+              <div class="list-item"><span class="dot"></span><div><strong>Investment range</strong><br><span>India: INR 75K-2L per month. Global: USD 2K-7.5K per month.</span></div></div>
+            </div>
+            <a class="card-link" href="#contact" data-service="Monthly Cloud Governance Retainer">Start monthly governance <span>→</span></a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">CTA</div>
+            <h3>Free Cloud Waste & Governance Snapshot</h3>
+            <p>A low-friction starting point to review your current cloud cost and governance posture before selecting a sprint or retainer.</p>
+            <div class="cta-banner">
+              <strong>Best first conversation</strong>
+              <span>Bring current cloud spend, ownership challenges, recent incidents, or upcoming AI/API usage concerns.</span>
+            </div>
+            <a class="card-link" href="#contact" data-service="Free Cloud Waste & Governance Snapshot">Request the snapshot <span>→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trust">
+      <div class="container">
+        <h2 class="section-title reveal">Trust assets for a low-risk first conversation</h2>
+        <p class="section-subtitle reveal">Before a buyer shares access or schedules a deeper discussion, they can inspect the method, sample output, delivery process, and data-handling approach.</p>
+        <div class="trust-grid">
+          <article class="trust-card reveal">
+            <span class="trust-kicker">One-pager</span>
+            <h3>Cloud and AI Cost Governance Snapshot</h3>
+            <p>A concise view of who the offer is for, the problem it solves, the expected deliverables, and why the first step is bounded.</p>
+          </article>
+          <article class="trust-card reveal">
+            <span class="trust-kicker">Sample output</span>
+            <h3>Sample Waste and Governance Report</h3>
+            <p>A buyer can see the shape of the findings, scorecard, priorities, and 30/60/90 day roadmap without exposing any customer data.</p>
+          </article>
+          <article class="trust-card reveal">
+            <span class="trust-kicker">Process</span>
+            <h3>Before, During, and After Delivery</h3>
+            <p>The assessment has a clear flow: discovery, evidence review, structured findings, handover, and optional implementation support.</p>
+          </article>
+          <article class="trust-card reveal">
+            <span class="trust-kicker">Data handling</span>
+            <h3>Minimum Access, Practical Evidence</h3>
+            <p>Read-only access or exported evidence is preferred, secrets are not requested in chat or email, and public proof requires approval.</p>
+          </article>
+        </div>
+        <div class="trust-actions reveal">
+          <a class="btn btn-primary" href="trust-assets.html">Review Trust Asset Pack</a>
+          <a class="btn btn-secondary" href="portfolio.html">View Portfolio Proof</a>
+          <a class="btn btn-secondary" href="#contact" data-service="Free Cloud Waste & Governance Snapshot">Request the snapshot</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why-us">
+      <div class="container split">
+        <div class="card reveal">
+          <h2 class="section-title smaller">Why DigiScience</h2>
+          <p class="section-subtitle compact">A practical, senior-led model for technology companies that need a stronger cloud operating model without adding a large internal team first.</p>
+          <div class="list">
+            <div class="list-item"><span class="dot"></span><div><strong>Founder-led delivery</strong><br><span>High-accountability engagement with direct access to senior leadership.</span></div></div>
+            <div class="list-item"><span class="dot"></span><div><strong>Architecture + operations depth</strong><br><span>A combined lens across cloud, AI, FinOps, observability, and operational excellence.</span></div></div>
+            <div class="list-item"><span class="dot"></span><div><strong>Practical transformation thinking</strong><br><span>Clear guidance that connects business priorities to executable technical direction.</span></div></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3 class="subhead">What this final version improves</h3>
+          <div class="pill-grid">
+            <div class="pill-card"><strong>Cost first, not tool first</strong><span>Governance starts from spend, ownership, risk, and operational accountability.</span></div>
+            <div class="pill-card"><strong>Guardrails over bureaucracy</strong><span>Practical controls that make delivery safer without slowing engineering teams unnecessarily.</span></div>
+            <div class="pill-card"><strong>Platform patterns</strong><span>Reusable workflows, golden paths, and runbooks that reduce dependency on senior engineers.</span></div>
+            <div class="pill-card"><strong>AI where it helps</strong><span>AI-agent workflows are introduced where they improve reporting, triage, or operations in measurable ways.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="solutions">
+      <div class="container split">
+        <div class="card reveal">
+          <h2 class="section-title smaller">Where we typically help</h2>
+          <p class="section-subtitle compact">These solution areas help prospects quickly identify how your services map to their business problem.</p>
+          <div class="list">
+            <div class="list-item"><span class="dot"></span><div><strong>Cloud cost waste and ownership gaps</strong><br><span>For teams where cloud spend is growing faster than revenue, engineering capacity, or governance maturity.</span></div></div>
+            <div class="list-item"><span class="dot"></span><div><strong>Landing zones that need rescue</strong><br><span>For AWS accounts or Azure subscriptions created quickly and now missing consistent standards.</span></div></div>
+            <div class="list-item"><span class="dot"></span><div><strong>Platform engineering foundations</strong><br><span>For teams stuck with repetitive DevOps work, inconsistent CI/CD, slow onboarding, and risky production changes.</span></div></div>
+            <div class="list-item"><span class="dot"></span><div><strong>Operational automation opportunities</strong><br><span>For reporting, support triage, customer success, and internal workflows where AI agents can reduce manual load.</span></div></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3 class="subhead">Technology focus</h3>
+          <p class="muted-top">Broad enough to establish trust, focused enough to feel intentional.</p>
+          <div class="tags tags-tight">
+            <span class="tag">AWS / Azure / GCP</span>
+            <span class="tag">Containers / Kubernetes</span>
+            <span class="tag">Cloud security</span>
+            <span class="tag">Platform engineering</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Terraform / OpenTofu</span>
+            <span class="tag">AI/API governance</span>
+            <span class="tag">Observability</span>
+            <span class="tag">AIOps</span>
+            <span class="tag">FinOps</span>
+            <span class="tag">Hybrid cloud</span>
+          </div>
+          <div class="cta-banner space-top">
+            <strong>Good fit for</strong>
+            <span>CIO, CTO, Head of Cloud, SaaS founders, platform teams, architecture teams, engineering leaders, finance stakeholders, and operations teams.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="container">
+        <h2 class="section-title reveal">A simple consulting motion buyers understand</h2>
+        <p class="section-subtitle reveal">This makes the engagement model feel structured, premium, and easier to trust.</p>
+        <div class="process">
+          <div class="step reveal"><div class="number">01</div><h3>Discover</h3><p>Understand goals, environment, risks, and constraints to define the right entry point.</p></div>
+          <div class="step reveal"><div class="number">02</div><h3>Assess</h3><p>Review current architecture, cost posture, tooling, visibility, and operating model gaps.</p></div>
+          <div class="step reveal"><div class="number">03</div><h3>Design</h3><p>Create target-state architecture, roadmap, priorities, and execution recommendations.</p></div>
+          <div class="step reveal"><div class="number">04</div><h3>Enable</h3><p>Support implementation, governance, optimization, and operational improvement over time.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <h2 class="section-title reveal">Frequently asked questions</h2>
+        <p class="section-subtitle reveal">Sharper questions and clearer answers for the things serious buyers usually want to know before the first conversation.</p>
+        <div class="faq">
+          <div class="faq-item reveal open">
+            <button class="faq-question" type="button" aria-expanded="true">What is the best way to start working with DigiScience?<span>−</span></button>
+            <div class="faq-answer">The best starting point is the free Cloud Waste & Governance Snapshot. From there, the work can move into a 7 to 14 day cost governance sprint, landing-zone rescue, platform engineering accelerator, or monthly governance retainer.</div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">Which types of organizations are the best fit for your services?<span>+</span></button>
+            <div class="faq-answer">DigiScience is best suited for SaaS, technology, and cloud-heavy companies that need senior help with AWS or Azure cost control, landing-zone guardrails, platform engineering foundations, and pragmatic AI automation.</div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">Do you support AWS-only environments, or can you also work with Azure and hybrid setups?<span>+</span></button>
+            <div class="faq-answer">Yes. Engagements can cover AWS-led, Azure-led, hybrid, and multi-cloud platforms where governance, cost visibility, landing-zone maturity, or operational standards need improvement.</div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">Can you help before a migration, platform rebuild, or AI rollout begins?<span>+</span></button>
+            <div class="faq-answer">Yes. Many engagements start before implementation with an assessment, cost and risk review, target-state architecture, governance model, or platform roadmap so execution begins with clarity.</div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">What deliverables can we expect from a typical consulting engagement?<span>+</span></button>
+            <div class="faq-answer">Typical deliverables include cloud spend findings, tagging and ownership recommendations, IAM and governance notes, rightsizing backlog, landing-zone guardrails, GitHub Actions templates, runbooks, roadmap decks, and executive reports.</div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">Can cost governance, landing-zone rescue, or platform engineering be standalone?<span>+</span></button>
+            <div class="faq-answer">Absolutely. Each packaged offer can be delivered independently, combined into a broader program, or continued through the monthly cloud governance retainer.</div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">What happens after we submit the enquiry form?<span>+</span></button>
+            <div class="faq-answer">Once you submit the form, your enquiry is reviewed and the DigiScience team will follow up using the contact details you shared.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-card reveal">
+          <h2 class="section-title smaller">Talk to DigiScience</h2>
+          <p class="section-subtitle compact">Speak directly with DigiScience about cloud cost, governance, landing-zone, platform engineering, or AI automation priorities. Share your requirements and we will come back with the right next step for your engagement.</p>
+          <div class="contact-links">
+            <div class="contact-link">
+              <div class="icon">✓</div>
+              <div>
+                <strong>Founder-led response</strong>
+                <span>Your request is reviewed with direct attention so conversations start quickly and with the right context.</span>
+              </div>
+            </div>
+            <div class="contact-link">
+              <div class="icon">✓</div>
+              <div>
+                <strong>Clear next steps</strong>
+                <span>Use the form to share your current challenge, expected outcome, and service area of interest.</span>
+              </div>
+            </div>
+            <div class="contact-link">
+              <div class="icon">✓</div>
+              <div>
+                <strong>Focused consulting conversations</strong>
+                <span>Ideal for free cloud snapshots, cost governance sprints, landing-zone rescue, platform engineering accelerators, and monthly governance retainers.</span>
+              </div>
+            </div>
+            <div class="contact-link">
+              <div class="icon">✉</div>
+              <div>
+                <strong>Business enquiries</strong>
+                <a href="mailto:rajiv.gupta@digisciencetechsol.com">rajiv.gupta@digisciencetechsol.com</a>
+              </div>
+            </div>
+            <div class="contact-link">
+              <div class="icon">⌂</div>
+              <div>
+                <strong>Office Address</strong>
+                <span>Digiscience Techsol Private Limited<br />NSIC Metro, 94, Old Ishwar Nagar,<br />Shambhu Dayal Bagh, Bahapur,<br />Okhla New Delhi, Delhi - 110065</span>
+              </div>
+            </div>
+          </div>
+          <div class="cta-banner space-top">
+            <strong>Ready to start the conversation?</strong>
+            <span>Tell us what you are trying to achieve and we will respond with the most relevant next step.</span>
+            <a class="cta-inline-link" href="#faq">Review the FAQ before you submit →</a>
+          </div>
+        </div>
+
+        <div class="contact-card reveal">
+          <h3 class="subhead">Request a consultation</h3>
+          <p class="muted-top">Share your requirement and we will review it and get back to you with the right engagement approach.</p>
+          <form id="contactForm" novalidate>
+            <p class="hidden-field hp-field" aria-hidden="true">
+              <label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </p>
+            <div>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div>
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Your company name" />
+            </div>
+            <div>
+              <label for="service">Service of interest</label>
+              <select id="service" name="service">
+                <option>Free Cloud Waste & Governance Snapshot</option>
+                <option>Cloud + AI Cost Governance Sprint</option>
+                <option>Cloud Landing Zone Rescue</option>
+                <option>Platform Engineering Accelerator</option>
+                <option>AI-Agent Workflow Automation</option>
+                <option>Monthly Cloud Governance Retainer</option>
+                <option>Cloud, DevOps and AI Advisory</option>
+              </select>
+            </div>
+            <div>
+              <label for="message">Requirement</label>
+              <textarea id="message" name="message" placeholder="Briefly describe your current challenge, priorities, or the outcome you want to achieve."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Submit Enquiry</button>
+            <p class="privacy-note">By submitting this form, you agree that DigiScience can use the details you share to respond to your enquiry. See the <a href="privacy.html">Privacy Policy</a>.</p>
+            <div class="form-note" id="formNote" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 DigiScience Tech Solutions • Rajiv Gupta • Atul Mishra • New Delhi, India</div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="services.html">Catalog</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="trust-assets.html">Trust Assets</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69ca6d0565e73a1c3959799d/1jkvbjoc9';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>
