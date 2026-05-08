@@ -2,13 +2,13 @@
 # Keep these as 301 redirects so Google consolidates ranking signals into the current catalog.
 /about.php / 301
 /contact.php /#contact 301
-/service.php /services.html 301
-/services.php /services.html 301
-/cloud-computing.php /services.html 301
-/ai-ml.php /services.html 301
-/devops.php /services.html 301
-/finops.php /services.html 301
-/observability.php /services.html 301
-/pricing.php /pricing.html 301
-/portfolio.php /portfolio.html 301
-/privacy.php /privacy.html 301
+/service.php /services 301
+/services.php /services 301
+/cloud-computing.php /services 301
+/ai-ml.php /services 301
+/devops.php /services 301
+/finops.php /services 301
+/observability.php /services 301
+/pricing.php /pricing 301
+/portfolio.php /portfolio 301
+/privacy.php /privacy 301
