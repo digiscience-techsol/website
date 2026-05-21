@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 426" role="img" aria-labelledby="title desc">
+  <title id="title">Industry AI solution mosaic</title>
+  <desc id="desc">Eight abstract industry AI scenes for manufacturing, healthcare, legal, BFSI, retail, logistics, HR, and public sector.</desc>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#081321"/>
+      <stop offset=".72" stop-color="#132943"/>
+      <stop offset="1" stop-color="#07101d"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#5ea8ff"/>
+      <stop offset="1" stop-color="#84f0da"/>
+    </linearGradient>
+    <style>
+      .tile-bg{fill:url(#tile);stroke:#d8e6ff;stroke-opacity:.13}
+      .line{stroke:#84f0da;stroke-width:2;fill:none;opacity:.75}
+      .soft{fill:#fff;opacity:.08}
+      .dot{fill:#84f0da}
+      .gold{stroke:#ffd88a;stroke-width:3;stroke-linecap:round}
+    </style>
+  </defs>
+  <rect width="800" height="426" fill="#07101d"/>
+  <g>
+    <rect class="tile-bg" x="0" y="0" width="200" height="213"/>
+    <path class="line" d="M35 150h130M55 150l18-54 25 54 22-82 31 82"/>
+    <circle class="dot" cx="100" cy="104" r="22" opacity=".24"/>
+    <path class="gold" d="M48 74h38M114 74h38"/>
+  </g>
+  <g transform="translate(200 0)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <rect class="soft" x="35" y="54" width="130" height="84" rx="16"/>
+    <path class="line" d="M58 112c24-52 60-52 84 0M58 112h84M100 58v98"/>
+    <circle class="dot" cx="100" cy="104" r="34" opacity=".16"/>
+  </g>
+  <g transform="translate(400 0)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <rect class="soft" x="46" y="52" width="96" height="112" rx="10"/>
+    <path class="line" d="M66 83h56M66 108h68M66 133h44"/>
+    <path class="gold" d="M136 76l20 20-44 44"/>
+  </g>
+  <g transform="translate(600 0)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <path class="line" d="M32 145c30-52 63-42 89-69 17-17 31-26 49-20"/>
+    <rect class="soft" x="42" y="70" width="116" height="76" rx="14"/>
+    <circle class="dot" cx="132" cy="84" r="9"/>
+    <path class="gold" d="M54 126h86"/>
+  </g>
+  <g transform="translate(0 213)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <path class="line" d="M45 126c28-48 72-68 124-60M55 145c42-18 80-18 118 0"/>
+    <circle class="dot" cx="70" cy="78" r="15" opacity=".8"/>
+    <rect class="soft" x="45" y="54" width="110" height="108" rx="18"/>
+  </g>
+  <g transform="translate(200 213)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <path class="line" d="M38 132h44l24-54 28 74 22-34h26"/>
+    <rect class="soft" x="38" y="60" width="124" height="86" rx="16"/>
+    <circle class="dot" cx="154" cy="118" r="11"/>
+  </g>
+  <g transform="translate(400 213)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <circle class="dot" cx="88" cy="94" r="30" opacity=".22"/>
+    <circle class="dot" cx="124" cy="116" r="22" opacity=".18"/>
+    <path class="line" d="M50 146c24-36 78-50 112-18M82 80h42M72 104h72"/>
+    <path class="gold" d="M64 66h22M132 140h22"/>
+  </g>
+  <g transform="translate(600 213)">
+    <rect class="tile-bg" width="200" height="213"/>
+    <rect class="soft" x="48" y="54" width="104" height="104" rx="18"/>
+    <path class="line" d="M72 82h56M72 108h56M72 134h56M100 62v92"/>
+    <circle class="dot" cx="100" cy="108" r="44" opacity=".12"/>
+  </g>
+</svg>

@@ -6,6 +6,93 @@ const serviceSelect = document.getElementById('service');
 const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 const appConfig = window.DIGISCIENCE_CONFIG || {};
 
+const ensurePremiumVisuals = () => {
+  if (!document.querySelector('link[href="premium.css"]')) {
+    const premiumStyles = document.createElement('link');
+    premiumStyles.rel = 'stylesheet';
+    premiumStyles.href = 'premium.css';
+    document.head.appendChild(premiumStyles);
+  }
+
+  const createImage = (src, alt, width, height) => {
+    const image = document.createElement('img');
+    image.src = src;
+    image.alt = alt;
+    image.width = width;
+    image.height = height;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.className = 'card-visual';
+    return image;
+  };
+
+  const heroPanel = document.querySelector('.hero-panel');
+  if (heroPanel && !heroPanel.querySelector('.hero-visual-shell')) {
+    heroPanel.classList.add('visible');
+    const shell = document.createElement('div');
+    shell.className = 'hero-visual-shell';
+    shell.innerHTML = [
+      '<img src="assets/ai-visuals/enterprise-ai-cloud-hero.svg" alt="Secure enterprise AI cloud architecture with governed data flows" width="700" height="393" decoding="async" fetchpriority="high" />',
+      '<div class="visual-badge visual-badge-top">Governed AI</div>',
+      '<div class="visual-badge visual-badge-bottom">Cloud + security foundation</div>'
+    ].join('');
+    heroPanel.insertBefore(shell, heroPanel.firstChild);
+  }
+
+  const serviceVisuals = {
+    'AI Industry Transformation Solutions': ['assets/ai-visuals/industry-ai-mosaic.svg', 'Industry AI transformation scenes across enterprise sectors', 800, 426],
+    'Secure Enterprise AI Cloud Platform': ['assets/ai-visuals/secure-ai-platform.svg', 'Secure AI cloud platform architecture with governance controls', 650, 366],
+    'Responsible AI Governance and Agent Control': ['assets/ai-visuals/secure-ai-platform.svg', 'Responsible AI governance and agent control architecture', 650, 366],
+    'AI-Ready DevOps and Platform Engineering': ['assets/ai-visuals/secure-ai-platform.svg', 'AI-ready DevOps, MLOps and LLMOps operating platform', 650, 366],
+    'Cloud Modernization for AI Readiness': ['assets/ai-visuals/ai-readiness-pilot.svg', 'AI readiness roadmap with data maturity and secure cloud foundation', 650, 366],
+    'Industry AI Pilot in 45 Days': ['assets/ai-visuals/ai-readiness-pilot.svg', '45-day AI pilot roadmap with measurable outcomes', 650, 366]
+  };
+
+  document.querySelectorAll('.card h3').forEach((heading) => {
+    const title = heading.textContent.trim();
+    const card = heading.closest('.card');
+    if (!card || card.querySelector('.card-visual') || !serviceVisuals[title]) return;
+    card.classList.add('visual-card');
+    card.insertBefore(createImage(...serviceVisuals[title]), card.firstChild);
+  });
+
+  const industryMap = {
+    'Manufacturing AI': ['industry-mf', 'Manufacturing AI visual'],
+    'Healthcare AI Workflows': ['industry-hc', 'Healthcare AI workflow visual'],
+    'Legal Document Intelligence': ['industry-lg', 'Legal document intelligence visual'],
+    'BFSI Compliance and Fraud Intelligence': ['industry-fs', 'Financial compliance and fraud intelligence visual'],
+    'Retail Demand and Customer Intelligence': ['industry-rt', 'Retail demand and customer intelligence visual'],
+    'Logistics AI Control Tower': ['industry-lo', 'Logistics AI control tower visual'],
+    'HR and Recruitment Intelligence': ['industry-hr', 'HR and recruitment intelligence visual'],
+    'Government / Public Sector AI': ['industry-ps', 'Government and public sector AI visual'],
+    'Government and Public Sector AI': ['industry-ps', 'Government and public sector AI visual']
+  };
+
+  document.querySelectorAll('#industries .cards').forEach((grid) => grid.classList.add('industry-cards'));
+  document.querySelectorAll('#industries .card h3').forEach((heading) => {
+    const title = heading.textContent.trim();
+    const card = heading.closest('.card');
+    const config = industryMap[title];
+    if (!card || !config || card.querySelector('.industry-visual')) return;
+    card.classList.add('industry-card');
+    const visual = document.createElement('div');
+    visual.className = `industry-visual ${config[0]}`;
+    visual.setAttribute('role', 'img');
+    visual.setAttribute('aria-label', config[1]);
+    card.insertBefore(visual, card.firstChild);
+  });
+
+  const proofCards = document.querySelectorAll('#proof .card');
+  if (proofCards[0] && !proofCards[0].querySelector('.card-visual')) {
+    proofCards[0].classList.add('visual-card');
+    proofCards[0].insertBefore(createImage('assets/ai-visuals/ai-readiness-pilot.svg', 'AI readiness assessment scorecard and pilot roadmap visual', 650, 366), proofCards[0].firstChild);
+  }
+  if (proofCards[1] && !proofCards[1].querySelector('.card-visual')) {
+    proofCards[1].classList.add('visual-card');
+    proofCards[1].insertBefore(createImage('assets/ai-visuals/secure-ai-platform.svg', 'Secure AI landing zone and governance architecture visual', 650, 366), proofCards[1].firstChild);
+  }
+};
+
 const productionStylePatch = document.createElement('style');
 productionStylePatch.textContent = `
   .contact-grid > * { min-width: 0; }
@@ -18,6 +105,8 @@ document.querySelectorAll('h3').forEach((heading) => {
     heading.textContent = 'Government / Public Sector AI';
   }
 });
+
+ensurePremiumVisuals();
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {

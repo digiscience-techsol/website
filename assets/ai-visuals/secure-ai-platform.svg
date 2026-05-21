@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 366" role="img" aria-labelledby="title desc">
+  <title id="title">Secure AI cloud platform</title>
+  <desc id="desc">Abstract enterprise architecture layers for secure AI landing zones, governance, observability, and cost controls.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#07101d"/>
+      <stop offset=".6" stop-color="#112640"/>
+      <stop offset="1" stop-color="#07101d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#5ea8ff"/>
+      <stop offset="1" stop-color="#84f0da"/>
+    </linearGradient>
+  </defs>
+  <rect width="650" height="366" rx="26" fill="url(#bg)"/>
+  <g opacity=".14" stroke="#d8e6ff">
+    <path d="M44 78h562M44 143h562M44 208h562M44 273h562"/>
+    <path d="M96 44v278M209 44v278M325 44v278M441 44v278M554 44v278"/>
+  </g>
+  <g transform="translate(325 182)">
+    <circle r="84" fill="#5ea8ff" opacity=".12"/>
+    <circle r="56" fill="#84f0da" opacity=".13"/>
+    <path d="M-42-6c12-31 72-31 85 0 23 5 39 21 39 43 0 26-22 45-52 45h-84c-30 0-52-19-52-45 0-22 17-39 40-43 6-20 14-31 24-31z" fill="url(#accent)" opacity=".86"/>
+    <path d="M-23 8h46v42h-46z" fill="#07101d" opacity=".66"/>
+    <path d="M0-48v-44M0 82v44M-82 0h-64M82 0h64" stroke="#84f0da" stroke-width="3" opacity=".7"/>
+  </g>
+  <g fill="#ffffff" opacity=".08" stroke="#d8e6ff" stroke-opacity=".16">
+    <rect x="55" y="68" width="142" height="70" rx="18"/>
+    <rect x="453" y="68" width="142" height="70" rx="18"/>
+    <rect x="55" y="230" width="142" height="70" rx="18"/>
+    <rect x="453" y="230" width="142" height="70" rx="18"/>
+  </g>
+  <g fill="none" stroke="#84f0da" stroke-width="2" opacity=".7">
+    <path d="M197 103c44 0 72 12 93 42M453 103c-44 0-72 12-93 42M197 265c44 0 72-12 93-42M453 265c-44 0-72-12-93-42"/>
+  </g>
+  <g fill="#84f0da">
+    <circle cx="126" cy="103" r="9"/><circle cx="524" cy="103" r="9"/><circle cx="126" cy="265" r="9"/><circle cx="524" cy="265" r="9"/>
+  </g>
+  <g stroke="#ffd88a" stroke-width="4" stroke-linecap="round" opacity=".9">
+    <path d="M92 280h68M490 88h68"/>
+  </g>
+</svg>
