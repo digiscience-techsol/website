@@ -105,13 +105,16 @@ const fallbackAnswer = (question) => {
   };
 };
 
+const shouldCaptureLead = (question) =>
+  /price|pricing|cost|quote|budget|pilot|45|poc|prototype|meeting|call|demo|consult|proposal|timeline|implementation|assessment|readiness/i.test(question);
+
 const parseAssistantJson = (outputText, question) => {
   const text = String(outputText || '').trim().replace(/^```json\s*/i, '').replace(/```$/i, '').trim();
   const parsed = JSON.parse(text);
   const answer = clamp(parsed.answer, 1400);
   return {
     answer: answer || fallbackAnswer(question).answer,
-    captureLead: Boolean(parsed.captureLead)
+    captureLead: Boolean(parsed.captureLead) || shouldCaptureLead(question)
   };
 };
 
