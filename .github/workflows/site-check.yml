@@ -1,0 +1,20 @@
+name: Site Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Confirm homepage exists
+        run: test -f index.html
+      - name: Confirm stylesheet exists
+        run: test -f style.css
+      - name: Confirm script exists
+        run: test -f script.js
