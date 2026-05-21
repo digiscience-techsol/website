@@ -6,6 +6,19 @@ const serviceSelect = document.getElementById('service');
 const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 const appConfig = window.DIGISCIENCE_CONFIG || {};
 
+const productionStylePatch = document.createElement('style');
+productionStylePatch.textContent = `
+  .contact-grid > * { min-width: 0; }
+  .contact-link a { overflow-wrap: anywhere; }
+`;
+document.head.appendChild(productionStylePatch);
+
+document.querySelectorAll('h3').forEach((heading) => {
+  if (heading.textContent.trim() === 'Government and Public Sector AI') {
+    heading.textContent = 'Government / Public Sector AI';
+  }
+});
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('open');
