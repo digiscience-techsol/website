@@ -1,1 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"><defs><linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#5EA8FF"/><stop offset="1" stop-color="#84F0DA"/></linearGradient></defs><rect x="6" y="6" width="52" height="52" rx="16" fill="url(#g)"/><rect x="16" y="16" width="32" height="32" rx="10" stroke="rgba(255,255,255,0.45)" stroke-width="2" transform="rotate(10 32 32)"/><rect x="22" y="22" width="20" height="20" rx="6" stroke="rgba(255,255,255,0.65)" stroke-width="2" transform="rotate(-10 32 32)"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">DigiScience Techsol</title>
+  <desc id="desc">Premium DigiScience Techsol mark combining cloud architecture, AI intelligence, and governed transformation.</desc>
+  <defs>
+    <linearGradient id="markBg" x1="18" y1="14" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8ec5ff"/>
+      <stop offset=".5" stop-color="#7df0d4"/>
+      <stop offset="1" stop-color="#d8e6ff"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="34" y1="28" x2="97" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07101d"/>
+      <stop offset="1" stop-color="#132948"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#5ea8ff" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect x="12" y="12" width="104" height="104" rx="30" fill="url(#markBg)" filter="url(#shadow)"/>
+  <rect x="24" y="24" width="80" height="80" rx="24" fill="url(#inner)" opacity=".96"/>
+  <path d="M46 82h36c13 0 23-9 23-21 0-11-8-20-19-21-5-12-16-20-30-20-18 0-33 13-36 31-10 3-17 11-17 22 0 5 2 9 5 12" fill="none" stroke="#8ec5ff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M40 74c10-15 23-22 39-21 12 1 22 6 31 16" fill="none" stroke="#7df0d4" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="44" cy="77" r="5" fill="#7df0d4"/>
+  <circle cx="72" cy="51" r="5" fill="#8ec5ff"/>
+  <circle cx="102" cy="69" r="5" fill="#d8e6ff"/>
+  <path d="M44 77l28-26 30 18" fill="none" stroke="#d8e6ff" stroke-width="2.5" stroke-opacity=".72"/>
+</svg>

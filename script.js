@@ -10,7 +10,7 @@ const ensurePremiumVisuals = () => {
   if (!document.querySelector('link[href^="premium.css"]')) {
     const premiumStyles = document.createElement('link');
     premiumStyles.rel = 'stylesheet';
-    premiumStyles.href = 'premium.css?v=premium3';
+    premiumStyles.href = 'premium.css?v=premium4';
     document.head.appendChild(premiumStyles);
   }
 
@@ -104,6 +104,251 @@ document.querySelectorAll('h3').forEach((heading) => {
 });
 
 ensurePremiumVisuals();
+
+const initLeadAssistant = () => {
+  if (document.querySelector('.ai-assistant-panel')) return;
+
+  const quickPrompts = [
+    ['Pricing', 'How should we budget for enterprise AI work?'],
+    ['45-day pilot', 'What is included in the 45-day AI pilot?'],
+    ['AI readiness', 'What does the AI Readiness Assessment cover?'],
+    ['Governance', 'How do you handle responsible AI governance?'],
+    ['Industries', 'Which industries do you support?'],
+    ['Contact', 'I want to talk to DigiScience']
+  ];
+
+  const industryAnswers = {
+    manufacturing: 'Manufacturing AI can focus on predictive maintenance, visual inspection, anomaly detection, quality intelligence, and production decision support. A good first pilot usually starts with one plant workflow and one measurable metric.',
+    healthcare: 'Healthcare AI work should stay workflow-led and governance-heavy: clinical documentation support, patient operations, scheduling intelligence, knowledge assistants, and secure document workflows with human review.',
+    legal: 'Legal document intelligence usually starts with contract ingestion, clause extraction, obligation tracking, legal search, review workflow, and an audit trail for every recommendation.',
+    bfsi: 'For banking, financial services, and insurance, the strongest starting points are fraud intelligence, compliance response, KYC support, audit readiness, model risk controls, and risk intelligence.',
+    retail: 'Retail AI opportunities include demand forecasting, recommendation systems, churn prevention, campaign intelligence, customer support productivity, and inventory decision support.',
+    logistics: 'Logistics AI can support ETA prediction, route intelligence, warehouse visibility, exception management, and control-tower decision support.',
+    hr: 'HR and recruitment intelligence can improve candidate matching, screening productivity, skills intelligence, interview support, and workforce analytics with bias and audit controls.',
+    government: 'Public sector AI should be secure and explainable: citizen-service productivity, document processing, knowledge access, audit intelligence, and governed workflow automation.'
+  };
+
+  const localAnswer = (question) => {
+    const text = question.toLowerCase();
+    const link = (label, href) => `<a href="${href}">${label}</a>`;
+    const asksPricing = /price|pricing|budget|cost|quote|fee/.test(text);
+    const asksPilot = /45|pilot|proof|poc|prototype/.test(text);
+
+    if (asksPricing && asksPilot) {
+      return `The 45-day pilot validates one AI workflow through scope, data feasibility, secure architecture, governance controls, a controlled proof, and a scale decision package. Pricing is handled as a private quote with planning bands, because cost depends on data access, integrations, governance depth, and production risk. Start with the ${link('pilot framework', '/45-day-ai-pilot')} and ${link('pricing guidance', '/pricing')}.`;
+    }
+
+    if (asksPricing) {
+      return `For enterprise AI, DigiScience should use private quotes with public budget guidance, not a fixed rate card. Planning bands are shown on the ${link('pricing page', '/pricing')}, with final scope based on data access, integrations, governance depth, cloud readiness, and production risk.`;
+    }
+
+    if (asksPilot) {
+      return `The 45-day pilot is a framework, not a customer claim. It validates one AI workflow through scope, data feasibility, secure architecture, governance controls, a controlled proof, and a scale decision package. See ${link('45-Day AI Pilot', '/45-day-ai-pilot')}.`;
+    }
+
+    if (/readiness|assessment|scorecard|start/.test(text)) {
+      return `The AI Readiness Assessment identifies high-value use cases, data gaps, cloud/security gaps, governance requirements, and the right first pilot. It is the cleanest starting point before committing to a build.`;
+    }
+
+    if (/govern|responsible|security|risk|hallucination|audit|approval|prompt|rbac|iam|private/.test(text)) {
+      return `DigiScience positions governance as part of the build: responsible AI, prompt security, model governance, human approval, hallucination risk controls, audit trail, IAM/RBAC, private networking, monitoring, and cost governance.`;
+    }
+
+    if (/platform|cloud|azure|aws|gcp|bedrock|vertex|openai|foundry|sagemaker|kubernetes/.test(text)) {
+      return `The platform approach can use Azure OpenAI, Azure AI Foundry, AWS Bedrock, SageMaker, Vertex AI, AKS/EKS/GKE, monitoring, security controls, and cost governance. Cloud is positioned as the secure foundation for measurable AI outcomes.`;
+    }
+
+    const matchedIndustry = Object.keys(industryAnswers).find((key) => text.includes(key));
+    if (matchedIndustry) return `${industryAnswers[matchedIndustry]} Explore more on the ${link('industries page', '/industries')}.`;
+
+    if (/industry|industries|sector|vertical/.test(text)) {
+      return `DigiScience supports manufacturing, healthcare, legal, BFSI, retail, logistics, HR/recruitment, and government/public sector use cases. The site frames each as business problem -> AI outcome -> secure architecture -> governance controls -> measurable value.`;
+    }
+
+    if (/contact|call|email|talk|demo|meeting|lead|consult/.test(text)) {
+      return 'Share your details below and DigiScience can follow up about the right assessment, pilot, or private quote.';
+    }
+
+    return `DigiScience Techsol is an AI-first cloud transformation partner helping enterprises build secure, governed, industry-specific AI solutions on Azure, AWS, and GCP. Ask me about pricing, the 45-day pilot, AI readiness, governance, cloud platform, or industries.`;
+  };
+
+  const toggle = document.createElement('button');
+  toggle.className = 'ai-assistant-toggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.innerHTML = '<span>AI</span><span>Ask DigiScience</span>';
+
+  const panel = document.createElement('section');
+  panel.className = 'ai-assistant-panel';
+  panel.setAttribute('aria-label', 'DigiScience lead assistant');
+  panel.innerHTML = `
+    <div class="ai-assistant-header">
+      <div>
+        <strong>DigiScience AI assistant</strong>
+        <span>Ask about services, pricing, pilots, governance, and industries.</span>
+      </div>
+      <button class="ai-assistant-close" type="button" aria-label="Close assistant">×</button>
+    </div>
+    <div class="ai-assistant-messages" aria-live="polite"></div>
+    <div>
+      <div class="ai-quick-actions"></div>
+      <form class="ai-assistant-input">
+        <input type="text" name="question" autocomplete="off" placeholder="Ask a question..." aria-label="Ask a question" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  `;
+
+  document.body.append(toggle, panel);
+
+  const messages = panel.querySelector('.ai-assistant-messages');
+  const quickActions = panel.querySelector('.ai-quick-actions');
+  const inputForm = panel.querySelector('.ai-assistant-input');
+  const questionInput = inputForm.querySelector('input');
+  const closeButton = panel.querySelector('.ai-assistant-close');
+  const transcript = [];
+
+  const scrollMessages = () => {
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  const addMessage = (content, type = 'bot', html = false) => {
+    const message = document.createElement('div');
+    message.className = `ai-msg ${type === 'user' ? 'ai-msg-user' : ''}`.trim();
+    if (html) {
+      message.innerHTML = content;
+    } else {
+      message.textContent = content;
+    }
+    messages.appendChild(message);
+    scrollMessages();
+    return message;
+  };
+
+  const addLeadForm = () => {
+    if (panel.querySelector('.ai-lead-form')) return;
+    const wrapper = addMessage('', 'bot');
+    const form = document.createElement('form');
+    form.className = 'ai-lead-form';
+    form.innerHTML = `
+      <input name="name" required placeholder="Name" autocomplete="name" />
+      <input name="email" required type="email" placeholder="Work email" autocomplete="email" />
+      <input name="company" placeholder="Company" autocomplete="organization" />
+      <textarea name="message" rows="3" required placeholder="What outcome or use case should we discuss?"></textarea>
+      <button type="submit">Send enquiry</button>
+    `;
+    wrapper.appendChild(form);
+    scrollMessages();
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const leadEndpointUrl = appConfig.leadEndpointUrl || appConfig.googleScriptUrl || '';
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        company: form.company.value.trim(),
+        service: 'Website AI assistant',
+        message: form.message.value.trim(),
+        source: 'lead-assistant',
+        page: window.location.pathname,
+        transcript: transcript.join(' | '),
+        submittedAt: new Date().toISOString()
+      };
+
+      if (!leadEndpointUrl || leadEndpointUrl.includes('PASTE_YOUR')) {
+        addMessage('The enquiry service is temporarily unavailable. Please email rajiv.gupta@digisciencetechsol.com directly.');
+        return;
+      }
+
+      try {
+        form.querySelector('button').disabled = true;
+        await fetch(leadEndpointUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: new URLSearchParams(payload).toString()
+        });
+        addMessage('Thanks. Your enquiry has been captured. DigiScience will review the requirement and follow up.');
+        form.reset();
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            event_category: 'engagement',
+            event_label: 'Website AI assistant'
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        addMessage('I could not submit this right now. Please email rajiv.gupta@digisciencetechsol.com directly.');
+      } finally {
+        form.querySelector('button').disabled = false;
+      }
+    });
+  };
+
+  const answerQuestion = async (question) => {
+    transcript.push(`Visitor: ${question}`);
+    addMessage(question, 'user');
+
+    if (/contact|call|email|talk|demo|meeting|lead|consult/.test(question.toLowerCase())) {
+      addMessage(localAnswer(question), 'bot', true);
+      addLeadForm();
+      return;
+    }
+
+    if (appConfig.assistantEndpointUrl) {
+      try {
+        const response = await fetch(appConfig.assistantEndpointUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question, page: window.location.pathname, transcript })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const answer = data.answer || localAnswer(question);
+          transcript.push(`Assistant: ${answer}`);
+          addMessage(answer);
+          return;
+        }
+      } catch (error) {
+        console.warn('Assistant endpoint unavailable, using website knowledge base.', error);
+      }
+    }
+
+    const answer = localAnswer(question);
+    transcript.push(`Assistant: ${answer.replace(/<[^>]+>/g, '')}`);
+    addMessage(answer, 'bot', true);
+  };
+
+  quickPrompts.forEach(([label, prompt]) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = label;
+    button.addEventListener('click', () => answerQuestion(prompt));
+    quickActions.appendChild(button);
+  });
+
+  inputForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const question = questionInput.value.trim();
+    if (!question) return;
+    questionInput.value = '';
+    answerQuestion(question);
+  });
+
+  const setOpen = (open) => {
+    panel.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) window.setTimeout(() => questionInput.focus(), 120);
+  };
+
+  toggle.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
+  closeButton.addEventListener('click', () => setOpen(false));
+
+  addMessage('Hello. I can help with DigiScience services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot.', 'bot');
+};
+
+initLeadAssistant();
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
