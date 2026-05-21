@@ -298,16 +298,24 @@ const initLeadAssistant = () => {
 
     if (appConfig.assistantEndpointUrl) {
       try {
+        const thinking = addMessage('Thinking through the DigiScience knowledge base...');
         const response = await fetch(appConfig.assistantEndpointUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ question, page: window.location.pathname, transcript })
+          body: JSON.stringify({
+            question,
+            page: window.location.pathname,
+            transcript: transcript.slice(-8),
+            source: 'website-assistant'
+          })
         });
+        thinking.remove();
         if (response.ok) {
           const data = await response.json();
           const answer = data.answer || localAnswer(question);
           transcript.push(`Assistant: ${answer}`);
           addMessage(answer);
+          if (data.captureLead) addLeadForm();
           return;
         }
       } catch (error) {
