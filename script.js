@@ -7,14 +7,14 @@ const submitButton = contactForm ? contactForm.querySelector('button[type="submi
 const appConfig = window.DIGISCIENCE_CONFIG || {};
 
 const ensurePremiumVisuals = () => {
-  if (!document.querySelector('link[href="premium.css"]')) {
+  if (!document.querySelector('link[href^="premium.css"]')) {
     const premiumStyles = document.createElement('link');
     premiumStyles.rel = 'stylesheet';
-    premiumStyles.href = 'premium.css';
+    premiumStyles.href = 'premium.css?v=premium2';
     document.head.appendChild(premiumStyles);
   }
 
-  const createImage = (src, alt, width, height) => {
+  const createImage = (src, alt, width, height, extraClass = '') => {
     const image = document.createElement('img');
     image.src = src;
     image.alt = alt;
@@ -22,7 +22,7 @@ const ensurePremiumVisuals = () => {
     image.height = height;
     image.loading = 'lazy';
     image.decoding = 'async';
-    image.className = 'card-visual';
+    image.className = `card-visual ${extraClass}`.trim();
     return image;
   };
 
@@ -40,12 +40,12 @@ const ensurePremiumVisuals = () => {
   }
 
   const serviceVisuals = {
-    'AI Industry Transformation Solutions': ['assets/ai-visuals/industry-ai-mosaic.svg', 'Industry AI transformation scenes across enterprise sectors', 800, 426],
-    'Secure Enterprise AI Cloud Platform': ['assets/ai-visuals/secure-ai-platform.svg', 'Secure AI cloud platform architecture with governance controls', 650, 366],
-    'Responsible AI Governance and Agent Control': ['assets/ai-visuals/secure-ai-platform.svg', 'Responsible AI governance and agent control architecture', 650, 366],
-    'AI-Ready DevOps and Platform Engineering': ['assets/ai-visuals/secure-ai-platform.svg', 'AI-ready DevOps, MLOps and LLMOps operating platform', 650, 366],
-    'Cloud Modernization for AI Readiness': ['assets/ai-visuals/ai-readiness-pilot.svg', 'AI readiness roadmap with data maturity and secure cloud foundation', 650, 366],
-    'Industry AI Pilot in 45 Days': ['assets/ai-visuals/ai-readiness-pilot.svg', '45-day AI pilot roadmap with measurable outcomes', 650, 366]
+    'AI Industry Transformation Solutions': ['assets/ai-visuals/service-industry-transformation.svg', 'Industry AI transformation across operations, documents, customers, and decision support', 900, 560],
+    'Secure Enterprise AI Cloud Platform': ['assets/ai-visuals/service-secure-platform.svg', 'Secure enterprise AI platform with private cloud, identity, observability, and governance controls', 900, 560],
+    'Responsible AI Governance and Agent Control': ['assets/ai-visuals/service-governance-control.svg', 'Responsible AI governance console with approval, audit, risk, and agent control', 900, 560],
+    'AI-Ready DevOps and Platform Engineering': ['assets/ai-visuals/service-ai-devops.svg', 'AI-ready DevOps and platform engineering pipeline for MLOps and LLMOps', 900, 560],
+    'Cloud Modernization for AI Readiness': ['assets/ai-visuals/service-modernization.svg', 'Cloud modernization roadmap for AI-ready data, security, platforms, and operations', 900, 560],
+    'Industry AI Pilot in 45 Days': ['assets/ai-visuals/service-45-day-pilot.svg', '45-day industry AI pilot plan from use case to measurable business outcome', 900, 560]
   };
 
   document.querySelectorAll('.card h3').forEach((heading) => {
@@ -57,15 +57,15 @@ const ensurePremiumVisuals = () => {
   });
 
   const industryMap = {
-    'Manufacturing AI': ['industry-mf', 'Manufacturing AI visual'],
-    'Healthcare AI Workflows': ['industry-hc', 'Healthcare AI workflow visual'],
-    'Legal Document Intelligence': ['industry-lg', 'Legal document intelligence visual'],
-    'BFSI Compliance and Fraud Intelligence': ['industry-fs', 'Financial compliance and fraud intelligence visual'],
-    'Retail Demand and Customer Intelligence': ['industry-rt', 'Retail demand and customer intelligence visual'],
-    'Logistics AI Control Tower': ['industry-lo', 'Logistics AI control tower visual'],
-    'HR and Recruitment Intelligence': ['industry-hr', 'HR and recruitment intelligence visual'],
-    'Government / Public Sector AI': ['industry-ps', 'Government and public sector AI visual'],
-    'Government and Public Sector AI': ['industry-ps', 'Government and public sector AI visual']
+    'Manufacturing AI': ['assets/ai-visuals/industry-manufacturing.svg', 'Manufacturing AI for predictive maintenance, visual inspection, and production intelligence'],
+    'Healthcare AI Workflows': ['assets/ai-visuals/industry-healthcare.svg', 'Healthcare AI workflows for documentation, scheduling, and patient operations'],
+    'Legal Document Intelligence': ['assets/ai-visuals/industry-legal.svg', 'Legal document intelligence for contracts, clause extraction, and obligation tracking'],
+    'BFSI Compliance and Fraud Intelligence': ['assets/ai-visuals/industry-bfsi.svg', 'BFSI AI for compliance, KYC, fraud intelligence, and audit readiness'],
+    'Retail Demand and Customer Intelligence': ['assets/ai-visuals/industry-retail.svg', 'Retail AI for demand forecasting, recommendations, and customer intelligence'],
+    'Logistics AI Control Tower': ['assets/ai-visuals/industry-logistics.svg', 'Logistics AI control tower for ETA, routing, exception, and warehouse intelligence'],
+    'HR and Recruitment Intelligence': ['assets/ai-visuals/industry-hr.svg', 'HR and recruitment AI for candidate matching, screening, and workforce analytics'],
+    'Government / Public Sector AI': ['assets/ai-visuals/industry-public-sector.svg', 'Government and public sector AI for secure citizen service and document workflows'],
+    'Government and Public Sector AI': ['assets/ai-visuals/industry-public-sector.svg', 'Government and public sector AI for secure citizen service and document workflows']
   };
 
   document.querySelectorAll('#industries .cards').forEach((grid) => grid.classList.add('industry-cards'));
@@ -76,10 +76,7 @@ const ensurePremiumVisuals = () => {
     if (!card || !config || card.querySelector('.industry-visual')) return;
     card.classList.add('industry-card');
     const visual = document.createElement('div');
-    visual.className = `industry-visual ${config[0]}`;
-    visual.setAttribute('role', 'img');
-    visual.setAttribute('aria-label', config[1]);
-    card.insertBefore(visual, card.firstChild);
+    card.insertBefore(createImage(config[0], config[1], 900, 560, 'industry-visual'), card.firstChild);
   });
 
   const proofCards = document.querySelectorAll('#proof .card');

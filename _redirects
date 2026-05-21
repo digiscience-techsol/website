@@ -12,3 +12,11 @@
 /pricing.php /pricing 301
 /portfolio.php /portfolio 301
 /privacy.php /privacy 301
+
+# AI-first clean routes.
+/services /services.html 200
+/portfolio /portfolio.html 200
+/industries /industries.html 200
+/ai-readiness-assessment /ai-readiness-assessment.html 200
+/45-day-ai-pilot /45-day-ai-pilot.html 200
+/contact /contact.html 200

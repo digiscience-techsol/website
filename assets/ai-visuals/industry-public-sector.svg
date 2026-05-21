@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Government and public sector AI</title><desc id="desc">Public sector AI for secure citizen services, document workflows, audit intelligence, and knowledge access.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#162944"/><stop offset="1" stop-color="#07121f"/></linearGradient><linearGradient id="a" x1="0" x2="1"><stop stop-color="#ffd98f"/><stop offset="1" stop-color="#80f0dc"/></linearGradient></defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <path d="M156 220h588l-294-96z" fill="#17365a" stroke="#7db7ff" stroke-width="6"/>
+  <g fill="#102945" stroke="#315b83" stroke-width="4"><rect x="196" y="238" width="82" height="172"/><rect x="336" y="238" width="82" height="172"/><rect x="476" y="238" width="82" height="172"/><rect x="616" y="238" width="82" height="172"/></g>
+  <rect x="142" y="410" width="616" height="42" rx="12" fill="#17365a" stroke="#7db7ff"/>
+  <circle cx="450" cy="176" r="32" fill="url(#a)"/><path d="M432 176l14 14 28-38" stroke="#07121f" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

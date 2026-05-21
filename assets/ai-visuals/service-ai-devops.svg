@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">AI-ready DevOps and platform engineering</title>
+  <desc id="desc">A release pipeline for MLOps and LLMOps with tests, approvals, observability, and safe production delivery.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#102847"/><stop offset="1" stop-color="#07121f"/></linearGradient><linearGradient id="a" x1="0" x2="1"><stop stop-color="#7db7ff"/><stop offset="1" stop-color="#ffd98f"/></linearGradient></defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <rect x="52" y="54" width="796" height="452" rx="34" fill="#0a1728" stroke="#284d72" stroke-width="2"/>
+  <g transform="translate(86 210)">
+    <path d="M62 96h620" stroke="#2e557a" stroke-width="16" stroke-linecap="round"/>
+    <g fill="#102945" stroke="#7db7ff" stroke-width="2">
+      <rect x="0" y="32" width="124" height="128" rx="24"/><rect x="170" y="32" width="124" height="128" rx="24"/><rect x="340" y="32" width="124" height="128" rx="24"/><rect x="510" y="32" width="124" height="128" rx="24"/><rect x="680" y="32" width="124" height="128" rx="24"/>
+    </g>
+    <g fill="url(#a)"><circle cx="62" cy="96" r="26"/><circle cx="232" cy="96" r="26"/><circle cx="402" cy="96" r="26"/><circle cx="572" cy="96" r="26"/><circle cx="742" cy="96" r="26"/></g>
+    <g fill="#eaf4ff" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+    </g>
+  </g>
+</svg>

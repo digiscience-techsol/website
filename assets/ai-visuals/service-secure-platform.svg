@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Secure enterprise AI cloud platform</title>
+  <desc id="desc">A secure AI cloud platform across Azure, AWS, and GCP with identity, network, monitoring, and governance controls.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#10294b"/><stop offset="1" stop-color="#07121f"/></linearGradient><linearGradient id="a" x1="0" x2="1"><stop stop-color="#7db7ff"/><stop offset="1" stop-color="#80f0dc"/></linearGradient></defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <rect x="52" y="54" width="796" height="452" rx="34" fill="#0a1728" stroke="#284d72" stroke-width="2"/>
+  <g transform="translate(118 188)">
+    <rect x="160" y="42" width="210" height="132" rx="30" fill="#17365a" stroke="#7db7ff"/>
+    <path d="M206 128h166c35 0 56-18 56-45 0-25-18-43-44-43-11-34-39-56-78-56-48 0-84 33-92 78-30 5-52 27-52 58 0 5 1 8 4 8z" transform="translate(-38 10)" fill="url(#a)" opacity=".9"/>
+    <rect x="242" y="92" width="48" height="34" rx="8" fill="#0a1728"/>
+    <g fill="#102945" stroke="#2d547b">
+      <rect x="0" y="0" width="130" height="60" rx="18"/><rect x="0" y="104" width="130" height="60" rx="18"/><rect x="0" y="208" width="130" height="60" rx="18"/>
+      <rect x="442" y="0" width="130" height="60" rx="18"/><rect x="442" y="104" width="130" height="60" rx="18"/><rect x="442" y="208" width="130" height="60" rx="18"/>
+    </g>
+    <g stroke="#80f0dc" stroke-width="5" opacity=".9">
+      <path d="M130 30h74M130 134h80M130 238h100M370 108h72M370 56h72M370 160h72"/>
+    </g>
+    <g fill="#eaf4ff" font-family="Arial, sans-serif" font-size="17" font-weight="700">
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Healthcare AI workflows</title><desc id="desc">Healthcare AI workflows for patient operations, clinical documentation, scheduling, and knowledge assistance.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#12304b"/><stop offset="1" stop-color="#07121f"/></linearGradient><linearGradient id="a" x1="0" x2="1"><stop stop-color="#80f0dc"/><stop offset="1" stop-color="#7db7ff"/></linearGradient></defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <rect x="70" y="172" width="310" height="260" rx="28" fill="#102945" stroke="#315b83"/>
+  <circle cx="190" cy="282" r="70" fill="url(#a)" opacity=".9"/><path d="M190 238v88M146 282h88" stroke="#07121f" stroke-width="22" stroke-linecap="round"/>
+  <rect x="454" y="172" width="310" height="260" rx="28" fill="#102945" stroke="#315b83"/>
+  <path d="M496 290h56l28-74 54 144 34-70h54" stroke="#80f0dc" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M500 224h190M500 374h156" stroke="#7db7ff" stroke-width="10" stroke-linecap="round" opacity=".6"/>
+</svg>

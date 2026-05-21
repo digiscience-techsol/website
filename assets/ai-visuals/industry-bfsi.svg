@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">BFSI compliance and fraud intelligence</title><desc id="desc">Financial services AI for compliance, KYC, fraud detection, audit readiness, and risk intelligence.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#122944"/><stop offset="1" stop-color="#07121f"/></linearGradient><linearGradient id="a" x1="0" x2="1"><stop stop-color="#7db7ff"/><stop offset="1" stop-color="#ffd98f"/></linearGradient></defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <rect x="82" y="186" width="306" height="236" rx="28" fill="#102945" stroke="#315b83"/>
+  <path d="M128 340c48-86 102-38 150-118 24-40 54-54 82-60" stroke="url(#a)" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <circle cx="276" cy="226" r="18" fill="#ffd98f"/><circle cx="340" cy="164" r="18" fill="#80f0dc"/>
+  <rect x="490" y="186" width="290" height="236" rx="28" fill="#102945" stroke="#315b83"/>
+  <path d="M635 234l80 34v66c0 56-38 86-80 108-42-22-80-52-80-108v-66z" fill="#17365a" stroke="#80f0dc" stroke-width="6"/>
+  <path d="M604 326l24 24 54-72" stroke="#ffd98f" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

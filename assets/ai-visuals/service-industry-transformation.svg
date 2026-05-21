@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">AI industry transformation</title>
+  <desc id="desc">A premium enterprise dashboard showing industry AI outcomes across operations, documents, customers, and decisions.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#132948"/><stop offset="1" stop-color="#07121f"/></linearGradient>
+    <linearGradient id="a" x1="0" x2="1"><stop stop-color="#78b8ff"/><stop offset="1" stop-color="#80f0dc"/></linearGradient>
+  </defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <rect x="44" y="42" width="812" height="476" rx="34" fill="#0b182a" stroke="#26476b" stroke-width="2"/>
+  <g transform="translate(78 172)">
+    <rect width="164" height="230" rx="22" fill="#102945" stroke="#2b547a"/>
+    <path d="M42 152h82M42 128h56M42 104h92" stroke="#78b8ff" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="82" cy="62" r="34" fill="url(#a)" opacity=".9"/>
+    <path d="M64 62h36M82 44v36" stroke="#062032" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(270 172)">
+    <rect width="164" height="230" rx="22" fill="#102945" stroke="#2b547a"/>
+    <path d="M52 42h60l24 28v112H52z" fill="#dcecff" opacity=".16" stroke="#8fc6ff"/>
+    <path d="M70 98h60M70 124h46M70 150h68" stroke="#80f0dc" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(462 172)">
+    <rect width="164" height="230" rx="22" fill="#102945" stroke="#2b547a"/>
+    <circle cx="82" cy="82" r="42" fill="#78b8ff" opacity=".25"/>
+    <circle cx="82" cy="82" r="22" fill="url(#a)"/>
+    <path d="M42 150c24-26 56-26 80 0" stroke="#ffd98f" stroke-width="9" fill="none" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(654 172)">
+    <rect width="164" height="230" rx="22" fill="#102945" stroke="#2b547a"/>
+    <path d="M44 138l34-42 30 28 36-66" stroke="url(#a)" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="144" cy="58" r="10" fill="#ffd98f"/>
+  </g>
+  <rect x="76" y="438" width="748" height="38" rx="19" fill="#122945" stroke="#2d547b"/>
+</svg>
