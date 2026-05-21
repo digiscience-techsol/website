@@ -10,7 +10,7 @@ const ensurePremiumVisuals = () => {
   if (!document.querySelector('link[href^="premium.css"]')) {
     const premiumStyles = document.createElement('link');
     premiumStyles.rel = 'stylesheet';
-    premiumStyles.href = 'premium.css?v=premium2';
+    premiumStyles.href = 'premium.css?v=premium3';
     document.head.appendChild(premiumStyles);
   }
 
@@ -32,7 +32,7 @@ const ensurePremiumVisuals = () => {
     const shell = document.createElement('div');
     shell.className = 'hero-visual-shell';
     shell.innerHTML = [
-      '<img src="assets/ai-visuals/enterprise-ai-cloud-hero.svg" alt="Secure enterprise AI cloud architecture with governed data flows" width="700" height="393" decoding="async" fetchpriority="high" />',
+      '<img src="assets/ai-photos/hero-enterprise-ai.jpg" alt="Secure enterprise AI cloud architecture with governed data flows" width="700" height="393" decoding="async" fetchpriority="high" />',
       '<div class="visual-badge visual-badge-top">Governed AI</div>',
       '<div class="visual-badge visual-badge-bottom">Cloud + security foundation</div>'
     ].join('');
@@ -40,12 +40,12 @@ const ensurePremiumVisuals = () => {
   }
 
   const serviceVisuals = {
-    'AI Industry Transformation Solutions': ['assets/ai-visuals/service-industry-transformation.svg', 'Industry AI transformation across operations, documents, customers, and decision support', 900, 560],
-    'Secure Enterprise AI Cloud Platform': ['assets/ai-visuals/service-secure-platform.svg', 'Secure enterprise AI platform with private cloud, identity, observability, and governance controls', 900, 560],
-    'Responsible AI Governance and Agent Control': ['assets/ai-visuals/service-governance-control.svg', 'Responsible AI governance console with approval, audit, risk, and agent control', 900, 560],
-    'AI-Ready DevOps and Platform Engineering': ['assets/ai-visuals/service-ai-devops.svg', 'AI-ready DevOps and platform engineering pipeline for MLOps and LLMOps', 900, 560],
-    'Cloud Modernization for AI Readiness': ['assets/ai-visuals/service-modernization.svg', 'Cloud modernization roadmap for AI-ready data, security, platforms, and operations', 900, 560],
-    'Industry AI Pilot in 45 Days': ['assets/ai-visuals/service-45-day-pilot.svg', '45-day industry AI pilot plan from use case to measurable business outcome', 900, 560]
+    'AI Industry Transformation Solutions': ['assets/ai-photos/service-industry-transformation.jpg', 'Industry AI transformation across operations, documents, customers, and decision support', 900, 560],
+    'Secure Enterprise AI Cloud Platform': ['assets/ai-photos/service-secure-platform.jpg', 'Secure enterprise AI platform with private cloud, identity, observability, and governance controls', 900, 560],
+    'Responsible AI Governance and Agent Control': ['assets/ai-photos/service-governance-control.jpg', 'Responsible AI governance console with approval, audit, risk, and agent control', 900, 560],
+    'AI-Ready DevOps and Platform Engineering': ['assets/ai-photos/service-ai-devops.jpg', 'AI-ready DevOps and platform engineering pipeline for MLOps and LLMOps', 900, 560],
+    'Cloud Modernization for AI Readiness': ['assets/ai-photos/service-modernization.jpg', 'Cloud modernization roadmap for AI-ready data, security, platforms, and operations', 900, 560],
+    'Industry AI Pilot in 45 Days': ['assets/ai-photos/service-45-day-pilot.jpg', '45-day industry AI pilot plan from use case to measurable business outcome', 900, 560]
   };
 
   document.querySelectorAll('.card h3').forEach((heading) => {
@@ -57,15 +57,15 @@ const ensurePremiumVisuals = () => {
   });
 
   const industryMap = {
-    'Manufacturing AI': ['assets/ai-visuals/industry-manufacturing.svg', 'Manufacturing AI for predictive maintenance, visual inspection, and production intelligence'],
-    'Healthcare AI Workflows': ['assets/ai-visuals/industry-healthcare.svg', 'Healthcare AI workflows for documentation, scheduling, and patient operations'],
-    'Legal Document Intelligence': ['assets/ai-visuals/industry-legal.svg', 'Legal document intelligence for contracts, clause extraction, and obligation tracking'],
-    'BFSI Compliance and Fraud Intelligence': ['assets/ai-visuals/industry-bfsi.svg', 'BFSI AI for compliance, KYC, fraud intelligence, and audit readiness'],
-    'Retail Demand and Customer Intelligence': ['assets/ai-visuals/industry-retail.svg', 'Retail AI for demand forecasting, recommendations, and customer intelligence'],
-    'Logistics AI Control Tower': ['assets/ai-visuals/industry-logistics.svg', 'Logistics AI control tower for ETA, routing, exception, and warehouse intelligence'],
-    'HR and Recruitment Intelligence': ['assets/ai-visuals/industry-hr.svg', 'HR and recruitment AI for candidate matching, screening, and workforce analytics'],
-    'Government / Public Sector AI': ['assets/ai-visuals/industry-public-sector.svg', 'Government and public sector AI for secure citizen service and document workflows'],
-    'Government and Public Sector AI': ['assets/ai-visuals/industry-public-sector.svg', 'Government and public sector AI for secure citizen service and document workflows']
+    'Manufacturing AI': ['assets/ai-photos/industry-manufacturing.jpg', 'Manufacturing AI for predictive maintenance, visual inspection, and production intelligence'],
+    'Healthcare AI Workflows': ['assets/ai-photos/industry-healthcare.jpg', 'Healthcare AI workflows for documentation, scheduling, and patient operations'],
+    'Legal Document Intelligence': ['assets/ai-photos/industry-legal.jpg', 'Legal document intelligence for contracts, clause extraction, and obligation tracking'],
+    'BFSI Compliance and Fraud Intelligence': ['assets/ai-photos/industry-bfsi.jpg', 'BFSI AI for compliance, KYC, fraud intelligence, and audit readiness'],
+    'Retail Demand and Customer Intelligence': ['assets/ai-photos/industry-retail.jpg', 'Retail AI for demand forecasting, recommendations, and customer intelligence'],
+    'Logistics AI Control Tower': ['assets/ai-photos/industry-logistics.jpg', 'Logistics AI control tower for ETA, routing, exception, and warehouse intelligence'],
+    'HR and Recruitment Intelligence': ['assets/ai-photos/industry-hr.jpg', 'HR and recruitment AI for candidate matching, screening, and workforce analytics'],
+    'Government / Public Sector AI': ['assets/ai-photos/industry-public-sector.jpg', 'Government and public sector AI for secure citizen service and document workflows'],
+    'Government and Public Sector AI': ['assets/ai-photos/industry-public-sector.jpg', 'Government and public sector AI for secure citizen service and document workflows']
   };
 
   document.querySelectorAll('#industries .cards').forEach((grid) => grid.classList.add('industry-cards'));
@@ -82,11 +82,11 @@ const ensurePremiumVisuals = () => {
   const proofCards = document.querySelectorAll('#proof .card');
   if (proofCards[0] && !proofCards[0].querySelector('.card-visual')) {
     proofCards[0].classList.add('visual-card');
-    proofCards[0].insertBefore(createImage('assets/ai-visuals/ai-readiness-pilot.svg', 'AI readiness assessment scorecard and pilot roadmap visual', 650, 366), proofCards[0].firstChild);
+    proofCards[0].insertBefore(createImage('assets/ai-photos/service-45-day-pilot.jpg', 'AI readiness assessment scorecard and pilot roadmap visual', 650, 366), proofCards[0].firstChild);
   }
   if (proofCards[1] && !proofCards[1].querySelector('.card-visual')) {
     proofCards[1].classList.add('visual-card');
-    proofCards[1].insertBefore(createImage('assets/ai-visuals/secure-ai-platform.svg', 'Secure AI landing zone and governance architecture visual', 650, 366), proofCards[1].firstChild);
+    proofCards[1].insertBefore(createImage('assets/ai-photos/service-secure-platform.jpg', 'Secure AI landing zone and governance architecture visual', 650, 366), proofCards[1].firstChild);
   }
 };
 
