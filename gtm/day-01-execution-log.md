@@ -4,7 +4,10 @@ Date: 2026-05-22
 
 ## Access available
 
-- LinkedIn: authenticated feed visible for Rajiv Das Gupta. Posting and sending were not completed because Chrome automation was blocked by an open extension UI.
+- LinkedIn: authenticated feed visible for Rakesh Pandey. Rakesh Pandey is the DigiScience LinkedIn outreach partner / sales head profile for outbound activity.
+- Company page visible from profile: DigiScience Techsol.
+- Company page/admin path observed: https://www.linkedin.com/company/121034242/admin/
+- Posting and sending were not completed because Chrome automation opened the composer but did not reliably type/paste content into the LinkedIn composer.
 - Email: Gmail tab is open. Sending was not approved, so no emails were sent.
 - Tracker update: available through repository CSV files.
 - Website/repo update: available through GitHub main and Cloudflare Pages deployment.
@@ -89,14 +92,14 @@ Pending DM targets:
 
 ## Blockers
 
-1. LinkedIn post and sending were not completed because browser automation was blocked by an open extension UI in Chrome.
+1. LinkedIn post and sending were not completed because browser automation opened the composer but could not reliably type/paste content into the LinkedIn composer.
 2. Buyer profile verification is pending for all 10 connection request targets.
 3. No direct messages can be sent until the founder is connected to the target buyer or messaging is otherwise allowed.
 
 ## Next Action
 
-1. Dismiss the blocking extension UI in Chrome.
-2. Verify actual buyer profiles for the 10 target accounts.
-3. Publish the prepared LinkedIn post manually or re-run automation after Chrome is clear.
+1. Use Rakesh Pandey's LinkedIn profile for DigiScience outreach.
+2. Manually paste/publish the prepared LinkedIn post from the open composer, or re-run automation after Chrome accepts typed/pasted content in LinkedIn.
+3. Verify actual buyer profiles for the 10 target accounts.
 4. Send connection requests only to verified buyer profiles.
 5. Update tracker status to Connection Sent only after actual send.
