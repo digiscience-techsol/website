@@ -6,11 +6,40 @@ const serviceSelect = document.getElementById('service');
 const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 const appConfig = window.DIGISCIENCE_CONFIG || {};
 
+const trackEvent = (eventName, params = {}) => {
+  if (!eventName) return;
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, {
+      event_category: 'engagement',
+      ...params
+    });
+    return;
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...params });
+};
+
+const buildMailtoUrl = (payload) => {
+  const subject = encodeURIComponent(`${payload.service || 'Website enquiry'} - ${payload.company || payload.name || 'Prospect'}`);
+  const body = encodeURIComponent([
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    `Company: ${payload.company}`,
+    `Service: ${payload.service}`,
+    `Page: ${payload.page}`,
+    '',
+    payload.message,
+    '',
+    `Intake details: ${payload.intakeDetails || '{}'}`
+  ].join('\n'));
+  return `mailto:rajiv.gupta@digisciencetechsol.com?subject=${subject}&body=${body}`;
+};
+
 const ensurePremiumVisuals = () => {
-  if (!document.querySelector('link[href^="premium.css"]')) {
+  if (!document.querySelector('link[href*="premium.css"]')) {
     const premiumStyles = document.createElement('link');
     premiumStyles.rel = 'stylesheet';
-    premiumStyles.href = 'premium.css?v=premium4';
+    premiumStyles.href = '/premium.css?v=premium4';
     document.head.appendChild(premiumStyles);
   }
 
@@ -32,7 +61,7 @@ const ensurePremiumVisuals = () => {
     const shell = document.createElement('div');
     shell.className = 'hero-visual-shell';
     shell.innerHTML = [
-      '<img src="assets/ai-photos/hero-enterprise-ai.jpg" alt="Secure enterprise AI cloud architecture with governed data flows" width="700" height="393" decoding="async" fetchpriority="high" />',
+      '<img src="/assets/ai-photos/hero-enterprise-ai.jpg" alt="Secure enterprise AI cloud architecture with governed data flows" width="700" height="393" decoding="async" fetchpriority="high" />',
       '<div class="visual-badge visual-badge-top">Governed AI</div>',
       '<div class="visual-badge visual-badge-bottom">Cloud + security foundation</div>'
     ].join('');
@@ -40,12 +69,12 @@ const ensurePremiumVisuals = () => {
   }
 
   const serviceVisuals = {
-    'AI Industry Transformation Solutions': ['assets/ai-photos/service-industry-transformation.jpg', 'Industry AI transformation across operations, documents, customers, and decision support', 900, 560],
-    'Secure Enterprise AI Cloud Platform': ['assets/ai-photos/service-secure-platform.jpg', 'Secure enterprise AI platform with private cloud, identity, observability, and governance controls', 900, 560],
-    'Responsible AI Governance and Agent Control': ['assets/ai-photos/service-governance-control.jpg', 'Responsible AI governance console with approval, audit, risk, and agent control', 900, 560],
-    'AI-Ready DevOps and Platform Engineering': ['assets/ai-photos/service-ai-devops.jpg', 'AI-ready DevOps and platform engineering pipeline for MLOps and LLMOps', 900, 560],
-    'Cloud Modernization for AI Readiness': ['assets/ai-photos/service-modernization.jpg', 'Cloud modernization roadmap for AI-ready data, security, platforms, and operations', 900, 560],
-    'Industry AI Pilot in 45 Days': ['assets/ai-photos/service-45-day-pilot.jpg', '45-day industry AI pilot plan from use case to measurable business outcome', 900, 560]
+    'AI Industry Transformation Solutions': ['/assets/ai-photos/service-industry-transformation.jpg', 'Industry AI transformation across operations, documents, customers, and decision support', 900, 560],
+    'Secure Enterprise AI Cloud Platform': ['/assets/ai-photos/service-secure-platform.jpg', 'Secure enterprise AI platform with private cloud, identity, observability, and governance controls', 900, 560],
+    'Responsible AI Governance and Agent Control': ['/assets/ai-photos/service-governance-control.jpg', 'Responsible AI governance console with approval, audit, risk, and agent control', 900, 560],
+    'AI-Ready DevOps and Platform Engineering': ['/assets/ai-photos/service-ai-devops.jpg', 'AI-ready DevOps and platform engineering pipeline for MLOps and LLMOps', 900, 560],
+    'Cloud Modernization for AI Readiness': ['/assets/ai-photos/service-modernization.jpg', 'Cloud modernization roadmap for AI-ready data, security, platforms, and operations', 900, 560],
+    'Industry AI Pilot in 45 Days': ['/assets/ai-photos/service-45-day-pilot.jpg', '45-day industry AI pilot plan from use case to measurable business outcome', 900, 560]
   };
 
   document.querySelectorAll('.card h3').forEach((heading) => {
@@ -57,15 +86,15 @@ const ensurePremiumVisuals = () => {
   });
 
   const industryMap = {
-    'Manufacturing AI': ['assets/ai-photos/industry-manufacturing.jpg', 'Manufacturing AI for predictive maintenance, visual inspection, and production intelligence'],
-    'Healthcare AI Workflows': ['assets/ai-photos/industry-healthcare.jpg', 'Healthcare AI workflows for documentation, scheduling, and patient operations'],
-    'Legal Document Intelligence': ['assets/ai-photos/industry-legal.jpg', 'Legal document intelligence for contracts, clause extraction, and obligation tracking'],
-    'BFSI Compliance and Fraud Intelligence': ['assets/ai-photos/industry-bfsi.jpg', 'BFSI AI for compliance, KYC, fraud intelligence, and audit readiness'],
-    'Retail Demand and Customer Intelligence': ['assets/ai-photos/industry-retail.jpg', 'Retail AI for demand forecasting, recommendations, and customer intelligence'],
-    'Logistics AI Control Tower': ['assets/ai-photos/industry-logistics.jpg', 'Logistics AI control tower for ETA, routing, exception, and warehouse intelligence'],
-    'HR and Recruitment Intelligence': ['assets/ai-photos/industry-hr.jpg', 'HR and recruitment AI for candidate matching, screening, and workforce analytics'],
-    'Government / Public Sector AI': ['assets/ai-photos/industry-public-sector.jpg', 'Government and public sector AI for secure citizen service and document workflows'],
-    'Government and Public Sector AI': ['assets/ai-photos/industry-public-sector.jpg', 'Government and public sector AI for secure citizen service and document workflows']
+    'Manufacturing AI': ['/assets/ai-photos/industry-manufacturing.jpg', 'Manufacturing AI for predictive maintenance, visual inspection, and production intelligence'],
+    'Healthcare AI Workflows': ['/assets/ai-photos/industry-healthcare.jpg', 'Healthcare AI workflows for documentation, scheduling, and patient operations'],
+    'Legal Document Intelligence': ['/assets/ai-photos/industry-legal.jpg', 'Legal document intelligence for contracts, clause extraction, and obligation tracking'],
+    'BFSI Compliance and Fraud Intelligence': ['/assets/ai-photos/industry-bfsi.jpg', 'BFSI AI for compliance, KYC, fraud intelligence, and audit readiness'],
+    'Retail Demand and Customer Intelligence': ['/assets/ai-photos/industry-retail.jpg', 'Retail AI for demand forecasting, recommendations, and customer intelligence'],
+    'Logistics AI Control Tower': ['/assets/ai-photos/industry-logistics.jpg', 'Logistics AI control tower for ETA, routing, exception, and warehouse intelligence'],
+    'HR and Recruitment Intelligence': ['/assets/ai-photos/industry-hr.jpg', 'HR and recruitment AI for candidate matching, screening, and workforce analytics'],
+    'Government / Public Sector AI': ['/assets/ai-photos/industry-public-sector.jpg', 'Government and public sector AI for secure citizen service and document workflows'],
+    'Government and Public Sector AI': ['/assets/ai-photos/industry-public-sector.jpg', 'Government and public sector AI for secure citizen service and document workflows']
   };
 
   document.querySelectorAll('#industries .cards').forEach((grid) => grid.classList.add('industry-cards'));
@@ -82,11 +111,11 @@ const ensurePremiumVisuals = () => {
   const proofCards = document.querySelectorAll('#proof .card');
   if (proofCards[0] && !proofCards[0].querySelector('.card-visual')) {
     proofCards[0].classList.add('visual-card');
-    proofCards[0].insertBefore(createImage('assets/ai-photos/service-45-day-pilot.jpg', 'AI readiness assessment scorecard and pilot roadmap visual', 650, 366), proofCards[0].firstChild);
+    proofCards[0].insertBefore(createImage('/assets/ai-photos/service-45-day-pilot.jpg', 'AI readiness assessment scorecard and pilot roadmap visual', 650, 366), proofCards[0].firstChild);
   }
   if (proofCards[1] && !proofCards[1].querySelector('.card-visual')) {
     proofCards[1].classList.add('visual-card');
-    proofCards[1].insertBefore(createImage('assets/ai-photos/service-secure-platform.jpg', 'Secure AI landing zone and governance architecture visual', 650, 366), proofCards[1].firstChild);
+    proofCards[1].insertBefore(createImage('/assets/ai-photos/service-secure-platform.jpg', 'Secure AI landing zone and governance architecture visual', 650, 366), proofCards[1].firstChild);
   }
 };
 
@@ -271,12 +300,7 @@ const initLeadAssistant = () => {
         });
         addMessage('Thanks. Your enquiry has been captured. DigiScience will review the requirement and follow up.');
         form.reset();
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'generate_lead', {
-            event_category: 'engagement',
-            event_label: 'Website AI assistant'
-          });
-        }
+      trackEvent('generate_lead', { event_label: 'Website AI assistant' });
       } catch (error) {
         console.error(error);
         addMessage('I could not submit this right now. Please email rajiv.gupta@digisciencetechsol.com directly.');
@@ -443,12 +467,24 @@ if (contactForm && formNote) {
       }
     });
 
+    const getField = (name) => contactForm.elements[name] ? String(contactForm.elements[name].value || '').trim() : '';
+    const composedMessage = [
+      getField('message'),
+      getField('businessProblem') ? `Business problem: ${getField('businessProblem')}` : '',
+      getField('desiredOutcome') ? `Desired outcome: ${getField('desiredOutcome')}` : '',
+      getField('businessContext') ? `Business context: ${getField('businessContext')}` : '',
+      getField('workflowPain') ? `Workflow pain: ${getField('workflowPain')}` : '',
+      getField('useCaseCandidate') ? `AI use case candidate: ${getField('useCaseCandidate')}` : '',
+      getField('dataAvailability') ? `Data availability: ${getField('dataAvailability')}` : '',
+      getField('successMetrics') ? `Success metrics: ${getField('successMetrics')}` : ''
+    ].filter(Boolean).join('\n\n');
+
     const payload = {
       name: contactForm.name.value.trim(),
       email: contactForm.email.value.trim(),
       company: contactForm.company.value.trim(),
       service: contactForm.service.value,
-      message: contactForm.message.value.trim(),
+      message: composedMessage,
       website: contactForm.website.value.trim(),
       source: window.location.hostname || 'website',
       page: window.location.pathname,
@@ -469,20 +505,27 @@ if (contactForm && formNote) {
 
     const leadEndpointUrl = appConfig.leadEndpointUrl || appConfig.googleScriptUrl || '';
 
+    // Static-safe fallback: if the backend endpoint is unavailable, the enquiry can still be sent by email without exposing secrets.
     if (!leadEndpointUrl || leadEndpointUrl.includes('PASTE_YOUR')) {
-      showFormNote('The enquiry service is temporarily unavailable. Please try again shortly or email <a href="mailto:rajiv.gupta@digisciencetechsol.com">rajiv.gupta@digisciencetechsol.com</a> directly.');
+      const mailtoUrl = buildMailtoUrl(payload);
+      showFormNote(`The enquiry service is temporarily unavailable. Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
+      trackEvent('click_mailto', { event_label: 'lead form fallback' });
       return;
     }
 
     if (leadEndpointUrl.includes('/macros/library/')) {
-      showFormNote('The enquiry service is temporarily unavailable. Please try again shortly or email <a href="mailto:rajiv.gupta@digisciencetechsol.com">rajiv.gupta@digisciencetechsol.com</a> directly.');
+      const mailtoUrl = buildMailtoUrl(payload);
+      showFormNote(`The enquiry service is temporarily unavailable. Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
+      trackEvent('click_mailto', { event_label: 'lead form fallback' });
       return;
     }
 
     const isGoogleScriptEndpoint = /script\.google\.com\/macros\/s\/.+\/exec/.test(leadEndpointUrl);
     const isDigiscienceLeadEndpoint = /n8n\.digisciencetechsol\.com\/webhook\/digiscience-lead-/.test(leadEndpointUrl);
     if (!isGoogleScriptEndpoint && !isDigiscienceLeadEndpoint) {
-      showFormNote('The enquiry service is temporarily unavailable. Please try again shortly or email <a href="mailto:rajiv.gupta@digisciencetechsol.com">rajiv.gupta@digisciencetechsol.com</a> directly.');
+      const mailtoUrl = buildMailtoUrl(payload);
+      showFormNote(`The enquiry service is temporarily unavailable. Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
+      trackEvent('click_mailto', { event_label: 'lead form fallback' });
       return;
     }
 
@@ -500,17 +543,13 @@ if (contactForm && formNote) {
         body: body.toString()
       });
 
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-          event_category: 'engagement',
-          event_label: payload.service || 'Website enquiry'
-        });
-      }
+      trackEvent('submit_contact_form', { event_label: payload.service || 'Website enquiry' });
+      trackEvent('generate_lead', { event_label: payload.service || 'Website enquiry' });
 
       contactForm.reset();
       showFormNote('Your enquiry has been submitted successfully. Redirecting...', 'success');
       window.setTimeout(() => {
-        window.location.href = '/success.html';
+        window.location.href = '/thank-you';
       }, 700);
     } catch (error) {
       console.error(error);
@@ -520,3 +559,31 @@ if (contactForm && formNote) {
     }
   });
 }
+
+document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_mailto', { event_label: link.getAttribute('href') }));
+});
+
+document.querySelectorAll('[data-track]').forEach((element) => {
+  element.addEventListener('click', () => trackEvent(element.getAttribute('data-track'), {
+    event_label: element.textContent.trim() || element.getAttribute('href') || 'tracked click'
+  }));
+});
+
+document.querySelectorAll('a[href*="ai-readiness"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_ai_readiness', { event_label: link.getAttribute('href') }));
+});
+
+document.querySelectorAll('a[href*="45-day-ai-pilot"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_45_day_pilot', { event_label: link.getAttribute('href') }));
+});
+
+document.querySelectorAll('a[href*="proof-assets"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_proof_asset', { event_label: link.getAttribute('href') }));
+});
+
+document.querySelectorAll('a[href*="pricing"], [data-pricing-package]').forEach((element) => {
+  element.addEventListener('click', () => trackEvent('click_pricing_package', {
+    event_label: element.textContent.trim() || element.getAttribute('href') || 'pricing'
+  }));
+});
