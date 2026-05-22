@@ -1,5 +1,6 @@
 # Legacy DigiScience URLs that appeared in search results.
 # Keep these as 301 redirects so Google consolidates ranking signals into the current catalog.
+https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /about.php / 301
 /contact.php /contact 301
 /service.php /services 301
