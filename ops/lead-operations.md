@@ -72,6 +72,55 @@ Current production status as of 2026-05-22:
 - Resend email notification is not active because `RESEND_API_KEY`, `LEAD_NOTIFICATION_FROM`, and verified sender setup are not configured.
 - SharePoint/CRM storage is pending until Microsoft Graph app registration and list IDs are available.
 
+## Lead Lifecycle and Founder Follow-Up
+
+Lead lifecycle:
+
+1. New
+2. Qualified
+3. Discovery Scheduled
+4. Proposal Needed
+5. Proposal Sent
+6. Won
+7. Lost
+8. Nurture
+
+Lead score meaning:
+
+- `Hot`: strong business email/company signal, buyer role, target industry, AI interest, detailed problem/outcome, near timeline, budget signal, or governance/compliance language.
+- `Warm`: enough fit to follow up, but missing urgency, budget, use-case clarity, or data readiness.
+- `Nurture`: early exploration, weak buyer authority, unclear problem, no timeline, or no budget signal.
+
+Owner action SLA:
+
+- Hot: respond within 1 business day.
+- Warm: respond within 2 business days.
+- Nurture: add to campaign list and follow with educational GTM content.
+
+First manual process until CRM is integrated:
+
+1. Review webhook notification.
+2. Check the KV lead record if details are needed.
+3. Add or update the lead in the manual tracker.
+4. Assign owner as Rajiv unless delegated.
+5. Send first response using the relevant offer: AI Readiness Assessment, 45-Day Pilot, or Responsible AI Governance Review.
+6. Update status and next follow-up date.
+7. After discovery, move to Proposal Needed or Nurture.
+
+How to review webhook notifications:
+
+- Check the configured workflow/inbox connected to `LEAD_WEBHOOK_URL`.
+- Confirm lead ID, company, AI interest area, lead score, lead category, and recommended action.
+- Do not copy secrets or private webhook URLs into docs, chat, email, or frontend code.
+
+How to move leads to SharePoint/CRM later:
+
+1. Export new KV records.
+2. Create or update the SharePoint list item.
+3. Map status, owner, next follow-up date, score, category, and notes.
+4. Keep KV as the raw intake archive until retention policy is defined.
+5. Once Graph integration is active, automate KV-to-SharePoint or direct form-to-SharePoint insertion.
+
 Required Cloudflare Pages project:
 
 - `digisciencetechsol-org-website`
