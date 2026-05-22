@@ -67,9 +67,10 @@ Current production status as of 2026-05-22:
 - Lead scoring and category logic are live.
 - Consent validation is live.
 - Honeypot rejection is live.
-- Cloudflare KV storage is not active yet because the `LEADS_KV` binding is not configured on the Pages project.
-- Resend email notification is not active yet because `RESEND_API_KEY` and verified sender variables are not configured.
-- Existing local Cloudflare credentials were not sufficient to create or bind KV through the Cloudflare API.
+- Cloudflare KV storage is active through the `LEADS_KV` Pages binding.
+- Webhook notification is active through the `LEAD_WEBHOOK_URL` Pages secret.
+- Resend email notification is not active because `RESEND_API_KEY`, `LEAD_NOTIFICATION_FROM`, and verified sender setup are not configured.
+- SharePoint/CRM storage is pending until Microsoft Graph app registration and list IDs are available.
 
 Required Cloudflare Pages project:
 
@@ -83,9 +84,21 @@ Required binding:
 
 - `LEADS_KV`
 
+Pages configuration file:
+
+- `wrangler.toml`
+
 ## 5. Storage Method
 
-Current implementation supports optional Cloudflare KV storage through a `LEADS_KV` binding.
+Current implementation stores production leads in Cloudflare KV through the `LEADS_KV` binding.
+
+Active KV namespace:
+
+- `DigiScience Leads`
+
+Active binding:
+
+- `LEADS_KV`
 
 Recommended production storage target:
 
@@ -134,7 +147,7 @@ SharePoint insertion is pending until Microsoft Graph app registration and Cloud
 
 ## How to Export Leads from KV
 
-After `LEADS_KV` is configured, leads are stored with keys like:
+Leads are stored with keys like:
 
 `DST-YYYYMMDD-XXXXXXXX`
 
@@ -143,6 +156,13 @@ Export options:
 1. Cloudflare dashboard: Workers & Pages -> KV -> DigiScience Leads -> browse/download keys.
 2. Cloudflare API: list keys from the namespace, then fetch each value.
 3. Future admin page: add an authenticated export route only after access control is designed.
+
+Wrangler export command pattern:
+
+```bash
+wrangler kv key list --namespace-id <namespace-id> --prefix DST- --remote
+wrangler kv key get <lead-id> --namespace-id <namespace-id> --remote
+```
 
 ## 6. Email Notification Method
 
@@ -158,14 +178,19 @@ Subject format:
 
 `New DigiScience AI Lead - <Company> - <AI Interest Area>`
 
-If Resend is not configured, the website falls back to the mailto enquiry path.
+Current production notification uses the secure webhook configured as `LEAD_WEBHOOK_URL`.
+
+If Resend and webhook are not configured, the website falls back to the mailto enquiry path.
 
 ## 7. Environment Variables Required
 
-Optional current endpoint variables:
+Current endpoint variables:
 
 - `LEADS_KV`
 - `LEAD_WEBHOOK_URL`
+
+Optional email variables:
+
 - `RESEND_API_KEY`
 - `LEAD_NOTIFICATION_FROM`
 - `LEAD_NOTIFICATION_TO`
@@ -173,7 +198,7 @@ Optional current endpoint variables:
 Recommended initial production configuration:
 
 - `LEADS_KV`: KV namespace binding, not a text variable.
-- `LEAD_WEBHOOK_URL`: optional existing secure workflow endpoint.
+- `LEAD_WEBHOOK_URL`: existing secure workflow endpoint configured as a Cloudflare Pages secret.
 - `RESEND_API_KEY`: Resend API key stored as a Cloudflare secret.
 - `LEAD_NOTIFICATION_FROM`: verified Resend sender.
 - `LEAD_NOTIFICATION_TO`: `rajiv.gupta@digisciencetechsol.com`.
@@ -223,8 +248,8 @@ curl -sS -X POST https://digisciencetechsol.com/api/lead \
 ## 9. Known Limitations
 
 - SharePoint lead storage is not active until Microsoft Graph credentials and list IDs are configured.
-- Email notification is not active until an approved email provider key is configured.
-- If neither KV, webhook, nor email is configured, `/api/lead` validates and returns a lead ID but does not persist the lead outside Cloudflare runtime logs. In that case, the mailto fallback remains the operational backup.
+- Resend direct email notification is not active until an approved email provider key and verified sender are configured.
+- The current production path is Cloudflare KV storage plus secure webhook notification.
 
 ## 10. How to Add SharePoint / CRM Integration Later
 
