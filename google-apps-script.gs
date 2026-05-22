@@ -40,6 +40,8 @@ function doPost(e) {
       data.service || 'General enquiry',
       data.message,
       data.source || '',
+      data.page || '',
+      data.intakeDetails || '',
       data.submittedAt || ''
     ]);
 
@@ -61,6 +63,8 @@ function normalizePayload_(e) {
     message: String(params.message || '').trim(),
     website: String(params.website || '').trim(),
     source: String(params.source || '').trim(),
+    page: String(params.page || '').trim(),
+    intakeDetails: String(params.intakeDetails || '').trim(),
     submittedAt: String(params.submittedAt || '').trim()
   };
 }
@@ -75,7 +79,7 @@ function getSheet_() {
 
   if (!sheet) {
     sheet = spreadsheet.insertSheet(SETTINGS.sheetName);
-    sheet.appendRow(['Timestamp', 'Lead ID', 'Name', 'Email', 'Company', 'Service', 'Requirement', 'Source', 'Submitted At']);
+    sheet.appendRow(['Timestamp', 'Lead ID', 'Name', 'Email', 'Company', 'Service', 'Requirement', 'Source', 'Page', 'Intake Details', 'Submitted At']);
     sheet.setFrozenRows(1);
   }
 
@@ -99,6 +103,8 @@ function notifyByEmail_(leadId, timestamp, data) {
     '<tr><td><strong>Service</strong></td><td>' + escapeHtml_(data.service || '-') + '</td></tr>',
     '<tr><td><strong>Requirement</strong></td><td>' + escapeHtml_(data.message).replace(/\r?\n/g, '<br>') + '</td></tr>',
     '<tr><td><strong>Source</strong></td><td>' + escapeHtml_(data.source || '-') + '</td></tr>',
+    '<tr><td><strong>Page</strong></td><td>' + escapeHtml_(data.page || '-') + '</td></tr>',
+    '<tr><td><strong>Intake Details</strong></td><td>' + escapeHtml_(data.intakeDetails || '-') + '</td></tr>',
     '</table>',
     '<p style="margin-top:16px">This enquiry was also stored in Google Sheets.</p>',
     '</div>'

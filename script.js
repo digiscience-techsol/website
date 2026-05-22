@@ -436,6 +436,13 @@ if (contactForm && formNote) {
       return;
     }
 
+    const extraFields = {};
+    new FormData(contactForm).forEach((value, key) => {
+      if (!['name', 'email', 'company', 'service', 'message', 'website'].includes(key) && String(value).trim()) {
+        extraFields[key] = String(value).trim();
+      }
+    });
+
     const payload = {
       name: contactForm.name.value.trim(),
       email: contactForm.email.value.trim(),
@@ -444,6 +451,8 @@ if (contactForm && formNote) {
       message: contactForm.message.value.trim(),
       website: contactForm.website.value.trim(),
       source: window.location.hostname || 'website',
+      page: window.location.pathname,
+      intakeDetails: JSON.stringify(extraFields),
       submittedAt: new Date().toISOString()
     };
 
@@ -501,7 +510,7 @@ if (contactForm && formNote) {
       contactForm.reset();
       showFormNote('Your enquiry has been submitted successfully. Redirecting...', 'success');
       window.setTimeout(() => {
-        window.location.href = 'success.html';
+        window.location.href = '/success.html';
       }, 700);
     } catch (error) {
       console.error(error);

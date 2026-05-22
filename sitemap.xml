@@ -91,6 +91,18 @@
     <priority>0.82</priority>
   </url>
   <url>
+    <loc>https://digisciencetechsol.com/proposal-templates</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://digisciencetechsol.com/gtm-assets</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+  <url>
     <loc>https://digisciencetechsol.com/contact</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>

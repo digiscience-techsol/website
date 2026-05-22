@@ -233,6 +233,15 @@ a {
   padding: 11px 18px;
 }
 
+.hidden-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .hero {
   padding: 84px 0 64px;
   position: relative;
