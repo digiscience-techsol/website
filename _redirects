@@ -12,3 +12,9 @@
 /pricing.php /pricing 301
 /portfolio.php /portfolio 301
 /privacy.php /privacy 301
+
+# Older cloud/FinOps pages should now consolidate into the AI-first positioning.
+/cloud-cost-governance-consultant-india /solutions/secure-ai-cloud-platform 301
+/ai-api-cost-governance /solutions/responsible-ai-governance 301
+/aws-azure-cost-optimization-startups /solutions/secure-ai-cloud-platform 301
+/finops-for-saas-startups-india /pricing 301
