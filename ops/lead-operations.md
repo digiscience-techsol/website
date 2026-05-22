@@ -58,6 +58,31 @@ If downstream storage or email is not configured, the frontend keeps the safe ma
 - Individual text fields are limited to avoid abuse.
 - Stack traces are not exposed to the browser.
 
+## Production Activation Status
+
+Current production status as of 2026-05-22:
+
+- `/api/lead` is live and validates submissions.
+- Lead ID generation is live.
+- Lead scoring and category logic are live.
+- Consent validation is live.
+- Honeypot rejection is live.
+- Cloudflare KV storage is not active yet because the `LEADS_KV` binding is not configured on the Pages project.
+- Resend email notification is not active yet because `RESEND_API_KEY` and verified sender variables are not configured.
+- Existing local Cloudflare credentials were not sufficient to create or bind KV through the Cloudflare API.
+
+Required Cloudflare Pages project:
+
+- `digisciencetechsol-org-website`
+
+Required KV namespace:
+
+- `DigiScience Leads`
+
+Required binding:
+
+- `LEADS_KV`
+
 ## 5. Storage Method
 
 Current implementation supports optional Cloudflare KV storage through a `LEADS_KV` binding.
@@ -107,6 +132,18 @@ Lead status options:
 
 SharePoint insertion is pending until Microsoft Graph app registration and Cloudflare secrets are available.
 
+## How to Export Leads from KV
+
+After `LEADS_KV` is configured, leads are stored with keys like:
+
+`DST-YYYYMMDD-XXXXXXXX`
+
+Export options:
+
+1. Cloudflare dashboard: Workers & Pages -> KV -> DigiScience Leads -> browse/download keys.
+2. Cloudflare API: list keys from the namespace, then fetch each value.
+3. Future admin page: add an authenticated export route only after access control is designed.
+
 ## 6. Email Notification Method
 
 The endpoint supports notification through Resend when these Cloudflare environment variables are configured:
@@ -132,6 +169,14 @@ Optional current endpoint variables:
 - `RESEND_API_KEY`
 - `LEAD_NOTIFICATION_FROM`
 - `LEAD_NOTIFICATION_TO`
+
+Recommended initial production configuration:
+
+- `LEADS_KV`: KV namespace binding, not a text variable.
+- `LEAD_WEBHOOK_URL`: optional existing secure workflow endpoint.
+- `RESEND_API_KEY`: Resend API key stored as a Cloudflare secret.
+- `LEAD_NOTIFICATION_FROM`: verified Resend sender.
+- `LEAD_NOTIFICATION_TO`: `rajiv.gupta@digisciencetechsol.com`.
 
 Future Microsoft 365 / SharePoint variables:
 
@@ -191,6 +236,15 @@ curl -sS -X POST https://digisciencetechsol.com/api/lead \
 6. Submit one safe test lead.
 7. Verify the item appears in SharePoint.
 8. Only then mark SharePoint storage as operational.
+
+## Secret Rotation
+
+1. Rotate provider secret in the provider dashboard first.
+2. Update the corresponding Cloudflare Pages environment variable or secret.
+3. Redeploy the Pages project or trigger a new deployment if required.
+4. Submit one safe test lead.
+5. Confirm `/api/lead` response shows the expected delivery path.
+6. Revoke the old provider secret.
 
 ## 11. Security Rules
 
