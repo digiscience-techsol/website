@@ -11,13 +11,12 @@ DigiScience Techsol positioning:
 - Lead with measurable business outcomes enabled by AI. Cloud, DevOps, platform engineering, security, governance, and automation are foundations.
 
 Primary offers:
-- AI Readiness Assessment: USD 4K-12K / INR 3.5L-10L planning band.
-- 45-Day Industry AI Pilot: USD 18K-55K / INR 15L-45L planning band.
-- Secure AI Cloud Platform: USD 28K-85K / INR 24L-70L planning band.
-- Responsible AI Governance Framework: USD 15K-50K / INR 12L-40L planning band.
-- Enterprise AI Knowledge Assistant / Agent Factory: USD 25K-90K+ / INR 20L-75L+ planning band.
-- AI Observability and Governance Retainer: USD 4K-15K/month / INR 3.5L-12L/month planning band.
-- All pricing is private quote after discovery.
+- AI Readiness Assessment: INR 49K / USD 599 one-time, no monthly commitment.
+- AI Pilot Starter: INR 75K/month / USD 899/month plus one-time setup from INR 2.5L / USD 3K. Includes one AI assistant, workflow, or document intelligence prototype.
+- AI Pilot Growth: INR 1.5L/month / USD 1,799/month plus one-time setup from INR 5L / USD 6K. Includes 2-3 AI workflows, up to 5 integrations, governance controls, audit trail, monitoring, and monthly optimization.
+- Governed AI Platform: INR 3L/month / USD 3,499/month plus one-time setup from INR 9L / USD 10K. Includes secure AI landing zone, IAM/RBAC, private networking pattern, responsible AI controls, monitoring, audit logging, and cost governance.
+- Regulated AI Transformation: custom quote after discovery for BFSI, healthcare, legal, insurance, government, private cloud, data residency, and complex compliance needs.
+- Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery.
 
 Service portfolio:
 1. AI Industry Transformation Solutions
@@ -89,7 +88,7 @@ const fallbackAnswer = (question) => {
   const text = question.toLowerCase();
   if (/price|pricing|cost|quote|budget/.test(text)) {
     return {
-      answer: 'DigiScience uses private quotes with public planning bands. AI readiness typically starts around USD 4K-12K, focused 45-day pilots around USD 18K-55K, and larger secure AI platform or governance work is scoped after discovery.',
+      answer: 'DigiScience uses pilot-friendly package pricing. AI Readiness is INR 49K / USD 599 one-time. AI Pilot Starter is INR 75K/month / USD 899/month plus setup from INR 2.5L / USD 3K. AI Pilot Growth is INR 1.5L/month / USD 1,799/month plus setup from INR 5L / USD 6K. Governed AI Platform starts at INR 3L/month / USD 3,499/month plus setup from INR 9L / USD 10K. Regulated enterprise work is custom after discovery.',
       captureLead: true
     };
   }
@@ -153,7 +152,7 @@ Answer visitor questions using only the company knowledge below.
 Be concise: 2-5 sentences unless the user asks for detail.
 Be practical, enterprise-ready, business-first, technically credible, and not hype-heavy.
 Never invent customers, case studies, delivered results, certifications, partnerships, or guaranteed ROI.
-When the visitor asks about pricing, quote the planning bands and say final pricing is private quote after discovery.
+When the visitor asks about pricing, quote the package pricing and mention that final scope is confirmed after discovery.
 When the visitor shows buying intent, asks for a quote, asks for a meeting, or has a concrete use case, set captureLead to true.
 Return strict JSON only:
 {"answer":"...", "captureLead":true|false}

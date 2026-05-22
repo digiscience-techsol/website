@@ -135,11 +135,11 @@ const initLeadAssistant = () => {
     const asksPilot = /45|pilot|proof|poc|prototype/.test(text);
 
     if (asksPricing && asksPilot) {
-      return `The 45-day pilot validates one AI workflow through scope, data feasibility, secure architecture, governance controls, a controlled proof, and a scale decision package. Pricing is handled as a private quote with planning bands, because cost depends on data access, integrations, governance depth, and production risk. Start with the ${link('pilot framework', '/45-day-ai-pilot')} and ${link('pricing guidance', '/pricing')}.`;
+      return `The 45-day pilot is packaged to start small. AI Pilot Starter is INR 75K/month / USD 899/month plus setup from INR 2.5L / USD 3K. AI Pilot Growth is INR 1.5L/month / USD 1,799/month plus setup from INR 5L / USD 6K. Final scope depends on use case, data access, integrations, and governance needs. Start with the ${link('pilot framework', '/45-day-ai-pilot')} and ${link('pricing page', '/pricing')}.`;
     }
 
     if (asksPricing) {
-      return `For enterprise AI, DigiScience should use private quotes with public budget guidance, not a fixed rate card. Planning bands are shown on the ${link('pricing page', '/pricing')}, with final scope based on data access, integrations, governance depth, cloud readiness, and production risk.`;
+      return `DigiScience uses package-style pricing: AI Readiness is INR 49K / USD 599 one-time, AI Pilot Starter is INR 75K/month / USD 899/month plus setup, AI Pilot Growth is INR 1.5L/month / USD 1,799/month plus setup, and Governed AI Platform starts at INR 3L/month / USD 3,499/month plus setup. See the ${link('pricing page', '/pricing')} for deliverables.`;
     }
 
     if (asksPilot) {
