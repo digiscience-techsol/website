@@ -79,9 +79,30 @@ Cloudflare Ray ID: 9ffd28fe7e7584c6-HKG
 https://digisciencetechsol.com/day-01-execution-log/
 HTTP/2 500
 Cloudflare Ray ID: 9ffd2901dd55d50d-HKG
+
+https://digisciencetechsol.com/day-01-linkedin-send-queue/
+HTTP/2 500
+Cloudflare Ray ID: 9ffd3061cb12978a-HKG
+
+https://digisciencetechsol.com/day-01-linkedin-post-final/
+HTTP/2 500
+Cloudflare Ray ID: 9ffd3066cdd510a4-HKG
+
+https://digisciencetechsol.com/day-01-execution-log/
+HTTP/2 500
+Cloudflare Ray ID: 9ffd306a5f5f85d5-HKG
 ```
 
 ## Latest deployment records observed
+
+```text
+Deployment ID: 045e1cb1-125a-4eb9-87a0-75c074a650db
+Environment: Production
+Branch: main
+Source: c2fff0e
+Status observed: Active in Cloudflare deployment list, but production slash URLs return HTTP 500.
+Deployment URL: https://045e1cb1.digisciencetechsol-org-website.pages.dev
+```
 
 ```text
 Deployment ID: 86894fe2-0313-4de9-bcb9-aa1a3018115d
@@ -125,6 +146,19 @@ component: Cloudflare Sites and Services - degraded_performance
 last checked: 2026-05-22 21:52 IST
 ```
 
+Latest Cloudflare status API check:
+
+```text
+checked: 2026-05-22 22:35 IST
+indicator: minor
+description: Minor Service Outage
+incident: Audit Log Delays
+incident status: investigating
+impact: minor
+shortlink: https://stspg.io/fkf485vw1l86
+component: Cloudflare Sites and Services - degraded_performance
+```
+
 The Cloudflare dashboard also showed an unknown API error while opening the Pages project.
 
 ## Current production behavior
@@ -142,6 +176,7 @@ Known bad:
 - Production content markers do not appear yet.
 - Latest Pages deployment records for `3d0d245` and `e8bd774` show failure.
 - Latest Pages deployment record for `a62feb7` shows Active, but production delivery still fails with HTTP 500 on the required slash URLs.
+- Latest Pages deployment record for `c2fff0e` shows Active, but production delivery still fails with HTTP 500 on the required slash URLs.
 
 ## Retry steps after Cloudflare recovery
 
