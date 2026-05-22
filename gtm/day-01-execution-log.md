@@ -37,26 +37,33 @@ If you are exploring AI, start by scoring one workflow.
 
 #AIReadiness #EnterpriseAI #DigitalTransformation
 
+## Buyer verification status
+
+- Accounts reviewed: 10
+- Buyer profiles verified: 6
+- Ready to send: 5
+- Buyer verification pending: 4
+- Do not send yet: 1
+- Buyer emails added: 0
+
 ## Connection Requests
 
 Status: 0 sent, 10 pending.
 
-Reason: The target companies are verified at company level, but no actual buyer profiles have been verified. No connection request was sent to a generic company page.
+Reason: Buyer verification has been reviewed and the send queue is prepared, but no LinkedIn send action was performed. No connection request was sent to a generic company page.
 
-Pending targets:
-
-| Company | Buyer role | Status | Next Action |
-|---|---|---|---|
-| Cyril Amarchand Mangaldas | Legal Head | Pending | Verify actual buyer profile |
-| Khaitan & Co | Legal Head | Pending | Verify actual buyer profile |
-| Bharat Forge | Manufacturing Operations Head | Pending | Verify actual buyer profile |
-| TVS Motor Company | Manufacturing Operations Head | Pending | Verify actual buyer profile |
-| Narayana Health | Healthcare Operations Head | Pending | Verify actual buyer profile |
-| Apollo Hospitals | Healthcare Operations Head | Pending | Verify actual buyer profile |
-| ICICI Lombard | Compliance Head / Risk Head | Pending | Verify actual buyer profile |
-| HDFC ERGO | Compliance Head / Risk Head | Pending | Verify actual buyer profile |
-| Quess Corp | CHRO / Talent Head | Pending | Verify actual buyer profile |
-| Delhivery | COO / Operations Head | Pending | Verify actual buyer profile |
+| Company | Buyer | Buyer role | Verification | Send status | Next Action |
+|---|---|---|---|---|---|
+| Cyril Amarchand Mangaldas | Komal Gupta | Chief Innovation Officer / legal innovation | Buyer verified | Ready to Send | Send connection request from Rakesh Pandey |
+| Khaitan & Co | Rohit Shukla | Executive Director / Chief Digital Officer | Needs manual LinkedIn verification | Buyer Verification Pending | Manually verify buyer profile URL on LinkedIn |
+| Bharat Forge | Yogesh Zope | CIO/CDO / digital transformation | Buyer verified | Ready to Send | Send connection request from Rakesh Pandey |
+| TVS Motor Company | Mahesh Calavai | Chief Digital and AI Officer | Needs manual LinkedIn verification | Buyer Verification Pending | Manually verify buyer profile URL on LinkedIn |
+| Narayana Health | Jagadeesh Ramasamy | Chief Digital Officer / CIO | Needs manual LinkedIn verification | Buyer Verification Pending | Manually verify buyer profile URL on LinkedIn |
+| Apollo Hospitals | CA Ashokkan Somuveerappan CHCIO | Healthcare IT / digital health leader | Buyer verified | Ready to Send | Send connection request from Rakesh Pandey |
+| ICICI Lombard | Sanjeev Mantri | MD & CEO | Buyer verified, role-fit review required | Do Not Send Yet | Find compliance, risk, CIO, or digital transformation buyer before sending |
+| HDFC ERGO | Parthanil Ghosh | MD & CEO / digital customer innovation sponsor | Buyer verified | Ready to Send | Send connection request from Rakesh Pandey |
+| Quess Corp | Ruchi Ahluwalia | Former Group Chief People Officer at Quess | Needs manual LinkedIn verification | Buyer Verification Pending | Find current Quess CHRO / Talent / workforce operations buyer |
+| Delhivery | Kapil Bharati | Co-founder & CTO | Buyer verified | Ready to Send | Send connection request from Rakesh Pandey |
 
 ## Direct messages
 
@@ -75,8 +82,9 @@ Pending DM targets:
 
 - First-50 prospect CSV updated for the 10 Day-1 target accounts.
 - Status remains Target Identified.
-- Next Action set to verify actual buyer profile before sending.
-- Notes updated to show Day-1 message prepared and not sent.
+- Verified rows have Next Action set to send from Rakesh Pandey.
+- Pending rows have Next Action set to manual buyer/profile verification.
+- Notes show no outreach was sent.
 
 ## Metrics updates
 
@@ -88,18 +96,18 @@ Pending DM targets:
 - Replies Received: 0
 - Discovery Calls Booked: 0
 - Website Leads Captured: 0
-- Notes: LinkedIn authenticated, but posting/sending blocked by browser extension UI. 10 connection requests and 5 DMs prepared; buyer profile verification pending; no outreach counted as sent.
+- Notes: LinkedIn authenticated as Rakesh Pandey. Buyer verification reviewed for 10 Day-1 accounts: 5 profiles ready to send, 5 pending/manual verification or role-fit review. No connection requests or DMs sent.
 
 ## Blockers
 
 1. LinkedIn post and sending were not completed because browser automation opened the composer but could not reliably type/paste content into the LinkedIn composer.
-2. Buyer profile verification is pending for all 10 connection request targets.
+2. Five target rows still need manual LinkedIn profile verification or role-fit review before sending.
 3. No direct messages can be sent until the founder is connected to the target buyer or messaging is otherwise allowed.
 
 ## Next Action
 
 1. Use Rakesh Pandey's LinkedIn profile for DigiScience outreach.
-2. Manually paste/publish the prepared LinkedIn post from the open composer, or re-run automation after Chrome accepts typed/pasted content in LinkedIn.
-3. Verify actual buyer profiles for the 10 target accounts.
-4. Send connection requests only to verified buyer profiles.
-5. Update tracker status to Connection Sent only after actual send.
+2. Manually paste/publish the prepared LinkedIn post from the final post page, or re-run automation after Chrome accepts typed/pasted content in LinkedIn.
+3. Use the Day-1 LinkedIn send queue for rows marked Ready to Send.
+4. Manually verify pending buyer URLs before sending.
+5. Update tracker status to Connection Sent only after actual LinkedIn confirmation.
