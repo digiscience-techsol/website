@@ -264,6 +264,7 @@ const initLeadAssistant = () => {
       <input name="email" required type="email" placeholder="Work email" autocomplete="email" />
       <input name="company" placeholder="Company" autocomplete="organization" />
       <textarea name="message" rows="3" required placeholder="What outcome or use case should we discuss?"></textarea>
+      <label class="checkbox-line compact"><input type="checkbox" name="consent" required /> <span>I agree to be contacted by DigiScience Techsol.</span></label>
       <button type="submit">Send enquiry</button>
     `;
     wrapper.appendChild(form);
@@ -272,37 +273,48 @@ const initLeadAssistant = () => {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!form.reportValidity()) return;
-      const leadEndpointUrl = appConfig.leadEndpointUrl || appConfig.googleScriptUrl || '';
+      const leadEndpointUrl = appConfig.leadEndpointUrl || '/api/lead';
       const payload = {
+        formType: 'assistant',
+        sourcePage: window.location.pathname,
+        fullName: form.name.value.trim(),
+        businessEmail: form.email.value.trim(),
         name: form.name.value.trim(),
         email: form.email.value.trim(),
         company: form.company.value.trim(),
+        aiInterestArea: 'Website AI assistant',
         service: 'Website AI assistant',
+        businessProblem: form.message.value.trim(),
         message: form.message.value.trim(),
-        source: 'lead-assistant',
         page: window.location.pathname,
+        consent: Boolean(form.consent && form.consent.checked),
         transcript: transcript.join(' | '),
         submittedAt: new Date().toISOString()
       };
 
-      if (!leadEndpointUrl || leadEndpointUrl.includes('PASTE_YOUR')) {
-        addMessage('The enquiry service is temporarily unavailable. Please email rajiv.gupta@digisciencetechsol.com directly.');
-        return;
-      }
-
       try {
         form.querySelector('button').disabled = true;
-        await fetch(leadEndpointUrl, {
+        const response = await fetch(leadEndpointUrl, {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: new URLSearchParams(payload).toString()
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
         });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          trackEvent('lead_submit_error', { event_label: result.error || 'assistant lead failure' });
+          addMessage('I could not submit this right now. Please email rajiv.gupta@digisciencetechsol.com directly.');
+          return;
+        }
         addMessage('Thanks. Your enquiry has been captured. DigiScience will review the requirement and follow up.');
         form.reset();
-      trackEvent('generate_lead', { event_label: 'Website AI assistant' });
+        trackEvent('lead_submit_success', { event_label: 'Website AI assistant', lead_id: result.leadId, lead_score: result.leadScore });
+        trackEvent('generate_lead', { event_label: 'Website AI assistant' });
       } catch (error) {
         console.error(error);
+        trackEvent('lead_submit_error', { event_label: 'assistant lead network failure' });
         addMessage('I could not submit this right now. Please email rajiv.gupta@digisciencetechsol.com directly.');
       } finally {
         form.querySelector('button').disabled = false;
@@ -447,7 +459,7 @@ if (contactForm && formNote) {
   const setSubmitting = (submitting) => {
     if (!submitButton) return;
     submitButton.disabled = submitting;
-    submitButton.textContent = submitting ? 'Submitting...' : 'Submit Enquiry';
+    submitButton.textContent = submitting ? 'Submitting...' : (submitButton.dataset.defaultText || 'Submit Enquiry');
   };
 
   const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -460,14 +472,11 @@ if (contactForm && formNote) {
       return;
     }
 
-    const extraFields = {};
-    new FormData(contactForm).forEach((value, key) => {
-      if (!['name', 'email', 'company', 'service', 'message', 'website'].includes(key) && String(value).trim()) {
-        extraFields[key] = String(value).trim();
-      }
-    });
-
     const getField = (name) => contactForm.elements[name] ? String(contactForm.elements[name].value || '').trim() : '';
+    if (submitButton && !submitButton.dataset.defaultText) {
+      submitButton.dataset.defaultText = submitButton.textContent;
+    }
+
     const composedMessage = [
       getField('message'),
       getField('businessProblem') ? `Business problem: ${getField('businessProblem')}` : '',
@@ -479,81 +488,102 @@ if (contactForm && formNote) {
       getField('successMetrics') ? `Success metrics: ${getField('successMetrics')}` : ''
     ].filter(Boolean).join('\n\n');
 
+    const formType = window.location.pathname.includes('ai-readiness-intake') ? 'ai_readiness_intake' : 'contact';
     const payload = {
-      name: contactForm.name.value.trim(),
-      email: contactForm.email.value.trim(),
-      company: contactForm.company.value.trim(),
-      service: contactForm.service.value,
+      sourcePage: window.location.pathname,
+      formType,
+      fullName: getField('name'),
+      businessEmail: getField('email'),
+      phone: getField('phone'),
+      company: getField('company'),
+      websiteOrLinkedIn: getField('profileUrl'),
+      role: getField('role') || getField('industryRole'),
+      industry: getField('industry'),
+      cloudPlatform: getField('cloud'),
+      aiInterestArea: getField('service') || (formType === 'ai_readiness_intake' ? 'AI Readiness Intake' : ''),
+      businessProblem: getField('businessProblem') || composedMessage,
+      desiredOutcome: getField('desiredOutcome'),
+      timeline: getField('timeline'),
+      budgetRange: getField('budget'),
+      consent: Boolean(contactForm.elements.consent && contactForm.elements.consent.checked),
+      businessContext: getField('businessContext'),
+      workflowPain: getField('workflowPain'),
+      useCaseCandidate: getField('useCaseCandidate'),
+      dataAvailability: getField('dataAvailability'),
+      currentSystems: getField('currentSystems'),
+      governanceRequirements: getField('governanceRequirements'),
+      complianceConstraints: getField('complianceConstraints'),
+      successMetrics: getField('successMetrics'),
+      stakeholders: getField('stakeholders'),
+      website: getField('website'),
+      name: getField('name'),
+      email: getField('email'),
+      service: getField('service') || (formType === 'ai_readiness_intake' ? 'AI Readiness Intake' : ''),
       message: composedMessage,
-      website: contactForm.website.value.trim(),
-      source: window.location.hostname || 'website',
       page: window.location.pathname,
-      intakeDetails: JSON.stringify(extraFields),
       submittedAt: new Date().toISOString()
     };
 
-    if (!payload.name || !payload.email || !payload.message) {
+    if (!payload.fullName || !payload.businessEmail || !payload.businessProblem) {
       showFormNote('Please complete your name, email, and requirement before submitting.');
       return;
     }
 
-    if (!isValidEmail(payload.email)) {
+    if (!isValidEmail(payload.businessEmail)) {
       showFormNote('Please enter a valid email address and submit your enquiry again.');
-      contactForm.email.focus();
+      contactForm.elements.email.focus();
       return;
     }
 
-    const leadEndpointUrl = appConfig.leadEndpointUrl || appConfig.googleScriptUrl || '';
+    if (!payload.consent) {
+      showFormNote('Please confirm consent before submitting your enquiry.');
+      return;
+    }
+
+    const leadEndpointUrl = appConfig.leadEndpointUrl || '/api/lead';
 
     // Static-safe fallback: if the backend endpoint is unavailable, the enquiry can still be sent by email without exposing secrets.
-    if (!leadEndpointUrl || leadEndpointUrl.includes('PASTE_YOUR')) {
+    const showFallback = (detail = 'The enquiry service is temporarily unavailable.') => {
       const mailtoUrl = buildMailtoUrl(payload);
-      showFormNote(`The enquiry service is temporarily unavailable. Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
+      showFormNote(`${detail} Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
       trackEvent('click_mailto', { event_label: 'lead form fallback' });
-      return;
-    }
-
-    if (leadEndpointUrl.includes('/macros/library/')) {
-      const mailtoUrl = buildMailtoUrl(payload);
-      showFormNote(`The enquiry service is temporarily unavailable. Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
-      trackEvent('click_mailto', { event_label: 'lead form fallback' });
-      return;
-    }
-
-    const isGoogleScriptEndpoint = /script\.google\.com\/macros\/s\/.+\/exec/.test(leadEndpointUrl);
-    const isDigiscienceLeadEndpoint = /n8n\.digisciencetechsol\.com\/webhook\/digiscience-lead-/.test(leadEndpointUrl);
-    if (!isGoogleScriptEndpoint && !isDigiscienceLeadEndpoint) {
-      const mailtoUrl = buildMailtoUrl(payload);
-      showFormNote(`The enquiry service is temporarily unavailable. Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
-      trackEvent('click_mailto', { event_label: 'lead form fallback' });
-      return;
-    }
+    };
 
     try {
       setSubmitting(true);
       showFormNote('Submitting your enquiry securely. Please wait...');
 
-      const body = new URLSearchParams(payload);
-      await fetch(leadEndpointUrl, {
+      const response = await fetch(leadEndpointUrl, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: body.toString()
+        body: JSON.stringify(payload)
       });
 
-      trackEvent('submit_contact_form', { event_label: payload.service || 'Website enquiry' });
-      trackEvent('generate_lead', { event_label: payload.service || 'Website enquiry' });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        trackEvent('lead_submit_error', { event_label: result.error || `HTTP ${response.status}` });
+        showFallback(result.error || 'The enquiry service could not accept this submission.');
+        return;
+      }
+
+      const submitEvent = formType === 'ai_readiness_intake' ? 'submit_ai_readiness_intake' : 'submit_contact_form';
+      trackEvent(submitEvent, { event_label: payload.aiInterestArea || 'Website enquiry', lead_id: result.leadId });
+      trackEvent('lead_submit_success', { event_label: payload.aiInterestArea || 'Website enquiry', lead_id: result.leadId, lead_score: result.leadScore });
+      trackEvent('generate_lead', { event_label: payload.aiInterestArea || 'Website enquiry' });
 
       contactForm.reset();
       showFormNote('Your enquiry has been submitted successfully. Redirecting...', 'success');
+      const redirectType = formType === 'ai_readiness_intake' ? 'intake' : 'contact';
       window.setTimeout(() => {
-        window.location.href = '/thank-you';
+        window.location.href = `/thank-you?type=${redirectType}`;
       }, 700);
     } catch (error) {
       console.error(error);
-      showFormNote('We could not submit your enquiry right now. Please try again, or email <a href="mailto:rajiv.gupta@digisciencetechsol.com">rajiv.gupta@digisciencetechsol.com</a> directly.');
+      trackEvent('lead_submit_error', { event_label: 'network or endpoint failure' });
+      showFallback('We could not submit your enquiry right now.');
     } finally {
       setSubmitting(false);
     }
