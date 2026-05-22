@@ -1,0 +1,5 @@
+DigiScience AI-first production verification
+Canonical domain: https://digisciencetechsol.com/
+WWW behavior: should redirect to apex
+Deployed commit: 206d77a1f739bf329df4d5dc82a477f5e1f170b8
+Verification marker: AI-FIRST-PRODUCTION-2026-05-22
