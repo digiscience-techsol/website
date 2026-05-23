@@ -25,6 +25,9 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /day-04-execution-log /day-04-execution-log.html 200!
 /day-04-execution-log/ /day-04-execution-log.html 200!
 /day-04-execution-log/index.html /day-04-execution-log.html 200!
+/manual-linkedin-post-handoff /manual-linkedin-post-handoff.html 200!
+/manual-linkedin-post-handoff/ /manual-linkedin-post-handoff.html 200!
+/manual-linkedin-post-handoff/index.html /manual-linkedin-post-handoff.html 200!
 
 /about.php / 301
 /contact.php /contact 301
