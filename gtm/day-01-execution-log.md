@@ -46,12 +46,12 @@ If you are exploring AI, start by scoring one workflow.
 - Buyer verification pending: 4
 - Do not send yet: 1
 - Buyer emails added: 0
-- Connection requests sent: 4
+- Connection requests sent: 7
 - Blocked by LinkedIn email gate: 1
 
 ## Connection Requests
 
-Status: 4 sent, 6 not sent.
+Status: 7 sent, 3 not sent.
 
 Reason: Only rows marked Ready to Send were used. Four requests were confirmed by LinkedIn. One Ready to Send profile was blocked because LinkedIn required the member email address to connect. No connection request was sent to a generic company page.
 
@@ -60,10 +60,10 @@ Reason: Only rows marked Ready to Send were used. Four requests were confirmed b
 | Cyril Amarchand Mangaldas | Komal Gupta | Chief Innovation Officer / legal innovation | Buyer verified | Connection Sent | LinkedIn confirmed "Invitation sent to Komal"; wait for acceptance |
 | Khaitan & Co | Rohit Shukla | Executive Director / Chief Digital Officer | Needs manual LinkedIn verification | Buyer Verification Pending | Manually verify buyer profile URL on LinkedIn |
 | Bharat Forge | Yogesh Zope | CIO/CDO / digital transformation | Buyer verified | Connection Sent | LinkedIn confirmed invitation sent; wait for acceptance |
-| TVS Motor Company | Mahesh Calavai | Chief Digital and AI Officer | Needs manual LinkedIn verification | Buyer Verification Pending | Manually verify buyer profile URL on LinkedIn |
-| Narayana Health | Jagadeesh Ramasamy | Chief Digital Officer / CIO | Needs manual LinkedIn verification | Buyer Verification Pending | Manually verify buyer profile URL on LinkedIn |
+| TVS Motor Company | Mahesh Calavai | Chief Digital & AI Officer | Buyer verified | Connection Sent | LinkedIn shows Pending; wait for acceptance |
+| Narayana Health | Jagadeesh Ramasamy | Chief Digital Officer / CIO | Buyer verified | Connection Sent | LinkedIn shows Pending; wait for acceptance |
 | Apollo Hospitals | CA Ashokkan Somuveerappan CHCIO | Healthcare IT / digital health leader | Buyer verified | Blocked | LinkedIn required member email address; do not bypass |
-| ICICI Lombard | Sanjeev Mantri | MD & CEO | Buyer verified, role-fit review required | Do Not Send Yet | Find compliance, risk, CIO, or digital transformation buyer before sending |
+| ICICI Lombard | Girish Nayak | Chief - Technology and Health / Underwriting and Claims | Buyer verified | Connection Sent | LinkedIn shows Pending; wait for acceptance |
 | HDFC ERGO | Parthanil Ghosh | MD & CEO / digital customer innovation sponsor | Buyer verified | Connection Sent | LinkedIn confirmed "Invitation sent to Parthanil"; wait for acceptance |
 | Quess Corp | Ruchi Ahluwalia | Former Group Chief People Officer at Quess | Needs manual LinkedIn verification | Buyer Verification Pending | Find current Quess CHRO / Talent / workforce operations buyer |
 | Delhivery | Kapil Bharati | Co-founder & CTO | Buyer verified | Connection Sent | LinkedIn confirmed "Invitation sent to Kapil"; wait for acceptance |
@@ -78,6 +78,12 @@ Sent connection request details:
 Blocked:
 
 - CA Ashokkan Somuveerappan CHCIO, Apollo Hospitals: not sent because LinkedIn required the member email address to connect.
+New connection request details from the next verified batch:
+
+- Mahesh Calavai, TVS Motor Company: basic connection request sent without note. LinkedIn confirmation observed through Pending state.
+- Jagadeesh Ramasamy, Narayana Health: basic connection request sent without note. LinkedIn confirmation observed through Pending state.
+- Girish Nayak, ICICI Lombard: basic connection request sent without note. LinkedIn confirmation observed through Pending state.
+
 
 ## Direct messages
 
@@ -116,19 +122,20 @@ Pending DM targets:
 - LinkedIn Post Published: Prepared - pending founder send
 - Connection Requests Sent: 4
 - Connections Accepted: 0
+- Connection Requests Sent: 7
 - Direct Messages Sent: 0
 - Follow-up Emails Sent: 0
 - Replies Received: 0
 - Discovery Calls Booked: 0
 - Website Leads Captured: 0
-- Notes: LinkedIn authenticated as Rakesh Pandey. Four basic connection requests sent and confirmed. One ready profile blocked by LinkedIn email requirement. No DMs, emails, or LinkedIn post were sent.
+- Notes: LinkedIn authenticated as Rakesh Pandey. Seven basic connection requests sent and confirmed through LinkedIn Pending state. One ready profile blocked by LinkedIn email requirement. No DMs, emails, or LinkedIn post were sent.
 
 ## Blockers
 
 1. LinkedIn post remains prepared only; composer typing was not reliable enough to publish safely.
 2. CA Ashokkan Somuveerappan CHCIO connection is blocked because LinkedIn requires the member email address.
 3. Khaitan & Co and Quess Corp still need verified personal LinkedIn profile URLs before sending.
-4. TVS Motor Company, Narayana Health, and ICICI Lombard now have better-fit verified buyer profiles, but no Day-2 connection requests were sent.
+4. TVS Motor Company, Narayana Health, and ICICI Lombard better-fit buyer profiles were verified and connection requests were sent in this approved next batch.
 5. No direct messages can be sent until the founder is connected to the target buyer or messaging is otherwise allowed.
 
 ## Next Action
