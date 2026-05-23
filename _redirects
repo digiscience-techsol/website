@@ -19,6 +19,9 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /day-02-execution-plan /day-02-execution-plan.html 200!
 /day-02-execution-plan/ /day-02-execution-plan.html 200!
 /day-02-execution-plan/index.html /day-02-execution-plan.html 200!
+/day-03-monitoring-plan /day-03-monitoring-plan.html 200!
+/day-03-monitoring-plan/ /day-03-monitoring-plan.html 200!
+/day-03-monitoring-plan/index.html /day-03-monitoring-plan.html 200!
 
 /about.php / 301
 /contact.php /contact 301
