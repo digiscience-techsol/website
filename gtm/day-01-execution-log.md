@@ -115,6 +115,22 @@ Day-3 monitoring check on 2026-05-23:
 - No new connection requests sent.
 - LinkedIn post status: Prepared only; composer automation remained blocked.
 
+Day-4 monitoring check on 2026-05-23:
+
+- Komal Gupta: Pending.
+- Yogesh Zope: Pending.
+- Parthanil Ghosh: Pending.
+- Kapil Bharati: Pending.
+- Mahesh Calavai: Pending.
+- Jagadeesh Ramasamy: Pending.
+- Girish Nayak: Pending.
+- Accepted connections: 0.
+- DM eligible profiles: 0.
+- DMs sent: 0.
+- No new connection requests sent.
+- LinkedIn post status: Prepared only; composer opened no reliable content editor, so the post was not published.
+- Apollo alternate: Debjyoti Ghosh verified for a future batch; no connection request sent.
+
 Pending DM targets:
 - Cyril Amarchand Mangaldas - Legal Head
 - Bharat Forge - Manufacturing Operations Head
@@ -130,7 +146,7 @@ Pending DM targets:
 - Sent rows have Next Follow-up Date set to 2026-05-25.
 - Khaitan & Co buyer cleanup: Rohit Shukla profile verified for a future batch. No request sent in this task.
 - Quess Corp buyer cleanup: Sunitha Karthikeyan profile verified for a future batch. No request sent in this task.
-- Apollo Hospitals buyer cleanup: no clean alternate verified; previous profile remains blocked by LinkedIn email gate.
+- Apollo Hospitals buyer cleanup: Debjyoti Ghosh verified as a future-batch operations buyer. Previous CA Ashokkan profile remains blocked by LinkedIn email gate and was not used.
 - Apollo row notes show LinkedIn email-gate blocker.
 - Notes show no DMs or emails were sent.
 
@@ -144,14 +160,14 @@ Pending DM targets:
 - Replies Received: 0
 - Discovery Calls Booked: 0
 - Website Leads Captured: 0
-- Notes: LinkedIn authenticated as Rakesh Pandey. Seven basic connection requests remain Pending. Accepted count is 0. DM eligible count is 0. Khaitan and Quess buyers were verified for a future batch. Apollo alternate remains pending. No new connection requests, DMs, emails, or LinkedIn post were sent during the monitoring task.
+- Notes: LinkedIn authenticated as Rakesh Pandey. Seven basic connection requests remain Pending. Accepted count is 0. DM eligible count is 0. Khaitan, Quess, and Apollo alternate buyers are verified for future-batch review. No new connection requests, DMs, emails, or LinkedIn post were sent during the monitoring task.
 
 ## Blockers
 
 1. LinkedIn post remains prepared only; composer typing was not reliable enough to publish safely.
 2. CA Ashokkan Somuveerappan CHCIO connection is blocked because LinkedIn requires the member email address.
 3. Khaitan & Co and Quess Corp now have verified future-batch buyer profiles, but no connection requests were sent in this monitoring task.
-4. Apollo Hospitals still needs an alternate verified buyer or a legitimate public email because the previous profile was blocked by LinkedIn email gate.
+4. Apollo Hospitals has a verified alternate for future-batch review, but no request should be sent without explicit approval.
 5. No direct messages can be sent until the founder is connected to the target buyer or messaging is otherwise allowed.
 
 ## Next Action
@@ -160,5 +176,5 @@ Pending DM targets:
 2. Wait for acceptance from Komal Gupta, Yogesh Zope, Parthanil Ghosh, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak.
 3. Send DMs only after connection acceptance.
 4. Use Rohit Shukla and Sunitha Karthikeyan only in a future approved batch, not before.
-5. Resolve the Apollo email-gate blocker by finding an alternate verified buyer or a legitimate public email.
+5. Use the Apollo alternate only in a future approved batch, not before.
 6. Manually paste/publish the prepared LinkedIn post from the final post page, or re-run automation after Chrome accepts typed/pasted content in LinkedIn.

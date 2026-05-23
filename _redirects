@@ -22,6 +22,9 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /day-03-monitoring-plan /day-03-monitoring-plan.html 200!
 /day-03-monitoring-plan/ /day-03-monitoring-plan.html 200!
 /day-03-monitoring-plan/index.html /day-03-monitoring-plan.html 200!
+/day-04-execution-log /day-04-execution-log.html 200!
+/day-04-execution-log/ /day-04-execution-log.html 200!
+/day-04-execution-log/index.html /day-04-execution-log.html 200!
 
 /about.php / 301
 /contact.php /contact 301
