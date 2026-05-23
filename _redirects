@@ -13,6 +13,12 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /day-01-execution-log /day-01-execution-log.html 200!
 /day-01-execution-log/ /day-01-execution-log.html 200!
 /day-01-execution-log/index.html /day-01-execution-log.html 200!
+/day-02-dm-templates /day-02-dm-templates.html 200!
+/day-02-dm-templates/ /day-02-dm-templates.html 200!
+/day-02-dm-templates/index.html /day-02-dm-templates.html 200!
+/day-02-execution-plan /day-02-execution-plan.html 200!
+/day-02-execution-plan/ /day-02-execution-plan.html 200!
+/day-02-execution-plan/index.html /day-02-execution-plan.html 200!
 
 /about.php / 301
 /contact.php /contact 301

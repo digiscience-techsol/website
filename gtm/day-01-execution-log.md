@@ -85,6 +85,15 @@ Status: 0 sent, 5 pending.
 
 Reason: DMs should only be sent when the founder is already connected or messaging is allowed. No verified connections were confirmed in this session.
 
+Day-2 status check on 2026-05-23:
+
+- Komal Gupta: Pending.
+- Yogesh Zope: Pending.
+- Parthanil Ghosh: Pending.
+- Kapil Bharati: Pending.
+- No DMs sent.
+- No new connection requests sent.
+
 Pending DM targets:
 - Cyril Amarchand Mangaldas - Legal Head
 - Bharat Forge - Manufacturing Operations Head
@@ -118,8 +127,9 @@ Pending DM targets:
 
 1. LinkedIn post remains prepared only; composer typing was not reliable enough to publish safely.
 2. CA Ashokkan Somuveerappan CHCIO connection is blocked because LinkedIn requires the member email address.
-3. Four target rows still need manual LinkedIn profile verification or role-fit review before sending.
-4. No direct messages can be sent until the founder is connected to the target buyer or messaging is otherwise allowed.
+3. Khaitan & Co and Quess Corp still need verified personal LinkedIn profile URLs before sending.
+4. TVS Motor Company, Narayana Health, and ICICI Lombard now have better-fit verified buyer profiles, but no Day-2 connection requests were sent.
+5. No direct messages can be sent until the founder is connected to the target buyer or messaging is otherwise allowed.
 
 ## Next Action
 
