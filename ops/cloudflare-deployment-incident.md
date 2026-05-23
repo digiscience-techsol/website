@@ -165,6 +165,29 @@ The Cloudflare dashboard also showed an unknown API error while opening the Page
 
 The required new paths redirect to slash URLs, but slash URLs return HTTP 500. Content checks fail because production does not return the new page files.
 
+Latest technical isolation on 2026-05-23 09:13 IST:
+
+- The apex custom domain and immutable Pages deployment URL both return HTTP 500 for the Day-1 directory routes.
+- The matching flat HTML files return HTTP 200 when requested directly as `.html` files.
+- Older static directories such as `/gtm-assets/`, `/day-01-outreach-pack/`, and `/week-01-metrics/` still return HTTP 200.
+- `/api/lead` still returns the expected HTTP 405 for GET, so the Pages Function route is not globally failing.
+- `_redirects` had no Day-1 route entries before the workaround.
+- `wrangler.toml` uses `pages_build_output_dir = "."` and KV binding `LEADS_KV`; no syntax/runtime error was found locally in `functions/api/lead.js`.
+
+Working flat asset checks before workaround:
+
+```text
+https://digisciencetechsol.com/day-01-linkedin-send-queue.html -> HTTP 200
+https://digisciencetechsol.com/day-01-linkedin-post-final.html -> HTTP 200
+https://digisciencetechsol.com/day-01-execution-log.html -> HTTP 200
+```
+
+Workaround prepared:
+
+- Add committed flat HTML files for the three Day-1 pages.
+- Add forced `_redirects` rewrites from the clean/slash routes to the flat HTML files.
+- Deploy through GitHub integration, not direct upload.
+
 Known good:
 
 - `www` redirect to apex is preserved.

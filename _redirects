@@ -1,6 +1,19 @@
 # Legacy DigiScience URLs that appeared in search results.
 # Keep these as 301 redirects so Google consolidates ranking signals into the current catalog.
 https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
+
+# Cloudflare Pages incident fallback: the Day-1 directory routes returned 500
+# while the flat HTML assets were healthy. Force these routes to the flat files.
+/day-01-linkedin-send-queue /day-01-linkedin-send-queue.html 200!
+/day-01-linkedin-send-queue/ /day-01-linkedin-send-queue.html 200!
+/day-01-linkedin-send-queue/index.html /day-01-linkedin-send-queue.html 200!
+/day-01-linkedin-post-final /day-01-linkedin-post-final.html 200!
+/day-01-linkedin-post-final/ /day-01-linkedin-post-final.html 200!
+/day-01-linkedin-post-final/index.html /day-01-linkedin-post-final.html 200!
+/day-01-execution-log /day-01-execution-log.html 200!
+/day-01-execution-log/ /day-01-execution-log.html 200!
+/day-01-execution-log/index.html /day-01-execution-log.html 200!
+
 /about.php / 301
 /contact.php /contact 301
 /service.php /services 301
