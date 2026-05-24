@@ -292,3 +292,12 @@ Day-9 monitoring update on 2026-05-24:
 - Komal, Yogesh, Kapil, Mahesh, Jagadeesh, and Girish remain pending.
 - New connection requests: 0.
 - DMs sent: 0.
+
+## Day-11 monitoring update
+
+- Week-2 LinkedIn post remains visible; no stable post URL or visible engagement counts were available.
+- No comments or replies required response.
+- Parthanil Ghosh remains connected with the initial DM visible and no reply observed.
+- Parthanil follow-up readiness pack was prepared only; do not send before 2026-05-27.
+- Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy and Girish Nayak remain pending.
+- New connection requests: 0. DMs sent: 0. Comment replies: 0.
