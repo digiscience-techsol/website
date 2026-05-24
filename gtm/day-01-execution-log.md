@@ -175,6 +175,19 @@ Day-7 monitoring update on 2026-05-24:
 - DMs sent in Day-7 monitoring: 0.
 - New connection requests sent in Day-7 monitoring: 0.
 
+
+Day-8 follow-up readiness check on 2026-05-24:
+
+- Current date: 2026-05-24.
+- Parthanil Ghosh follow-up due date: 2026-05-27.
+- Due condition met: No.
+- Parthanil initial DM remains visible in LinkedIn.
+- Parthanil reply observed: No.
+- Follow-up sent: No, because it is not due yet.
+- Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak remain Pending.
+- New connection requests sent: 0.
+- Additional DMs sent: 0.
+
 ## Tracker updates
 
 - First-50 prospect CSV updated for the 10 Day-1 target accounts.
