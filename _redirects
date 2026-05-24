@@ -123,3 +123,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /week-02-post-response-kit /week-02-post-response-kit.html 200!
 /week-02-post-response-kit/ /week-02-post-response-kit.html 200!
 /week-02-post-response-kit/index.html /week-02-post-response-kit.html 200!
+
+/day-12-monitoring-log /day-12-monitoring-log.html 200!
+/day-12-monitoring-log/ /day-12-monitoring-log.html 200!
+/day-12-monitoring-log/index.html /day-12-monitoring-log.html 200!
