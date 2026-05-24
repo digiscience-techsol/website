@@ -127,3 +127,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /day-12-monitoring-log /day-12-monitoring-log.html 200!
 /day-12-monitoring-log/ /day-12-monitoring-log.html 200!
 /day-12-monitoring-log/index.html /day-12-monitoring-log.html 200!
+
+/day-13-monitoring-log /day-13-monitoring-log.html 200!
+/day-13-monitoring-log/ /day-13-monitoring-log.html 200!
+/day-13-monitoring-log/index.html /day-13-monitoring-log.html 200!
