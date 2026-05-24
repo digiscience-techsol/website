@@ -242,3 +242,17 @@ Day-9 monitoring update on 2026-05-24:
 5. Use Rohit Shukla and Sunitha Karthikeyan only in a future approved batch, not before.
 6. Use the Apollo alternate only in a future approved batch, not before.
 7. LinkedIn post is already published; continue tracking engagement.
+
+
+## Day-10 monitoring - 2026-05-24
+
+- Parthanil Ghosh: Message Sent. DM remains visible in LinkedIn thread. No reply observed. Follow-up due date is 2026-05-27, so no follow-up was sent.
+- Komal Gupta: Pending.
+- Yogesh Zope: Pending.
+- Kapil Bharati: Pending.
+- Mahesh Calavai: Pending.
+- Jagadeesh Ramasamy: Pending.
+- Girish Nayak: Pending.
+- DMs sent during Day-10 monitoring: 0.
+- New connection requests sent during Day-10 monitoring: 0.
+- New customer-facing assets created: customer onboarding operating pack, AI readiness delivery kit, proposal-to-pilot conversion pack, Week-2 GTM plan, LinkedIn Batch 02, and Outreach Batch 02.
