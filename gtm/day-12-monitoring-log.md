@@ -22,6 +22,9 @@
 
 ## Pending requests
 
+Pending requests summary: Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak remain pending.
+
+
 - Komal Gupta: Pending.
 - Yogesh Zope: Pending.
 - Kapil Bharati: Pending.
