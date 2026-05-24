@@ -314,10 +314,10 @@ Day-9 monitoring update on 2026-05-24:
 
 ## Day-13 monitoring update
 
-- Week-2 post is visible in LinkedIn content search.
+- Week-2 post could not be verified in the current VPS browser session because LinkedIn opened to the sign-in page.
 - Post URL remains unavailable and no engagement metrics were invented.
-- No comments or replies required response.
-- Parthanil Ghosh remains connected with initial DM visible and no reply observed.
+- Comments and replies could not be verified without LinkedIn sign-in.
+- Parthanil Ghosh connection, initial DM visibility, and reply status could not be rechecked without LinkedIn sign-in.
 - Parthanil follow-up remains blocked until 2026-05-27.
-- Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy and Girish Nayak remain pending.
+- Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy and Girish Nayak could not be rechecked without LinkedIn sign-in; previous accepted state remains unchanged.
 - New connection requests: 0. DMs sent: 0. Comment replies: 0.
