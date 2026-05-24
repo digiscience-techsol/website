@@ -50,3 +50,6 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /day-06-execution-log /day-06-execution-log.html 200!
 /day-06-execution-log/ /day-06-execution-log.html 200!
 /day-06-execution-log/index.html /day-06-execution-log.html 200!
+/day-07-monitoring-log /day-07-monitoring-log.html 200!
+/day-07-monitoring-log/ /day-07-monitoring-log.html 200!
+/day-07-monitoring-log/index.html /day-07-monitoring-log.html 200!
