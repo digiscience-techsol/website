@@ -47,3 +47,6 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /ai-api-cost-governance /solutions/responsible-ai-governance 301
 /aws-azure-cost-optimization-startups /solutions/secure-ai-cloud-platform 301
 /finops-for-saas-startups-india /pricing 301
+/day-06-execution-log /day-06-execution-log.html 200!
+/day-06-execution-log/ /day-06-execution-log.html 200!
+/day-06-execution-log/index.html /day-06-execution-log.html 200!

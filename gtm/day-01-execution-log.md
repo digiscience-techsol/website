@@ -15,7 +15,7 @@ Date: 2026-05-23
 
 ## LinkedIn post status
 
-Status: Prepared, not sent.
+Status: Published from Rakesh Pandey profile on Day-5.
 
 Post title: AI readiness before AI spend
 
@@ -64,7 +64,7 @@ Reason: Only rows marked Ready to Send were used. Four requests were confirmed b
 | Narayana Health | Jagadeesh Ramasamy | Chief Digital Officer / CIO | Buyer verified | Connection Sent | LinkedIn shows Pending; wait for acceptance |
 | Apollo Hospitals | CA Ashokkan Somuveerappan CHCIO | Healthcare IT / digital health leader | Buyer verified | Blocked | LinkedIn required member email address; do not bypass |
 | ICICI Lombard | Girish Nayak | Chief - Technology and Health / Underwriting and Claims | Buyer verified | Connection Sent | LinkedIn shows Pending; wait for acceptance |
-| HDFC ERGO | Parthanil Ghosh | MD & CEO / digital customer innovation sponsor | Buyer verified | Connection Sent | LinkedIn confirmed "Invitation sent to Parthanil"; wait for acceptance |
+| HDFC ERGO | Parthanil Ghosh | MD & CEO / digital customer innovation sponsor | Buyer verified | Message Sent | DM sent from Rakesh Pandey profile on 2026-05-24; wait for reply and follow up on 2026-05-27 if no response |
 | Quess Corp | Sunitha Karthikeyan | Senior Vice President & Head of HR at Quess Corp | Buyer verified for future batch | Ready for Future Batch | Do not send until a future batch is approved |
 | Delhivery | Kapil Bharati | Co-founder & CTO | Buyer verified | Connection Sent | LinkedIn confirmed "Invitation sent to Kapil"; wait for acceptance |
 
@@ -149,6 +149,19 @@ Pending DM targets:
 - ICICI Lombard - Compliance / Risk Head
 - Delhivery - COO / Operations Head
 
+
+Day-6 accepted connection and DM update on 2026-05-24:
+
+- Parthanil Ghosh: Accepted / 1st-degree connected.
+- DM sent from Rakesh Pandey profile using the approved BFSI compliance intelligence / AI readiness message.
+- Direct Messages Sent: 1.
+- Connections Accepted: 1.
+- Replies Received: 0.
+- Discovery Calls Booked: 0.
+- Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak remain Pending.
+- No DMs were sent to pending profiles.
+- No new connection requests were sent.
+
 ## Tracker updates
 
 - First-50 prospect CSV updated for the 10 Day-1 target accounts.
@@ -163,10 +176,10 @@ Pending DM targets:
 
 ## Metrics updates
 
-- LinkedIn Post Published: Prepared - pending manual Rakesh Pandey publish
+- LinkedIn Post Published: Published from Rakesh Pandey profile
 - Connection Requests Sent: 7
-- Connections Accepted: 0
-- Direct Messages Sent: 0
+- Connections Accepted: 1
+- Direct Messages Sent: 1
 - Follow-up Emails Sent: 0
 - Replies Received: 0
 - Discovery Calls Booked: 0
@@ -184,8 +197,9 @@ Pending DM targets:
 ## Next Action
 
 1. Use Rakesh Pandey's LinkedIn profile for DigiScience outreach.
-2. Wait for acceptance from Komal Gupta, Yogesh Zope, Parthanil Ghosh, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak.
-3. Send DMs only after connection acceptance.
-4. Use Rohit Shukla and Sunitha Karthikeyan only in a future approved batch, not before.
-5. Use the Apollo alternate only in a future approved batch, not before.
-6. Manually paste/publish the prepared LinkedIn post from the final post page, or re-run automation after Chrome accepts typed/pasted content in LinkedIn.
+2. Wait for acceptance from Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak.
+3. Wait for Parthanil Ghosh reply; follow up on 2026-05-27 if no response and after approval.
+4. Send DMs only after connection acceptance.
+5. Use Rohit Shukla and Sunitha Karthikeyan only in a future approved batch, not before.
+6. Use the Apollo alternate only in a future approved batch, not before.
+7. LinkedIn post is already published; continue tracking engagement.
