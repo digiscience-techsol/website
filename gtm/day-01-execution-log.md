@@ -256,3 +256,14 @@ Day-9 monitoring update on 2026-05-24:
 - DMs sent during Day-10 monitoring: 0.
 - New connection requests sent during Day-10 monitoring: 0.
 - New customer-facing assets created: customer onboarding operating pack, AI readiness delivery kit, proposal-to-pilot conversion pack, Week-2 GTM plan, LinkedIn Batch 02, and Outreach Batch 02.
+
+
+## Week-2 approval monitoring - 2026-05-24
+
+- Parthanil Ghosh: connected, initial DM visible, no reply observed, no follow-up sent because due date is 2026-05-27.
+- Komal Gupta, Yogesh Zope, Kapil Bharati, Mahesh Calavai, Jagadeesh Ramasamy, and Girish Nayak remain pending.
+- Selected post: Why AI readiness is not a technical assessment only.
+- LinkedIn post published: no; prepared only.
+- New connection requests sent: 0.
+- DMs sent during this task: 0.
+- Week-2 approval pack, final post, next connection batch and execution log created.
