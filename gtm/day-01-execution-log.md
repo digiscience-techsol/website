@@ -188,6 +188,19 @@ Day-8 follow-up readiness check on 2026-05-24:
 - New connection requests sent: 0.
 - Additional DMs sent: 0.
 
+
+Day-9 monitoring update on 2026-05-24:
+
+- Parthanil Ghosh: Connected and initial DM remains visible. No reply observed. Follow-up due date is 2026-05-27, so no follow-up was sent.
+- Komal Gupta: Pending.
+- Yogesh Zope: Pending.
+- Kapil Bharati: Pending.
+- Mahesh Calavai: Pending.
+- Jagadeesh Ramasamy: Pending.
+- Girish Nayak: Pending.
+- DMs sent in Day-9 monitoring: 0.
+- New connection requests sent in Day-9 monitoring: 0.
+
 ## Tracker updates
 
 - First-50 prospect CSV updated for the 10 Day-1 target accounts.
