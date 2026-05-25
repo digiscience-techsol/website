@@ -82,6 +82,21 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 5 Account Validation Checklist CSV](templates/top-5-account-validation-checklist.csv)
   - Internal CSV version of the top-5 validation checklist. Keep under `ops/templates`; do not move to public `/assets/templates`.
 
+- [Cyril Amarchand Mangaldas Founder Brief](account-briefs/cyril-amarchand-mangaldas-founder-brief.md)
+  - Internal founder decision brief for fit, offer, route confidence, validation gaps, risk, and no-send status.
+
+- [Tata Steel Founder Brief](account-briefs/tata-steel-founder-brief.md)
+  - Internal founder decision brief for manufacturing AI fit, offer, route confidence, validation gaps, risk, and no-send status.
+
+- [Shardul Amarchand Mangaldas Founder Brief](account-briefs/shardul-amarchand-mangaldas-founder-brief.md)
+  - Internal founder decision brief for legal AI fit, route confidence, missing validation, risk, and no-send status.
+
+- [HDFC ERGO Founder Brief](account-briefs/hdfc-ergo-founder-brief.md)
+  - Internal founder decision brief for BFSI/insurance AI fit, route confidence, validation gaps, risk, and no-send status.
+
+- [Khaitan & Co Founder Brief](account-briefs/khaitan-founder-brief.md)
+  - Internal founder decision brief for legal AI fit, route confidence, validation gaps, risk, and no-send status.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
