@@ -38,6 +38,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Legal AI Demo Storyboard](legal-ai-demo-storyboard.md)
   - No-customer-data demo flow for document upload, clause extraction, obligation summary, source citation, reviewer approval, audit trail, final report, and governance controls.
 
+- [Industry Discovery: Manufacturing AI](industry-discovery-manufacturing-ai.md)
+  - Target buyers, manufacturing pain points, discovery questions, asset/equipment readiness, maintenance data, OT/MES/ERP/SCADA questions, quality inspection, cloud readiness, security/governance, success metrics, red flags, and first-offer logic.
+
+- [Manufacturing AI Pilot Qualification Checklist](manufacturing-ai-pilot-qualification-checklist.md)
+  - Qualification rules for AI Readiness Assessment, 45-Day Predictive Maintenance Pilot, Computer Vision Quality Inspection Pilot, Secure AI Cloud Platform, minimum data, plant/team readiness, equipment/sensor needs, reviewer availability, and go/no-go rules.
+
+- [Manufacturing AI Proposal Outline](manufacturing-ai-proposal-outline.md)
+  - Proposal structure for customer problem, solution, scope options, architecture, cloud service options, data ingestion, edge/IoT considerations, security/governance, phases, deliverables, commercial packaging, and success criteria.
+
+- [Manufacturing AI Demo Storyboard](manufacturing-ai-demo-storyboard.md)
+  - No-customer-data demo flow for sample equipment data, maintenance history, anomaly detection, failure-risk scoring, quality inspection option, human review, dashboard, audit trail, pilot report, and governance controls.
+
 ## Customer Onboarding And Delivery
 
 - [Customer Delivery Checklist](customer-delivery-checklist.md)
