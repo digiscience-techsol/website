@@ -58,6 +58,12 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 5 No-Send Outreach Drafts](top-5-no-send-outreach-drafts.md)
   - Placeholder-only outreach drafts for the top 5 accounts with business pain, suggested first offer, soft CTA, and public DigiScience page link. Do not send without founder approval.
 
+- [Top 5 Founder Outreach Approval Sheet](top-5-founder-outreach-approval-sheet.md)
+  - Internal founder-review approval matrix for top-5 account route, role, message, risk, no-send decision, and approval status.
+
+- [Top 5 Founder Outreach Approval Matrix CSV](templates/top-5-founder-outreach-approval-matrix.csv)
+  - Internal CSV version of the founder approval matrix. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
