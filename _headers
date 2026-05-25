@@ -61,6 +61,18 @@
 /assets/templates/*
   X-Robots-Tag: noindex, nofollow, noarchive
 
+/assets/templates*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/assets/templates/digiscience-first-50-prospect-list.csv
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/assets/templates/digiscience-prospect-tracker.csv
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/assets/templates/digiscience-week-01-sales-metrics.csv
+  X-Robots-Tag: noindex, nofollow, noarchive
+
 /ops/*
   X-Robots-Tag: noindex, nofollow, noarchive
 
