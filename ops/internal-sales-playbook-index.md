@@ -37,6 +37,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [First 20 Target Account CSV](templates/first-20-target-account-shortlist.csv)
   - Internal CSV version of the first 20 target account shortlist. Keep under `ops/templates`; do not move to public `/assets/templates`.
 
+- [Top 5 Account Discovery Pack](top-5-account-discovery-pack.md)
+  - Internal account-specific discovery prep for Cyril Amarchand Mangaldas, Tata Steel, Shardul Amarchand Mangaldas & Co, HDFC ERGO General Insurance, and Khaitan & Co.
+
+- [Top 5 Account Call Prep](top-5-account-call-prep.md)
+  - Five-minute pre-call briefings, opening questions, discovery questions, likely objections, recommended responses, and CTAs for the top 5 accounts.
+
+- [Top 5 Account Offer Mapping](top-5-account-offer-mapping.md)
+  - Best offers, alternate offers, pilot scope ideas, required data, stakeholders, approval paths, and commercial packaging suggestions for the top 5 accounts.
+
+- [Top 5 Account No-Send Rule](top-5-account-no-send-rule.md)
+  - Internal no-send controls: verify buyer role/contact route, LinkedIn AUTH PENDING, no invented buyer details, official contact route only, and founder approval required.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
