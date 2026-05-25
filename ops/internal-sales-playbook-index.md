@@ -24,6 +24,20 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Customer Call Notes Template](customer-call-notes-template.md)
   - Internal template for capturing customer context, workflow, data, cloud, governance, opportunity score, risks, offer recommendation, and next action.
 
+## Industry Workflows
+
+- [Industry Discovery: Legal Document Intelligence](industry-discovery-legal-document-intelligence.md)
+  - Target buyers, legal document workflow pain, discovery questions, document readiness, security/confidentiality, source traceability, success metrics, red flags, and first-offer logic.
+
+- [Legal AI Pilot Qualification Checklist](legal-ai-pilot-qualification-checklist.md)
+  - Qualification rules for AI Readiness Assessment, 45-Day Legal Document Intelligence Pilot, Responsible AI Governance Review, document requirements, reviewer availability, security assumptions, and go/no-go rules.
+
+- [Legal AI Proposal Outline](legal-ai-proposal-outline.md)
+  - Proposal structure for customer problem, solution, scope options, architecture, cloud options, security/governance, phases, deliverables, commercial packaging, and success criteria.
+
+- [Legal AI Demo Storyboard](legal-ai-demo-storyboard.md)
+  - No-customer-data demo flow for document upload, clause extraction, obligation summary, source citation, reviewer approval, audit trail, final report, and governance controls.
+
 ## Customer Onboarding And Delivery
 
 - [Customer Delivery Checklist](customer-delivery-checklist.md)
