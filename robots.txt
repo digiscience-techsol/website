@@ -1,4 +1,29 @@
 User-agent: *
 Allow: /
 
+# Internal GTM, outreach, tracker, and execution assets are not public website content.
+Disallow: /day-
+Disallow: /week-
+Disallow: /outreach-
+Disallow: /linkedin-
+Disallow: /manual-linkedin-
+Disallow: /manual-linkedin-post-handoff
+Disallow: /parthanil-
+Disallow: /parthanil-follow-up-readiness
+Disallow: /30-day-gtm-plan
+Disallow: /daily-sales-checklist
+Disallow: /discovery-call-kit
+Disallow: /first-offers
+Disallow: /follow-up-cadence
+Disallow: /gtm-assets
+Disallow: /ideal-customer-profile
+Disallow: /outbound-message-bank
+Disallow: /proposal-templates
+Disallow: /prospect-tracker
+Disallow: /sales-execution
+Disallow: /target-account-selection
+Disallow: /assets/templates/
+Disallow: /ops/
+Disallow: /gtm/
+
 Sitemap: https://digisciencetechsol.com/sitemap.xml
