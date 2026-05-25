@@ -50,6 +50,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Manufacturing AI Demo Storyboard](manufacturing-ai-demo-storyboard.md)
   - No-customer-data demo flow for sample equipment data, maintenance history, anomaly detection, failure-risk scoring, quality inspection option, human review, dashboard, audit trail, pilot report, and governance controls.
 
+- [Industry Discovery: Healthcare AI](industry-discovery-healthcare-ai.md)
+  - Target buyers, healthcare operations pain points, discovery questions, patient workflows, clinical/admin documentation, data readiness, EHR/HIS/LIS/PACS/CRM integration, privacy/security, human review, clinical safety, success metrics, red flags, and first-offer logic.
+
+- [Healthcare AI Pilot Qualification Checklist](healthcare-ai-pilot-qualification-checklist.md)
+  - Qualification rules for AI Readiness Assessment, 45-Day Healthcare AI Workflow Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, minimum data, privacy assumptions, human approval, stakeholder availability, integration readiness, and go/no-go rules.
+
+- [Healthcare AI Proposal Outline](healthcare-ai-proposal-outline.md)
+  - Proposal structure for customer problem, solution, scope options, architecture, cloud service options, data integration, privacy/security/governance, human-in-loop workflow, phases, deliverables, commercial packaging, and success criteria.
+
+- [Healthcare AI Demo Storyboard](healthcare-ai-demo-storyboard.md)
+  - Privacy-safe sample-data demo flow for intake request, triage classification, documentation assistant, source-cited knowledge retrieval, human review, escalation, audit trail, operations report, and governance controls.
+
 ## Customer Onboarding And Delivery
 
 - [Customer Delivery Checklist](customer-delivery-checklist.md)
