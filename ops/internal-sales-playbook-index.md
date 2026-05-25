@@ -115,6 +115,24 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 2 Legal Founder Approval Sheet CSV](templates/top-2-legal-founder-approval-sheet.csv)
   - Internal CSV version of the top-2 legal founder approval sheet. Keep under `ops/templates`; do not move to public `/assets/templates`.
 
+- [First Revenue Execution Pack](first-revenue-execution-pack.md)
+  - Internal first-revenue operating pack focused on top 3 offers, top 3 industries, 30-day target actions, weekly rhythm, lead-to-proposal flow, and first 10 actions.
+
+- [Customer-Facing One-Page Offer Drafts](customer-facing-one-page-offers.md)
+  - Internal source drafts for AI Readiness Assessment, 45-Day Legal AI Pilot, BFSI/Insurance AI Pilot, Manufacturing AI Pilot, and Responsible AI Governance Review.
+
+- [First Discovery To Proposal Workflow](first-discovery-to-proposal-workflow.md)
+  - Internal workflow for lead qualification, discovery structure, scoring, proposal selection, proposal review, kickoff, and lost/nurture handling.
+
+- [First Customer Proposal Skeletons](first-customer-proposal-skeletons.md)
+  - Internal placeholder-only proposal skeletons for the first revenue offers. No fake customer names or claims.
+
+- [Founder Weekly Revenue Dashboard](founder-weekly-revenue-dashboard.md)
+  - Internal weekly metrics dashboard for target accounts reviewed, outreach approved/sent, replies, discovery calls, proposals, projected pipeline, blockers, and next actions.
+
+- [First Revenue Action Backlog](first-revenue-action-backlog.md)
+  - Internal action backlog grouped into this week, next week, founder approval, authentication, and customer response.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
