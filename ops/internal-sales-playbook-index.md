@@ -133,6 +133,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [First Revenue Action Backlog](first-revenue-action-backlog.md)
   - Internal action backlog grouped into this week, next week, founder approval, authentication, and customer response.
 
+- [Founder Next Revenue Decision Pack](founder-next-revenue-decision-pack.md)
+  - Single internal founder decision pack for the next revenue move: current situation, revenue focus, immediate recommendation, route decision, guardrails, and exact founder question.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
