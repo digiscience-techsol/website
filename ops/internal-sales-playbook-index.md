@@ -5,6 +5,23 @@ Status: Internal index. Do not publish.
 
 This index links the internal sales, lead, discovery, qualification, onboarding, and CRM operating materials for DigiScience Techsol.
 
+## First Customer Execution
+
+- [First Customer Execution Kit](first-customer-execution-kit.md)
+  - Compact operating kit for target account shortlisting, buyer profiles, priority industries, first offers, discovery call prep, qualification, proposal response, follow-up cadence, operating rhythm, and go/no-go rules.
+
+- [One-Page Offer Summaries](one-page-offer-summaries.md)
+  - Internal one-page offer summaries for Legal, Manufacturing, Healthcare, BFSI/Insurance, Logistics, Retail, and HR/Recruitment workflows.
+
+- [Industry Priority Scorecard](industry-priority-scorecard.md)
+  - Priority scoring across industries by urgency, workflow clarity, data availability, compliance sensitivity, 45-day pilot fit, budget signal, decision-maker access, and reference potential.
+
+- [Discovery Email And Call Prep](discovery-email-and-call-prep.md)
+  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, recap template, and next-step email.
+
+- [Proposal Response Templates](proposal-response-templates.md)
+  - Internal proposal response templates for AI Readiness Assessment, 45-Day AI Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, and priority industry responses.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
