@@ -1,34 +1,7 @@
-# Legacy DigiScience URLs that appeared in search results.
-# Keep these as 301 redirects so Google consolidates ranking signals into the current catalog.
+# Canonical host.
 https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 
-# Cloudflare Pages incident fallback: the Day-1 directory routes returned 500
-# while the flat HTML assets were healthy. Force these routes to the flat files.
-/day-01-linkedin-send-queue /day-01-linkedin-send-queue.html 200!
-/day-01-linkedin-send-queue/ /day-01-linkedin-send-queue.html 200!
-/day-01-linkedin-send-queue/index.html /day-01-linkedin-send-queue.html 200!
-/day-01-linkedin-post-final /day-01-linkedin-post-final.html 200!
-/day-01-linkedin-post-final/ /day-01-linkedin-post-final.html 200!
-/day-01-linkedin-post-final/index.html /day-01-linkedin-post-final.html 200!
-/day-01-execution-log /day-01-execution-log.html 200!
-/day-01-execution-log/ /day-01-execution-log.html 200!
-/day-01-execution-log/index.html /day-01-execution-log.html 200!
-/day-02-dm-templates /day-02-dm-templates.html 200!
-/day-02-dm-templates/ /day-02-dm-templates.html 200!
-/day-02-dm-templates/index.html /day-02-dm-templates.html 200!
-/day-02-execution-plan /day-02-execution-plan.html 200!
-/day-02-execution-plan/ /day-02-execution-plan.html 200!
-/day-02-execution-plan/index.html /day-02-execution-plan.html 200!
-/day-03-monitoring-plan /day-03-monitoring-plan.html 200!
-/day-03-monitoring-plan/ /day-03-monitoring-plan.html 200!
-/day-03-monitoring-plan/index.html /day-03-monitoring-plan.html 200!
-/day-04-execution-log /day-04-execution-log.html 200!
-/day-04-execution-log/ /day-04-execution-log.html 200!
-/day-04-execution-log/index.html /day-04-execution-log.html 200!
-/manual-linkedin-post-handoff /manual-linkedin-post-handoff.html 200!
-/manual-linkedin-post-handoff/ /manual-linkedin-post-handoff.html 200!
-/manual-linkedin-post-handoff/index.html /manual-linkedin-post-handoff.html 200!
-
+# Legacy PHP URLs.
 /about.php / 301
 /contact.php /contact 301
 /service.php /services 301
@@ -42,92 +15,8 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /portfolio.php /portfolio 301
 /privacy.php /privacy 301
 
-# Older cloud/FinOps pages should now consolidate into the AI-first positioning.
+# Older cloud/FinOps pages consolidate into current AI-first buyer pages.
 /cloud-cost-governance-consultant-india /solutions/secure-ai-cloud-platform 301
 /ai-api-cost-governance /solutions/responsible-ai-governance 301
 /aws-azure-cost-optimization-startups /solutions/secure-ai-cloud-platform 301
 /finops-for-saas-startups-india /pricing 301
-/day-06-execution-log /day-06-execution-log.html 200!
-/day-06-execution-log/ /day-06-execution-log.html 200!
-/day-06-execution-log/index.html /day-06-execution-log.html 200!
-/day-07-monitoring-log /day-07-monitoring-log.html 200!
-/day-07-monitoring-log/ /day-07-monitoring-log.html 200!
-/day-07-monitoring-log/index.html /day-07-monitoring-log.html 200!
-/day-08-follow-up-log /day-08-follow-up-log.html 200!
-/day-08-follow-up-log/ /day-08-follow-up-log.html 200!
-/day-08-follow-up-log/index.html /day-08-follow-up-log.html 200!
-/day-09-monitoring-log /day-09-monitoring-log.html 200!
-/day-09-monitoring-log/ /day-09-monitoring-log.html 200!
-/day-09-monitoring-log/index.html /day-09-monitoring-log.html 200!
-
-/day-10-monitoring-log /day-10-monitoring-log.html 200!
-/day-10-monitoring-log/ /day-10-monitoring-log.html 200!
-/day-10-monitoring-log/index.html /day-10-monitoring-log.html 200!
-
-/customer-onboarding-operating-pack /customer-onboarding-operating-pack.html 200!
-/customer-onboarding-operating-pack/ /customer-onboarding-operating-pack.html 200!
-/customer-onboarding-operating-pack/index.html /customer-onboarding-operating-pack.html 200!
-
-/ai-readiness-delivery-kit /ai-readiness-delivery-kit.html 200!
-/ai-readiness-delivery-kit/ /ai-readiness-delivery-kit.html 200!
-/ai-readiness-delivery-kit/index.html /ai-readiness-delivery-kit.html 200!
-
-/proposal-to-pilot-conversion-pack /proposal-to-pilot-conversion-pack.html 200!
-/proposal-to-pilot-conversion-pack/ /proposal-to-pilot-conversion-pack.html 200!
-/proposal-to-pilot-conversion-pack/index.html /proposal-to-pilot-conversion-pack.html 200!
-
-/week-02-gtm-plan /week-02-gtm-plan.html 200!
-/week-02-gtm-plan/ /week-02-gtm-plan.html 200!
-/week-02-gtm-plan/index.html /week-02-gtm-plan.html 200!
-
-/linkedin-posts-batch-02 /linkedin-posts-batch-02.html 200!
-/linkedin-posts-batch-02/ /linkedin-posts-batch-02.html 200!
-/linkedin-posts-batch-02/index.html /linkedin-posts-batch-02.html 200!
-
-/outreach-batch-02 /outreach-batch-02.html 200!
-/outreach-batch-02/ /outreach-batch-02.html 200!
-/outreach-batch-02/index.html /outreach-batch-02.html 200!
-
-/week-02-execution-approval-pack /week-02-execution-approval-pack.html 200!
-/week-02-execution-approval-pack/ /week-02-execution-approval-pack.html 200!
-/week-02-execution-approval-pack/index.html /week-02-execution-approval-pack.html 200!
-
-/week-02-linkedin-post-01-final /week-02-linkedin-post-01-final.html 200!
-/week-02-linkedin-post-01-final/ /week-02-linkedin-post-01-final.html 200!
-/week-02-linkedin-post-01-final/index.html /week-02-linkedin-post-01-final.html 200!
-
-/week-02-next-connection-batch /week-02-next-connection-batch.html 200!
-/week-02-next-connection-batch/ /week-02-next-connection-batch.html 200!
-/week-02-next-connection-batch/index.html /week-02-next-connection-batch.html 200!
-
-/week-02-execution-log /week-02-execution-log.html 200!
-/week-02-execution-log/ /week-02-execution-log.html 200!
-/week-02-execution-log/index.html /week-02-execution-log.html 200!
-
-/week-02-linkedin-post-01-execution-log /week-02-linkedin-post-01-execution-log.html 200!
-/week-02-linkedin-post-01-execution-log/ /week-02-linkedin-post-01-execution-log.html 200!
-/week-02-linkedin-post-01-execution-log/index.html /week-02-linkedin-post-01-execution-log.html 200!
-
-/week-02-post-engagement-log /week-02-post-engagement-log.html 200!
-/week-02-post-engagement-log/ /week-02-post-engagement-log.html 200!
-/week-02-post-engagement-log/index.html /week-02-post-engagement-log.html 200!
-
-/day-11-monitoring-log /day-11-monitoring-log.html 200!
-/day-11-monitoring-log/ /day-11-monitoring-log.html 200!
-/day-11-monitoring-log/index.html /day-11-monitoring-log.html 200!
-
-/parthanil-follow-up-readiness /parthanil-follow-up-readiness.html 200!
-/parthanil-follow-up-readiness/ /parthanil-follow-up-readiness.html 200!
-/parthanil-follow-up-readiness/index.html /parthanil-follow-up-readiness.html 200!
-
-/week-02-post-response-kit /week-02-post-response-kit.html 200!
-/week-02-post-response-kit/ /week-02-post-response-kit.html 200!
-/week-02-post-response-kit/index.html /week-02-post-response-kit.html 200!
-
-/day-12-monitoring-log /day-12-monitoring-log.html 200!
-/day-12-monitoring-log/ /day-12-monitoring-log.html 200!
-/day-12-monitoring-log/index.html /day-12-monitoring-log.html 200!
-
-/day-13-monitoring-log /day-13-monitoring-log.html 200!
-/day-13-monitoring-log/ /day-13-monitoring-log.html 200!
-/day-13-monitoring-log/index.html /day-13-monitoring-log.html 200!
