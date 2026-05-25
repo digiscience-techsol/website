@@ -109,6 +109,12 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 2 Legal No-Send Message Drafts](top-2-legal-no-send-message-drafts.md)
   - Internal no-send message variants for Cyril Amarchand Mangaldas and Khaitan & Co, including AI Readiness Assessment, Legal Document Intelligence workflow, referral-first drafts, compliance-safe wording, claims to avoid, and founder approval checkboxes.
 
+- [Top 2 Legal Founder Approval Sheet](top-2-legal-founder-approval-sheet.md)
+  - Internal founder approval sheet for Cyril Amarchand Mangaldas and Khaitan & Co, including route confidence, first offer, message variants, strategist recommendation, founder decision, approved route, timing, and final no-send status.
+
+- [Top 2 Legal Founder Approval Sheet CSV](templates/top-2-legal-founder-approval-sheet.csv)
+  - Internal CSV version of the top-2 legal founder approval sheet. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
