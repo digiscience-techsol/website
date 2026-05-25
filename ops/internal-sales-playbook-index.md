@@ -73,6 +73,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Founder Approval Decision Log CSV](templates/founder-approval-decision-log.csv)
   - Internal decision log template for account, route, role, message, risk, decision, approval status, evidence, and next action. Keep under `ops/templates`; do not move to public `/assets/templates`.
 
+- [Top 5 Account Validation Checklist](top-5-account-validation-checklist.md)
+  - Internal checklist for account relevance, proposed offer, verified route, route confidence, buyer/person verification status, target function, readiness, risk, missing validation, founder decision, and final no-send status.
+
+- [Top 5 Founder Review Pack](top-5-founder-review-pack.md)
+  - Founder-ready internal summary of why each top-5 account is relevant, what is verified, what is not verified, approval requirements, and recommended next safe action.
+
+- [Top 5 Account Validation Checklist CSV](templates/top-5-account-validation-checklist.csv)
+  - Internal CSV version of the top-5 validation checklist. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
