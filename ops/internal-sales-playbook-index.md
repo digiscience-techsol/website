@@ -62,6 +62,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Healthcare AI Demo Storyboard](healthcare-ai-demo-storyboard.md)
   - Privacy-safe sample-data demo flow for intake request, triage classification, documentation assistant, source-cited knowledge retrieval, human review, escalation, audit trail, operations report, and governance controls.
 
+- [Industry Discovery: BFSI / Insurance AI](industry-discovery-bfsi-insurance-ai.md)
+  - Target buyers, BFSI/insurance pain points, claims and underwriting questions, compliance/audit, data/document readiness, core system integration, security/privacy, model risk, human approval, success metrics, red flags, and first-offer logic.
+
+- [BFSI / Insurance AI Pilot Qualification Checklist](bfsi-insurance-ai-pilot-qualification-checklist.md)
+  - Qualification rules for AI Readiness Assessment, 45-Day Claims / Underwriting / Compliance AI Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, minimum data, regulatory assumptions, human approval, audit trail, integration readiness, and go/no-go rules.
+
+- [BFSI / Insurance AI Proposal Outline](bfsi-insurance-ai-proposal-outline.md)
+  - Proposal structure for customer problem, solution, scope options, architecture, cloud service options, document/data integration, security/governance, model risk, human-in-loop workflow, auditability, phases, deliverables, commercial packaging, and success criteria.
+
+- [BFSI / Insurance AI Demo Storyboard](bfsi-insurance-ai-demo-storyboard.md)
+  - Privacy-safe sample-data demo flow for claims/policy document review, triage, document extraction, fraud/compliance signal review, source citation, human approval, audit trail, governance checkpoint, and decision-support report.
+
 ## Customer Onboarding And Delivery
 
 - [Customer Delivery Checklist](customer-delivery-checklist.md)
