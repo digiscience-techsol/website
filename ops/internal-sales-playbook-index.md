@@ -49,6 +49,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 5 Account No-Send Rule](top-5-account-no-send-rule.md)
   - Internal no-send controls: verify buyer role/contact route, LinkedIn AUTH PENDING, no invented buyer details, official contact route only, and founder approval required.
 
+- [Top 5 Buyer Role Verification](top-5-buyer-role-verification.md)
+  - Internal verification pack for official websites, contact routes, role routes, person-level buyer status, first offers, and no-send reasons for the top 5 accounts.
+
+- [Top 5 Buyer Verification CSV](templates/top-5-buyer-verification.csv)
+  - Internal CSV version of the top 5 buyer-role and contact-route verification pack. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
+- [Top 5 No-Send Outreach Drafts](top-5-no-send-outreach-drafts.md)
+  - Placeholder-only outreach drafts for the top 5 accounts with business pain, suggested first offer, soft CTA, and public DigiScience page link. Do not send without founder approval.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
