@@ -22,6 +22,21 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Proposal Response Templates](proposal-response-templates.md)
   - Internal proposal response templates for AI Readiness Assessment, 45-Day AI Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, and priority industry responses.
 
+- [First 20 Target Account Shortlist](first-20-target-account-shortlist.md)
+  - Internal 20-account shortlist across Legal Document Intelligence, BFSI / Insurance AI, and Manufacturing AI with account-level public data, buyer-role targets, offers, pain hypotheses, scores, and next actions.
+
+- [Target Shortlist Selection Rationale](target-shortlist-selection-rationale.md)
+  - Rationale for account selection, industry priority, high-fit criteria, disqualification signals, buyer-role validation, and account-to-discovery process.
+
+- [First 20 Account Outreach Prep](first-20-account-outreach-prep.md)
+  - Internal no-send outreach prep covering industry opening angles, recommended offer per account, discovery question per account, LinkedIn AUTH PENDING note, and official-contact-only fallback.
+
+- [First 20 Account Review Checklist](first-20-account-review-checklist.md)
+  - Internal checklist for company verification, buyer-role validation, contact route validation, pain hypothesis mapping, first-offer choice, and no-send controls.
+
+- [First 20 Target Account CSV](templates/first-20-target-account-shortlist.csv)
+  - Internal CSV version of the first 20 target account shortlist. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
