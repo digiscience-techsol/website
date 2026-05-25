@@ -64,6 +64,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 5 Founder Outreach Approval Matrix CSV](templates/top-5-founder-outreach-approval-matrix.csv)
   - Internal CSV version of the founder approval matrix. Keep under `ops/templates`; do not move to public `/assets/templates`.
 
+- [Top 5 Founder Review Workflow](top-5-founder-review-workflow.md)
+  - Internal workflow for founder account review, validation evidence, route approval, buyer/person approval, send/no-send decisions, risk categories, and audit trail requirements.
+
+- [Top 5 Outreach Approval SOP](top-5-outreach-approval-sop.md)
+  - Internal SOP for moving top-5 accounts from no-send preparation to founder-approved outreach while preserving LinkedIn AUTH PENDING and public containment rules.
+
+- [Founder Approval Decision Log CSV](templates/founder-approval-decision-log.csv)
+  - Internal decision log template for account, route, role, message, risk, decision, approval status, evidence, and next action. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
