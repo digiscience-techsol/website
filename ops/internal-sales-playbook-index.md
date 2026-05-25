@@ -97,6 +97,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Khaitan & Co Founder Brief](account-briefs/khaitan-founder-brief.md)
   - Internal founder decision brief for legal AI fit, route confidence, validation gaps, risk, and no-send status.
 
+- [Top 5 Founder Approval Matrix](top-5-founder-approval-matrix.md)
+  - Internal matrix for account, industry, first offer, official route, route confidence, buyer/person status, missing validation, risk, recommended action, founder decision, message variant, and final no-send status.
+
+- [Top 5 Founder Approval Matrix CSV](templates/top-5-founder-approval-matrix.csv)
+  - Internal CSV version of the founder approval matrix. Keep under `ops/templates`; do not move to public `/assets/templates`.
+
+- [Top 5 Founder Decision Notes](top-5-founder-decision-notes.md)
+  - Internal decision notes covering which accounts are safest, which need referral-first, which should avoid generic contact routes, and recommended order of action.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
