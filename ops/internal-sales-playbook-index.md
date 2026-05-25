@@ -74,6 +74,45 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [BFSI / Insurance AI Demo Storyboard](bfsi-insurance-ai-demo-storyboard.md)
   - Privacy-safe sample-data demo flow for claims/policy document review, triage, document extraction, fraud/compliance signal review, source citation, human approval, audit trail, governance checkpoint, and decision-support report.
 
+- [Industry Discovery: Logistics AI](industry-discovery-logistics-ai.md)
+  - Target buyers, logistics pain points, discovery questions, data readiness, TMS/WMS/ERP/API/GPS/telematics, operational workflow, security/governance, success metrics, red flags, and first-offer logic.
+
+- [Logistics AI Pilot Qualification Checklist](logistics-ai-pilot-qualification-checklist.md)
+  - Qualification criteria for AI Readiness, 45-Day Logistics Pilot, Secure AI Platform, minimum data, operational readiness, integrations, success criteria, and go/no-go rules.
+
+- [Logistics AI Proposal Outline](logistics-ai-proposal-outline.md)
+  - Proposal structure for logistics AI problem, solution, scope, architecture, cloud services, data integration, security, governance, phases, deliverables, packaging, and success criteria.
+
+- [Logistics AI Demo Storyboard](logistics-ai-demo-storyboard.md)
+  - Sample-data demo flow for shipment data, exception detection, route risk, control tower alert, customer escalation summary, human review, audit trail, and final report.
+
+- [Industry Discovery: Retail AI](industry-discovery-retail-ai.md)
+  - Retail workflow discovery covering store operations, stock-outs, demand signals, customer support, inventory visibility, personalization governance, campaign effectiveness, and returns.
+
+- [Retail AI Pilot Qualification Checklist](retail-ai-pilot-qualification-checklist.md)
+  - Qualification rules for AI Readiness, retail workflow pilot, recommendation/customer support pilot, governance review, data needs, success criteria, and go/no-go rules.
+
+- [Retail AI Proposal Outline](retail-ai-proposal-outline.md)
+  - Proposal structure for retail AI solution options, architecture, data, cloud services, privacy/governance, deliverables, packaging, and success criteria.
+
+- [Retail AI Demo Storyboard](retail-ai-demo-storyboard.md)
+  - Sample-data demo flow for product/order/support data, demand signals, stock risk, support summarization, human approval, and dashboard.
+
+- [Industry Discovery: HR / Recruitment AI](industry-discovery-hr-recruitment-ai.md)
+  - Target buyers, HR/recruitment pain points, discovery questions, candidate data readiness, ATS/HRMS integration, governance/fairness, human review, metrics, red flags, and first-offer logic.
+
+- [HR / Recruitment AI Pilot Qualification Checklist](hr-recruitment-ai-pilot-qualification-checklist.md)
+  - Qualification rules for AI Readiness, 45-Day HR Workflow Pilot, Responsible AI Governance Review, minimum data, fairness controls, human approval, success criteria, and go/no-go rules.
+
+- [HR / Recruitment AI Proposal Outline](hr-recruitment-ai-proposal-outline.md)
+  - Proposal structure for HR/recruitment AI problem, solution, scope, architecture, cloud services, privacy/fairness controls, phases, deliverables, packaging, and success criteria.
+
+- [HR / Recruitment AI Demo Storyboard](hr-recruitment-ai-demo-storyboard.md)
+  - Sample/anonymized-data demo flow for job description, resumes, matching support, recruiter review, interview notes summary, fairness checkpoint, and audit trail.
+
+- [Industry AI Offer Packaging Matrix](industry-ai-offer-packaging-matrix.md)
+  - Cross-industry matrix covering target buyer, pain point, first offer, 45-day pilot idea, data needed, success metric, governance risk, proposal angle, and disqualification signals.
+
 ## Customer Onboarding And Delivery
 
 - [Customer Delivery Checklist](customer-delivery-checklist.md)
