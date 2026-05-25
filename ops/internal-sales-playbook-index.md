@@ -106,6 +106,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 5 Founder Decision Notes](top-5-founder-decision-notes.md)
   - Internal decision notes covering which accounts are safest, which need referral-first, which should avoid generic contact routes, and recommended order of action.
 
+- [Top 2 Legal No-Send Message Drafts](top-2-legal-no-send-message-drafts.md)
+  - Internal no-send message variants for Cyril Amarchand Mangaldas and Khaitan & Co, including AI Readiness Assessment, Legal Document Intelligence workflow, referral-first drafts, compliance-safe wording, claims to avoid, and founder approval checkboxes.
+
 ## Lead Operations
 
 - [Lead Funnel Operating Model](lead-funnel-operating-model.md)
