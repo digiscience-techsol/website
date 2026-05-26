@@ -3,7 +3,7 @@
 ## Test Metadata
 
 - Recipient: `rajivjobnaukri@gmail.com`
-- Subject: `AI readiness review for legal document workflows - HTML render test`
+- Subject: `AI readiness review for legal document workflows — HTML render test`
 - Prospect/customer sent: No
 - CAM form submitted: No
 - LinkedIn used: No
