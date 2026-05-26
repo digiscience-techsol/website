@@ -115,6 +115,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Top 2 Legal Founder Approval Sheet CSV](templates/top-2-legal-founder-approval-sheet.csv)
   - Internal CSV version of the top-2 legal founder approval sheet. Keep under `ops/templates`; do not move to public `/assets/templates`.
 
+- [Cyril Amarchand Mangaldas Final Message Prep](cyril-final-message-prep.md)
+  - Internal final founder-reviewed message preparation for Cyril Amarchand Mangaldas only, including official contact form, referral-first, very short variants, compliance-safe wording, claims to avoid, founder checklist, and PREPARED / NO-SEND status.
+
 - [First Revenue Execution Pack](first-revenue-execution-pack.md)
   - Internal first-revenue operating pack focused on top 3 offers, top 3 industries, 30-day target actions, weekly rhythm, lead-to-proposal flow, and first 10 actions.
 
@@ -135,6 +138,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 
 - [Founder Next Revenue Decision Pack](founder-next-revenue-decision-pack.md)
   - Single internal founder decision pack for the next revenue move: current situation, revenue focus, immediate recommendation, route decision, guardrails, and exact founder question.
+
+- [DigiScience Current Milestone Dashboard](digiscience-current-milestone-dashboard.md)
+  - Internal milestone dashboard identifying the current stage, completed milestones, readiness scores, blockers, and next business milestones toward the first qualified discovery call.
+
+- [First Discovery Call Readiness Pack](first-discovery-call-readiness-pack.md)
+  - Internal readiness pack for selling the first AI Readiness Assessment, including target industries, call agenda, qualification questions, customer inputs, governance questions, expected outcome, next steps, and proposal trigger criteria.
+
+- [First Discovery Call Gap List](first-discovery-call-gap-list.md)
+  - Internal gap list tracking what is missing before the first discovery call, first proposal, first paid pilot, and scalable onboarding.
 
 ## Lead Operations
 
