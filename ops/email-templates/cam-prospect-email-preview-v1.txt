@@ -1,0 +1,20 @@
+Subject: AI readiness review for legal document workflows
+
+Hello,
+
+DigiScience Techsol helps legal teams assess whether a specific document-heavy workflow is ready for safe, governed AI adoption before moving into a pilot or implementation.
+
+Business pain:
+Legal document workflows can be time-consuming and risk-sensitive when teams need source traceability, confidentiality controls, and reviewer approval before relying on AI-supported outputs.
+
+For Cyril Amarchand Mangaldas, a practical starting point could be a Legal Document Intelligence AI Readiness Assessment. The review would focus on whether one workflow is suitable for AI support with human review, source traceability, confidentiality controls, and clear pilot go/no-go criteria.
+
+Safe legal AI approach:
+We are not requesting confidential documents at this stage. The first discussion would only identify whether there is a suitable workflow, owner, and governance path for a controlled readiness assessment.
+
+Would the Innovation, Knowledge Management, or Legal Operations team be the right route for a short introductory discussion?
+
+Regards,
+Rajiv Das Gupta
+DigiScience Techsol
+https://digisciencetechsol.com/ai-readiness-assessment
