@@ -124,6 +124,21 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Cyril Amarchand Mangaldas Pre-Submit Review Log](cyril-pre-submit-review-log.md)
   - Internal browser pre-submit review log for the official Innovation/contact route, form fields, message fit, subject support, captcha, screenshot path, blockers, and NOT SENT status.
 
+- [Founder Outreach Review Email HTML](founder-outreach-review-email.html)
+  - Internal Gmail/Outlook-ready HTML founder review email for CAM, Khaitan backup, top accounts, decision options, and no-outreach status.
+
+- [Founder Outreach Review Email Text](founder-outreach-review-email.txt)
+  - Plain-text fallback for the founder review email.
+
+- [Outreach Review Package For Founder](outreach-review-package-for-founder.md)
+  - Internal summary package for founder review of the current CAM-first outreach decision state.
+
+- [Founder Prospect Customer List Review](founder-prospect-customer-list-review.md)
+  - Internal review of top prospects, current outreach order, top 5 state, top 20 summary, and no-send controls.
+
+- [Founder Review Email Send Log](founder-review-email-send-log.md)
+  - Internal send log for founder personal review email, recipient, subject, send status, method, blocker, files created, and confirmation.
+
 - [First Revenue Execution Pack](first-revenue-execution-pack.md)
   - Internal first-revenue operating pack focused on top 3 offers, top 3 industries, 30-day target actions, weekly rhythm, lead-to-proposal flow, and first 10 actions.
 
