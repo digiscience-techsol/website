@@ -121,6 +121,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Cyril Amarchand Mangaldas Final Send Checklist](cyril-final-send-checklist.md)
   - Internal no-send checklist for the selected official Innovation/contact route, Option A message, subject, pre-send checks, risks, exact send steps, evidence capture, stop conditions, and final approval status.
 
+- [Cyril Amarchand Mangaldas Pre-Submit Review Log](cyril-pre-submit-review-log.md)
+  - Internal browser pre-submit review log for the official Innovation/contact route, form fields, message fit, subject support, captcha, screenshot path, blockers, and NOT SENT status.
+
 - [First Revenue Execution Pack](first-revenue-execution-pack.md)
   - Internal first-revenue operating pack focused on top 3 offers, top 3 industries, 30-day target actions, weekly rhythm, lead-to-proposal flow, and first 10 actions.
 
