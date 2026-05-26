@@ -1,0 +1,41 @@
+DigiScience Techsol
+AI-first cloud transformation partner
+
+Founder Review Only - No External Outreach Sent
+
+Executive summary:
+- CAM pre-submit ready
+- Captcha pending
+- Not submitted
+- Founder approval required
+
+Decision options:
+- Approve CAM final submit
+- Hold
+- Request wording changes
+
+Account priority:
+- CAM: first priority, pre-submit ready
+- Khaitan: backup, not approved
+- Tata Steel: research, route validation needed
+- Shardul: research, route validation needed
+- HDFC ERGO: hold, enterprise route needed
+
+Technology touchpoints:
+- Legal Document Intelligence
+- Secure RAG pattern
+- Source traceability
+- Human review workflow
+- Audit trail
+- Azure OpenAI / AWS Bedrock / Vertex AI optional architecture
+- Azure AI Document Intelligence / AWS Textract style document extraction
+- AI governance and access control
+
+Risk guardrails:
+- No fake claims
+- No autonomous legal advice
+- No confidential data requested
+- No outreach sent yet
+
+Clear next action:
+Approve final CAM submit only after reviewing message.
