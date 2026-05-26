@@ -118,6 +118,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Cyril Amarchand Mangaldas Final Message Prep](cyril-final-message-prep.md)
   - Internal final founder-reviewed message preparation for Cyril Amarchand Mangaldas only, including official contact form, referral-first, very short variants, compliance-safe wording, claims to avoid, founder checklist, and PREPARED / NO-SEND status.
 
+- [Cyril Amarchand Mangaldas Final Send Checklist](cyril-final-send-checklist.md)
+  - Internal no-send checklist for the selected official Innovation/contact route, Option A message, subject, pre-send checks, risks, exact send steps, evidence capture, stop conditions, and final approval status.
+
 - [First Revenue Execution Pack](first-revenue-execution-pack.md)
   - Internal first-revenue operating pack focused on top 3 offers, top 3 industries, 30-day target actions, weekly rhythm, lead-to-proposal flow, and first 10 actions.
 
