@@ -1,0 +1,26 @@
+Subject: PREVIEW ONLY - Legal AI Readiness Email for Cyril Amarchand Mangaldas
+
+Hello,
+
+DigiScience Techsol helps legal teams evaluate whether a document-heavy workflow is ready for safe, governed AI adoption before moving into implementation.
+
+Why this matters:
+Legal document intelligence needs speed, source traceability, and human control. The first step is not a broad AI rollout. It is a controlled readiness review of one workflow, with confidentiality, reviewer approval, and governance designed from the start.
+
+For Cyril Amarchand Mangaldas, a practical starting point could be a Legal Document Intelligence AI Readiness Assessment. The assessment would identify whether one workflow has the right business owner, document structure, controls, and success criteria for a focused AI pilot.
+
+What the review covers:
+- Source-cited outputs
+- Secure RAG pattern
+- Human approval
+
+We are not requesting confidential documents at this stage. The first discussion would only confirm whether there is a suitable workflow, owner, and governance path for a controlled readiness assessment.
+
+Would the Innovation, Knowledge Management, or Legal Operations team be the right route for a short introductory discussion?
+
+View AI Readiness Assessment:
+https://digisciencetechsol.com/ai-readiness-assessment
+
+DigiScience Techsol
+AI-first cloud transformation partner
+https://digisciencetechsol.com
