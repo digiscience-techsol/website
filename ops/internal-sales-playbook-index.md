@@ -127,6 +127,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [CAM Final Pre-Send Approval](cam-final-pre-send-approval.md)
   - Internal final approval package for Cyril Amarchand Mangaldas route selection, sender mailbox, final subject, v4 HTML template, checklist, risks, and founder send/hold/revise decision.
 
+- [CAM Official Email Route Verification](cam-official-email-route-verification.md)
+  - Internal verification of official CAM public sources for a valid Innovation, Knowledge Management, Legal Operations, or business enquiry email route, with fallback route recommendation and no-send status.
+
 - [Founder Outreach Review Email HTML](founder-outreach-review-email.html)
   - Internal Gmail/Outlook-ready HTML founder review email for CAM, Khaitan backup, top accounts, decision options, and no-outreach status.
 
