@@ -17,7 +17,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
   - Priority scoring across industries by urgency, workflow clarity, data availability, compliance sensitivity, 45-day pilot fit, budget signal, decision-maker access, and reference potential.
 
 - [Discovery Email And Call Prep](discovery-email-and-call-prep.md)
-  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, recap template, and next-step email.
+  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, and next-step email.
 
 - [Proposal Response Templates](proposal-response-templates.md)
   - Internal proposal response templates for AI Readiness Assessment, 45-Day AI Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, and priority industry responses.
@@ -95,7 +95,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
   - Internal founder decision brief for BFSI/insurance AI fit, route confidence, validation gaps, risk, and no-send status.
 
 - [Khaitan & Co Founder Brief](account-briefs/khaitan-founder-brief.md)
-  - Internal founder decision brief for legal AI fit, route confidence, validation gaps, risk, and no-send status.
+  - Internal founder decision brief for legal AI fit, route confidence, validation gaps, and no-send status.
 
 - [Top 5 Founder Approval Matrix](top-5-founder-approval-matrix.md)
   - Internal matrix for account, industry, first offer, official route, route confidence, buyer/person status, missing validation, risk, recommended action, founder decision, message variant, and final no-send status.
@@ -123,6 +123,9 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 
 - [Cyril Amarchand Mangaldas Pre-Submit Review Log](cyril-pre-submit-review-log.md)
   - Internal browser pre-submit review log for the official Innovation/contact route, form fields, message fit, subject support, captcha, screenshot path, blockers, and NOT SENT status.
+
+- [CAM Final Pre-Send Approval](cam-final-pre-send-approval.md)
+  - Internal final approval package for Cyril Amarchand Mangaldas route selection, sender mailbox, final subject, v4 HTML template, checklist, risks, and founder send/hold/revise decision.
 
 - [Founder Outreach Review Email HTML](founder-outreach-review-email.html)
   - Internal Gmail/Outlook-ready HTML founder review email for CAM, Khaitan backup, top accounts, decision options, and no-outreach status.
@@ -226,7 +229,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Healthcare AI Demo Storyboard](healthcare-ai-demo-storyboard.md)
   - Privacy-safe sample-data demo flow for intake request, triage classification, documentation assistant, source-cited knowledge retrieval, human review, escalation, audit trail, operations report, and governance controls.
 
-- [Industry Discovery: BFSI / Insurance AI](industry-discovery-bfsi-insurance-ai.md)
+- [Industry Discovery: BFSI / Insurance AI](bfsi-insurance-ai.md)
   - Target buyers, BFSI/insurance pain points, claims and underwriting questions, compliance/audit, data/document readiness, core system integration, security/privacy, model risk, human approval, success metrics, red flags, and first-offer logic.
 
 - [BFSI / Insurance AI Pilot Qualification Checklist](bfsi-insurance-ai-pilot-qualification-checklist.md)
