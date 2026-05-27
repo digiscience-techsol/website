@@ -1,49 +1,29 @@
 # Email Design Notes
 
-Date: 2026-05-26
-Status: Internal design notes. Do not publish.
+## Approved Visual Baseline
 
-## Purpose
+- Founder visual quality accepted: yes
+- Accepted sender mailbox: subscription@digisciencetechsol.com
+- Approved baseline template: cam-prospect-premium-email-v4.html
+- Approved use: future founder previews and controlled prospect emails after explicit founder approval
+- External send status: not approved yet
 
-Create two clearly separated email experiences:
+## Baseline Design Rules
 
-- Founder Review Email: internal approval pack for Rajiv.
-- CAM Prospect Email Preview: production-facing message preview for Cyril Amarchand Mangaldas.
+- Use true HTML MIME for preview and approved prospect sends.
+- Keep the email body visually formatted in Gmail and Outlook, not dependent on screenshots or attachments.
+- Use a polished, professional layout with inline CSS, readable sections, clear business value, and a visible CTA button.
+- Keep prospect-facing content clean: no internal notes, no operational logs, no approval language, no blockers, and no private context.
+- Do not add tracking pixels, external scripts, fake testimonials, fake logos, or unsupported claims.
 
-## Design Rules Applied
+## Current Decision
 
-- Inline CSS only.
-- 640px max-width email container.
-- No external CSS.
-- No JavaScript.
-- No tracking pixel.
-- No fake logo.
-- No fake customer claim.
-- Professional header using DigiScience Techsol name only.
-- Section cards, status badges, spacing, and mobile-friendly table/card layout.
+The founder accepted the visual quality of `cam-prospect-premium-email-v4.html` as the visual baseline. This approval covers design quality only. It does not approve sending to CAM or any other prospect.
 
-## Separation Rules
+## Prohibited Until Explicit Approval
 
-Founder Review Email may include:
-
-- Founder Review Only label.
-- No external outreach sent notice.
-- CAM internal status.
-- Khaitan backup status.
-- Top 5 account summary.
-- Founder decision options.
-- Next action checklist.
-
-CAM Prospect Email Preview must not include:
-
-- Internal notes.
-- Top 5 or top 20 account lists.
-- No-send status.
-- Approval language.
-- Blockers.
-- Similar-client claims.
-
-## Screenshot Outputs
-
-- ops/email-templates/founder-review-email-v2-preview.png
-- ops/email-templates/cam-prospect-email-preview-v1-preview.png
+- No public HTML publishing.
+- No sitemap update.
+- No prospect email send.
+- No CAM form submission.
+- No LinkedIn action.
