@@ -40,6 +40,21 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [First 10 Route Validation Gate](first-10-route-validation-gate.md)
   - Internal route-validation gate for CAM, Khaitan, Shardul, Tata Steel, HDFC ERGO, and five additional legal/compliance/document-heavy accounts. No outreach approved.
 
+- [Quote-To-Cash Readiness Pack](quote-to-cash-readiness-pack.md)
+  - Internal readiness pack for pricing, proposal owner, billing owner, invoice method, payment method, company/tax details, contract/signature method, and kickoff checklist.
+
+- [Founder Commercial Decision Sheet](founder-commercial-decision-sheet.md)
+  - Internal founder decision sheet for pricing, proposal owner, billing owner, payment method, and contract/signature method. All decisions pending until founder approves.
+
+- [AI Readiness Assessment SOW Template](ai-readiness-assessment-sow-template.md)
+  - Internal SOW template for the Legal Document Intelligence AI Readiness Assessment with placeholders for customer, workflow, scope, commercial terms, and acceptance criteria.
+
+- [AI Readiness Assessment Invoice Info Checklist](ai-readiness-assessment-invoice-info-checklist.md)
+  - Internal invoice information checklist for billing entity, tax/GST, payment method, invoice numbering, due date, service description, and secure handling rules.
+
+- [AI Readiness Assessment Kickoff Checklist](ai-readiness-assessment-kickoff-checklist.md)
+  - Internal kickoff checklist covering sponsor, workflow owner, reviewer, sample data readiness, security constraints, communication cadence, success metric, and go/no-go criteria.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
