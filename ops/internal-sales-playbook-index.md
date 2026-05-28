@@ -55,6 +55,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [AI Readiness Assessment Kickoff Checklist](ai-readiness-assessment-kickoff-checklist.md)
   - Internal kickoff checklist covering sponsor, workflow owner, reviewer, sample data readiness, security constraints, communication cadence, success metric, and go/no-go criteria.
 
+- [Quote-To-Cash Review Evidence Pack](quote-to-cash-review-evidence-pack.md)
+  - Internal evidence pack with repo path, branch, commit URLs, file URLs, local/remote state, push method, and public-exposure checks for quote-to-cash files.
+
+- [Founder Commercial Approval Form](founder-commercial-approval-form.md)
+  - Internal decision-ready approval form for pricing, proposal owner, billing owner, payment method, and signature method. All fields pending founder approval.
+
+- [Founder Action Paths For Commercial Readiness](founder-action-paths-for-commercial-readiness.md)
+  - Internal action-path file listing each commercial blocker, whether DigiBot can solve it, founder action required, noVNC/browser path, data sensitivity, deadline, and revenue impact.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
