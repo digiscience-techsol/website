@@ -5,6 +5,29 @@ Status: Internal index. Do not publish.
 
 This index links the internal sales, lead, discovery, qualification, onboarding, and CRM operating materials for DigiScience Techsol.
 
+## 45-Day Revenue Reset
+
+- [DigiScience 45-Day Revenue Reset](digiscience-45-day-revenue-reset.md)
+  - Master internal source of truth for the 45-day reset, current stage diagnosis, targets, weekly milestones, revenue scoreboard, blockers, and validation.
+
+- [45-Day Revenue Scoreboard](45-day-revenue-scoreboard.md)
+  - Internal execution scoreboard for baseline metrics, weekly targets, daily owner actions, blocked items, and next milestone.
+
+- [Legal AI First Offer Final](legal-ai-first-offer-final.md)
+  - Final internal offer definition for the Legal Document Intelligence AI Readiness Assessment, including buyer, problem, deliverables, timeline, criteria, price placeholder, proposal trigger, and pilot path.
+
+- [Legal AI Buyer Group Map](legal-ai-buyer-group-map.md)
+  - Internal buying-group map for Innovation / Digital, Legal Operations, Knowledge Management, IT / Security, Compliance / Risk, Finance / Procurement, and Managing Partner / Sponsor.
+
+- [45-Day Account Action Plan](45-day-account-action-plan.md)
+  - Internal account action plan for CAM response pending, named backup/research/hold accounts, and additional legal/compliance/document-heavy target accounts for route validation only.
+
+- [45-Day Outreach And Referral Plan](45-day-outreach-and-referral-plan.md)
+  - Internal no-send route plan for official forms, founder network/referrals, verified official email routes, partner/referral route, LinkedIn AUTH PENDING, cadence, and no-send controls.
+
+- [45-Day Discovery To Proposal SLA](45-day-discovery-to-proposal-sla.md)
+  - Internal SLA for discovery checklist, qualification score, proposal-within-24-hours rule, proposal approval, follow-up cadence, close criteria, and billing kickoff.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
