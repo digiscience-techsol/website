@@ -1,7 +1,7 @@
 # CAM Final Form Submit Log
 
 Date: 2026-05-28
-Status: PARTIAL / NOT SUBMITTED
+Status: FIXED / SUBMITTED
 
 ## Account
 
@@ -66,6 +66,49 @@ No external follow-up date is set because submission did not complete. Recommend
 
 ## Final Status
 
-PARTIAL / NOT SUBMITTED
+FIXED / SUBMITTED
 
-No email was sent. CAM form submission did not complete. LinkedIn was not used. Khaitan or any other account was not contacted.
+No email was sent. LinkedIn was not used. Khaitan or any other account was not contacted.
+
+## Approved Fresh Retry
+
+- Founder approval for one fresh retry: yes, received 2026-05-28.
+- Retry attempted: yes.
+- Retry route: official CAM Innovation/contact form only.
+- Fresh retry route opened: `https://www.cyrilshroff.com/innovation`
+- Browser resolved route: `https://www.cyrilshroff.com/innovation-2/?cam_retry=20260528`
+- Pre-captcha fields populated: yes.
+- Pre-captcha screenshot path: `/data/.openclaw/media/browser/71e7f16e-4e28-4669-96aa-88ce27cebb69.png`
+
+## Retry Captcha And Field Verification
+
+- Captcha required: yes.
+- Captcha completed manually by founder: yes.
+- First captcha completion cleared the required fields: yes.
+- Fields refilled before submit: yes.
+- Captcha expired after refill: yes.
+- Founder completed captcha again manually: yes.
+- Fields verified immediately before submit: yes.
+- Captcha verified immediately before submit: yes.
+- Pre-submit screenshot path: `/data/.openclaw/media/browser/6d2305a8-698e-40d1-a190-16448ff82ce2.png`
+
+## Retry Submission Result
+
+- Retry submit clicked: yes.
+- Retry submit clicks performed: 1.
+- Retry submitted successfully: yes.
+- Confirmation observed: yes.
+- Confirmation text: `Thank You For Contacting Us!!!`
+- Post-submit screenshot path: `/data/.openclaw/media/browser/b8204ad0-3185-4b1e-ad69-d35e36bdd0e0.png`
+- Retry submit timestamp: 2026-05-28 14:14 IST / 2026-05-28 08:44 UTC
+- Validation errors on retry: none observed after final submit.
+
+## Updated Final Status
+
+FIXED / SUBMITTED
+
+No email was sent. LinkedIn was not used. Khaitan or any other account was not contacted. No guessed email address was used.
+
+## Updated Next Recommended Action
+
+Wait for any inbound response from CAM. Do not send follow-up, email, LinkedIn message, or contact any other account unless founder separately approves the next action.
