@@ -17,7 +17,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
   - Priority scoring across industries by urgency, workflow clarity, data availability, compliance sensitivity, 45-day pilot fit, budget signal, decision-maker access, and reference potential.
 
 - [Discovery Email And Call Prep](discovery-email-and-call-prep.md)
-  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, and next-step email.
+  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, recap template, and next-step email.
 
 - [Proposal Response Templates](proposal-response-templates.md)
   - Internal proposal response templates for AI Readiness Assessment, 45-Day AI Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, and priority industry responses.
@@ -86,7 +86,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
   - Internal founder decision brief for fit, offer, route confidence, validation gaps, risk, and no-send status.
 
 - [Tata Steel Founder Brief](account-briefs/tata-steel-founder-brief.md)
-  - Internal founder decision brief for manufacturing AI fit, offer, route confidence, validation gaps, and no-send status.
+  - Internal founder decision brief for manufacturing AI fit, offer, route confidence, validation gaps, risk, and no-send status.
 
 - [Shardul Amarchand Mangaldas Founder Brief](account-briefs/shardul-amarchand-mangaldas-founder-brief.md)
   - Internal founder decision brief for legal AI fit, route confidence, missing validation, risk, and no-send status.
@@ -132,6 +132,12 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 
 - [CAM Final Form Submit Log](cam-final-form-submit-log.md)
   - Internal log for the founder-approved CAM official Innovation/contact form submit attempt, captcha status, single-click submission result, exact validation errors, screenshot path, and PARTIAL / NOT SUBMITTED status.
+
+- [CAM Response Monitoring Plan](cam-response-monitoring-plan.md)
+  - Internal monitoring plan for CAM response tracking after the official Innovation/contact form submission, including inboxes, cadence, response criteria, no-response handling, and owner checklist.
+
+- [CAM Follow-Up Draft No-Send](cam-follow-up-draft-no-send.md)
+  - Internal no-send follow-up draft for CAM, with timing placeholder, route approval requirements, and explicit no-send controls.
 
 - [Founder Outreach Review Email HTML](founder-outreach-review-email.html)
   - Internal Gmail/Outlook-ready HTML founder review email for CAM, Khaitan backup, top accounts, decision options, and no-outreach status.
