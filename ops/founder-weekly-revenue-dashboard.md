@@ -26,6 +26,17 @@ Status: Internal weekly dashboard. Do not publish.
 - Proposals: 0.
 - Next action: monitor response.
 
+## Latest CAM Monitoring Check
+
+- Checked at: 2026-05-28 16:05 IST / 2026-05-28 10:35 UTC.
+- CAM response received: no.
+- Accessible inbox checked: yes.
+- Website lead notification search checked: yes.
+- Shared `subscription@digisciencetechsol.com` mailbox direct access: partial; connector access denied.
+- Current stage: Response Pending.
+- Follow-up status: DRAFT / NO-SEND.
+- Next monitoring date: 2026-05-29.
+
 ## Current Focus
 
 - Offers: AI Readiness Assessment, 45-Day Industry AI Pilot, Responsible AI Governance Review.
