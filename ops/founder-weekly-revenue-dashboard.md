@@ -28,11 +28,14 @@ Status: Internal weekly dashboard. Do not publish.
 
 ## Latest CAM Monitoring Check
 
-- Checked at: 2026-05-28 16:05 IST / 2026-05-28 10:35 UTC.
+- Checked at: 2026-05-28 16:17 IST / 2026-05-28 10:47 UTC.
 - CAM response received: no.
-- Accessible inbox checked: yes.
+- Outlook Web session checked: yes; no usable authenticated `subscription@digisciencetechsol.com` mailbox tab was available.
+- Accessible Outlook inbox/search checked: yes.
+- Outlook Sent Items checked: yes; no CAM reference found.
 - Website lead notification search checked: yes.
-- Shared `subscription@digisciencetechsol.com` mailbox direct access: partial; connector access denied.
+- Gmail secondary keyword search checked: yes; no CAM/DigiScience response found.
+- Shared `subscription@digisciencetechsol.com` mailbox direct access: blocked; connector access denied.
 - Current stage: Response Pending.
 - Follow-up status: DRAFT / NO-SEND.
 - Next monitoring date: 2026-05-29.
