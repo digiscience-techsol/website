@@ -28,6 +28,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [45-Day Discovery To Proposal SLA](45-day-discovery-to-proposal-sla.md)
   - Internal SLA for discovery checklist, qualification score, proposal-within-24-hours rule, proposal approval, follow-up cadence, close criteria, and billing kickoff.
 
+- [45-Day Revenue Execution Gate](45-day-revenue-execution-gate.md)
+  - Internal quote-to-cash readiness gate answering whether DigiScience can quote, propose, invoice, and start if a qualified prospect replies.
+
+- [AI Readiness Assessment Pricing Decision](ai-readiness-assessment-pricing-decision.md)
+  - Internal pricing and commercial readiness options for the Legal Document Intelligence AI Readiness Assessment. Founder approval required before use.
+
+- [Proposal Billing Readiness Checklist](proposal-billing-readiness-checklist.md)
+  - Internal checklist for proposal owner, template, commercial terms, invoice method, payment method, tax/company details, signature method, onboarding handoff, and missing items.
+
+- [First 10 Route Validation Gate](first-10-route-validation-gate.md)
+  - Internal route-validation gate for CAM, Khaitan, Shardul, Tata Steel, HDFC ERGO, and five additional legal/compliance/document-heavy accounts. No outreach approved.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
