@@ -100,6 +100,15 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Customer-Ready AI Readiness Approval Checklist](customer-ready-ai-readiness-approval-checklist.md)
   - Internal checklist for founder approval, price approval, recipient confirmation, private billing details, final review, and send approval.
 
+- [45-Day Revenue Control Tower](45-day-revenue-control-tower.md)
+  - Internal milestone dashboard showing current stage, M1-M15 revenue ladder, quote-to-cash readiness, blockers, CAM/proposal/billing status, and next 7-day execution plan.
+
+- [Founder Weekly Revenue Review Pack](founder-weekly-revenue-review-pack.md)
+  - Founder-visible internal weekly review pack with executive summary, what moved, what did not move, blockers, founder decisions, self-resolvable actions, noVNC/founder-help path, next actions, risk level, and recommendation.
+
+- [45-Day Revenue Next Action Board](45-day-revenue-next-action-board.md)
+  - Internal action board mapping only actionable next steps to supported milestones, owner, deadline, dependency, status, and evidence needed.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
