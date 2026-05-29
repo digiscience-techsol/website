@@ -1,13 +1,13 @@
 # Founder Commercial Decisions Locked
 
-Status: Proposed commercial defaults only. Founder approval is still pending.
+Status: Founder-approved commercial defaults for first-customer use. Sensitive billing, tax, and payment values remain placeholders only.
 
-## 1. Current Commercial Default Proposal
+## 1. Current Commercial Defaults
 
-| Field | Proposed default |
+| Field | Founder-approved default |
 | --- | --- |
 | Pricing option | Option A low-friction first customer |
-| Proposed price | INR 1,00,000 + applicable taxes |
+| Approved price | INR 1,00,000 + applicable taxes |
 | Scope | 1 workflow, 1-2 stakeholder calls, readiness scorecard, pilot go/no-go recommendation |
 | Optional credit | Up to 50% credited toward 45-day pilot if signed within 30 days, founder discretion |
 | Proposal owner | DigiBot drafts, founder approves |
@@ -16,9 +16,9 @@ Status: Proposed commercial defaults only. Founder approval is still pending.
 | Payment method | Company bank transfer |
 | Signature method | Email acceptance for assessment; signed PDF/SOW for pilot |
 
-## 2. Pending Founder Approval Fields
+## 2. Sensitive Details Still Needed
 
-The following fields must be approved by the founder before DigiScience quotes, proposes, invoices, or starts a paid AI Readiness Assessment:
+The following sensitive or operational fields are still needed before issuing a real invoice or customer-facing document. Do not store actual values in Git:
 
 - Exact legal entity name
 - Invoice billing address
@@ -40,6 +40,6 @@ The following fields must be approved by the founder before DigiScience quotes, 
 
 ## 4. Roadmap Alignment
 
-This file supports the DigiScience 45-Day Revenue Reset by locking a proposed first-revenue commercial path for founder review without treating it as final approval. It narrows the current quote/propose/invoice/start gate to one practical path: Option A pricing, DigiBot-drafted founder-approved proposal, founder-owned billing, manual invoice, company bank transfer, and lightweight acceptance for the assessment.
+This file supports the DigiScience 45-Day Revenue Reset by locking the founder-approved first-revenue commercial path. It narrows the current quote/propose/invoice/start gate to one practical path: Option A pricing, DigiBot-drafted founder-approved proposal, founder-owned billing, manual invoice, company bank transfer, and lightweight acceptance for the assessment.
 
 This reduces proposal delay if a qualified prospect replies, while keeping all sensitive company, tax, and bank details outside Git until the founder provides them through an approved secure path.

@@ -1,10 +1,10 @@
 # Founder Commercial Approval Decision Needed
 
-Status: Internal founder approval gate for dry run only. No commercial decision is approved until the founder marks approve, revise, or reject.
+Status: Founder-approved commercial defaults for first-customer use. Sensitive billing, tax, and payment values remain placeholders only.
 
 ## 1. Recommended Defaults
 
-| Field | Recommended default for dry run |
+| Field | Founder-approved default |
 | --- | --- |
 | Offer | AI Readiness Assessment |
 | Price | INR 1,00,000 + applicable taxes |
@@ -18,13 +18,13 @@ Status: Internal founder approval gate for dry run only. No commercial decision 
 
 Founder decision:
 
-- Approve: [Pending]
-- Revise: [Pending]
-- Reject: [Pending]
+- Approve: Approved for first-customer use
+- Revise: Not selected
+- Reject: Not selected
 
 Revision notes, if any:
 
-- [Founder to provide revisions]
+- No revisions requested for these commercial defaults.
 
 ## 3. Sensitive Details Still Needed
 
@@ -47,4 +47,4 @@ Do not enter actual sensitive values in this file.
 
 ## 5. Exact Founder Action
 
-Founder action required: approve the recommended defaults for dry run, or provide exact revisions.
+Founder action required next: provide the remaining sensitive invoice/payment/tax details only through a secure private path or founder-led temporary noVNC session if needed.

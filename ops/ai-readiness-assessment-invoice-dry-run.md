@@ -1,6 +1,6 @@
 # AI Readiness Assessment Invoice Dry Run
 
-Status: Internal dry run using placeholders only. Do not send.
+Status: Internal dry run using placeholders only. Founder-approved commercial defaults are recorded for first-customer use. Do not send.
 
 ## Invoice Draft Fields
 
@@ -9,7 +9,7 @@ Status: Internal dry run using placeholders only. Do not send.
 | Invoice number | [Invoice number placeholder] |
 | Customer | [Customer placeholder] |
 | Service description | AI Readiness Assessment for [workflow placeholder] |
-| Amount | [Amount placeholder: proposed INR 1,00,000] |
+| Amount | [Amount placeholder: founder-approved INR 1,00,000] |
 | Tax | [Applicable taxes placeholder] |
 | Payment due date | [Payment due date placeholder] |
 | Payment method | Manual invoice + company bank transfer |

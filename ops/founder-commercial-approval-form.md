@@ -1,6 +1,6 @@
 # Founder Commercial Approval Form
 
-Status: Internal founder approval form. No decision is approved yet.
+Status: Founder-approved commercial defaults for first-customer use. Sensitive billing, tax, and payment values remain placeholders only.
 Created: 2026-05-28
 
 ## Purpose
@@ -15,7 +15,7 @@ Record the minimum founder approvals required before DigiScience can quote, prop
 - Scope: smallest paid assessment; 1 workflow, 1-2 stakeholder calls, lightweight readiness scorecard, pilot go/no-go recommendation.
 - Risk: underpricing effort; limited room for deeper security/governance work.
 - Recommendation: use if the goal is fastest first paid customer and buyer has procurement friction.
-- Founder decision: Pending.
+- Founder decision: Approved for first-customer use.
 - Why needed: a proposal cannot be quoted without approved price.
 - Who must decide: founder.
 - What happens if not decided: DigiScience cannot safely send a quote or invoice.
@@ -49,7 +49,7 @@ Record the minimum founder approvals required before DigiScience can quote, prop
 
 ### Option A: DigiBot Drafts, Founder Approves
 
-- Founder decision: Pending.
+- Founder decision: Approved for first-customer use.
 - Why needed: establishes 24-hour proposal workflow.
 - Who must decide: founder.
 - What happens if not decided: proposal ownership remains unclear after a qualified response.
@@ -75,7 +75,7 @@ Record the minimum founder approvals required before DigiScience can quote, prop
 
 ### Option A: Founder Handles Billing
 
-- Founder decision: Pending.
+- Founder decision: Approved for first-customer use.
 - Why needed: fastest manual billing route if no tool is configured.
 - Who must decide: founder.
 - What happens if not decided: invoice ownership remains unclear.
@@ -103,7 +103,7 @@ Recommended current path: manual invoice + company bank transfer.
 
 ### Option A: Bank Transfer
 
-- Founder decision: Pending.
+- Founder decision: Approved for first-customer use.
 - Why needed: gives buyer a clear payment path.
 - Who must decide: founder.
 - What happens if not decided: accepted proposal cannot convert to payment request.
@@ -148,7 +148,7 @@ Recommended current path: manual invoice + company bank transfer.
 
 ### Option A: Email Acceptance
 
-- Founder decision: Pending.
+- Founder decision: Approved for assessment.
 - Why needed: lowest-friction acceptance route.
 - Who must decide: founder.
 - What happens if not decided: acceptance evidence remains unclear.
@@ -156,7 +156,7 @@ Recommended current path: manual invoice + company bank transfer.
 
 ### Option B: Signed PDF
 
-- Founder decision: Pending.
+- Founder decision: Approved for pilot/SOW use.
 - Why needed: formal signature route if buyer requires it.
 - Who must decide: founder.
 - What happens if not decided: formal acceptance may stall.
@@ -180,13 +180,14 @@ Recommended current path: manual invoice + company bank transfer.
 
 ## Approval Summary
 
-Minimum approvals needed before sending a proposal:
+Founder-approved first-customer defaults:
 
-- Pricing option and exact price/range.
-- Proposal owner.
-- Billing owner.
-- Payment method. Recommended current path: manual invoice + company bank transfer.
-- Signature method.
+- Pricing option and exact price: Option A, INR 1,00,000 + applicable taxes.
+- Proposal owner: DigiBot drafts, founder approves.
+- Billing owner: founder handles billing.
+- Payment method: manual invoice + company bank transfer.
+- Signature method: email acceptance for assessment; signed PDF/SOW for pilot.
+- Razorpay/Stripe: deferred.
 
 Current commercial lock references:
 
@@ -197,4 +198,4 @@ Sensitive bank/tax details must not be stored in Git. If founder-led retrieval i
 
 ## No-Hallucination Confirmation
 
-No option is approved in this form. No quote, proposal, invoice, payment, signature, customer acceptance, or billing start is claimed.
+Founder-approved defaults are recorded for first-customer use. No quote, proposal, invoice, payment, customer acceptance, billing start, or sensitive bank/tax/payment value is claimed or stored.

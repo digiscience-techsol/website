@@ -1,6 +1,6 @@
 # AI Readiness Assessment Proposal Dry Run
 
-Status: Internal dry run using placeholders only. Do not send.
+Status: Internal dry run using placeholders only. Founder-approved commercial defaults are recorded for first-customer use. Do not send.
 
 ## Proposal Fields
 
@@ -9,7 +9,7 @@ Status: Internal dry run using placeholders only. Do not send.
 | Customer | [Customer placeholder] |
 | Workflow | [Workflow placeholder] |
 | Offer | AI Readiness Assessment |
-| Price | [Proposed INR 1,00,000 + applicable taxes] |
+| Price | [Founder-approved INR 1,00,000 + applicable taxes] |
 | Acceptance method | Email acceptance for assessment; signed PDF/SOW for pilot |
 | Next step | Founder approval, then customer-facing proposal preparation |
 
@@ -60,4 +60,4 @@ Status: Internal dry run using placeholders only. Do not send.
 
 ## Next Step
 
-Founder action required: approve the commercial defaults or provide revisions before preparing any customer-facing proposal.
+Founder action required: provide final customer/workflow placeholders and approve the customer-facing proposal before sending.

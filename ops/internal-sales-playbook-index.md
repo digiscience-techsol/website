@@ -82,6 +82,12 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [AI Readiness Assessment Kickoff Dry Run](ai-readiness-assessment-kickoff-dry-run.md)
   - Internal placeholder-only kickoff dry run covering sponsor, workflow owner, reviewer, sample document/data readiness, security assumptions, weekly cadence, final output, and go/no-go decision.
 
+- [First Customer Commercial Approval Record](first-customer-commercial-approval-record.md)
+  - Internal record of founder-approved first-customer commercial defaults, approval date, proposal/billing/signature workflows, sensitive fields still pending, no-secrets-in-Git rule, final review checkpoint, and roadmap alignment.
+
+- [First Customer Quote Ready Checklist](first-customer-quote-ready-checklist.md)
+  - Internal checklist confirming quote/proposal can be drafted with approved defaults and placeholders, while invoice issuance and customer start remain gated by private details, payment, and acceptance.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)

@@ -7,31 +7,30 @@ Created: 2026-05-28
 
 Can DigiScience quote, propose, invoice, and start tomorrow?
 
-No.
+Partially.
 
-DigiScience can discuss the Legal Document Intelligence AI Readiness Assessment and draft a proposal, but it cannot safely quote, invoice, collect payment, sign, and start until the commercial and billing decisions below are closed.
+DigiScience now has founder-approved first-customer commercial defaults for quote/proposal dry run and first-customer use. Real invoice issuance and kickoff still require sensitive billing, tax, payment, and signatory details through a secure private path or founder-led temporary noVNC session if needed.
 
 ## Required Readiness Areas
 
 ### 1. Final Pricing
 
-- Current status: not approved.
-- Required decision: founder must approve one pricing option and exact INR/USD price or range for the Legal Document Intelligence AI Readiness Assessment.
-- Self-resolvable by DigiBot: no.
-- Founder action needed: yes.
+- Current status: approved for first-customer use.
+- Approved decision: Option A, AI Readiness Assessment at INR 1,00,000 + applicable taxes.
+- Self-resolvable by DigiBot: yes for proposal wording using approved defaults.
+- Founder action needed: no for commercial default; yes for any exception or discount.
 - Exact noVNC/browser path or document/details required: noVNC not required; founder can approve pricing in Telegram or provide a private commercial decision note.
 - Next path:
-  - Founder selects Option A, B, or C from `ops/ai-readiness-assessment-pricing-decision.md`.
-  - Founder approves exact price/range.
-  - DigiBot updates proposal-ready pricing language internally.
+  - DigiBot uses approved Option A price in placeholder proposal/invoice dry-run files.
+  - Founder approves any customer-facing final proposal before sending.
 - Impact on 45-day revenue plan: high; without approved pricing, DigiScience cannot issue a quote or proposal quickly.
 
 ### 2. Proposal Owner
 
-- Current status: partially defined; DigiBot drafts and founder approves, but final owner workflow is not locked.
-- Required decision: assign proposal drafter, final approver, and 24-hour turnaround owner.
+- Current status: approved for first-customer use.
+- Approved decision: DigiBot drafts, founder approves.
 - Self-resolvable by DigiBot: partially.
-- Founder action needed: yes.
+- Founder action needed: only final approval before customer-facing use.
 - Exact noVNC/browser path or document/details required: noVNC not required; founder can confirm owner/approver in Telegram.
 - Next path:
   - DigiBot drafts proposal/SOW pack.
@@ -41,10 +40,10 @@ DigiScience can discuss the Legal Document Intelligence AI Readiness Assessment 
 
 ### 3. Billing Owner
 
-- Current status: not assigned.
-- Required decision: identify who owns invoice creation, payment tracking, and billing confirmation.
+- Current status: approved for first-customer use.
+- Approved decision: founder handles billing.
 - Self-resolvable by DigiBot: no.
-- Founder action needed: yes.
+- Founder action needed: yes, for actual invoice issuance, payment tracking, and confirmation.
 - Exact noVNC/browser path or document/details required: noVNC may be required if billing owner must access accounting, banking, GST, or payment portal; otherwise founder can provide owner name/role privately.
 - Next path:
   - Founder assigns billing owner.
@@ -54,33 +53,29 @@ DigiScience can discuss the Legal Document Intelligence AI Readiness Assessment 
 
 ### 4. Invoice Method
 
-- Current status: not configured in execution docs.
-- Required decision: choose manual invoice, accounting software, payment gateway invoice, bank invoice, or other method.
+- Current status: approved for first-customer use.
+- Approved decision: manual invoice.
 - Self-resolvable by DigiBot: partially.
 - Founder action needed: yes.
 - Exact noVNC/browser path or document/details required:
-  - If using accounting software: founder opens the accounting portal through noVNC/browser and completes login/2FA manually.
-  - If using payment gateway invoice: founder opens Razorpay/Stripe/payment provider through noVNC/browser and completes login/2FA manually.
-  - If using manual invoice: founder provides an approved invoice template or required invoice fields in a secure private channel.
+  - Founder provides approved invoice fields in a secure private channel.
+  - If using an accounting portal, founder opens the portal through noVNC/browser and completes login/2FA manually.
 - Next path:
-  - Founder selects invoice method.
-  - DigiBot prepares invoice information checklist or template text without storing secrets.
+  - DigiBot prepares invoice draft with placeholders only.
   - Founder/billing owner issues invoice after accepted proposal.
 - Impact on 45-day revenue plan: high; no invoice method means payment cannot be requested cleanly.
 
 ### 5. Payment Method
 
-- Current status: not approved.
-- Required decision: choose accepted payment route such as bank transfer, UPI, Razorpay, Stripe, or another method.
+- Current status: approved for first-customer use.
+- Approved decision: company bank transfer via manual invoice. Razorpay/Stripe deferred.
 - Self-resolvable by DigiBot: no.
 - Founder action needed: yes.
 - Exact noVNC/browser path or document/details required:
-  - Bank transfer: founder provides approved payment instructions privately.
-  - UPI: founder provides approved business UPI details privately.
-  - Razorpay/Stripe/payment gateway: founder opens provider through noVNC/browser and completes login/2FA manually.
+  - Founder provides approved company bank transfer instructions privately.
+  - Razorpay/Stripe are deferred and not required for first revenue.
 - Next path:
-  - Founder chooses payment method.
-  - Founder provides or verifies payment instructions privately.
+  - Founder provides or verifies company bank transfer instructions privately.
   - DigiBot prepares non-secret payment instruction placeholder for proposal/invoice workflow.
 - Impact on 45-day revenue plan: high; without payment method, accepted work cannot become collected revenue.
 
@@ -101,8 +96,8 @@ DigiScience can discuss the Legal Document Intelligence AI Readiness Assessment 
 
 ### 7. Contract / Signature Method
 
-- Current status: not approved.
-- Required decision: choose acceptance method: email approval, signed PDF, e-sign tool, purchase order, or signed SOW.
+- Current status: approved for first-customer use.
+- Approved decision: email acceptance for assessment; signed PDF/SOW for pilot.
 - Self-resolvable by DigiBot: partially.
 - Founder action needed: yes.
 - Exact noVNC/browser path or document/details required:
@@ -111,7 +106,6 @@ DigiScience can discuss the Legal Document Intelligence AI Readiness Assessment 
   - E-sign: founder opens e-sign tool through noVNC/browser and completes login/2FA manually if needed.
   - Purchase order: founder confirms whether PO is required before kickoff.
 - Next path:
-  - Founder selects signature/acceptance route.
   - DigiBot drafts acceptance language or SOW signature block for review.
   - Founder approves before any proposal is sent.
 - Impact on 45-day revenue plan: medium-high; unclear acceptance route can delay close even after buyer agrees.
@@ -131,14 +125,14 @@ DigiScience can discuss the Legal Document Intelligence AI Readiness Assessment 
 
 ## Readiness Summary
 
-- Quote readiness: not ready until pricing is approved.
-- Proposal readiness: partial; needs final proposal owner and template/SOW approval.
-- Invoice readiness: not ready until invoice method, payment method, billing owner, and company/tax details are confirmed.
+- Quote readiness: commercially ready with approved first-customer defaults.
+- Proposal readiness: commercially ready for DigiBot draft and founder approval.
+- Invoice readiness: partial; method/payment/billing owner approved, but sensitive company/tax/bank details remain needed outside Git.
 - Start readiness: partial; kickoff checklist can be drafted but needs founder approval.
 
 ## Next Milestone
 
-Close founder decisions for pricing, proposal owner, billing owner, invoice method, payment method, company/tax/GST details, and signature method before approving any new outreach batch.
+Collect remaining sensitive company/tax/billing/payment fields through a secure private path or founder-led temporary noVNC session, then prepare the first customer-facing proposal/invoice only after founder review.
 
 ## No-Hallucination Confirmation
 
