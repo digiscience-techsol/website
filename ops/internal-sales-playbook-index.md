@@ -64,6 +64,12 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Founder Action Paths For Commercial Readiness](founder-action-paths-for-commercial-readiness.md)
   - Internal action-path file listing each commercial blocker, whether DigiBot can solve it, founder action required, noVNC/browser path, data sensitivity, deadline, and revenue impact.
 
+- [Founder Commercial Decisions Locked](founder-commercial-decisions-locked.md)
+  - Internal proposed commercial defaults for the 45-Day Revenue Reset: Option A first customer pricing, DigiBot drafts/founder approves, founder handles billing, manual invoice, company bank transfer, and Razorpay/Stripe deferred.
+
+- [Manual Invoice Bank Transfer Readiness](manual-invoice-bank-transfer-readiness.md)
+  - Internal manual invoice + company bank transfer workflow with placeholders only, founder-only sensitive detail checklist, founder-led noVNC path if needed, deferred Razorpay/Stripe status, and no Git storage for sensitive bank/tax details.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
@@ -76,7 +82,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
   - Priority scoring across industries by urgency, workflow clarity, data availability, compliance sensitivity, 45-day pilot fit, budget signal, decision-maker access, and reference potential.
 
 - [Discovery Email And Call Prep](discovery-email-and-call-prep.md)
-  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, recap template, and next-step email.
+  - Pre-call research checklist, first email template, discovery opening, problem questions, AI readiness scoring questions, closing script, and next-step email.
 
 - [Proposal Response Templates](proposal-response-templates.md)
   - Internal proposal response templates for AI Readiness Assessment, 45-Day AI Pilot, Responsible AI Governance Review, Secure AI Cloud Platform, and priority industry responses.
@@ -254,7 +260,7 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 ## Discovery And Qualification
 
 - [Discovery Call Script](discovery-call-script.md)
-  - 30-minute call agenda, opening script, qualification questions, closing script, and next-step recommendation logic.
+  - 30-minute call agenda, opening script, qualification questions, and next-step recommendation logic.
 
 - [Pilot Qualification Checklist](pilot-qualification-checklist.md)
   - Offer fit rules for AI Readiness Assessment, 45-Day AI Pilot, Responsible AI Governance Review, and Secure AI Cloud Platform.
