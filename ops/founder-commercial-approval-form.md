@@ -99,6 +99,8 @@ Record the minimum founder approvals required before DigiScience can quote, prop
 
 ## 4. Payment Method
 
+Recommended current path: manual invoice + company bank transfer.
+
 ### Option A: Bank Transfer
 
 - Founder decision: Pending.
@@ -106,6 +108,7 @@ Record the minimum founder approvals required before DigiScience can quote, prop
 - Who must decide: founder.
 - What happens if not decided: accepted proposal cannot convert to payment request.
 - 45-day revenue impact: high.
+- Current status: Recommended current path when paired with manual invoice.
 
 ### Option B: UPI
 
@@ -117,18 +120,20 @@ Record the minimum founder approvals required before DigiScience can quote, prop
 
 ### Option C: Razorpay
 
-- Founder decision: Pending.
-- Why needed: payment link can simplify collection if account is ready.
+- Founder decision: Deferred.
+- Current status: DEFERRED; not an active default.
+- Why needed: payment link can simplify collection later if setup exists.
 - Who must decide: founder.
-- What happens if not decided: Razorpay link cannot be offered.
+- What happens if not decided: Razorpay remains deferred and cannot be offered.
 - 45-day revenue impact: medium-high.
 
 ### Option D: Stripe
 
-- Founder decision: Pending.
-- Why needed: payment link option if Stripe is available and appropriate.
+- Founder decision: Deferred.
+- Current status: DEFERRED; not an active default.
+- Why needed: payment link option later if setup exists and is appropriate.
 - Who must decide: founder.
-- What happens if not decided: Stripe/payment-link route cannot be offered.
+- What happens if not decided: Stripe remains deferred and cannot be offered.
 - 45-day revenue impact: medium.
 
 ### Option E: Other
@@ -180,8 +185,15 @@ Minimum approvals needed before sending a proposal:
 - Pricing option and exact price/range.
 - Proposal owner.
 - Billing owner.
-- Payment method.
+- Payment method. Recommended current path: manual invoice + company bank transfer.
 - Signature method.
+
+Current commercial lock references:
+
+- [Founder Commercial Decisions Locked](founder-commercial-decisions-locked.md)
+- [Manual Invoice Bank Transfer Readiness](manual-invoice-bank-transfer-readiness.md)
+
+Sensitive bank/tax details must not be stored in Git. If founder-led retrieval is needed, use a temporary noVNC session through a secure private path, founder logs in manually, DigiBot records only non-secret workflow status, and the public tunnel is closed after use.
 
 ## No-Hallucination Confirmation
 
