@@ -88,6 +88,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [First Customer Quote Ready Checklist](first-customer-quote-ready-checklist.md)
   - Internal checklist confirming quote/proposal can be drafted with approved defaults and placeholders, while invoice issuance and customer start remain gated by private details, payment, and acceptance.
 
+- [Customer-Ready AI Readiness Proposal](customer-ready-ai-readiness-proposal.md)
+  - Internal customer-ready proposal draft with placeholders, approved commercial terms, scope, deliverables, timeline, success criteria, payment placeholder, acceptance method, and founder-review next step.
+
+- [Customer-Ready AI Readiness SOW](customer-ready-ai-readiness-sow.md)
+  - Internal SOW draft covering scope, out of scope, responsibilities, assumptions, security/data handling, deliverables, timeline, and acceptance criteria.
+
+- [Customer-Ready AI Readiness Invoice Draft](customer-ready-ai-readiness-invoice-draft.md)
+  - Internal invoice draft with placeholders only, approved assessment amount, due date placeholder, bank transfer placeholder, and no sensitive bank/tax/payment values.
+
+- [Customer-Ready AI Readiness Approval Checklist](customer-ready-ai-readiness-approval-checklist.md)
+  - Internal checklist for founder approval, price approval, recipient confirmation, private billing details, final review, and send approval.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
