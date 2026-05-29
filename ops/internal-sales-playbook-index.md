@@ -109,6 +109,12 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [45-Day Revenue Next Action Board](45-day-revenue-next-action-board.md)
   - Internal action board mapping only actionable next steps to supported milestones, owner, deadline, dependency, status, and evidence needed.
 
+- [Week 1 Route Validation Results](week-1-route-validation-results.md)
+  - Internal validation-only route status for Khaitan, Shardul, Trilegal, AZB, and JSA, with official/public route evidence, confidence, risk, recommended route, and no-outreach approval status.
+
+- [Week 1 Founder Revenue Decision Packet](week-1-founder-revenue-decision-packet.md)
+  - Internal founder decision packet with three next-action options: wait for CAM, prepare Khaitan no-send package, or prepare one selected route-validated account package.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)

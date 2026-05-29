@@ -24,6 +24,7 @@ Review date: 2026-05-29.
 | Proposal package created | GREEN | File evidence: customer-ready proposal, SOW, invoice draft, and approval checklist exist under `ops/`. |
 | Quote-to-cash dry run prepared | GREEN | File evidence: dry-run proposal, invoice, and kickoff files exist under `ops/`. |
 | Revenue control tower started | GREEN | File evidence: `ops/45-day-revenue-control-tower.md`. |
+| CAM response monitoring refreshed | YELLOW | Connector evidence: accessible Outlook/Gmail searches found no CAM response; direct shared mailbox access remains blocked. |
 | Sensitive-data guardrail enforced | GREEN | Files use placeholders and instructions, not actual private values. |
 
 ## 3. What Did Not Move
@@ -31,6 +32,7 @@ Review date: 2026-05-29.
 | Item | Status | Reason |
 | --- | --- | --- |
 | First discovery call | RED | No booked qualified discovery call. |
+| CAM response | YELLOW | Monitoring refreshed on 2026-05-29; response still pending. |
 | First proposal sent | RED | Recipient, workflow, final review, and send approval are pending. |
 | First invoice issued | RED | Customer acceptance and private billing details are pending. |
 | First payment received | RED | No invoice has been issued or paid. |
@@ -45,6 +47,7 @@ Review date: 2026-05-29.
 | Private billing details not captured | RED | Invoice cannot be issued. |
 | Founder send approval pending | RED | No proposal or outreach can leave DigiScience. |
 | No accepted customer yet | RED | Paid assessment cannot start. |
+| Direct shared mailbox access blocked | YELLOW | `subscription@digisciencetechsol.com` shared-mailbox connector access returned forbidden; accessible inbox/search routes were checked instead. |
 
 ## 5. Founder Decisions Required
 
@@ -63,6 +66,7 @@ Review date: 2026-05-29.
 | Keep internal control tower current | M1-M15 | Ready |
 | Convert approved recipient/workflow into a final proposal draft | M6, M9 | Ready after founder selection |
 | Prepare discovery call agenda after response | M8 | Ready after call signal |
+| Continue CAM monitoring through response window | M4, M8 | Ready |
 | Prepare private billing detail capture checklist | M7, M11 | Ready |
 | Monitor internal docs for public exposure risk | M2 | Ready |
 

@@ -6,6 +6,10 @@ Last updated: 2026-05-29.
 | Action | Milestone supported | Owner | Deadline | Dependency | Status | Evidence needed |
 | --- | --- | --- | --- | --- | --- | --- |
 | Select first buyer route and recipient | M8: First discovery call booked; M9: First proposal sent | Founder | Day 1 | None | Pending | Founder-approved recipient/route note |
+| Choose Week 1 revenue decision option A/B/C | M4: First controlled outbound submitted; M8: First discovery call booked; M9: First proposal sent | Founder | Day 1 | CAM monitoring and route validation completed | Pending | Founder-selected option in decision packet |
+| If Option A, continue CAM monitoring | M4: First controlled outbound submitted; M8: First discovery call booked | DigiBot | 2026-06-01 | Founder approves waiting | Ready after dependency | Updated CAM monitoring result |
+| If Option B, prepare Khaitan no-send route package | M8: First discovery call booked; M9: First proposal sent | DigiBot | Day 2 | Founder approves Khaitan package preparation | Ready after dependency | Khaitan no-send route package |
+| If Option C, prepare one selected account final-message package | M8: First discovery call booked; M9: First proposal sent | DigiBot | Day 2 | Founder selects one account | Ready after dependency | Account-specific no-send final-message package |
 | Select first workflow/problem statement | M6: Proposal/SOW/invoice draft ready; M9: First proposal sent | Founder | Day 1 | Recipient/route selected | Pending | Founder-approved workflow/problem note |
 | Prepare customer-specific proposal draft with placeholders | M9: First proposal sent | DigiBot | Day 2 | Recipient and workflow selected | Ready after dependency | Draft proposal file or review copy |
 | Prepare customer-specific SOW draft with placeholders | M9: First proposal sent | DigiBot | Day 2 | Recipient and workflow selected | Ready after dependency | Draft SOW file or review copy |

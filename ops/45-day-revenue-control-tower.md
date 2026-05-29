@@ -8,8 +8,8 @@ Last checkpoint: 2026-05-29.
 | Item | Status | Notes |
 | --- | --- | --- |
 | Current stage | YELLOW | Quote/proposal package is ready for founder review; invoice issuance still needs private billing details. |
-| Active milestone | YELLOW | Move from commercial readiness to first qualified customer pipeline and first discovery call. |
-| Current constraint | RED | No buyer-specific recipient/workflow approved for sending. |
+| Active milestone | YELLOW | Move from route validation to founder-selected next revenue action. |
+| Current constraint | RED | Founder has not selected Option A/B/C from the Week 1 revenue decision packet. |
 
 ## 2. Milestone Ladder
 
@@ -18,7 +18,7 @@ Last checkpoint: 2026-05-29.
 | M1: Public website + lead capture ready | GREEN | Reported evidence: production website and lead capture were previously verified. | None for current control tower. | Keep public site stable while revenue ops stay internal. | DigiBot |
 | M2: Public/private cleanup complete | GREEN | File evidence: internal revenue files are under `ops/`; recent sitemap checks reported no exposure. | None for current control tower. | Keep new control files internal only. | DigiBot |
 | M3: Legal AI wedge selected | GREEN | File evidence: legal AI offer and route-validation materials exist under `ops/`. | Needs first buyer-specific recipient/workflow before use. | Select the first legal/compliance workflow target. | Founder + DigiBot |
-| M4: First controlled outbound submitted | GREEN | Reported evidence: CAM route was submitted and marked response pending in prior route-validation work. | No new contact action is approved now. | Wait for approved next route or response. | Founder |
+| M4: First controlled outbound submitted | GREEN | Reported evidence: CAM route was submitted and marked response pending in prior route-validation work; monitoring refreshed on 2026-05-29 with no response found. | No new contact action is approved now. | Continue monitoring on 2026-06-01. | Founder |
 | M5: Commercial defaults approved | GREEN | File evidence: first-customer commercial approval record and approval form exist under `ops/`. | Sensitive billing details are still private/pending. | Use approved defaults in quote/proposal drafts. | Founder |
 | M6: Proposal/SOW/invoice draft ready | GREEN | File evidence: customer-ready proposal, SOW, invoice draft, and approval checklist exist under `ops/`. | Customer-specific recipient/workflow is not selected. | Founder reviews package and selects first recipient/workflow. | DigiBot + Founder |
 | M7: Private billing details captured | RED | File evidence: billing detail fields remain pending and must not be stored in Git. | Founder must provide private legal, tax, invoice, and bank-transfer instructions outside Git. | Capture details through secure private path only when invoice issuance is needed. | Founder |
@@ -35,8 +35,8 @@ Last checkpoint: 2026-05-29.
 
 | Milestone | Status | Evidence |
 | --- | --- | --- |
-| First qualified customer pipeline | YELLOW | Target/account materials exist; no current approved outbound action. |
-| First discovery call | RED | No booked qualified discovery call. |
+| First qualified customer pipeline | YELLOW | CAM monitoring refreshed and five next legal routes validated; founder decision packet now gates next action. |
+| First discovery call | RED | No booked qualified discovery call; CAM response still pending as of 2026-05-29 monitoring. |
 | First proposal | YELLOW | Customer-ready proposal/SOW drafts exist under `ops/`. |
 | First paid AI Readiness Assessment | RED | No customer acceptance/payment yet. |
 | First billing start | RED | Invoice can be drafted with placeholders only; real invoice needs private details. |
@@ -48,7 +48,7 @@ Last checkpoint: 2026-05-29.
 | Commercial defaults | 100% | GREEN | Approved for first-customer use. |
 | Proposal readiness | 80% | GREEN | Draft package exists; founder final review still required. |
 | Invoice readiness | 50% | YELLOW | Draft exists; private billing/tax/payment details pending. |
-| Customer route readiness | 40% | YELLOW | Routes/accounts prepared; next approved recipient/workflow pending. |
+| Customer route readiness | 55% | YELLOW | CAM monitoring refreshed and five legal routes validated; founder must select Option A/B/C. |
 | Billing start readiness | 25% | RED | Requires accepted proposal, private invoice details, and payment confirmation. |
 
 ## 5. Quote-To-Cash Readiness
@@ -76,9 +76,17 @@ Last checkpoint: 2026-05-29.
 
 | Item | Status | Notes |
 | --- | --- | --- |
-| CAM route | YELLOW | Historical route work exists; no new contact action approved. |
+| CAM route | YELLOW | Historical route work exists; 2026-05-29 monitoring found no response in accessible Outlook/Gmail/lead-notification routes. |
 | CAM proposal use | RED | Do not use real CAM details in proposal package. |
-| CAM next action | RED | No contact, follow-up, or form submission approved. |
+| CAM next action | RED | No contact, follow-up, or form submission approved. Next monitoring date: 2026-06-01. |
+
+## 7A. Week 1 Founder Decision Packet
+
+| Option | Status | Revenue motion |
+| --- | --- | --- |
+| Option A: wait for CAM response until next monitoring date | Pending founder decision | Keeps CAM as primary path through 2026-06-01. |
+| Option B: approve Khaitan route validation follow-up package, no sending yet | Pending founder decision | Creates safest prepared backup path after CAM. |
+| Option C: approve one route-validated legal account for final message preparation, no sending yet | Pending founder decision | Converts route validation into one account-specific no-send message package. |
 
 ## 8. Proposal Package Status
 
@@ -107,7 +115,7 @@ Last checkpoint: 2026-05-29.
 | Day | Status | Action |
 | --- | --- | --- |
 | Day 1 | YELLOW | Founder selects recipient/workflow or approves next route for first customer motion. |
-| Day 2 | YELLOW | DigiBot prepares final customer-specific proposal draft with placeholders. |
+| Day 2 | YELLOW | DigiBot executes founder-selected Option A/B/C without sending anything. |
 | Day 3 | YELLOW | Founder final-reviews proposal/SOW wording and decides send/no-send. |
 | Day 4 | YELLOW | If approved, send through founder-approved route only. |
 | Day 5 | YELLOW | Track response and prepare discovery call agenda if reply arrives. |
