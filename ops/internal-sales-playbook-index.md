@@ -70,6 +70,18 @@ This index links the internal sales, lead, discovery, qualification, onboarding,
 - [Manual Invoice Bank Transfer Readiness](manual-invoice-bank-transfer-readiness.md)
   - Internal manual invoice + company bank transfer workflow with placeholders only, founder-only sensitive detail checklist, founder-led noVNC path if needed, deferred Razorpay/Stripe status, and no Git storage for sensitive bank/tax details.
 
+- [Founder Commercial Approval Decision Needed](founder-commercial-approval-decision-needed.md)
+  - Internal founder approval gate for the dry-run commercial defaults: approve, revise, or reject. Uses placeholders only and stores no sensitive values.
+
+- [AI Readiness Assessment Proposal Dry Run](ai-readiness-assessment-proposal-dry-run.md)
+  - Internal placeholder-only proposal dry run for the AI Readiness Assessment, including scope, timeline, deliverables, success criteria, assumptions, out of scope, acceptance method, and next step.
+
+- [AI Readiness Assessment Invoice Dry Run](ai-readiness-assessment-invoice-dry-run.md)
+  - Internal placeholder-only invoice dry run for AI Readiness Assessment with manual invoice + company bank transfer path and no actual bank or tax details.
+
+- [AI Readiness Assessment Kickoff Dry Run](ai-readiness-assessment-kickoff-dry-run.md)
+  - Internal placeholder-only kickoff dry run covering sponsor, workflow owner, reviewer, sample document/data readiness, security assumptions, weekly cadence, final output, and go/no-go decision.
+
 ## First Customer Execution
 
 - [First Customer Execution Kit](first-customer-execution-kit.md)
