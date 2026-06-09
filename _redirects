@@ -3,6 +3,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 
 # Legacy PHP URLs.
 /about.php / 301
+/about.html /about 301
 /contact.php /contact 301
 /service.php /services 301
 /services.php /services 301
