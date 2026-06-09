@@ -11,9 +11,50 @@
   <link rel="icon" href="assets/favicon.svg?v=premium4" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css?v=lead1" />
   <link rel="stylesheet" href="premium.css?v=premium4" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://digisciencetechsol.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://digisciencetechsol.com/pricing"}
+        ]
+      },
+      {
+        "@type": "AggregateOffer",
+        "name": "DigiScience Techsol AI Transformation Packages",
+        "url": "https://digisciencetechsol.com/pricing",
+        "priceCurrency": "INR",
+        "lowPrice": "49000",
+        "highPrice": "900000",
+        "offerCount": 5,
+        "seller": {"@type": "Organization", "name": "DigiScience Techsol", "url": "https://digisciencetechsol.com/"},
+        "offers": [
+          {"@type": "Offer", "name": "AI Readiness Assessment", "price": "49000", "priceCurrency": "INR", "url": "https://digisciencetechsol.com/ai-readiness-assessment", "description": "One-time AI readiness assessment covering business value, data readiness, cloud readiness, security, governance risk, pilot feasibility, and roadmap."},
+          {"@type": "Offer", "name": "AI Pilot Starter", "price": "75000", "priceCurrency": "INR", "url": "https://digisciencetechsol.com/45-day-ai-pilot", "description": "Monthly support for one focused AI workflow, with one-time setup from INR 2.5L."},
+          {"@type": "Offer", "name": "AI Pilot Growth", "price": "150000", "priceCurrency": "INR", "url": "https://digisciencetechsol.com/45-day-ai-pilot", "description": "Monthly support for department-level AI pilots with multiple workflows, integrations, and governance controls."},
+          {"@type": "Offer", "name": "Governed AI Platform", "price": "300000", "priceCurrency": "INR", "url": "https://digisciencetechsol.com/solutions/secure-ai-cloud-platform", "description": "Monthly support for secure AI landing zones, governance controls, observability, and LLMOps handover."},
+          {"@type": "Offer", "name": "Regulated AI Transformation", "priceSpecification": {"@type": "PriceSpecification", "priceCurrency": "INR", "description": "Custom quote after discovery"}, "url": "https://digisciencetechsol.com/contact", "description": "Custom AI transformation scope for regulated, multi-department, private cloud, or complex integration needs."}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "What is the lowest-risk way to start with DigiScience Techsol?", "acceptedAnswer": {"@type": "Answer", "text": "Most new customers should start with the AI Readiness Assessment. It confirms the use case, data readiness, cloud readiness, risk controls, success metrics, and recommended pilot path before a larger build is proposed."}},
+          {"@type": "Question", "name": "Are cloud usage and AI model costs included in the package price?", "acceptedAnswer": {"@type": "Answer", "text": "No. Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery so the buyer can control consumption and vendor choice."}},
+          {"@type": "Question", "name": "Which package is best for a first AI pilot?", "acceptedAnswer": {"@type": "Answer", "text": "AI Pilot Starter is best for one focused workflow. AI Pilot Growth is better when a department needs multiple workflows, integrations, role-based access, audit trails, and more formal governance controls."}},
+          {"@type": "Question", "name": "Can DigiScience work on Azure, AWS, and Google Cloud?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. DigiScience designs secure AI solutions on Azure, AWS, and Google Cloud, including Azure OpenAI, AWS Bedrock, Amazon SageMaker, Google Vertex AI, monitoring, security, and cost governance patterns."}},
+          {"@type": "Question", "name": "When is custom enterprise pricing required?", "acceptedAnswer": {"@type": "Answer", "text": "Custom pricing is used when the scope includes regulated workflows, data residency, private or hybrid cloud, architecture board review, multi-department rollout, advanced compliance mapping, or complex integrations."}}
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <header class="topbar"><div class="container nav"><a class="brand" href="/" aria-label="DigiScience Techsol home"><img class="brand-mark" src="/assets/favicon.svg?v=premium4" alt="DigiScience Techsol logo" width="42" height="42" decoding="async" /><span class="brand-text">DigiScience Techsol</span></a><button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button><nav class="nav-links" id="navLinks"><a href="/">Home</a><a href="/services">Services</a><a href="/industries">Industries</a><a href="/pricing">Pricing</a><a href="/proof-assets">Proof Assets</a><a href="/45-day-ai-pilot">45-Day Pilot</a><a href="/ai-readiness-assessment">AI Readiness</a><a href="/contact" class="btn btn-secondary nav-cta">Contact</a></nav></div></header>
+  <header class="topbar"><div class="container nav"><a class="brand" href="/" aria-label="DigiScience Techsol home"><img class="brand-mark" src="/assets/favicon.svg?v=premium4" alt="DigiScience Techsol logo" width="42" height="42" decoding="async" /><span class="brand-text">DigiScience Techsol</span></a><button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button><nav class="nav-links" id="navLinks"><a href="/">Home</a><a href="/services">Services</a><a href="/industries">Industries</a><a href="/pricing">Pricing</a><a href="/proof-assets">Proof Assets</a><a href="/45-day-ai-pilot">45-Day Pilot</a><a href="/ai-readiness-assessment">AI Readiness</a><a href="/about">About</a><a href="/contact" class="btn btn-secondary nav-cta">Contact</a></nav></div></header>
 
   <main>
     <section class="pricing-hero bg-grid">
@@ -193,9 +234,11 @@
         <a class="btn btn-primary" href="/contact">Request package quote</a>
       </div>
     </section>
+
+    <section class="section section-tight"><div class="container"><h2 class="section-title smaller">Pricing questions buyers usually ask</h2><div class="faq"><div class="faq-item card open"><button class="faq-question" type="button">What is the lowest-risk way to start with DigiScience Techsol?<span>-</span></button><div class="faq-answer"><p>Start with the AI Readiness Assessment. It confirms the use case, data readiness, cloud readiness, risk controls, success metrics, and recommended pilot path before a larger build is proposed.</p></div></div><div class="faq-item card"><button class="faq-question" type="button">Are cloud usage and AI model costs included?<span>+</span></button><div class="faq-answer"><p>No. Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery so the buyer can control consumption and vendor choice.</p></div></div><div class="faq-item card"><button class="faq-question" type="button">Which package is best for a first AI pilot?<span>+</span></button><div class="faq-answer"><p>AI Pilot Starter is best for one focused workflow. AI Pilot Growth is better when a department needs multiple workflows, integrations, role-based access, audit trails, and formal governance controls.</p></div></div><div class="faq-item card"><button class="faq-question" type="button">Can DigiScience work on Azure, AWS, and Google Cloud?<span>+</span></button><div class="faq-answer"><p>Yes. DigiScience designs secure AI solutions on Azure, AWS, and Google Cloud, including Azure OpenAI, AWS Bedrock, Amazon SageMaker, Google Vertex AI, monitoring, security, and cost governance patterns.</p></div></div><div class="faq-item card"><button class="faq-question" type="button">When is custom enterprise pricing required?<span>+</span></button><div class="faq-answer"><p>Custom pricing is used when the scope includes regulated workflows, data residency, private or hybrid cloud, architecture board review, multi-department rollout, advanced compliance mapping, or complex integrations.</p></div></div></div></div></section>
   </main>
 
-  <footer class="footer"><div class="container footer-inner"><div>DigiScience Techsol • AI-first cloud transformation partner</div><div class="footer-links"><a href="/services">Services</a><a href="/industries">Industries</a><a href="/ai-readiness-assessment">AI Readiness Assessment</a><a href="/45-day-ai-pilot">45-Day Pilot</a><a href="/proof-assets">Proof Assets</a><a href="/customer-onboarding">Customer Onboarding</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a></div></div></footer>
+  <footer class="footer"><div class="container footer-inner"><div>DigiScience Techsol • AI-first cloud transformation partner</div><div class="footer-links"><a href="/services">Services</a><a href="/industries">Industries</a><a href="/ai-readiness-assessment">AI Readiness Assessment</a><a href="/45-day-ai-pilot">45-Day Pilot</a><a href="/proof-assets">Proof Assets</a><a href="/customer-onboarding">Customer Onboarding</a><a href="/pricing">Pricing</a><a href="/about">About</a><a href="/contact">Contact</a></div></div></footer>
   <script src="config.js?v=lead1"></script>
   <script src="script.js?v=lead1" defer></script>
 </body>

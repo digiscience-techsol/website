@@ -1,0 +1,52 @@
+# DigiScience Techsol
+
+> AI-first cloud transformation partner for secure, governed, industry-specific AI solutions on Azure, AWS, and Google Cloud.
+
+DigiScience Techsol helps enterprise and mid-market teams assess AI readiness, choose practical first use cases, build secure cloud-hosted AI pilots, and add responsible AI governance before scaling. The company is based in New Delhi, India and serves global buyers in manufacturing, healthcare, legal, BFSI/insurance, logistics, HR/recruitment, retail, education, real estate, and public sector workflows.
+
+## Primary URLs
+
+- Homepage: https://digisciencetechsol.com/
+- Services: https://digisciencetechsol.com/services
+- Pricing: https://digisciencetechsol.com/pricing
+- Industries: https://digisciencetechsol.com/industries
+- About: https://digisciencetechsol.com/about
+- AI Readiness Assessment: https://digisciencetechsol.com/ai-readiness-assessment
+- 45-Day Industry AI Pilot: https://digisciencetechsol.com/45-day-ai-pilot
+- Proof Assets: https://digisciencetechsol.com/proof-assets
+- Contact: https://digisciencetechsol.com/contact
+- Sitemap: https://digisciencetechsol.com/sitemap.xml
+
+## Core Offers
+
+- AI Readiness Assessment: entry offer for scoring use cases, data readiness, cloud readiness, security posture, responsible AI risk, business value, and pilot feasibility.
+- 45-Day Industry AI Pilot: controlled proof of value for one high-priority AI workflow with architecture, governance controls, working pilot, success metrics, and scale roadmap.
+- Secure Enterprise AI Cloud Platform: secure AI landing zones with IAM/RBAC, private networking, audit logging, monitoring, data classification, AI service access, and cost governance.
+- Responsible AI Governance and Agent Control: prompt security, model risk controls, human approval, hallucination risk management, audit trail, agent permissions, and compliance mapping.
+- AI-Ready DevOps and Platform Engineering: DevSecOps, MLOps, LLMOps, release approval, observability, and production support patterns for AI systems.
+- Cloud Modernization for AI Readiness: targeted modernization required to make cloud, data, security, and delivery foundations ready for governed AI adoption.
+
+## Pricing Snapshot
+
+- AI Readiness Assessment: INR 49K / USD 599 one-time.
+- AI Pilot Starter: INR 75K / USD 899 per month, plus one-time setup from INR 2.5L / USD 3K.
+- AI Pilot Growth: INR 1.5L / USD 1,799 per month, plus one-time setup from INR 5L / USD 6K.
+- Governed AI Platform: INR 3L / USD 3,499 per month, plus one-time setup from INR 9L / USD 10K.
+- Regulated AI Transformation: custom quote after discovery for regulated or complex needs.
+
+Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery.
+
+## Priority Industries
+
+- Manufacturing AI: predictive maintenance, quality intelligence, plant operations support, downtime reduction, production planning, and operator decision support.
+- Healthcare AI: administrative workflow automation, patient support workflows, clinical documentation support, governed knowledge retrieval, and compliance-aware deployment.
+- Legal Document Intelligence: contract review, clause extraction, obligation tracking, legal knowledge assistants, source-grounded answers, and reviewer workflows.
+- BFSI and Insurance AI: compliance intelligence, claims triage, risk review, document automation, audit evidence, and governed decision support.
+- Logistics AI: shipment exception intelligence, route and capacity insights, customer update automation, and operations workflow support.
+- HR and Recruitment AI: candidate screening support, policy assistants, onboarding knowledge assistants, and human-reviewed workflow automation.
+- Retail AI: demand intelligence, product support, customer service augmentation, merchandising insights, and operational analytics.
+
+## Recommended First Step
+
+For a new buyer, start with the AI Readiness Assessment. It validates whether a business problem is suitable for AI, whether the data and cloud environment can support a pilot, which governance controls are required, what success metrics should be used, and whether a 45-day pilot is justified.
+
