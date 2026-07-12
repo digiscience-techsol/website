@@ -164,6 +164,82 @@ a {
   font-size: 0.96rem;
 }
 
+.nav-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-group > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-group > a::after {
+  content: "⌄";
+  color: var(--primary-2);
+  font-size: 0.78rem;
+  transform: translateY(-1px);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: -18px;
+  z-index: 120;
+  display: grid;
+  min-width: 310px;
+  padding: 12px;
+  border: 1px solid rgba(170,220,255,0.18);
+  border-radius: 18px;
+  background: rgba(7, 16, 29, 0.98);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.44);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 20px;
+}
+
+.nav-dropdown a {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: #e8f2ff;
+  line-height: 1.25;
+}
+
+.nav-dropdown a span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.nav-dropdown a:hover,
+.nav-dropdown a:focus-visible {
+  color: #fff;
+  background: rgba(94,168,255,0.1);
+}
+
+.nav-group:hover .nav-dropdown,
+.nav-group:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 .nav-links a:hover,
 .footer-links a:hover,
 .contact-link a:hover {
@@ -795,7 +871,7 @@ a {
 
 .service-strip-inner {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 1px;
   background: rgba(255,255,255,0.08);
 }
@@ -1462,6 +1538,37 @@ textarea {
 
   .nav-links.open {
     display: flex;
+  }
+
+  .nav-group {
+    width: 100%;
+    display: grid;
+  }
+
+  .nav-group > a {
+    width: 100%;
+    font-weight: 750;
+  }
+
+  .nav-dropdown {
+    position: static;
+    min-width: 0;
+    width: 100%;
+    margin: 8px 0 2px;
+    padding: 6px 0 6px 10px;
+    border: 0;
+    border-left: 1px solid rgba(132,240,218,0.22);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .nav-dropdown a {
+    padding: 8px 10px;
   }
 
   .cards,
