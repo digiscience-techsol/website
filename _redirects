@@ -14,6 +14,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /observability.php /services 301
 /pricing.php /pricing 301
 /portfolio.php /portfolio 301
+/portfolio /proof-assets 301
 /privacy.php /privacy 301
 
 # Older cloud/FinOps pages consolidate into current AI-first buyer pages.
@@ -21,3 +22,8 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /ai-api-cost-governance /solutions/responsible-ai-governance 301
 /aws-azure-cost-optimization-startups /solutions/secure-ai-cloud-platform 301
 /finops-for-saas-startups-india /pricing 301
+
+# Buyer-friendly aliases for the revised information architecture.
+/resources /proof-assets 301
+/architectures /proof-assets 301
+/engagement-models /pricing 301

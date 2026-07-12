@@ -12,19 +12,20 @@ DigiScience Techsol positioning:
 
 Primary offers:
 - AI Readiness Assessment: INR 49K / USD 599 one-time, no monthly commitment.
-- AI Pilot Starter: INR 75K/month / USD 899/month plus one-time setup from INR 2.5L / USD 3K. Includes one AI assistant, workflow, or document intelligence prototype.
-- AI Pilot Growth: INR 1.5L/month / USD 1,799/month plus one-time setup from INR 5L / USD 6K. Includes 2-3 AI workflows, up to 5 integrations, governance controls, audit trail, monitoring, and monthly optimization.
-- Governed AI Platform: INR 3L/month / USD 3,499/month plus one-time setup from INR 9L / USD 10K. Includes secure AI landing zone, IAM/RBAC, private networking pattern, responsible AI controls, monitoring, audit logging, and cost governance.
-- Regulated AI Transformation: custom quote after discovery for BFSI, healthcare, legal, insurance, government, private cloud, data residency, and complex compliance needs.
-- Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery.
+- Focused AI Pilot: scoped after readiness and discovery for one workflow, defined users, controlled data, success criteria, governance controls, and a production scale decision.
+- Department AI Accelerator: scoped programme for multiple workflows, integrations, reusable capabilities, and formal governance.
+- Governed Enterprise AI Platform: custom programme for enterprise, regulated, hybrid, or private requirements.
+- Managed AI Governance and Operations: monthly service scoped to evaluation, monitoring, release governance, incidents, reporting, and optimization responsibilities.
+- Cloud usage, model or token consumption, licences, specialist hardware, travel, and customer-specific integrations are estimated separately.
 
 Service portfolio:
-1. AI Industry Transformation Solutions
-2. Secure Enterprise AI Cloud Platform
-3. Responsible AI Governance and Agent Control
-4. AI-Ready DevOps and Platform Engineering
-5. Cloud Modernization for AI Readiness
-6. Industry AI Pilot in 45 Days
+1. AI Strategy, Readiness and Transformation Advisory
+2. AI Industry Transformation Solutions
+3. Industry AI Pilot in 45 Days
+4. Secure Enterprise AI Cloud Platform
+5. Responsible AI Governance and Agent Control
+6. AI-Ready DevOps and Platform Engineering
+7. Cloud Modernization for AI Readiness
 
 Target industries:
 - Manufacturing: predictive maintenance, visual inspection, anomaly detection, quality intelligence, production decision support.
@@ -88,13 +89,13 @@ const fallbackAnswer = (question) => {
   const text = question.toLowerCase();
   if (/price|pricing|cost|quote|budget/.test(text)) {
     return {
-      answer: 'DigiScience uses pilot-friendly package pricing. AI Readiness is INR 49K / USD 599 one-time. AI Pilot Starter is INR 75K/month / USD 899/month plus setup from INR 2.5L / USD 3K. AI Pilot Growth is INR 1.5L/month / USD 1,799/month plus setup from INR 5L / USD 6K. Governed AI Platform starts at INR 3L/month / USD 3,499/month plus setup from INR 9L / USD 10K. Regulated enterprise work is custom after discovery.',
+      answer: 'The AI Readiness Assessment is INR 49K / USD 599 one-time. Focused pilots, department accelerators, enterprise AI platforms, and managed AI governance or operations are scoped after discovery because workflow, data, integrations, security, scale, and operating responsibility materially change delivery effort.',
       captureLead: true
     };
   }
   if (/pilot|45|poc|prototype/.test(text)) {
     return {
-      answer: 'The 45-day pilot validates one enterprise AI use case through scope, data feasibility, secure architecture, governance controls, a controlled proof, and a scale decision package. It is a framework, not a guaranteed outcome claim.',
+      answer: 'The 45-day pilot validates one enterprise AI use case through scope, data feasibility, secure architecture, governance controls, a controlled working proof, user and quality measures, and a production scale decision package.',
       captureLead: true
     };
   }

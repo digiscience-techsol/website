@@ -59,7 +59,7 @@ Use the equivalent services on Azure, AWS or GCP depending on the client environ
 - One measurable KPI
 - Limited data sample
 - Clear success and stop criteria
-- No production scale promise before validation
+- Production scale follows successful validation and an approved operating model
 
 ## Deliverables
 
@@ -75,7 +75,7 @@ Use the equivalent services on Azure, AWS or GCP depending on the client environ
 - Client provides access to sample data or process documentation.
 - Stakeholders are available for short discovery reviews.
 - Security and compliance constraints are reviewed before build.
-- This is a reference guide, not a customer case study.
+- Customer-specific assumptions and evidence are confirmed during discovery.
 
 ## Success Criteria
 

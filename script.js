@@ -39,7 +39,7 @@ const ensurePremiumVisuals = () => {
   if (!document.querySelector('link[href*="premium.css"]')) {
     const premiumStyles = document.createElement('link');
     premiumStyles.rel = 'stylesheet';
-    premiumStyles.href = '/premium.css?v=premium4';
+    premiumStyles.href = '/premium.css?v=premium5';
     document.head.appendChild(premiumStyles);
   }
 
@@ -69,6 +69,7 @@ const ensurePremiumVisuals = () => {
   }
 
   const serviceVisuals = {
+    'AI Strategy, Readiness & Transformation Advisory': ['/assets/ai-visuals/ai-readiness-pilot.svg', 'AI strategy, readiness scorecard, target architecture, and transformation roadmap', 900, 560],
     'AI Industry Transformation Solutions': ['/assets/ai-photos/service-industry-transformation.jpg', 'Industry AI transformation across operations, documents, customers, and decision support', 900, 560],
     'Secure Enterprise AI Cloud Platform': ['/assets/ai-photos/service-secure-platform.jpg', 'Secure enterprise AI platform with private cloud, identity, observability, and governance controls', 900, 560],
     'Responsible AI Governance and Agent Control': ['/assets/ai-photos/service-governance-control.jpg', 'Responsible AI governance console with approval, audit, risk, and agent control', 900, 560],
@@ -164,15 +165,15 @@ const initLeadAssistant = () => {
     const asksPilot = /45|pilot|proof|poc|prototype/.test(text);
 
     if (asksPricing && asksPilot) {
-      return `The 45-day pilot is packaged to start small. AI Pilot Starter is INR 75K/month / USD 899/month plus setup from INR 2.5L / USD 3K. AI Pilot Growth is INR 1.5L/month / USD 1,799/month plus setup from INR 5L / USD 6K. Final scope depends on use case, data access, integrations, and governance needs. Start with the ${link('pilot framework', '/45-day-ai-pilot')} and ${link('pricing page', '/pricing')}.`;
+      return `The 45-day pilot is scoped after readiness and discovery because data access, integrations, security, users, and governance materially change delivery effort. The ${link('pilot framework', '/45-day-ai-pilot')} explains what is delivered, and the ${link('engagement models page', '/pricing')} explains the commercial approach.`;
     }
 
     if (asksPricing) {
-      return `DigiScience uses package-style pricing: AI Readiness is INR 49K / USD 599 one-time, AI Pilot Starter is INR 75K/month / USD 899/month plus setup, AI Pilot Growth is INR 1.5L/month / USD 1,799/month plus setup, and Governed AI Platform starts at INR 3L/month / USD 3,499/month plus setup. See the ${link('pricing page', '/pricing')} for deliverables.`;
+      return `The AI Readiness Assessment is INR 49K / USD 599 one-time. Pilots, accelerators, enterprise AI platforms, and managed governance or operations are scoped after discovery because delivery responsibility and risk vary by workflow, data, integrations, security, scale, and support needs. See the ${link('engagement models page', '/pricing')}.`;
     }
 
     if (asksPilot) {
-      return `The 45-day pilot is a framework, not a customer claim. It validates one AI workflow through scope, data feasibility, secure architecture, governance controls, a controlled proof, and a scale decision package. See ${link('45-Day AI Pilot', '/45-day-ai-pilot')}.`;
+      return `The 45-day pilot validates one AI workflow through scope, data feasibility, secure architecture, governance controls, a controlled working proof, user and quality measures, and a production scale decision. See ${link('45-Day AI Pilot', '/45-day-ai-pilot')}.`;
     }
 
     if (/readiness|assessment|scorecard|start/.test(text)) {

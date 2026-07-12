@@ -8,31 +8,34 @@ DigiScience Techsol helps enterprise and mid-market teams assess AI readiness, c
 
 - Homepage: https://digisciencetechsol.com/
 - Services: https://digisciencetechsol.com/services
-- Pricing: https://digisciencetechsol.com/pricing
 - Industries: https://digisciencetechsol.com/industries
+- How We Deliver: https://digisciencetechsol.com/how-we-deliver
+- Engagement Models: https://digisciencetechsol.com/pricing
 - About: https://digisciencetechsol.com/about
 - AI Readiness Assessment: https://digisciencetechsol.com/ai-readiness-assessment
 - 45-Day Industry AI Pilot: https://digisciencetechsol.com/45-day-ai-pilot
-- Proof Assets: https://digisciencetechsol.com/proof-assets
+- Architectures and Insights: https://digisciencetechsol.com/proof-assets
 - Contact: https://digisciencetechsol.com/contact
 - Sitemap: https://digisciencetechsol.com/sitemap.xml
 
-## Core Offers
+## Service Portfolio
 
-- AI Readiness Assessment: entry offer for scoring use cases, data readiness, cloud readiness, security posture, responsible AI risk, business value, and pilot feasibility.
+- AI Strategy, Readiness and Transformation Advisory: opportunity prioritization, readiness scoring, target architecture, risk view, and executable transformation roadmap.
+  - AI Readiness Assessment is the defined entry offer for scoring use cases, data readiness, cloud readiness, security posture, responsible AI risk, business value, and pilot feasibility.
+- AI Industry Transformation Solutions: outcome-led AI workflows for prediction, document intelligence, knowledge access, assistants, agents, and operational decision support.
 - 45-Day Industry AI Pilot: controlled proof of value for one high-priority AI workflow with architecture, governance controls, working pilot, success metrics, and scale roadmap.
 - Secure Enterprise AI Cloud Platform: secure AI landing zones with IAM/RBAC, private networking, audit logging, monitoring, data classification, AI service access, and cost governance.
 - Responsible AI Governance and Agent Control: prompt security, model risk controls, human approval, hallucination risk management, audit trail, agent permissions, and compliance mapping.
 - AI-Ready DevOps and Platform Engineering: DevSecOps, MLOps, LLMOps, release approval, observability, and production support patterns for AI systems.
 - Cloud Modernization for AI Readiness: targeted modernization required to make cloud, data, security, and delivery foundations ready for governed AI adoption.
 
-## Pricing Snapshot
+## Engagement Model Snapshot
 
 - AI Readiness Assessment: INR 49K / USD 599 one-time.
-- AI Pilot Starter: INR 75K / USD 899 per month, plus one-time setup from INR 2.5L / USD 3K.
-- AI Pilot Growth: INR 1.5L / USD 1,799 per month, plus one-time setup from INR 5L / USD 6K.
-- Governed AI Platform: INR 3L / USD 3,499 per month, plus one-time setup from INR 9L / USD 10K.
-- Regulated AI Transformation: custom quote after discovery for regulated or complex needs.
+- Focused AI Pilot: scoped after readiness and discovery.
+- Department AI Accelerator: scoped programme for multiple workflows, integrations, and formal controls.
+- Governed Enterprise AI Platform: custom programme for enterprise, regulated, hybrid, or private requirements.
+- Managed AI Governance and Operations: monthly service scoped to production operating responsibility.
 
 Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery.
 
@@ -49,4 +52,3 @@ Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrati
 ## Recommended First Step
 
 For a new buyer, start with the AI Readiness Assessment. It validates whether a business problem is suitable for AI, whether the data and cloud environment can support a pilot, which governance controls are required, what success metrics should be used, and whether a 45-day pilot is justified.
-
