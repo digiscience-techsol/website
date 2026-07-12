@@ -180,7 +180,7 @@ const buildEmailText = (lead, leadId, score, category, recommendedAction) => [
 ].join('\n');
 
 const notifyByResend = async (env, lead, leadId, score, category, recommendedAction) => {
-  if (!env.RESEND_API_KEY || !env.LEAD_NOTIFICATION_FROM) return { configured: false, sent: false };
+  if (!env.RESEND_API_KEY || !env.LEAD_NOTIFICATION_FROM || !env.LEAD_NOTIFICATION_TO) return { configured: false, sent: false };
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -190,7 +190,7 @@ const notifyByResend = async (env, lead, leadId, score, category, recommendedAct
     },
     body: JSON.stringify({
       from: env.LEAD_NOTIFICATION_FROM,
-      to: env.LEAD_NOTIFICATION_TO || 'rajiv.gupta@digisciencetechsol.com',
+      to: env.LEAD_NOTIFICATION_TO,
       subject: `New DigiScience AI Lead - ${lead.company || 'Unknown Company'} - ${lead.aiInterestArea || 'AI Enquiry'}`,
       text: buildEmailText(lead, leadId, score, category, recommendedAction)
     })
@@ -264,7 +264,7 @@ export async function onRequest({ request, env }) {
     const record = {
       leadId,
       status: 'New',
-      owner: 'rajiv.gupta@digisciencetechsol.com',
+      owner: 'DigiScience lead operations',
       nextFollowUpDate: '',
       leadScore: score,
       leadCategory: category,

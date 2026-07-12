@@ -19,22 +19,6 @@ const trackEvent = (eventName, params = {}) => {
   window.dataLayer.push({ event: eventName, ...params });
 };
 
-const buildMailtoUrl = (payload) => {
-  const subject = encodeURIComponent(`${payload.service || 'Website enquiry'} - ${payload.company || payload.name || 'Prospect'}`);
-  const body = encodeURIComponent([
-    `Name: ${payload.name}`,
-    `Email: ${payload.email}`,
-    `Company: ${payload.company}`,
-    `Service: ${payload.service}`,
-    `Page: ${payload.page}`,
-    '',
-    payload.message,
-    '',
-    `Intake details: ${payload.intakeDetails || '{}'}`
-  ].join('\n'));
-  return `mailto:rajiv.gupta@digisciencetechsol.com?subject=${subject}&body=${body}`;
-};
-
 const ensurePremiumVisuals = () => {
   if (!document.querySelector('link[href*="premium.css"]')) {
     const premiumStyles = document.createElement('link');
@@ -306,7 +290,7 @@ const initLeadAssistant = () => {
         const result = await response.json().catch(() => ({}));
         if (!response.ok || !result.ok) {
           trackEvent('lead_submit_error', { event_label: result.error || 'assistant lead failure' });
-          addMessage('I could not submit this right now. Please email rajiv.gupta@digisciencetechsol.com directly.');
+          addMessage('I could not submit this right now. Please use the main contact form or try again shortly.');
           return;
         }
         addMessage('Thanks. Your enquiry has been captured. DigiScience will review the requirement and follow up.');
@@ -316,7 +300,7 @@ const initLeadAssistant = () => {
       } catch (error) {
         console.error(error);
         trackEvent('lead_submit_error', { event_label: 'assistant lead network failure' });
-        addMessage('I could not submit this right now. Please email rajiv.gupta@digisciencetechsol.com directly.');
+        addMessage('I could not submit this right now. Please use the main contact form or try again shortly.');
       } finally {
         form.querySelector('button').disabled = false;
       }
@@ -543,11 +527,9 @@ if (contactForm && formNote) {
 
     const leadEndpointUrl = appConfig.leadEndpointUrl || '/api/lead';
 
-    // Static-safe fallback: if the backend endpoint is unavailable, the enquiry can still be sent by email without exposing secrets.
+    // Privacy-safe fallback: keep personal contact details out of public client code.
     const showFallback = (detail = 'The enquiry service is temporarily unavailable.') => {
-      const mailtoUrl = buildMailtoUrl(payload);
-      showFormNote(`${detail} Please use this fallback email link: <a href="${mailtoUrl}">Email enquiry details</a>.`);
-      trackEvent('click_mailto', { event_label: 'lead form fallback' });
+      showFormNote(`${detail} No enquiry was sent. Please try again shortly.`);
     };
 
     try {

@@ -47,7 +47,7 @@ Governance priorities:
 
 Lead capture:
 - Strong lead moments: pricing, quote request, pilot discussion, assessment request, meeting request, implementation timeline, use-case feasibility, security/governance review.
-- Contact email: rajiv.gupta@digisciencetechsol.com.
+- Contact route: https://digisciencetechsol.com/contact.
 
 Important claims policy:
 - Do not invent customers, case studies, logos, delivered results, certifications, partnerships, or guaranteed ROI.
