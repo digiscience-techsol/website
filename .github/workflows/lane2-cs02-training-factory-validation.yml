@@ -1,0 +1,73 @@
+name: Lane 2 CS02 Distributed Training Validation
+
+on:
+  pull_request:
+    paths:
+      - "portfolio/ai-platform-engineer/cs02-distributed-training-factory/**"
+      - ".github/workflows/lane2-cs02-training-factory-validation.yml"
+  push:
+    branches:
+      - main
+      - "agent/lane2-ai-platform-engineer"
+    paths:
+      - "portfolio/ai-platform-engineer/cs02-distributed-training-factory/**"
+      - ".github/workflows/lane2-cs02-training-factory-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core-and-source-validation:
+    name: Config tests and framework source validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio/ai-platform-engineer/cs02-distributed-training-factory
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: portfolio/ai-platform-engineer/cs02-distributed-training-factory/pyproject.toml
+
+      - name: Install dependency-free core
+        run: python -m pip install --disable-pip-version-check -e .
+
+      - name: Compile all source without importing optional frameworks
+        run: python -m compileall -q src
+
+      - name: Run configuration tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate example configurations
+        run: |
+          training-config examples/pytorch-local.json >/dev/null
+          training-config examples/tensorflow-local.json >/dev/null
+
+      - name: Verify distributed framework implementation is present
+        run: |
+          grep -q 'DistributedDataParallel' src/training_factory/pytorch_train.py
+          grep -q 'DistributedSampler' src/training_factory/pytorch_train.py
+          grep -q 'init_process_group' src/training_factory/pytorch_train.py
+          grep -q 'MultiWorkerMirroredStrategy' src/training_factory/tensorflow_train.py
+          grep -q 'CheckpointManager' src/training_factory/tensorflow_train.py
+          grep -q 'TrainerClient' src/training_factory/kubeflow_submit.py
+          grep -q 'CustomTrainer' src/training_factory/kubeflow_submit.py
+          echo "Framework-dependent implementation is present; runtime execution remains a separately labelled evidence stage."
+
+      - name: Assert examples do not claim completed framework execution
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for path in Path("examples").glob("*.json"):
+              payload = json.loads(path.read_text())
+              assert payload["evidence_label"].startswith("requires-")
+              print(f"Honest boundary OK: {path} -> {payload['evidence_label']}")
+          PY
