@@ -1,0 +1,73 @@
+name: Portfolio Evidence Validation
+
+on:
+  pull_request:
+    paths:
+      - 'portfolio/**'
+      - '.github/workflows/portfolio-validate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'portfolio/**'
+      - '.github/workflows/portfolio-validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile public demo modules
+        run: python -m compileall -q portfolio/case-studies portfolio/tools
+
+      - name: Run portfolio completeness and self-tests
+        run: python portfolio/tools/validate_portfolio.py
+
+      - name: Check Terraform formatting
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform format check
+        run: terraform fmt -check -recursive portfolio/case-studies
+
+      - name: Basic credential-pattern guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE --exclude='portfolio-validate.yml' \
+            '(AKIA[0-9A-Z]{16}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9_]{20,})' \
+            portfolio; then
+            echo 'Potential credential pattern found.' >&2
+            exit 1
+          fi
+          echo 'No known credential pattern found.'
+
+      - name: Publish validation summary
+        if: always()
+        run: |
+          {
+            echo '## Portfolio evidence validation'
+            echo
+            echo '- 12 case-study completeness checks'
+            echo '- Python syntax and deterministic self-tests'
+            echo '- Terraform formatting'
+            echo '- Basic credential-pattern guard'
+            echo
+            echo 'Live cloud provisioning is intentionally excluded from this workflow.'
+          } >> "$GITHUB_STEP_SUMMARY"
