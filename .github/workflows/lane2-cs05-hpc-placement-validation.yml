@@ -1,0 +1,73 @@
+name: Lane 2 CS05 Hybrid HPC Placement Validation
+
+on:
+  pull_request:
+    paths:
+      - "portfolio/ai-platform-engineer/cs05-hybrid-hpc-ai-platform/**"
+      - ".github/workflows/lane2-cs05-hpc-placement-validation.yml"
+  push:
+    branches:
+      - main
+      - "agent/lane2-ai-platform-engineer"
+    paths:
+      - "portfolio/ai-platform-engineer/cs05-hybrid-hpc-ai-platform/**"
+      - ".github/workflows/lane2-cs05-hpc-placement-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  placement-engine-tests:
+    name: Placement policy, cost and evidence tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio/ai-platform-engineer/cs05-hybrid-hpc-ai-platform
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: portfolio/ai-platform-engineer/cs05-hybrid-hpc-ai-platform/pyproject.toml
+
+      - name: Install package
+        run: python -m pip install --disable-pip-version-check -e .
+
+      - name: Compile source
+        run: python -m compileall -q src
+
+      - name: Run policy tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate deterministic placement evidence
+        run: >-
+          hpc-placement examples/urgent-training-scenario.json
+          --output evidence/ci-urgent-training-placement.json
+
+      - name: Validate honest evidence boundary and recommendation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("evidence/ci-urgent-training-placement.json")
+          result = json.loads(path.read_text())
+          assert result["evidence_label"] == "simulated"
+          assert "not evidence of a live HPC or cloud execution" in result["warning"]
+          assert result["recommended_target"] == "approved-cloud-burst"
+          assert any(not item["eligible"] for item in result["evaluations"])
+          print("Placement evidence is deterministic, explainable and explicitly simulated.")
+          PY
+
+      - name: Upload placement evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs05-hybrid-placement-evidence
+          path: portfolio/ai-platform-engineer/cs05-hybrid-hpc-ai-platform/evidence/ci-urgent-training-placement.json
+          if-no-files-found: error
+          retention-days: 14
