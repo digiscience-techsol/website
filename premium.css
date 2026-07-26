@@ -320,6 +320,10 @@
 }
 
 @media (max-width: 760px) {
+  .service-strip-inner {
+    grid-template-columns: 1fr;
+  }
+
   .hero-visual-shell {
     min-height: 220px;
   }

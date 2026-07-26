@@ -682,6 +682,171 @@ a {
   color: var(--muted);
 }
 
+.assessment-hero {
+  padding-bottom: 72px;
+}
+
+.assessment-offer-card,
+.assessment-home-terms {
+  position: relative;
+  border: 1px solid rgba(132,240,218,0.48);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(94,168,255,0.14), rgba(132,240,218,0.07)),
+    rgba(11,22,39,0.9);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.32), 0 0 70px rgba(94,168,255,0.08);
+}
+
+.assessment-offer-card {
+  align-self: center;
+  margin-top: 12px;
+  padding: 40px 28px 28px;
+}
+
+.assessment-price {
+  display: grid;
+  gap: 7px;
+  margin: 18px 0 10px;
+}
+
+.assessment-price strong {
+  color: #f8fbff;
+  font-size: clamp(2.3rem, 5vw, 3.7rem);
+  line-height: 1;
+}
+
+.assessment-price span,
+.assessment-standard,
+.assessment-fineprint,
+.assessment-home-terms p {
+  color: var(--muted);
+}
+
+.assessment-standard {
+  margin: 0 0 22px;
+}
+
+.assessment-standard strong {
+  color: #dce9ff;
+}
+
+.offer-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.offer-meta-grid > div {
+  min-height: 82px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+}
+
+.offer-meta-grid span,
+.offer-meta-grid strong {
+  display: block;
+}
+
+.offer-meta-grid span {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.offer-meta-grid strong {
+  color: #eef6ff;
+  font-size: 0.94rem;
+}
+
+.assessment-fineprint {
+  margin: 18px 0 0;
+  font-size: 0.9rem;
+}
+
+.assessment-path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.path-card {
+  min-height: 210px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.04);
+}
+
+.path-card > span {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.path-card h3 {
+  margin: 18px 0 10px;
+}
+
+.path-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.path-card-wide {
+  grid-column: span 3;
+  min-height: 0;
+}
+
+.assessment-input-card {
+  padding: 28px;
+}
+
+.assessment-boundaries {
+  align-items: stretch;
+}
+
+.assessment-boundaries .card {
+  height: 100%;
+}
+
+.boundary-card p + p {
+  margin-top: 18px;
+}
+
+.assessment-home-panel {
+  align-items: center;
+  padding: 34px;
+  border: 1px solid rgba(132,240,218,0.18);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgba(94,168,255,0.1), rgba(132,240,218,0.05)),
+    rgba(255,255,255,0.035);
+  box-shadow: var(--shadow);
+}
+
+.assessment-home-terms {
+  padding: 26px;
+}
+
+.compact-price strong {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.form-selection-note {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(132,240,218,0.28);
+  border-radius: 14px;
+  background: rgba(132,240,218,0.08);
+  color: #dffdf6;
+  font-weight: 700;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -1590,6 +1755,19 @@ textarea {
   .form-grid.two,
   .wide-form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .assessment-path-grid,
+  .offer-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-card-wide {
+    grid-column: auto;
+  }
+
+  .assessment-home-panel {
+    padding: 24px;
   }
 
   .hero {
