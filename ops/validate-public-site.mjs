@@ -66,9 +66,10 @@ for (const service of expectedServices) {
 
 const solutionAssessment = fs.readFileSync(path.join(root, 'solution-assessment.html'), 'utf8');
 const requiredAssessmentCopy = [
-  'non-technical business owners',
+  'business owners and leaders',
   'functional leaders',
   'technical leaders',
+  'specialized expertise',
   'workflow improvement',
   'automation',
   'AI',
@@ -93,6 +94,12 @@ for (const phrase of requiredAssessmentCopy) {
 }
 
 const publicText = htmlFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+for (const phrase of ['non-technical', 'nontechnical', 'do not need a technical specification']) {
+  if (publicText.toLowerCase().includes(phrase)) {
+    failures.push(`public HTML contains reductive audience framing: "${phrase}"`);
+  }
+}
+
 for (const phrase of ['PDF generation is pending', 'INR 75K', 'INR 1.5L', 'INR 3L']) {
   if (publicText.includes(phrase)) failures.push(`public HTML still contains retired phrase: ${phrase}`);
 }
