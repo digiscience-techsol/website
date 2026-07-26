@@ -64,6 +64,34 @@ for (const service of expectedServices) {
   if (!services.includes(service)) failures.push(`services.html: missing service ${service}`);
 }
 
+const solutionAssessment = fs.readFileSync(path.join(root, 'solution-assessment.html'), 'utf8');
+const requiredAssessmentCopy = [
+  'non-technical business owners',
+  'functional leaders',
+  'technical leaders',
+  'workflow improvement',
+  'automation',
+  'AI',
+  'secure cloud',
+  'hybrid or on-premise',
+  'platform modernization',
+  'INR 29,000',
+  'USD 349',
+  'INR 49,000',
+  'USD 599',
+  'seven-business-day',
+  '50% to begin',
+  '50% before',
+  'signed within 60 days',
+  'bounded pre-implementation engagement',
+  'not full delivery',
+];
+for (const phrase of requiredAssessmentCopy) {
+  if (!solutionAssessment.toLowerCase().includes(phrase.toLowerCase())) {
+    failures.push(`solution-assessment.html: missing required offer language "${phrase}"`);
+  }
+}
+
 const publicText = htmlFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 for (const phrase of ['PDF generation is pending', 'INR 75K', 'INR 1.5L', 'INR 3L']) {
   if (publicText.includes(phrase)) failures.push(`public HTML still contains retired phrase: ${phrase}`);

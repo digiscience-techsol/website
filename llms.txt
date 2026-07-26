@@ -4,6 +4,8 @@
 
 DigiScience Techsol helps enterprise and mid-market teams assess AI readiness, choose practical first use cases, build secure cloud-hosted AI pilots, and add responsible AI governance before scaling. The company is based in New Delhi, India and serves global buyers in manufacturing, healthcare, legal, BFSI/insurance, logistics, HR/recruitment, retail, education, real estate, and public sector workflows.
 
+For buyers who have a defined business or technology problem but have not chosen a solution, the DigiScience Solution Assessment compares workflow improvement, automation, AI, secure cloud, hybrid or on-premise deployment, platform modernization, and combined paths before implementation is scoped.
+
 ## Primary URLs
 
 - Homepage: https://digisciencetechsol.com/
@@ -12,6 +14,7 @@ DigiScience Techsol helps enterprise and mid-market teams assess AI readiness, c
 - How We Deliver: https://digisciencetechsol.com/how-we-deliver
 - Engagement Models: https://digisciencetechsol.com/pricing
 - About: https://digisciencetechsol.com/about
+- DigiScience Solution Assessment: https://digisciencetechsol.com/solution-assessment
 - AI Readiness Assessment: https://digisciencetechsol.com/ai-readiness-assessment
 - 45-Day Industry AI Pilot: https://digisciencetechsol.com/45-day-ai-pilot
 - Architectures and Insights: https://digisciencetechsol.com/proof-assets
@@ -21,7 +24,7 @@ DigiScience Techsol helps enterprise and mid-market teams assess AI readiness, c
 ## Service Portfolio
 
 - AI Strategy, Readiness and Transformation Advisory: opportunity prioritization, readiness scoring, target architecture, risk view, and executable transformation roadmap.
-  - AI Readiness Assessment is the defined entry offer for scoring use cases, data readiness, cloud readiness, security posture, responsible AI risk, business value, and pilot feasibility.
+  - AI Readiness Assessment is the focused option for scoring use cases, data readiness, cloud readiness, security posture, responsible AI risk, business value, and pilot feasibility when AI is already the likely path.
 - AI Industry Transformation Solutions: outcome-led AI workflows for prediction, document intelligence, knowledge access, assistants, agents, and operational decision support.
 - 45-Day Industry AI Pilot: controlled proof of value for one high-priority AI workflow with architecture, governance controls, working pilot, success metrics, and scale roadmap.
 - Secure Enterprise AI Cloud Platform: secure AI landing zones with IAM/RBAC, private networking, audit logging, monitoring, data classification, AI service access, and cost governance.
@@ -31,7 +34,8 @@ DigiScience Techsol helps enterprise and mid-market teams assess AI readiness, c
 
 ## Engagement Model Snapshot
 
-- AI Readiness Assessment: INR 49K / USD 599 one-time.
+- DigiScience Solution Assessment: first five paid customers INR 29K / USD 349; standard INR 49K / USD 599. One defined problem, seven business days after required buyer inputs, 50% to begin and 50% before the final package. The full paid fee is credited toward a DigiScience implementation signed within 60 days.
+- AI Readiness Assessment: a focused downstream option when the defined problem requires AI opportunity, readiness, governance, and pilot assessment.
 - Focused AI Pilot: scoped after readiness and discovery.
 - Department AI Accelerator: scoped programme for multiple workflows, integrations, and formal controls.
 - Governed Enterprise AI Platform: custom programme for enterprise, regulated, hybrid, or private requirements.
@@ -51,4 +55,4 @@ Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrati
 
 ## Recommended First Step
 
-For a new buyer, start with the AI Readiness Assessment. It validates whether a business problem is suitable for AI, whether the data and cloud environment can support a pilot, which governance controls are required, what success metrics should be used, and whether a 45-day pilot is justified.
+For a new buyer with one defined business or technology problem, start with the DigiScience Solution Assessment. It is a bounded pre-implementation engagement, not full implementation or unlimited free consulting. It recommends whether the appropriate path is workflow improvement, automation, AI, secure cloud, hybrid or on-premise deployment, platform modernization, or a combination.

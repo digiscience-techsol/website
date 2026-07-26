@@ -11,7 +11,9 @@ DigiScience Techsol positioning:
 - Lead with measurable business outcomes enabled by AI. Cloud, DevOps, platform engineering, security, governance, and automation are foundations.
 
 Primary offers:
-- AI Readiness Assessment: INR 49K / USD 599 one-time, no monthly commitment.
+- DigiScience Solution Assessment: a bounded pre-implementation engagement for one defined business or technology problem. It can recommend workflow improvement, automation, AI, secure cloud, hybrid or on-premise deployment, platform modernization, or a combination. It is not full implementation or unlimited free consulting.
+- DigiScience Solution Assessment founding-customer terms: first five paid customers INR 29,000 / USD 349; standard price INR 49,000 / USD 599; seven business days after required buyer inputs; 50% to begin and 50% before the final package; the full paid fee is credited toward a DigiScience implementation signed within 60 days.
+- AI Readiness Assessment: a focused assessment for AI use cases, data readiness, cloud readiness, governance risk, and pilot feasibility.
 - Focused AI Pilot: scoped after readiness and discovery for one workflow, defined users, controlled data, success criteria, governance controls, and a production scale decision.
 - Department AI Accelerator: scoped programme for multiple workflows, integrations, reusable capabilities, and formal governance.
 - Governed Enterprise AI Platform: custom programme for enterprise, regulated, hybrid, or private requirements.
@@ -89,7 +91,13 @@ const fallbackAnswer = (question) => {
   const text = question.toLowerCase();
   if (/price|pricing|cost|quote|budget/.test(text)) {
     return {
-      answer: 'The AI Readiness Assessment is INR 49K / USD 599 one-time. Focused pilots, department accelerators, enterprise AI platforms, and managed AI governance or operations are scoped after discovery because workflow, data, integrations, security, scale, and operating responsibility materially change delivery effort.',
+      answer: 'The DigiScience Solution Assessment is INR 29,000 / USD 349 for the first five paid customers, then INR 49,000 / USD 599 standard. It covers one defined problem in seven business days after required inputs, with 50% to begin and 50% before the final package. The full paid fee is credited toward a DigiScience implementation signed within 60 days.',
+      captureLead: true
+    };
+  }
+  if (/solution assessment|defined problem|business problem|right path/.test(text)) {
+    return {
+      answer: 'Bring one defined business or technology problem. DigiScience assesses workflow improvement, automation, AI, secure cloud, hybrid or on-premise deployment, platform modernization, or a combination, then delivers a recommendation and implementation brief. It is a bounded pre-implementation engagement, not full implementation or unlimited free consulting.',
       captureLead: true
     };
   }
@@ -100,7 +108,7 @@ const fallbackAnswer = (question) => {
     };
   }
   return {
-    answer: 'DigiScience Techsol helps enterprises design, build, secure, and operate governed AI solutions on Azure, AWS, and GCP. A good next step is an AI Readiness Assessment to identify the best use case, data gaps, governance controls, and pilot path.',
+    answer: 'DigiScience Techsol helps business and technology leaders choose and deliver the right path for defined problems, including workflow improvement, automation, AI, secure cloud, hybrid deployment, and platform modernization. A good first step is the bounded DigiScience Solution Assessment.',
     captureLead: /contact|meeting|call|demo|consult|proposal/.test(text)
   };
 };

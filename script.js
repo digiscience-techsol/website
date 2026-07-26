@@ -3,8 +3,22 @@ const navLinks = document.getElementById('navLinks');
 const contactForm = document.getElementById('contactForm');
 const formNote = document.getElementById('formNote');
 const serviceSelect = document.getElementById('service');
+const formSelectionNote = document.getElementById('formSelectionNote');
 const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 const appConfig = window.DIGISCIENCE_CONFIG || {};
+
+const serviceQuery = new URLSearchParams(window.location.search).get('service');
+const serviceOptions = {
+  'solution-assessment': 'DigiScience Solution Assessment'
+};
+
+if (serviceSelect && serviceOptions[serviceQuery]) {
+  serviceSelect.value = serviceOptions[serviceQuery];
+  if (formSelectionNote) {
+    formSelectionNote.hidden = false;
+    formSelectionNote.textContent = `You are enquiring about the ${serviceOptions[serviceQuery]}.`;
+  }
+}
 
 const trackEvent = (eventName, params = {}) => {
   if (!eventName) return;
@@ -123,6 +137,7 @@ const initLeadAssistant = () => {
   if (document.querySelector('.ai-assistant-panel')) return;
 
   const quickPrompts = [
+    ['Solution assessment', 'How does the DigiScience Solution Assessment work?'],
     ['Pricing', 'How should we budget for enterprise AI work?'],
     ['45-day pilot', 'What is included in the 45-day AI pilot?'],
     ['AI readiness', 'What does the AI Readiness Assessment cover?'],
@@ -153,15 +168,19 @@ const initLeadAssistant = () => {
     }
 
     if (asksPricing) {
-      return `The AI Readiness Assessment is INR 49K / USD 599 one-time. Pilots, accelerators, enterprise AI platforms, and managed governance or operations are scoped after discovery because delivery responsibility and risk vary by workflow, data, integrations, security, scale, and support needs. See the ${link('engagement models page', '/pricing')}.`;
+      return `The DigiScience Solution Assessment is INR 29,000 / USD 349 for the first five paid customers, then INR 49,000 / USD 599 standard. It covers one defined problem in seven business days after required inputs, with 50% to begin and 50% before the final package. The full paid fee is credited toward a DigiScience implementation signed within 60 days. See the ${link('assessment terms', '/solution-assessment')}.`;
     }
 
     if (asksPilot) {
       return `The 45-day pilot validates one AI workflow through scope, data feasibility, secure architecture, governance controls, a controlled working proof, user and quality measures, and a production scale decision. See ${link('45-Day AI Pilot', '/45-day-ai-pilot')}.`;
     }
 
-    if (/readiness|assessment|scorecard|start/.test(text)) {
-      return `The AI Readiness Assessment identifies high-value use cases, data gaps, cloud/security gaps, governance requirements, and the right first pilot. It is the cleanest starting point before committing to a build.`;
+    if (/solution assessment|defined problem|business problem|right path/.test(text)) {
+      return `Bring one defined business or technology problem. DigiScience assesses workflow improvement, automation, AI, secure cloud, hybrid or on-premise deployment, platform modernization, or a combination, then delivers a recommendation and implementation brief. It is a bounded pre-implementation engagement, not full implementation or unlimited free consulting. See the ${link('Solution Assessment', '/solution-assessment')}.`;
+    }
+
+    if (/readiness|scorecard/.test(text)) {
+      return `The AI Readiness Assessment identifies high-value use cases, data gaps, cloud/security gaps, governance requirements, and the right first pilot. It is the focused starting point when AI is already the likely path.`;
     }
 
     if (/govern|responsible|security|risk|hallucination|audit|approval|prompt|rbac|iam|private/.test(text)) {
@@ -183,7 +202,7 @@ const initLeadAssistant = () => {
       return 'Share your details below and DigiScience can follow up about the right assessment, pilot, or private quote.';
     }
 
-    return `DigiScience Techsol is an AI-first cloud transformation partner helping enterprises build secure, governed, industry-specific AI solutions on Azure, AWS, and GCP. Ask me about pricing, the 45-day pilot, AI readiness, governance, cloud platform, or industries.`;
+    return `DigiScience Techsol helps business and technology leaders choose and deliver the right path for defined problems, including workflow improvement, automation, AI, secure cloud, hybrid deployment, and platform modernization. Ask me about the Solution Assessment, pricing, the 45-day pilot, AI readiness, governance, cloud platforms, or industries.`;
   };
 
   const toggle = document.createElement('button');
@@ -374,7 +393,7 @@ const initLeadAssistant = () => {
   toggle.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
   closeButton.addEventListener('click', () => setOpen(false));
 
-  addMessage('Hello. I can help with DigiScience services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot.', 'bot');
+  addMessage('Hello. I can help with the DigiScience Solution Assessment, services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot.', 'bot');
 };
 
 initLeadAssistant();
@@ -585,6 +604,10 @@ document.querySelectorAll('[data-track]').forEach((element) => {
 
 document.querySelectorAll('a[href*="ai-readiness"]').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_ai_readiness', { event_label: link.getAttribute('href') }));
+});
+
+document.querySelectorAll('a[href*="solution-assessment"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_solution_assessment', { event_label: link.getAttribute('href') }));
 });
 
 document.querySelectorAll('a[href*="45-day-ai-pilot"]').forEach((link) => {
