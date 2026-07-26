@@ -15,6 +15,7 @@ const walk = (dir) => {
   }
 };
 walk(root);
+const renderedHtmlFiles = htmlFiles.filter((file) => !/http-equiv="refresh"/i.test(fs.readFileSync(file, 'utf8')));
 
 const resolvePublicPath = (urlPath) => {
   const clean = decodeURIComponent(urlPath.split(/[?#]/)[0]);
@@ -104,10 +105,48 @@ for (const phrase of ['PDF generation is pending', 'INR 75K', 'INR 1.5L', 'INR 3
   if (publicText.includes(phrase)) failures.push(`public HTML still contains retired phrase: ${phrase}`);
 }
 
+for (const file of renderedHtmlFiles) {
+  const relative = path.relative(root, file);
+  const html = fs.readFileSync(file, 'utf8');
+  if (!/config\.js\?v=lead2/.test(html)) failures.push(`${relative}: missing current shared configuration`);
+  if (!/script\.js\?v=lead4/.test(html)) failures.push(`${relative}: missing current shared measurement script`);
+  if (/googletagmanager\.com\/gtag\/js/.test(html)) {
+    failures.push(`${relative}: contains duplicate page-level GA loader instead of shared measurement`);
+  }
+}
+
+const publicConfig = fs.readFileSync(path.join(root, 'config.js'), 'utf8');
+if (!/gaMeasurementId:\s*'G-9CZXKFZ365'/.test(publicConfig)) {
+  failures.push('config.js: missing GA4 measurement ID');
+}
+
+const publicScript = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
+for (const eventName of [
+  'solution_assessment_view',
+  'pricing_view',
+  'contact_view',
+  'form_start',
+  'form_validation_error',
+  'lead_submit_attempt',
+  'lead_submit_success',
+  'lead_submit_error',
+  'generate_lead'
+]) {
+  if (!publicScript.includes(eventName)) failures.push(`script.js: missing funnel event ${eventName}`);
+}
+if (/lead_id:|lead_score:/.test(publicScript)) {
+  failures.push('script.js: analytics payload still includes lead identifiers or internal scores');
+}
+
+const leadFunction = fs.readFileSync(path.join(root, 'functions', 'api', 'lead.js'), 'utf8');
+for (const phrase of ['delivery: {', 'accepted: false', 'accepted: true', 'Internal Test', 'attemptDelivery']) {
+  if (!leadFunction.includes(phrase)) failures.push(`functions/api/lead.js: missing durable-delivery behavior "${phrase}"`);
+}
+
 if (failures.length) {
   console.error(`Validation failed with ${failures.length} issue(s):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
-console.log(`Validated ${htmlFiles.length} public HTML files, shared navigation, seven services, local links, assets, and retired pricing language.`);
+console.log(`Validated ${htmlFiles.length} public HTML files, ${renderedHtmlFiles.length} measured pages, shared navigation, seven services, local links, assets, and durable lead instrumentation.`);
