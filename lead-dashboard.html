@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiScience Lead Dashboard</title>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="theme-color" content="#07101d" />
+  <link rel="icon" href="/assets/favicon.svg?v=premium4" type="image/svg+xml" />
+  <link rel="stylesheet" href="/style.css?v=lead1" />
+  <link rel="stylesheet" href="/premium.css?v=premium4" />
+</head>
+<body>
+  <header class="topbar"><div class="container nav"><a class="brand" href="/" aria-label="DigiScience Techsol home"><img class="brand-mark" src="/assets/favicon.svg?v=premium4" alt="DigiScience Techsol logo" width="42" height="42" decoding="async" /><span class="brand-text">DigiScience Techsol</span></a><nav class="nav-links"><a href="/contact" class="btn btn-secondary nav-cta">Contact</a></nav></div></header>
+  <main>
+    <section class="page-hero bg-grid"><div class="container"><div class="eyebrow">Internal lead operations</div><h1>Lead dashboard</h1><p>Review inbound AI readiness, pilot, governance, and industry AI enquiries captured by the DigiScience website.</p></div></section>
+    <section class="section section-tight">
+      <div class="container">
+        <form class="contact-form" id="dashboardAuth">
+          <label>Dashboard Token<input type="password" name="token" placeholder="Enter server-configured token" required /></label>
+          <button class="btn btn-primary" type="submit">Load leads</button>
+          <p class="form-note show is-info" id="dashboardNote">Token is kept in this browser session only. Do not share it in chat.</p>
+        </form>
+        <div class="lead-dashboard" id="leadDashboard" hidden></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const form = document.getElementById('dashboardAuth');
+    const note = document.getElementById('dashboardNote');
+    const dashboard = document.getElementById('leadDashboard');
+
+    const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[char]));
+
+    const renderLeads = (leads) => {
+      dashboard.hidden = false;
+      if (!leads.length) {
+        dashboard.innerHTML = '<div class="card"><h2 class="section-title smaller">No leads found</h2><p>No website leads are visible in KV yet.</p></div>';
+        return;
+      }
+      dashboard.innerHTML = leads.map((record) => {
+        const lead = record.lead || {};
+        return `<article class="card lead-card">
+          <div class="lead-card-head"><strong>${escapeHtml(record.leadCategory)} ${escapeHtml(record.leadScore)}</strong><span>${escapeHtml(lead.submittedAt)}</span></div>
+          <h2>${escapeHtml(lead.company || 'Unknown company')}</h2>
+          <p><strong>${escapeHtml(lead.fullName)}</strong> · ${escapeHtml(lead.role)} · ${escapeHtml(lead.businessEmail)}</p>
+          <p>${escapeHtml(lead.industry)} · ${escapeHtml(lead.aiInterestArea)} · ${escapeHtml(lead.timeline)}</p>
+          <p>${escapeHtml(lead.businessProblem)}</p>
+          <p><strong>Next action:</strong> ${escapeHtml(record.recommendedAction)}</p>
+          <p><strong>Source:</strong> ${escapeHtml(lead.sourcePage)} · <strong>ID:</strong> ${escapeHtml(record.leadId)}</p>
+        </article>`;
+      }).join('');
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const token = form.token.value.trim();
+      note.textContent = 'Loading leads...';
+      try {
+        const response = await fetch('/api/leads?limit=100', {
+          headers: { authorization: `Bearer ${token}` }
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          note.textContent = result.error || 'Unable to load leads.';
+          return;
+        }
+        note.textContent = `Loaded ${result.count} lead record(s).`;
+        renderLeads(result.leads || []);
+      } catch (error) {
+        note.textContent = 'Unable to load leads right now.';
+      }
+    });
+  </script>
+</body>
+</html>

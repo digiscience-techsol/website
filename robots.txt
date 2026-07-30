@@ -62,6 +62,8 @@ Disallow: /proposal-templates
 Disallow: /prospect-tracker
 Disallow: /sales-execution
 Disallow: /target-account-selection
+Disallow: /lead-dashboard
+Disallow: /api/leads
 Disallow: /assets/templates/
 Disallow: /ops/
 Disallow: /gtm/

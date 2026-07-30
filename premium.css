@@ -313,6 +313,35 @@
   width: min(100%, 320px);
 }
 
+.lead-dashboard {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.lead-card {
+  display: grid;
+  gap: 10px;
+}
+
+.lead-card h2,
+.lead-card p {
+  margin: 0;
+}
+
+.lead-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.lead-card-head strong {
+  color: var(--primary-2);
+}
+
 @media (max-width: 1080px) {
   .industry-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));

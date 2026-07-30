@@ -78,3 +78,9 @@
 
 /gtm/*
   X-Robots-Tag: noindex, nofollow, noarchive
+
+/lead-dashboard*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/api/leads*
+  X-Robots-Tag: noindex, nofollow, noarchive
