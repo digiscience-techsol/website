@@ -211,25 +211,42 @@ const notifyByMicrosoftGraph = async (env, lead, leadId, score, category, recomm
   if (!tokenResponse.ok) return { configured: true, sent: false, stage: 'token', status: tokenResponse.status };
 
   const { access_token: accessToken } = await tokenResponse.json();
-  const response = await fetch(`https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.LEAD_NOTIFICATION_FROM)}/sendMail`, {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      message: {
-        subject: notificationSubject(lead, /internal controlled test/i.test(lead.businessProblem)),
-        body: { contentType: 'Text', content: buildEmailText(lead, leadId, score, category, recommendedAction) },
-        toRecipients: [env.LEAD_NOTIFICATION_TO, env.LEAD_NOTIFICATION_EXTRA_TO].filter(Boolean).join(',').split(',').map((address) => ({
-          emailAddress: { address: address.trim() }
-        })).filter(({ emailAddress }) => emailAddress.address)
-      },
-      saveToSentItems: true
-    })
-  });
+  const recipients = [...new Set(
+    [env.LEAD_NOTIFICATION_TO, env.LEAD_NOTIFICATION_EXTRA_TO]
+      .filter(Boolean)
+      .join(',')
+      .split(',')
+      .map((address) => address.trim().toLowerCase())
+      .filter(Boolean)
+  )];
 
-  return { configured: true, sent: response.ok, status: response.status };
+  const deliveries = await Promise.all(recipients.map(async (address) => {
+    const response = await fetch(`https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.LEAD_NOTIFICATION_FROM)}/sendMail`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: {
+          subject: notificationSubject(lead, /internal controlled test/i.test(lead.businessProblem)),
+          body: { contentType: 'Text', content: buildEmailText(lead, leadId, score, category, recommendedAction) },
+          toRecipients: [{ emailAddress: { address } }]
+        },
+        saveToSentItems: true
+      })
+    });
+    return { sent: response.ok, status: response.status };
+  }));
+
+  const acceptedCount = deliveries.filter(({ sent }) => sent).length;
+  return {
+    configured: true,
+    sent: acceptedCount > 0,
+    status: acceptedCount === recipients.length ? 202 : 502,
+    recipientCount: recipients.length,
+    acceptedCount
+  };
 };
 
 const notifyByResend = async (env, lead, leadId, score, category, recommendedAction) => {
