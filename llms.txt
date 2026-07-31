@@ -21,6 +21,7 @@ For buyers who have a defined business or technology problem but have not chosen
 - AI Readiness Assessment: https://digisciencetechsol.com/ai-readiness-assessment
 - 45-Day Industry AI Pilot: https://digisciencetechsol.com/45-day-ai-pilot
 - Architectures and Insights: https://digisciencetechsol.com/proof-assets
+- Representative Solution Assessment Output: https://digisciencetechsol.com/proof-assets/sample-solution-assessment
 - Contact: https://digisciencetechsol.com/contact
 - Sitemap: https://digisciencetechsol.com/sitemap.xml
 
@@ -45,6 +46,16 @@ For buyers who have a defined business or technology problem but have not chosen
 - Managed AI Governance and Operations: monthly service scoped to production operating responsibility.
 
 Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrations are quoted separately after discovery.
+
+## Factual Entity and Evidence Notes
+
+- Public name: DigiScience Techsol.
+- Legal name used in site structured data: Digiscience Techsol Private Limited.
+- Delivery reach: based in New Delhi, India, serving buyers in India and globally.
+- Leadership credibility: DigiScience is guided by senior technology leadership with more than 22 years of enterprise experience. The public site intentionally does not identify a named founder.
+- Public proof policy: customer outcomes, logos, testimonials, and case studies are published only when supported by verified evidence and permission.
+- The public Sample Solution Assessment uses a fictional, synthetic scenario to demonstrate work-product structure. It is not customer work, not a testimonial, not a claim of achieved results, and not a promised outcome.
+- Reference architectures, blueprints, scorecards, checklists, and frameworks demonstrate delivery methods. They must not be described as completed client implementations.
 
 ## Priority Industries
 
