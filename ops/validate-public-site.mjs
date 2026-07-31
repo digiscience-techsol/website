@@ -39,6 +39,44 @@ for (const file of htmlFiles) {
   if (isIndexable && !html.includes('config.js?v=lead2')) failures.push(`${relative}: missing current analytics configuration`);
   if (isIndexable && !html.includes('script.js?v=lead4')) failures.push(`${relative}: missing current shared funnel measurement`);
   if (/googletagmanager\.com\/gtag\/js/.test(html)) failures.push(`${relative}: contains a duplicate page-level Google tag loader`);
+  if (isIndexable && !/rel="canonical" href="https:\/\/digisciencetechsol\.com\//.test(html)) {
+    failures.push(`${relative}: missing canonical URL`);
+  }
+
+  const requiredDiscoveryMetadata = [
+    ['property', 'og:site_name'],
+    ['property', 'og:title'],
+    ['property', 'og:description'],
+    ['property', 'og:type'],
+    ['property', 'og:url'],
+    ['property', 'og:image'],
+    ['name', 'twitter:card'],
+    ['name', 'twitter:title'],
+    ['name', 'twitter:description'],
+    ['name', 'twitter:image'],
+  ];
+  if (isIndexable) {
+    for (const [attribute, value] of requiredDiscoveryMetadata) {
+      if (!new RegExp(`<meta\\s+${attribute}="${value}"\\s+content="`, 'i').test(html)) {
+        failures.push(`${relative}: missing discovery metadata ${value}`);
+      }
+    }
+  }
+
+  for (const schemaMatch of html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)) {
+    try {
+      JSON.parse(schemaMatch[1]);
+    } catch (error) {
+      failures.push(`${relative}: invalid JSON-LD (${error.message})`);
+    }
+  }
+
+  const needsResourceSchema = isIndexable
+    && (/^industries[\\/][^\\/]+[\\/]index\.html$/.test(relative)
+      || /^proof-assets[\\/](?:index|[^\\/]+)\.html$/.test(relative));
+  if (needsResourceSchema && !/application\/ld\+json/.test(html)) {
+    failures.push(`${relative}: missing industry or proof-resource structured data`);
+  }
 
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
@@ -219,6 +257,9 @@ if (!aboutSource.includes('more than 22 years of enterprise technology experienc
 }
 
 const publicText = htmlFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+if (publicText.includes('PostalAddress') || publicText.includes('NSIC Metro, 94, Old Ishwar Nagar')) {
+  failures.push('public HTML contains an unverified street address in entity markup');
+}
 for (const phrase of ['non-technical', 'nontechnical', 'do not need a technical specification']) {
   if (publicText.toLowerCase().includes(phrase)) {
     failures.push(`public HTML contains reductive audience framing: "${phrase}"`);
@@ -228,6 +269,20 @@ for (const phrase of ['non-technical', 'nontechnical', 'do not need a technical 
 for (const retiredNavigationPhrase of ['Book an AI Strategy Call', '>Resources<']) {
   if (publicText.includes(retiredNavigationPhrase)) {
     failures.push(`public HTML contains retired navigation wording: "${retiredNavigationPhrase}"`);
+  }
+}
+
+const llmsSource = fs.readFileSync(path.join(root, 'llms.txt'), 'utf8');
+for (const factualMachineReadableNote of [
+  'more than 22 years of enterprise experience',
+  'not customer work',
+  'not a testimonial',
+  'not a claim of achieved results',
+  'must not be described as completed client implementations',
+  'https://digisciencetechsol.com/proof-assets/sample-solution-assessment',
+]) {
+  if (!llmsSource.includes(factualMachineReadableNote)) {
+    failures.push(`llms.txt: missing factual evidence note "${factualMachineReadableNote}"`);
   }
 }
 
