@@ -1,5 +1,5 @@
 // Forces a fresh Pages Functions deployment after encrypted notification credentials change.
-const MICROSOFT_GRAPH_NOTIFICATION_VERSION = '2026-07-31';
+const MICROSOFT_GRAPH_NOTIFICATION_VERSION = '2026-07-31.1';
 
 const ALLOWED_ORIGINS = new Set([
   'https://digisciencetechsol.com',
