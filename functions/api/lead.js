@@ -221,7 +221,7 @@ const notifyByMicrosoftGraph = async (env, lead, leadId, score, category, recomm
       message: {
         subject: notificationSubject(lead, /internal controlled test/i.test(lead.businessProblem)),
         body: { contentType: 'Text', content: buildEmailText(lead, leadId, score, category, recommendedAction) },
-        toRecipients: env.LEAD_NOTIFICATION_TO.split(',').map((address) => ({
+        toRecipients: [env.LEAD_NOTIFICATION_TO, env.LEAD_NOTIFICATION_EXTRA_TO].filter(Boolean).join(',').split(',').map((address) => ({
           emailAddress: { address: address.trim() }
         })).filter(({ emailAddress }) => emailAddress.address)
       },
