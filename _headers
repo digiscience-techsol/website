@@ -1,3 +1,9 @@
+/thank-you*
+  X-Robots-Tag: noindex, noarchive
+
+/404.html
+  X-Robots-Tag: noindex, nofollow, noarchive
+
 /day-*
   X-Robots-Tag: noindex, nofollow, noarchive
 

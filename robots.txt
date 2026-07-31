@@ -64,6 +64,7 @@ Disallow: /sales-execution
 Disallow: /target-account-selection
 Disallow: /lead-dashboard
 Disallow: /api/leads
+Disallow: /thank-you
 Disallow: /assets/templates/
 Disallow: /ops/
 Disallow: /gtm/

@@ -25,7 +25,7 @@ const resolvePublicPath = (urlPath) => {
     path.join(root, `${relative}.html`),
     path.join(root, relative, 'index.html'),
   ];
-  return candidates.find((candidate) => fs.existsSync(candidate));
+  return candidates.find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile());
 };
 
 for (const file of htmlFiles) {
@@ -82,6 +82,72 @@ for (const sensitiveParameter of ['lead_id', 'lead_score']) {
   if (scriptSource.includes(sensitiveParameter)) {
     failures.push(`script.js: sends internal lead data to analytics: ${sensitiveParameter}`);
   }
+}
+
+const sitemapSource = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
+const sitemapUrls = [...sitemapSource.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+if (new Set(sitemapUrls).size !== sitemapUrls.length) failures.push('sitemap.xml: contains duplicate URLs');
+for (const sitemapUrl of sitemapUrls) {
+  const parsed = new URL(sitemapUrl);
+  const file = resolvePublicPath(parsed.pathname);
+  if (!file) {
+    failures.push(`sitemap.xml: URL has no public HTML target ${sitemapUrl}`);
+    continue;
+  }
+  const html = fs.readFileSync(file, 'utf8');
+  if (/name="robots" content="noindex/.test(html)) failures.push(`sitemap.xml: includes noindex page ${sitemapUrl}`);
+  const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
+  if (canonical !== sitemapUrl) failures.push(`sitemap.xml: canonical mismatch for ${sitemapUrl}`);
+}
+if (sitemapUrls.includes('https://digisciencetechsol.com/thank-you')) {
+  failures.push('sitemap.xml: includes the enquiry receipt page');
+}
+
+const thankYouSource = fs.readFileSync(path.join(root, 'thank-you.html'), 'utf8');
+if (!/name="robots" content="noindex/.test(thankYouSource)) {
+  failures.push('thank-you.html: enquiry receipt page must be noindex');
+}
+const notFoundSource = fs.readFileSync(path.join(root, '404.html'), 'utf8');
+if (!/name="robots" content="noindex, nofollow"/.test(notFoundSource)) {
+  failures.push('404.html: custom not-found page must be noindex, nofollow');
+}
+
+const redirectsSource = fs.readFileSync(path.join(root, '_redirects'), 'utf8');
+const requiredLegacyRedirects = [
+  '/index.php / 301',
+  '/career.php /about 301',
+  '/target-industry.php /industries 301',
+  '/service-digital-transformation-1.php /services 301',
+  '/service-data-center-management-2.php /solutions/secure-ai-cloud-platform 301',
+  '/service-it-infrastructure-management-3.php /solutions/cloud-modernization-ai-readiness 301',
+  '/service-technology-consulting-services-4.php /solution-assessment 301',
+  '/service-cyber-security-5.php /solutions/responsible-ai-governance 301',
+];
+for (const redirect of requiredLegacyRedirects) {
+  if (!redirectsSource.includes(redirect)) failures.push(`_redirects: missing legacy mapping ${redirect}`);
+}
+
+const routesConfig = JSON.parse(fs.readFileSync(path.join(root, '_routes.json'), 'utf8'));
+const requiredPrivateRoutes = [
+  '/api/*',
+  '/assets/templates/*',
+  '/ops/*',
+  '/gtm/*',
+  '/proof-assets-source/*',
+  '/scripts/*',
+  '/workers/*',
+  '/functions/*',
+  '/cpanel_v7.zip',
+  '/google-apps-script.gs',
+  '/README.txt',
+  '/wrangler.toml',
+];
+for (const route of requiredPrivateRoutes) {
+  if (!routesConfig.include?.includes(route)) failures.push(`_routes.json: missing protected route ${route}`);
+}
+const privateRouteHandler = fs.readFileSync(path.join(root, 'functions', '[[path]].js'), 'utf8');
+if (!/status:\s*404/.test(privateRouteHandler) || !/x-robots-tag/.test(privateRouteHandler)) {
+  failures.push('functions/[[path]].js: blocked operational paths must return a noindex 404');
 }
 
 const services = fs.readFileSync(path.join(root, 'services.html'), 'utf8');

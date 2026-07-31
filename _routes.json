@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*",
+    "/assets/templates/*",
+    "/ops",
+    "/ops/*",
+    "/gtm",
+    "/gtm/*",
+    "/proof-assets-source",
+    "/proof-assets-source/*",
+    "/scripts",
+    "/scripts/*",
+    "/workers",
+    "/workers/*",
+    "/functions",
+    "/functions/*",
+    "/.github/*",
+    "/.gitignore",
+    "/cpanel_v7.zip",
+    "/google-apps-script.gs",
+    "/README.md",
+    "/README.txt",
+    "/wrangler.toml"
+  ],
+  "exclude": []
+}
