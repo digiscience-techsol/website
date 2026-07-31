@@ -2,6 +2,10 @@ const ALLOWED_ORIGINS = new Set([
   'https://digisciencetechsol.com',
   'https://www.digisciencetechsol.com'
 ]);
+const PREVIEW_ORIGIN_PATTERN = /^https:\/\/[a-z0-9-]+\.digisciencetechsol-org-website\.pages\.dev$/i;
+const INTERNAL_TEST_EMAIL_PATTERN = /@digisciencetechsol\.invalid$/i;
+
+const isAllowedOrigin = (origin) => ALLOWED_ORIGINS.has(origin) || PREVIEW_ORIGIN_PATTERN.test(origin);
 
 const TARGET_INDUSTRIES = new Set([
   'Manufacturing',
@@ -26,7 +30,7 @@ const jsonResponse = (body, status = 200, origin = '') => {
     'cache-control': 'no-store'
   };
 
-  if (origin && ALLOWED_ORIGINS.has(origin)) {
+  if (origin && isAllowedOrigin(origin)) {
     headers['access-control-allow-origin'] = origin;
     headers.vary = 'Origin';
   }
@@ -106,6 +110,10 @@ const toLead = (payload, request) => {
   const businessEmail = getFirst(payload, ['businessEmail', 'email']);
   const company = getFirst(payload, ['company', 'companyName']);
   const consentValue = payload.consent === true || payload.consent === 'true' || payload.consent === 'yes' || payload.consent === 'on';
+  const internalTestRequested = payload.internalTest === true || payload.internalTest === 'true';
+  const isInternalTest = internalTestRequested
+    && INTERNAL_TEST_EMAIL_PATTERN.test(businessEmail)
+    && /^DigiScience Internal Test\b/i.test(company);
 
   return {
     sourcePage,
@@ -125,6 +133,7 @@ const toLead = (payload, request) => {
     timeline: getFirst(payload, ['timeline']),
     budgetRange: getFirst(payload, ['budgetRange', 'budget']),
     consent: consentValue,
+    isInternalTest,
     businessContext: getFirst(payload, ['businessContext']),
     workflowPain: getFirst(payload, ['workflowPain']),
     useCaseCandidate: getFirst(payload, ['useCaseCandidate']),
@@ -150,6 +159,8 @@ const validateLead = (lead, payload) => {
 };
 
 const buildEmailText = (lead, leadId, score, category, recommendedAction) => [
+  lead.isInternalTest ? 'INTERNAL TEST — DO NOT TREAT AS A CUSTOMER ENQUIRY' : 'CUSTOMER ENQUIRY',
+  '',
   `Lead ID: ${leadId}`,
   `Score: ${score} (${category})`,
   `Recommended next action: ${recommendedAction}`,
@@ -191,7 +202,7 @@ const notifyByResend = async (env, lead, leadId, score, category, recommendedAct
     body: JSON.stringify({
       from: env.LEAD_NOTIFICATION_FROM,
       to: env.LEAD_NOTIFICATION_TO,
-      subject: `New DigiScience AI Lead - ${lead.company || 'Unknown Company'} - ${lead.aiInterestArea || 'AI Enquiry'}`,
+      subject: `${lead.isInternalTest ? '[INTERNAL TEST — DO NOT TREAT AS CUSTOMER] ' : ''}New DigiScience AI Lead - ${lead.company || 'Unknown Company'} - ${lead.aiInterestArea || 'AI Enquiry'}`,
       text: buildEmailText(lead, leadId, score, category, recommendedAction)
     })
   });
@@ -224,15 +235,27 @@ const storeInKv = async (env, leadId, record) => {
   return { configured: true, stored: true };
 };
 
+const attemptDelivery = async (name, operation, unavailableResult) => {
+  try {
+    return await operation();
+  } catch (error) {
+    console.error('lead_delivery_channel_failed', {
+      channel: name,
+      error: error instanceof Error ? error.message : 'Unknown delivery error'
+    });
+    return unavailableResult;
+  }
+};
+
 export async function onRequest({ request, env }) {
   const origin = request.headers.get('origin') || '';
 
   if (request.method === 'OPTIONS') {
-    if (origin && !ALLOWED_ORIGINS.has(origin)) return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, origin);
+    if (origin && !isAllowedOrigin(origin)) return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, origin);
     return new Response(null, {
       status: 204,
       headers: {
-        'access-control-allow-origin': origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://digisciencetechsol.com',
+        'access-control-allow-origin': origin && isAllowedOrigin(origin) ? origin : 'https://digisciencetechsol.com',
         'access-control-allow-methods': 'POST, OPTIONS',
         'access-control-allow-headers': 'content-type',
         'access-control-max-age': '86400',
@@ -245,7 +268,7 @@ export async function onRequest({ request, env }) {
     return jsonResponse({ ok: false, error: 'Method not allowed' }, 405, origin);
   }
 
-  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+  if (origin && !isAllowedOrigin(origin)) {
     return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, origin);
   }
 
@@ -263,7 +286,7 @@ export async function onRequest({ request, env }) {
     const recommendedAction = getRecommendedAction(lead, category);
     const record = {
       leadId,
-      status: 'New',
+      status: lead.isInternalTest ? 'Internal Test' : 'New',
       owner: 'DigiScience lead operations',
       nextFollowUpDate: '',
       leadScore: score,
@@ -272,27 +295,58 @@ export async function onRequest({ request, env }) {
       lead
     };
 
-    const storage = await storeInKv(env, leadId, record);
-    const webhook = await forwardToWebhook(env, record);
-    const email = await notifyByResend(env, lead, leadId, score, category, recommendedAction);
+    const [storage, webhook, email] = await Promise.all([
+      attemptDelivery('storage', () => storeInKv(env, leadId, record), { configured: Boolean(env.LEADS_KV), stored: false }),
+      attemptDelivery('webhook', () => forwardToWebhook(env, record), { configured: Boolean(env.LEAD_WEBHOOK_URL), sent: false }),
+      attemptDelivery('email', () => notifyByResend(env, lead, leadId, score, category, recommendedAction), {
+        configured: Boolean(env.RESEND_API_KEY && env.LEAD_NOTIFICATION_FROM && env.LEAD_NOTIFICATION_TO),
+        sent: false
+      })
+    ]);
+    const channels = {
+      storage: Boolean(storage.stored),
+      webhook: Boolean(webhook.sent),
+      email: Boolean(email.sent)
+    };
+    const accepted = Object.values(channels).some(Boolean);
+
+    if (!accepted) {
+      console.error('lead_delivery_rejected', { leadId, channels, internalTest: lead.isInternalTest });
+      return jsonResponse({
+        ok: false,
+        error: 'The enquiry could not be recorded. No confirmation was created; please try again shortly.',
+        delivery: {
+          accepted: false,
+          channels
+        }
+      }, 503, origin);
+    }
+
+    if (Object.values(channels).some((delivered) => !delivered)) {
+      console.warn('lead_delivery_partial', { leadId, channels, internalTest: lead.isInternalTest });
+    }
 
     return jsonResponse({
       ok: true,
       leadId,
-      message: 'Lead received',
-      leadScore: score,
-      leadCategory: category,
-      recommendedAction,
+      message: 'Enquiry recorded',
+      testSubmission: lead.isInternalTest,
       delivery: {
-        storage,
-        webhook,
-        email
-      },
-      fallback: {
-        mailtoAvailable: !storage.stored && !webhook.sent && !email.sent
+        accepted: true,
+        channels
       }
     }, 200, origin);
   } catch (error) {
-    return jsonResponse({ ok: false, error: 'Lead submission failed. Please use the email fallback.' }, 500, origin);
+    console.error('lead_submission_failed', {
+      error: error instanceof Error ? error.message : 'Unknown lead submission error'
+    });
+    return jsonResponse({
+      ok: false,
+      error: 'The enquiry could not be recorded. No confirmation was created; please try again shortly.',
+      delivery: {
+        accepted: false,
+        channels: { storage: false, webhook: false, email: false }
+      }
+    }, 500, origin);
   }
 }

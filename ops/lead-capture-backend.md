@@ -1,43 +1,62 @@
 # Lead Capture Backend
 
-## Current Production Path
+## Current Website Path
 
-Website forms submit to the public lead endpoint configured in `config.js`:
+All website lead forms submit JSON to the same-origin Cloudflare Pages Function:
 
-- `window.DIGISCIENCE_CONFIG.leadEndpointUrl`
+- client configuration: `window.DIGISCIENCE_CONFIG.leadEndpointUrl`
+- endpoint: `POST /api/lead`
+- implementation: `functions/api/lead.js`
 
-The current endpoint is the DigiScience n8n control-plane webhook. The website sends form data with `no-cors` to avoid exposing credentials in the browser.
+The browser must treat an enquiry as accepted only when the endpoint returns:
 
-## Captured Fields
+```json
+{
+  "ok": true,
+  "delivery": {
+    "accepted": true
+  }
+}
+```
 
-- name
-- email
-- company
-- service
-- message
-- page
-- source
-- submittedAt
-- intakeDetails
-- transcript when submitted from the AI assistant
+The function returns an error instead of a success receipt when no durable delivery channel accepts the record.
 
-## Lead Sources
+## Durable Delivery Channels
 
-- Contact page
-- AI Readiness Assessment intake
-- Website AI assistant lead form
+The function attempts all configured channels independently:
 
-## Required Backend Behavior
+1. Cloudflare KV through the `LEADS_KV` binding.
+2. An optional downstream webhook through `LEAD_WEBHOOK_URL`.
+3. An optional Resend notification through `RESEND_API_KEY`, `LEAD_NOTIFICATION_FROM`, and `LEAD_NOTIFICATION_TO`.
 
-The n8n or Apps Script backend should:
+A lead receipt is truthful when at least one channel succeeds. Partial delivery is logged for follow-up. Channel failures do not prevent another configured channel from accepting the lead.
 
-1. Validate required fields.
-2. Drop honeypot spam submissions where `website` is populated.
-3. Store lead in Google Sheet, CRM, or database.
-4. Send email notification to `rajiv.gupta@digisciencetechsol.com`.
-5. Preserve `page`, `service`, `intakeDetails`, and assistant transcript.
-6. Return success if called server-side; browser forms use `no-cors` and redirect to `/success.html`.
+Production secret values and lead records must remain in Cloudflare, Resend, the downstream system, or the approved lead inbox. Do not store them in Git.
 
-## Security Notes
+## Measurement
 
-Do not expose private API tokens, SMTP passwords, CRM keys, or Cloudflare credentials in frontend code. Keep automation credentials only in n8n, Google Apps Script, or Cloudflare secret storage.
+`config.js` provides the GA4 measurement ID and `script.js` initializes the shared measurement layer on every rendered public page. The funnel records:
+
+- assessment, pricing, contact, intake, and thank-you views
+- CTA clicks
+- form start
+- validation error
+- submission attempt
+- durable delivery success
+- submission or delivery error
+- GA4 `generate_lead` only after durable acceptance
+
+Analytics events must not contain names, email addresses, free-text problems, lead IDs, or internal lead scores.
+
+## Controlled Internal Test
+
+An authorized delivery test must be unmistakably internal:
+
+- set `internalTest: true`
+- use the reserved `@digisciencetechsol.invalid` email domain
+- begin the company name with `DigiScience Internal Test`
+- begin the problem statement with `CONTROLLED INTERNAL TEST:`
+
+The stored record is marked `Internal Test`, and any notification subject and body explicitly say not to treat it as a customer enquiry.
+
+Do not run repeated tests merely to probe configuration. One controlled test is enough unless a separate retry is explicitly authorized after a diagnosed failure.
