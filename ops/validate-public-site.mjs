@@ -31,10 +31,14 @@ const resolvePublicPath = (urlPath) => {
 for (const file of htmlFiles) {
   const relative = path.relative(root, file);
   const html = fs.readFileSync(file, 'utf8');
+  const isIndexable = !/name="robots" content="noindex/.test(html);
   if (!/<title>[^<]+<\/title>/.test(html)) failures.push(`${relative}: missing title`);
-  if (!/name="robots" content="noindex/.test(html) && !/name="description" content="[^"]+"/.test(html)) failures.push(`${relative}: missing meta description`);
+  if (isIndexable && !/name="description" content="[^"]+"/.test(html)) failures.push(`${relative}: missing meta description`);
   if (/<nav class="nav-links" id="navLinks"><\/nav>/.test(html)) failures.push(`${relative}: empty navigation`);
   if (/<div class="footer-links"><\/div>/.test(html)) failures.push(`${relative}: empty footer links`);
+  if (isIndexable && !html.includes('config.js?v=lead2')) failures.push(`${relative}: missing current analytics configuration`);
+  if (isIndexable && !html.includes('script.js?v=lead4')) failures.push(`${relative}: missing current shared funnel measurement`);
+  if (/googletagmanager\.com\/gtag\/js/.test(html)) failures.push(`${relative}: contains a duplicate page-level Google tag loader`);
 
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
@@ -47,6 +51,36 @@ for (const file of htmlFiles) {
     }
     const absolute = target.startsWith('/') ? target : `/${path.posix.join(path.posix.dirname(`/${relative}`), target)}`;
     if (!resolvePublicPath(absolute)) failures.push(`${relative}: missing local target ${target}`);
+  }
+}
+
+const configSource = fs.readFileSync(path.join(root, 'config.js'), 'utf8');
+if (!/gaMeasurementId:\s*'G-[A-Z0-9]+'/.test(configSource)) {
+  failures.push('config.js: missing a valid GA4 measurement ID');
+}
+
+const scriptSource = fs.readFileSync(path.join(root, 'script.js'), 'utf8');
+const requiredMeasurementEvents = [
+  'solution_assessment_view',
+  'pricing_view',
+  'contact_view',
+  'ai_readiness_intake_view',
+  'form_start',
+  'form_validation_error',
+  'lead_submit_attempt',
+  'lead_submit_error',
+  'lead_submit_success',
+  'generate_lead',
+  'click_contact',
+];
+for (const eventName of requiredMeasurementEvents) {
+  if (!scriptSource.includes(`'${eventName}'`)) {
+    failures.push(`script.js: missing funnel measurement event ${eventName}`);
+  }
+}
+for (const sensitiveParameter of ['lead_id', 'lead_score']) {
+  if (scriptSource.includes(sensitiveParameter)) {
+    failures.push(`script.js: sends internal lead data to analytics: ${sensitiveParameter}`);
   }
 }
 
@@ -110,4 +144,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Validated ${htmlFiles.length} public HTML files, shared navigation, seven services, local links, assets, and retired pricing language.`);
+console.log(`Validated ${htmlFiles.length} public HTML files, shared navigation, seven services, local links, assets, analytics coverage, and retired pricing language.`);

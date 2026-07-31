@@ -6,6 +6,35 @@ const serviceSelect = document.getElementById('service');
 const formSelectionNote = document.getElementById('formSelectionNote');
 const submitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 const appConfig = window.DIGISCIENCE_CONFIG || {};
+const gaMeasurementId = String(appConfig.gaMeasurementId || '').trim();
+
+const initializeAnalytics = () => {
+  if (!/^G-[A-Z0-9]+$/i.test(gaMeasurementId)) return false;
+  if (window.__DIGISCIENCE_GA_INITIALIZED__) return true;
+
+  window.__DIGISCIENCE_GA_INITIALIZED__ = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag() {
+    window.dataLayer.push(arguments);
+  };
+
+  if (!document.querySelector(`script[data-digiscience-ga="${gaMeasurementId}"]`)) {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.async = true;
+    analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`;
+    analyticsScript.dataset.digiscienceGa = gaMeasurementId;
+    document.head.appendChild(analyticsScript);
+  }
+
+  window.gtag('js', new Date());
+  window.gtag('config', gaMeasurementId, {
+    send_page_view: true,
+    transport_type: 'beacon'
+  });
+  return true;
+};
+
+initializeAnalytics();
 
 const serviceQuery = new URLSearchParams(window.location.search).get('service');
 const serviceOptions = {
@@ -25,13 +54,27 @@ const trackEvent = (eventName, params = {}) => {
   if (typeof window.gtag === 'function') {
     window.gtag('event', eventName, {
       event_category: 'engagement',
+      page_path: window.location.pathname,
       ...params
     });
-    return;
   }
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: eventName, ...params });
 };
+
+const funnelViewEvents = {
+  '/solution-assessment': 'solution_assessment_view',
+  '/pricing': 'pricing_view',
+  '/contact': 'contact_view',
+  '/ai-readiness-intake': 'ai_readiness_intake_view',
+  '/thank-you': 'lead_thank_you_view'
+};
+
+const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+if (funnelViewEvents[currentPath]) {
+  trackEvent(funnelViewEvents[currentPath], {
+    service: serviceOptions[serviceQuery] || '',
+    page_title: document.title
+  });
+}
 
 const ensurePremiumVisuals = () => {
   if (!document.querySelector('link[href*="premium.css"]')) {
@@ -276,7 +319,13 @@ const initLeadAssistant = () => {
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
+      if (!form.reportValidity()) {
+        trackEvent('form_validation_error', {
+          form_name: 'assistant_lead_form',
+          failure_reason: 'required_fields'
+        });
+        return;
+      }
       const leadEndpointUrl = appConfig.leadEndpointUrl || '/api/lead';
       const payload = {
         formType: 'assistant',
@@ -298,6 +347,10 @@ const initLeadAssistant = () => {
 
       try {
         form.querySelector('button').disabled = true;
+        trackEvent('lead_submit_attempt', {
+          form_name: 'assistant_lead_form',
+          service: 'Website AI assistant'
+        });
         const response = await fetch(leadEndpointUrl, {
           method: 'POST',
           headers: {
@@ -308,17 +361,30 @@ const initLeadAssistant = () => {
         });
         const result = await response.json().catch(() => ({}));
         if (!response.ok || !result.ok) {
-          trackEvent('lead_submit_error', { event_label: result.error || 'assistant lead failure' });
+          trackEvent('lead_submit_error', {
+            form_name: 'assistant_lead_form',
+            failure_stage: 'request',
+            http_status: response.status
+          });
           addMessage('I could not submit this right now. Please use the main contact form or try again shortly.');
           return;
         }
         addMessage('Thanks. Your enquiry has been captured. DigiScience will review the requirement and follow up.');
         form.reset();
-        trackEvent('lead_submit_success', { event_label: 'Website AI assistant', lead_id: result.leadId, lead_score: result.leadScore });
-        trackEvent('generate_lead', { event_label: 'Website AI assistant' });
+        trackEvent('lead_submit_success', {
+          form_name: 'assistant_lead_form',
+          service: 'Website AI assistant'
+        });
+        trackEvent('generate_lead', {
+          form_name: 'assistant_lead_form',
+          service: 'Website AI assistant'
+        });
       } catch (error) {
         console.error(error);
-        trackEvent('lead_submit_error', { event_label: 'assistant lead network failure' });
+        trackEvent('lead_submit_error', {
+          form_name: 'assistant_lead_form',
+          failure_stage: 'network'
+        });
         addMessage('I could not submit this right now. Please use the main contact form or try again shortly.');
       } finally {
         form.querySelector('button').disabled = false;
@@ -454,6 +520,19 @@ document.querySelectorAll('[data-service]').forEach((link) => {
 });
 
 if (contactForm && formNote) {
+  const formType = window.location.pathname.includes('ai-readiness-intake') ? 'ai_readiness_intake' : 'contact';
+  const formName = formType === 'ai_readiness_intake' ? 'ai_readiness_intake_form' : 'contact_form';
+  let formStarted = false;
+
+  contactForm.addEventListener('focusin', () => {
+    if (formStarted) return;
+    formStarted = true;
+    trackEvent('form_start', {
+      form_name: formName,
+      service: serviceSelect ? serviceSelect.value : ''
+    });
+  });
+
   const showFormNote = (message, kind = 'info') => {
     formNote.innerHTML = message;
     formNote.classList.remove('is-success', 'is-info');
@@ -472,6 +551,7 @@ if (contactForm && formNote) {
     event.preventDefault();
 
     if (!contactForm.reportValidity()) {
+      trackEvent('form_validation_error', { form_name: formName, failure_reason: 'required_fields' });
       showFormNote('Please complete the required fields and then submit your enquiry again.');
       return;
     }
@@ -492,7 +572,6 @@ if (contactForm && formNote) {
       getField('successMetrics') ? `Success metrics: ${getField('successMetrics')}` : ''
     ].filter(Boolean).join('\n\n');
 
-    const formType = window.location.pathname.includes('ai-readiness-intake') ? 'ai_readiness_intake' : 'contact';
     const payload = {
       sourcePage: window.location.pathname,
       formType,
@@ -529,17 +608,20 @@ if (contactForm && formNote) {
     };
 
     if (!payload.fullName || !payload.businessEmail || !payload.businessProblem) {
+      trackEvent('form_validation_error', { form_name: formName, failure_reason: 'missing_identity_or_problem' });
       showFormNote('Please complete your name, email, and requirement before submitting.');
       return;
     }
 
     if (!isValidEmail(payload.businessEmail)) {
+      trackEvent('form_validation_error', { form_name: formName, failure_reason: 'invalid_email' });
       showFormNote('Please enter a valid email address and submit your enquiry again.');
       contactForm.elements.email.focus();
       return;
     }
 
     if (!payload.consent) {
+      trackEvent('form_validation_error', { form_name: formName, failure_reason: 'missing_consent' });
       showFormNote('Please confirm consent before submitting your enquiry.');
       return;
     }
@@ -554,6 +636,10 @@ if (contactForm && formNote) {
     try {
       setSubmitting(true);
       showFormNote('Submitting your enquiry securely. Please wait...');
+      trackEvent('lead_submit_attempt', {
+        form_name: formName,
+        service: payload.aiInterestArea || 'Website enquiry'
+      });
 
       const response = await fetch(leadEndpointUrl, {
         method: 'POST',
@@ -566,15 +652,25 @@ if (contactForm && formNote) {
 
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.ok) {
-        trackEvent('lead_submit_error', { event_label: result.error || `HTTP ${response.status}` });
+        trackEvent('lead_submit_error', {
+          form_name: formName,
+          failure_stage: 'request',
+          http_status: response.status
+        });
         showFallback(result.error || 'The enquiry service could not accept this submission.');
         return;
       }
 
       const submitEvent = formType === 'ai_readiness_intake' ? 'submit_ai_readiness_intake' : 'submit_contact_form';
-      trackEvent(submitEvent, { event_label: payload.aiInterestArea || 'Website enquiry', lead_id: result.leadId });
-      trackEvent('lead_submit_success', { event_label: payload.aiInterestArea || 'Website enquiry', lead_id: result.leadId, lead_score: result.leadScore });
-      trackEvent('generate_lead', { event_label: payload.aiInterestArea || 'Website enquiry' });
+      trackEvent(submitEvent, { form_name: formName, service: payload.aiInterestArea || 'Website enquiry' });
+      trackEvent('lead_submit_success', {
+        form_name: formName,
+        service: payload.aiInterestArea || 'Website enquiry'
+      });
+      trackEvent('generate_lead', {
+        form_name: formName,
+        service: payload.aiInterestArea || 'Website enquiry'
+      });
 
       contactForm.reset();
       showFormNote('Your enquiry has been submitted successfully. Redirecting...', 'success');
@@ -584,7 +680,7 @@ if (contactForm && formNote) {
       }, 700);
     } catch (error) {
       console.error(error);
-      trackEvent('lead_submit_error', { event_label: 'network or endpoint failure' });
+      trackEvent('lead_submit_error', { form_name: formName, failure_stage: 'network' });
       showFallback('We could not submit your enquiry right now.');
     } finally {
       setSubmitting(false);
@@ -592,7 +688,7 @@ if (contactForm && formNote) {
   });
 }
 
-document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+document.querySelectorAll('a[href^="mailto:"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_mailto', { event_label: link.getAttribute('href') }));
 });
 
@@ -602,24 +698,30 @@ document.querySelectorAll('[data-track]').forEach((element) => {
   }));
 });
 
-document.querySelectorAll('a[href*="ai-readiness"]').forEach((link) => {
+document.querySelectorAll('a[href*="ai-readiness"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_ai_readiness', { event_label: link.getAttribute('href') }));
 });
 
-document.querySelectorAll('a[href*="solution-assessment"]').forEach((link) => {
+document.querySelectorAll('a[href*="solution-assessment"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_solution_assessment', { event_label: link.getAttribute('href') }));
 });
 
-document.querySelectorAll('a[href*="45-day-ai-pilot"]').forEach((link) => {
+document.querySelectorAll('a[href*="45-day-ai-pilot"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_45_day_pilot', { event_label: link.getAttribute('href') }));
 });
 
-document.querySelectorAll('a[href*="proof-assets"]').forEach((link) => {
+document.querySelectorAll('a[href*="proof-assets"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_proof_asset', { event_label: link.getAttribute('href') }));
 });
 
-document.querySelectorAll('a[href*="pricing"], [data-pricing-package]').forEach((element) => {
+document.querySelectorAll('a[href*="pricing"]:not([data-track]), [data-pricing-package]:not([data-track])').forEach((element) => {
   element.addEventListener('click', () => trackEvent('click_pricing_package', {
     event_label: element.textContent.trim() || element.getAttribute('href') || 'pricing'
+  }));
+});
+
+document.querySelectorAll('a[href^="/contact"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_contact', {
+    event_label: link.textContent.trim() || link.getAttribute('href') || 'contact'
   }));
 });
