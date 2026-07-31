@@ -2,11 +2,19 @@
 https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 
 # Legacy PHP URLs.
+/index.php / 301
 /about.php / 301
 /about.html /about 301
 /contact.php /contact 301
+/career.php /about 301
+/target-industry.php /industries 301
 /service.php /services 301
 /services.php /services 301
+/service-digital-transformation-1.php /services 301
+/service-data-center-management-2.php /solutions/secure-ai-cloud-platform 301
+/service-it-infrastructure-management-3.php /solutions/cloud-modernization-ai-readiness 301
+/service-technology-consulting-services-4.php /solution-assessment 301
+/service-cyber-security-5.php /solutions/responsible-ai-governance 301
 /cloud-computing.php /services 301
 /ai-ml.php /services 301
 /devops.php /services 301
@@ -15,6 +23,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /pricing.php /pricing 301
 /portfolio.php /portfolio 301
 /portfolio /proof-assets 301
+/trust-assets /proof-assets 301
 /privacy.php /privacy 301
 
 # Older cloud/FinOps pages consolidate into current AI-first buyer pages.
