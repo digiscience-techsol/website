@@ -193,10 +193,41 @@ for (const phrase of requiredAssessmentCopy) {
   }
 }
 
+const sampleAssessment = fs.readFileSync(path.join(root, 'proof-assets', 'sample-solution-assessment.html'), 'utf8');
+const requiredSampleDisclosures = [
+  'Representative sample',
+  'synthetic scenario',
+  'fictional',
+  'not customer work',
+  'not a testimonial',
+  'not a claim of achieved results',
+  'workflow redesign',
+  'conventional automation',
+  'AI-assisted exceptions',
+  'platform modernization',
+  'This sample demonstrates the format—not a promised result',
+];
+for (const phrase of requiredSampleDisclosures) {
+  if (!sampleAssessment.toLowerCase().includes(phrase.toLowerCase())) {
+    failures.push(`proof-assets/sample-solution-assessment.html: missing disclosure or sample content "${phrase}"`);
+  }
+}
+
+const aboutSource = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
+if (!aboutSource.includes('more than 22 years of enterprise technology experience')) {
+  failures.push('about.html: missing the approved anonymous enterprise leadership experience statement');
+}
+
 const publicText = htmlFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 for (const phrase of ['non-technical', 'nontechnical', 'do not need a technical specification']) {
   if (publicText.toLowerCase().includes(phrase)) {
     failures.push(`public HTML contains reductive audience framing: "${phrase}"`);
+  }
+}
+
+for (const retiredNavigationPhrase of ['Book an AI Strategy Call', '>Resources<']) {
+  if (publicText.includes(retiredNavigationPhrase)) {
+    failures.push(`public HTML contains retired navigation wording: "${retiredNavigationPhrase}"`);
   }
 }
 
