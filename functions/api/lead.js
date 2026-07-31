@@ -179,6 +179,56 @@ const buildEmailText = (lead, leadId, score, category, recommendedAction) => [
   `Stakeholders: ${lead.stakeholders}`
 ].join('\n');
 
+const notificationSubject = (lead, internalTest = false) => {
+  const prefix = internalTest ? '[INTERNAL TEST] ' : '';
+  return `${prefix}New DigiScience Lead — ${lead.company || 'Unknown Company'} — ${lead.aiInterestArea || 'Enquiry'}`;
+};
+
+const notifyByMicrosoftGraph = async (env, lead, leadId, score, category, recommendedAction) => {
+  const required = [
+    env.MICROSOFT_TENANT_ID,
+    env.MICROSOFT_GRAPH_CLIENT_ID,
+    env.MICROSOFT_GRAPH_CLIENT_SECRET,
+    env.LEAD_NOTIFICATION_FROM,
+    env.LEAD_NOTIFICATION_TO
+  ];
+  if (required.some((value) => !value)) return { configured: false, sent: false };
+
+  const tokenResponse = await fetch(`https://login.microsoftonline.com/${encodeURIComponent(env.MICROSOFT_TENANT_ID)}/oauth2/v2.0/token`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: env.MICROSOFT_GRAPH_CLIENT_ID,
+      client_secret: env.MICROSOFT_GRAPH_CLIENT_SECRET,
+      scope: 'https://graph.microsoft.com/.default',
+      grant_type: 'client_credentials'
+    })
+  });
+
+  if (!tokenResponse.ok) return { configured: true, sent: false, stage: 'token', status: tokenResponse.status };
+
+  const { access_token: accessToken } = await tokenResponse.json();
+  const response = await fetch(`https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.LEAD_NOTIFICATION_FROM)}/sendMail`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: {
+        subject: notificationSubject(lead, /internal controlled test/i.test(lead.businessProblem)),
+        body: { contentType: 'Text', content: buildEmailText(lead, leadId, score, category, recommendedAction) },
+        toRecipients: env.LEAD_NOTIFICATION_TO.split(',').map((address) => ({
+          emailAddress: { address: address.trim() }
+        })).filter(({ emailAddress }) => emailAddress.address)
+      },
+      saveToSentItems: true
+    })
+  });
+
+  return { configured: true, sent: response.ok, status: response.status };
+};
+
 const notifyByResend = async (env, lead, leadId, score, category, recommendedAction) => {
   if (!env.RESEND_API_KEY || !env.LEAD_NOTIFICATION_FROM || !env.LEAD_NOTIFICATION_TO) return { configured: false, sent: false };
 
@@ -191,12 +241,25 @@ const notifyByResend = async (env, lead, leadId, score, category, recommendedAct
     body: JSON.stringify({
       from: env.LEAD_NOTIFICATION_FROM,
       to: env.LEAD_NOTIFICATION_TO,
-      subject: `New DigiScience AI Lead - ${lead.company || 'Unknown Company'} - ${lead.aiInterestArea || 'AI Enquiry'}`,
+      subject: notificationSubject(lead, /internal controlled test/i.test(lead.businessProblem)),
       text: buildEmailText(lead, leadId, score, category, recommendedAction)
     })
   });
 
   return { configured: true, sent: response.ok, status: response.status };
+};
+
+const notifyByEmail = async (env, lead, leadId, score, category, recommendedAction) => {
+  const [microsoftGraph, resend] = await Promise.all([
+    notifyByMicrosoftGraph(env, lead, leadId, score, category, recommendedAction),
+    notifyByResend(env, lead, leadId, score, category, recommendedAction)
+  ]);
+  return {
+    configured: microsoftGraph.configured || resend.configured,
+    sent: microsoftGraph.sent || resend.sent,
+    microsoftGraph,
+    resend
+  };
 };
 
 const forwardToWebhook = async (env, record) => {
@@ -274,7 +337,7 @@ export async function onRequest({ request, env }) {
 
     const storage = await storeInKv(env, leadId, record);
     const webhook = await forwardToWebhook(env, record);
-    const email = await notifyByResend(env, lead, leadId, score, category, recommendedAction);
+    const email = await notifyByEmail(env, lead, leadId, score, category, recommendedAction);
 
     return jsonResponse({
       ok: true,
