@@ -11,10 +11,10 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /service.php /services 301
 /services.php /services 301
 /service-digital-transformation-1.php /services 301
-/service-data-center-management-2.php /solutions/secure-ai-cloud-platform 301
-/service-it-infrastructure-management-3.php /solutions/cloud-modernization-ai-readiness 301
+/service-data-center-management-2.php /solutions/secure-ai-cloud-platform/ 301
+/service-it-infrastructure-management-3.php /solutions/cloud-modernization-ai-readiness/ 301
 /service-technology-consulting-services-4.php /solution-assessment 301
-/service-cyber-security-5.php /solutions/responsible-ai-governance 301
+/service-cyber-security-5.php /solutions/responsible-ai-governance/ 301
 /cloud-computing.php /services 301
 /ai-ml.php /services 301
 /devops.php /services 301
@@ -22,17 +22,17 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /observability.php /services 301
 /pricing.php /pricing 301
 /portfolio.php /portfolio 301
-/portfolio /proof-assets 301
-/trust-assets /proof-assets 301
+/portfolio /proof-assets/ 301
+/trust-assets /proof-assets/ 301
 /privacy.php /privacy 301
 
 # Older cloud/FinOps pages consolidate into current AI-first buyer pages.
-/cloud-cost-governance-consultant-india /solutions/secure-ai-cloud-platform 301
-/ai-api-cost-governance /solutions/responsible-ai-governance 301
-/aws-azure-cost-optimization-startups /solutions/secure-ai-cloud-platform 301
+/cloud-cost-governance-consultant-india /solutions/secure-ai-cloud-platform/ 301
+/ai-api-cost-governance /solutions/responsible-ai-governance/ 301
+/aws-azure-cost-optimization-startups /solutions/secure-ai-cloud-platform/ 301
 /finops-for-saas-startups-india /pricing 301
 
 # Buyer-friendly aliases for the revised information architecture.
-/resources /proof-assets 301
-/architectures /proof-assets 301
+/resources /proof-assets/ 301
+/architectures /proof-assets/ 301
 /engagement-models /pricing 301

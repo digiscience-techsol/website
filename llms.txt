@@ -11,16 +11,16 @@ For buyers who have a defined business or technology problem but have not chosen
 - Homepage: https://digisciencetechsol.com/
 - Services: https://digisciencetechsol.com/services
 - Industries: https://digisciencetechsol.com/industries
-- Retail AI: https://digisciencetechsol.com/industries/retail-ai
-- Logistics AI: https://digisciencetechsol.com/industries/logistics-ai
-- HR and Recruitment AI: https://digisciencetechsol.com/industries/hr-recruitment-ai
+- Retail AI: https://digisciencetechsol.com/industries/retail-ai/
+- Logistics AI: https://digisciencetechsol.com/industries/logistics-ai/
+- HR and Recruitment AI: https://digisciencetechsol.com/industries/hr-recruitment-ai/
 - How We Deliver: https://digisciencetechsol.com/how-we-deliver
 - Engagement Models: https://digisciencetechsol.com/pricing
 - About: https://digisciencetechsol.com/about
 - DigiScience Solution Assessment: https://digisciencetechsol.com/solution-assessment
 - AI Readiness Assessment: https://digisciencetechsol.com/ai-readiness-assessment
 - 45-Day Industry AI Pilot: https://digisciencetechsol.com/45-day-ai-pilot
-- Architectures and Insights: https://digisciencetechsol.com/proof-assets
+- Architectures and Insights: https://digisciencetechsol.com/proof-assets/
 - Representative Solution Assessment Output: https://digisciencetechsol.com/proof-assets/sample-solution-assessment
 - Contact: https://digisciencetechsol.com/contact
 - Sitemap: https://digisciencetechsol.com/sitemap.xml

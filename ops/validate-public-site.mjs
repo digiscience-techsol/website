@@ -42,6 +42,14 @@ for (const file of htmlFiles) {
   if (isIndexable && !/rel="canonical" href="https:\/\/digisciencetechsol\.com\//.test(html)) {
     failures.push(`${relative}: missing canonical URL`);
   }
+  const directoryRoute = relative.replaceAll('\\', '/').match(/^(.+)\/index\.html$/)?.[1];
+  if (isIndexable && directoryRoute) {
+    const expectedCanonical = `https://digisciencetechsol.com/${directoryRoute}/`;
+    const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
+    if (canonical !== expectedCanonical) {
+      failures.push(`${relative}: directory canonical must match Cloudflare route ${expectedCanonical}`);
+    }
+  }
 
   const requiredDiscoveryMetadata = [
     ['property', 'og:site_name'],
@@ -156,10 +164,10 @@ const requiredLegacyRedirects = [
   '/career.php /about 301',
   '/target-industry.php /industries 301',
   '/service-digital-transformation-1.php /services 301',
-  '/service-data-center-management-2.php /solutions/secure-ai-cloud-platform 301',
-  '/service-it-infrastructure-management-3.php /solutions/cloud-modernization-ai-readiness 301',
+  '/service-data-center-management-2.php /solutions/secure-ai-cloud-platform/ 301',
+  '/service-it-infrastructure-management-3.php /solutions/cloud-modernization-ai-readiness/ 301',
   '/service-technology-consulting-services-4.php /solution-assessment 301',
-  '/service-cyber-security-5.php /solutions/responsible-ai-governance 301',
+  '/service-cyber-security-5.php /solutions/responsible-ai-governance/ 301',
 ];
 for (const redirect of requiredLegacyRedirects) {
   if (!redirectsSource.includes(redirect)) failures.push(`_redirects: missing legacy mapping ${redirect}`);
