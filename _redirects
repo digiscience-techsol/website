@@ -1,27 +1,5 @@
-# Direct canonical destinations for legacy www requests.
-https://www.digisciencetechsol.com/index.php https://digisciencetechsol.com/ 301!
-https://www.digisciencetechsol.com/about.php https://digisciencetechsol.com/about 301!
-https://www.digisciencetechsol.com/contact.php https://digisciencetechsol.com/contact 301!
-https://www.digisciencetechsol.com/career.php https://digisciencetechsol.com/about 301!
-https://www.digisciencetechsol.com/target-industry.php https://digisciencetechsol.com/industries 301!
-https://www.digisciencetechsol.com/service.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/services.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/service-digital-transformation-1.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/service-data-center-management-2.php https://digisciencetechsol.com/solutions/secure-ai-cloud-platform/ 301!
-https://www.digisciencetechsol.com/service-it-infrastructure-management-3.php https://digisciencetechsol.com/solutions/cloud-modernization-ai-readiness/ 301!
-https://www.digisciencetechsol.com/service-technology-consulting-services-4.php https://digisciencetechsol.com/solution-assessment 301!
-https://www.digisciencetechsol.com/service-cyber-security-5.php https://digisciencetechsol.com/solutions/responsible-ai-governance/ 301!
-https://www.digisciencetechsol.com/cloud-computing.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/ai-ml.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/devops.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/finops.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/observability.php https://digisciencetechsol.com/services 301!
-https://www.digisciencetechsol.com/pricing.php https://digisciencetechsol.com/pricing 301!
-https://www.digisciencetechsol.com/portfolio.php https://digisciencetechsol.com/portfolio 301!
-https://www.digisciencetechsol.com/privacy.php https://digisciencetechsol.com/privacy 301!
-
-# Canonical host.
-https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
+# Host canonicalization must be configured with Cloudflare Redirect Rules.
+# Pages _redirects supports path rules, not source-domain rules.
 
 # Legacy PHP URLs.
 /index.php / 301
@@ -43,7 +21,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /finops.php /services 301
 /observability.php /services 301
 /pricing.php /pricing 301
-/portfolio.php /portfolio 301
+/portfolio.php /proof-assets/ 301
 /portfolio /proof-assets/ 301
 /trust-assets /proof-assets/ 301
 /privacy.php /privacy 301
