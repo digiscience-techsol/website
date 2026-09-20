@@ -70,3 +70,12 @@ Cloud usage, LLM tokens, paid third-party tools, and unusually complex integrati
 ## Recommended First Step
 
 For a new buyer with one defined business or technology problem, start with the DigiScience Solution Assessment. It is a bounded pre-implementation engagement, not full implementation or unlimited free consulting. It recommends whether the appropriate path is workflow improvement, automation, AI, secure cloud, hybrid or on-premise deployment, platform modernization, or a combination.
+
+## Buyer-problem guides
+
+These advisory guides explain diagnostic methods and illustrative examples, not client results.
+
+- Business problem selector: https://digisciencetechsol.com/business-problems/
+- Manufacturing enquiries are arriving. Where does the handoff break?: https://digisciencetechsol.com/guides/manufacturing-enquiry-workflow/
+- Cloud or AI costs are rising. What should you check first?: https://digisciencetechsol.com/guides/ai-cloud-cost-control/
+- Your AI pilot works in a demo. Is it ready for production?: https://digisciencetechsol.com/guides/ai-pilot-production-readiness/
