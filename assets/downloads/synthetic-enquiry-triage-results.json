@@ -1,0 +1,72 @@
+{
+  "mode": "synthetic_local_demonstration",
+  "accepted": [
+    {
+      "enquiry_id": "DEMO-001",
+      "status": "ready_for_review",
+      "owner_queue": "technical_review",
+      "next_action": "Review feasibility and agree scope",
+      "contact_validation": "format_only"
+    },
+    {
+      "enquiry_id": "DEMO-002",
+      "status": "needs_information",
+      "owner_queue": "intake",
+      "next_action": "Request the required drawing through an approved channel",
+      "contact_validation": "format_only"
+    },
+    {
+      "enquiry_id": "DEMO-003",
+      "status": "ready_for_review",
+      "owner_queue": "technical_review",
+      "next_action": "Review feasibility and agree scope",
+      "contact_validation": "format_only"
+    },
+    {
+      "enquiry_id": "DEMO-006",
+      "status": "needs_information",
+      "owner_queue": "intake",
+      "next_action": "Request the required drawing through an approved channel",
+      "contact_validation": "format_only"
+    },
+    {
+      "enquiry_id": "DEMO-007",
+      "status": "ready_for_review",
+      "owner_queue": "technical_review",
+      "next_action": "Review feasibility and agree scope",
+      "contact_validation": "format_only"
+    }
+  ],
+  "rejected": [
+    {
+      "line": 6,
+      "enquiry_id": "DEMO-004",
+      "reason": "Invalid email format; deliverability not tested"
+    },
+    {
+      "line": 7,
+      "enquiry_id": "DEMO-005",
+      "reason": "Missing problem description"
+    }
+  ],
+  "duplicates": [
+    {
+      "line": 5,
+      "enquiry_id": "DEMO-001",
+      "reason": "Exact repeat; one work item retained"
+    }
+  ],
+  "counts": {
+    "input": 8,
+    "accepted": 5,
+    "rejected": 2,
+    "duplicates": 1
+  },
+  "limitations": [
+    "No messages sent",
+    "No attachment inspected",
+    "No CRM integration or identity verification",
+    "Queue labels are not staffing or SLA evidence",
+    "No customer outcomes measured"
+  ]
+}

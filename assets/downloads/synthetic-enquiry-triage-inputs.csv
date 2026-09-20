@@ -1,0 +1,9 @@
+enquiry_id,business_email,problem,drawing_required,drawing_received
+DEMO-001,buyer1@example.com,Review quote handoff,yes,yes
+DEMO-002,buyer2@example.com,Clarify drawing request,yes,no
+DEMO-003,buyer3@example.com,Assess website contact flow,no,no
+DEMO-001,buyer1@example.com,Review quote handoff,yes,yes
+DEMO-004,invalid-address,Assess an enquiry,no,no
+DEMO-005,buyer5@example.com,,no,no
+DEMO-006,buyer6@example.com,Review missing specification,yes,no
+DEMO-007,buyer7@example.com,Map current process,no,no
