@@ -38,7 +38,20 @@ initializeAnalytics();
 
 const serviceQuery = new URLSearchParams(window.location.search).get('service');
 const serviceOptions = {
-  'solution-assessment': 'DigiScience Solution Assessment'
+  "solution-assessment": "DigiScience Solution Assessment",
+  "ai-strategy-readiness": "AI Strategy and Readiness",
+  "secure-ai-cloud-platform": "Secure AI Cloud Platform",
+  "cloud-modernization-ai-readiness": "Cloud Modernization",
+  "industry-ai-transformation": "Industry AI Transformation",
+  "responsible-ai-governance": "Responsible AI Governance",
+  "ai-ready-devops": "AI-ready DevOps",
+  "bfsi-compliance-intelligence": "Bfsi Compliance Intelligence",
+  "healthcare-ai": "Healthcare Ai",
+  "hr-recruitment-ai": "Hr Recruitment Ai",
+  "legal-document-intelligence": "Legal Document Intelligence",
+  "logistics-ai": "Logistics Ai",
+  "manufacturing-ai": "Manufacturing Ai",
+  "retail-ai": "Retail Ai"
 };
 
 if (serviceSelect && serviceOptions[serviceQuery]) {
@@ -311,7 +324,7 @@ const initLeadAssistant = () => {
       <input name="email" required type="email" placeholder="Work email" autocomplete="email" />
       <input name="company" placeholder="Company" autocomplete="organization" />
       <textarea name="message" rows="3" required placeholder="What outcome or use case should we discuss?"></textarea>
-      <label class="checkbox-line compact"><input type="checkbox" name="consent" required /> <span>I agree to be contacted by DigiScience Techsol.</span></label>
+      <label class="checkbox-line compact"><input type="checkbox" name="consent" required /> <span>I agree to be contacted by DigiScience Techsol. <a href="/privacy">Privacy notice</a>.</span></label>
       <button type="submit">Send enquiry</button>
     `;
     wrapper.appendChild(form);
@@ -360,7 +373,7 @@ const initLeadAssistant = () => {
           body: JSON.stringify(payload)
         });
         const result = await response.json().catch(() => ({}));
-        if (!response.ok || !result.ok) {
+        if (!response.ok || !result.ok || result.delivery?.accepted !== true) {
           trackEvent('lead_submit_error', {
             form_name: 'assistant_lead_form',
             failure_stage: 'request',
@@ -478,7 +491,7 @@ if (menuToggle && navLinks) {
   });
 }
 
-const observer = new IntersectionObserver(
+const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -487,9 +500,9 @@ const observer = new IntersectionObserver(
     });
   },
   { threshold: 0.12 }
-);
+) : null;
 
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+document.querySelectorAll('.reveal').forEach((element) => observer?.observe(element));
 
 document.querySelectorAll('.faq-item').forEach((item) => {
   const button = item.querySelector('.faq-question');
@@ -523,6 +536,8 @@ if (contactForm && formNote) {
   const formType = window.location.pathname.includes('ai-readiness-intake') ? 'ai_readiness_intake' : 'contact';
   const formName = formType === 'ai_readiness_intake' ? 'ai_readiness_intake_form' : 'contact_form';
   let formStarted = false;
+  let submissionInFlight = false;
+  contactForm.addEventListener('invalid', () => trackEvent('form_validation_error', {form_name: formName, failure_reason: 'native_validation'}), true);
 
   contactForm.addEventListener('focusin', () => {
     if (formStarted) return;
@@ -534,7 +549,7 @@ if (contactForm && formNote) {
   });
 
   const showFormNote = (message, kind = 'info') => {
-    formNote.innerHTML = message;
+    formNote.textContent = message;
     formNote.classList.remove('is-success', 'is-info');
     formNote.classList.add(kind === 'success' ? 'is-success' : 'is-info', 'show');
   };
@@ -549,6 +564,7 @@ if (contactForm && formNote) {
 
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (submissionInFlight) return;
 
     if (!contactForm.reportValidity()) {
       trackEvent('form_validation_error', { form_name: formName, failure_reason: 'required_fields' });
@@ -574,6 +590,7 @@ if (contactForm && formNote) {
 
     const payload = {
       sourcePage: window.location.pathname,
+      serviceId: Object.hasOwn(serviceOptions, serviceQuery) ? serviceQuery : '',
       formType,
       fullName: getField('name'),
       businessEmail: getField('email'),
@@ -630,10 +647,11 @@ if (contactForm && formNote) {
 
     // Privacy-safe fallback: keep personal contact details out of public client code.
     const showFallback = (detail = 'The enquiry service is temporarily unavailable.') => {
-      showFormNote(`${detail} No enquiry was sent. Please try again shortly.`);
+      showFormNote(`${detail} We could not confirm receipt. Your details are still in this form; please try again later.`);
     };
 
     try {
+      submissionInFlight = true;
       setSubmitting(true);
       showFormNote('Submitting your enquiry securely. Please wait...');
       trackEvent('lead_submit_attempt', {
@@ -651,7 +669,7 @@ if (contactForm && formNote) {
       });
 
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) {
+      if (!response.ok || !result.ok || result.delivery?.accepted !== true) {
         trackEvent('lead_submit_error', {
           form_name: formName,
           failure_stage: 'request',
@@ -661,8 +679,6 @@ if (contactForm && formNote) {
         return;
       }
 
-      const submitEvent = formType === 'ai_readiness_intake' ? 'submit_ai_readiness_intake' : 'submit_contact_form';
-      trackEvent(submitEvent, { form_name: formName, service: payload.aiInterestArea || 'Website enquiry' });
       trackEvent('lead_submit_success', {
         form_name: formName,
         service: payload.aiInterestArea || 'Website enquiry'
@@ -683,6 +699,7 @@ if (contactForm && formNote) {
       trackEvent('lead_submit_error', { form_name: formName, failure_stage: 'network' });
       showFallback('We could not submit your enquiry right now.');
     } finally {
+      submissionInFlight = false;
       setSubmitting(false);
     }
   });

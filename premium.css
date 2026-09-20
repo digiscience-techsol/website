@@ -348,7 +348,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .service-strip-inner {
     grid-template-columns: 1fr;
   }

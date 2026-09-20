@@ -1,5 +1,5 @@
-# Canonical host.
-https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
+# Host canonicalization must be configured with Cloudflare Redirect Rules.
+# Pages _redirects supports path rules, not source-domain rules.
 
 # Legacy PHP URLs.
 /index.php / 301
@@ -21,7 +21,7 @@ https://www.digisciencetechsol.com/* https://digisciencetechsol.com/:splat 301!
 /finops.php /services 301
 /observability.php /services 301
 /pricing.php /pricing 301
-/portfolio.php /portfolio 301
+/portfolio.php /proof-assets/ 301
 /portfolio /proof-assets/ 301
 /trust-assets /proof-assets/ 301
 /privacy.php /privacy 301

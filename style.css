@@ -1585,8 +1585,8 @@ textarea {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(18px);
+  opacity: 1;
+  transform: none;
   transition: opacity .55s ease, transform .55s ease;
 }
 
@@ -1677,7 +1677,7 @@ textarea {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .menu-toggle {
     display: inline-flex;
   }
@@ -1919,4 +1919,19 @@ select:focus-visible {
 .seo-panel { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; background: var(--surface); }
 .seo-panel h3 { margin-top: 0; }
 .seo-cta-band { margin: 2rem 0 0; padding: 1.25rem; border-radius: 8px; background: var(--surface-strong); border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-@media (max-width: 760px) { .seo-grid { grid-template-columns: 1fr; } .seo-cta-band { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 900px) { .seo-grid { grid-template-columns: 1fr; } .seo-cta-band { align-items: flex-start; flex-direction: column; } }
+
+/* Growth audit: reduce browsing effort without hiding catalogue content. */
+.optional-intake { margin: 1rem 0; border: 1px solid var(--border); padding: 1rem; border-radius: 8px; }
+.optional-intake summary { cursor: pointer; font-weight: 700; padding: .5rem 0; }
+@media (max-width: 768px) {
+  #home #portfolio .card-visual, #home #industries .card-visual { display: none; }
+  #home #portfolio .card, #home #industries .card { padding: 1rem; }
+  #home #portfolio, #home #industries { padding-block: 2rem; }
+  body.contact-page .page-hero { padding-block: 1.5rem; }
+  body.contact-page .page-hero .card { display: none; }
+  .ai-assistant-toggle { max-width: 65vw; }
+}
+/* Grid children must be allowed to shrink below long headline words. */
+.hero-grid > *, .split > *, .hero > .container > * { min-width: 0; }
+h1, h2, .hero-actions .btn { overflow-wrap: anywhere; }
