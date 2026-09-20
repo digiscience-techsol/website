@@ -1,90 +1,34 @@
 # 45-Day AI Pilot Framework
+Asset type: phase and investment-decision worksheet
+Illustrative planning method | Updated 20 September 2026
 
-Asset type: framework
+Use a controlled pilot to investigate one promising workflow before approving production investment. This is a planning framework, not evidence of a completed customer pilot or a promise of a booked start date.
 
-This guide presents a reusable DigiScience Techsol delivery pattern for enterprise review and planning.
+## Six questions before commitment
+- Business value: which workflow, stakeholder and measurable signal define usefulness?
+- Data feasibility: which documents, systems, events, images or knowledge sources are available, classified and suitable?
+- Security and governance: which access, private-network, prompt, model, audit and human-approval controls are required?
+- Technical architecture: which cloud services fit the pilot and what would change for production?
+- Operating model: who reviews outputs, approves risky actions, handles incidents and runs monitoring/cost controls?
+- Scale decision: what should be built next, revised or stopped, and what further investment is required?
 
-## Purpose
+## Days 1-7: scope and readiness
+Confirm the use case, business measure, data access, security constraints, governance risks and pilot acceptance criteria. Capture the problem statement, user workflow, assumptions and constraints in a pilot brief.
 
-Provide a practical framework for enterprise AI discovery and decision-making.
+## Days 8-21: architecture and build
+Design the workflow and data path, configure the agreed cloud services and build one controlled proof. Document data flow, access model and observability. The prototype uses agreed sample data and governance controls.
 
-## Target Buyer
+## Days 22-35: governance and validation
+Test output quality, failure modes, access controls, human approval, logs, monitoring and cost visibility. Record actual results and unresolved evidence against agreed acceptance criteria rather than a general declaration that the system works.
 
-Business sponsor, CIO, product owner
+## Days 36-45: decision package
+Present results, risks, production roadmap, budget view, backlog and next action. Record quality and adoption signals, control evidence, dependencies, costs and the recommended path: scale, revise or stop.
+The timeline is adapted after discovery. Complex data access, legal review or integration constraints can extend it. Confirm schedule and responsibilities for the actual engagement.
 
-## Business Problem
+## Investment decision record
+Record the agreed business criterion, observed evidence, quality/control gaps, user-review outcome, cost visibility, dependency owner and recommended next step. A controlled proof is not production readiness by itself. Production work needs an operating model, further scope and explicit responsibilities.
 
-Validate one controlled workflow without starting a broad AI program.
-
-## Measurable Outcome
-
-Reach a go/no-go decision with measurable pilot evidence.
-
-## Architecture View
-
-- Business workflow intake
-- Secure data source mapping
-- AI service or model endpoint access
-- Human review and approval step
-- Audit log and quality feedback loop
-- KPI dashboard for value tracking
-
-## Cloud Services
-
-Use the equivalent services on Azure, AWS or GCP depending on the client environment:
-
-- Identity and access management
-- Private networking and secure endpoints
-- Object/document/data storage
-- Managed AI service or model gateway
-- Logging, monitoring and cost management
-- Secrets management
-- Workflow orchestration where needed
-
-## Governance and Security Controls
-
-- Role-based access control
-- Data classification
-- Human approval for high-risk outputs
-- Prompt and response logging where permitted
-- Source citation or evidence capture
-- Privacy and compliance review
-- Model risk and hallucination handling
-- Cost and usage guardrails
-
-## Pilot Scope
-
-- One workflow
-- One business owner
-- One measurable KPI
-- Limited data sample
-- Clear success and stop criteria
-- Production scale follows successful validation and an approved operating model
-
-## Deliverables
-
-- Current-state workflow summary
-- Readiness or blueprint score
-- Security and governance gap view
-- Pilot architecture outline
-- Success criteria and decision path
-- Next-step recommendation
-
-## Assumptions
-
-- Client provides access to sample data or process documentation.
-- Stakeholders are available for short discovery reviews.
-- Security and compliance constraints are reviewed before build.
-- Customer-specific assumptions and evidence are confirmed during discovery.
-
-## Success Criteria
-
-- Use case is clearly scoped.
-- Business value is measurable.
-- Data readiness is understood.
-- Security and governance risks are visible.
-- Pilot decision is clear: proceed, fix gaps, or stop.
-
-## Next Step CTA
-
-Book a 30-minute workflow readiness discussion with DigiScience Techsol and choose one candidate workflow to score.
+## Boundaries and source
+A pilot is not full enterprise rollout. Large migrations, unlimited integrations, production SLA, advanced compliance certification and multi-department change management are scoped separately. A pilot may include a controlled prototype; the separate Solution Assessment does not include coding or a working proof of concept.
+Source: https://digisciencetechsol.com/45-day-ai-pilot
+Discuss pilot fit: https://digisciencetechsol.com/contact
