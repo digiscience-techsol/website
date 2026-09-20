@@ -111,7 +111,8 @@ const toLead = (payload, request) => {
   const consentValue = payload.consent === true || payload.consent === 'true' || payload.consent === 'yes' || payload.consent === 'on';
 
   return {
-    sourcePage,
+    sourcePage: sourcePage.split(/[?#]/)[0].slice(0, 250),
+    serviceId: /^[a-z0-9-]{1,80}$/.test(payload.serviceId || '') ? payload.serviceId : '',
     formType,
     submittedAt: getFirst(payload, ['submittedAt']) || new Date().toISOString(),
     fullName,
@@ -138,7 +139,7 @@ const toLead = (payload, request) => {
     successMetrics: getFirst(payload, ['successMetrics']),
     stakeholders: getFirst(payload, ['stakeholders']),
     userAgent: normalizeText(request.headers.get('user-agent')).slice(0, 500),
-    referrer: normalizeText(request.headers.get('referer')).slice(0, 500)
+    referrer: (() => { try { return new URL(request.headers.get('referer')).origin; } catch { return ''; } })()
   };
 };
 
@@ -270,10 +271,11 @@ const notifyByResend = async (env, lead, leadId, score, category, recommendedAct
 };
 
 const notifyByEmail = async (env, lead, leadId, score, category, recommendedAction) => {
-  const [microsoftGraph, resend] = await Promise.all([
+  const results = await Promise.allSettled([
     notifyByMicrosoftGraph(env, lead, leadId, score, category, recommendedAction),
     notifyByResend(env, lead, leadId, score, category, recommendedAction)
   ]);
+  const [microsoftGraph, resend] = results.map(r => r.status === 'fulfilled' ? r.value : {configured: true, sent: false});
   return {
     configured: microsoftGraph.configured || resend.configured,
     sent: microsoftGraph.sent || resend.sent,
@@ -307,15 +309,15 @@ const storeInKv = async (env, leadId, record) => {
   return { configured: true, stored: true };
 };
 
-export async function onRequest({ request, env }) {
+async function handleLead({ request, env }) {
   const origin = request.headers.get('origin') || '';
 
   if (request.method === 'OPTIONS') {
-    if (origin && !ALLOWED_ORIGINS.has(origin)) return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, origin);
+    if (origin && !allowedOrigin(origin, request)) return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, origin);
     return new Response(null, {
       status: 204,
       headers: {
-        'access-control-allow-origin': origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://digisciencetechsol.com',
+        'access-control-allow-origin': origin && allowedOrigin(origin, request) ? origin : 'https://digisciencetechsol.com',
         'access-control-allow-methods': 'POST, OPTIONS',
         'access-control-allow-headers': 'content-type',
         'access-control-max-age': '86400',
@@ -328,7 +330,7 @@ export async function onRequest({ request, env }) {
     return jsonResponse({ ok: false, error: 'Method not allowed' }, 405, origin);
   }
 
-  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+  if (origin && !allowedOrigin(origin, request)) {
     return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, origin);
   }
 
@@ -355,18 +357,17 @@ export async function onRequest({ request, env }) {
       lead
     };
 
-    const storage = await storeInKv(env, leadId, record);
-    const webhook = await forwardToWebhook(env, record);
-    const email = await notifyByEmail(env, lead, leadId, score, category, recommendedAction);
+    const results = await Promise.allSettled([storeInKv(env, leadId, record), forwardToWebhook(env, record), notifyByEmail(env, lead, leadId, score, category, recommendedAction)]);
+    const [storage, webhook, email] = results.map(r => r.status === 'fulfilled' ? r.value : {configured: true, stored: false, sent: false});
+    const accepted = Boolean(storage.stored || webhook.sent || email.sent);
+    if (!accepted) return jsonResponse({ok: false, error: 'We could not confirm receipt. Please try again later.', delivery: {accepted: false}}, 503, origin);
 
     return jsonResponse({
       ok: true,
       leadId,
       message: 'Lead received',
-      leadScore: score,
-      leadCategory: category,
-      recommendedAction,
       delivery: {
+        accepted,
         storage,
         webhook,
         email
@@ -376,6 +377,29 @@ export async function onRequest({ request, env }) {
       }
     }, 200, origin);
   } catch (error) {
-    return jsonResponse({ ok: false, error: 'Lead submission failed. Please use the email fallback.' }, 500, origin);
+    return jsonResponse({ ok: false, error: 'We could not confirm receipt. Please try again later.' }, 500, origin);
   }
+}
+
+// Only same-origin previews for this project; never accept arbitrary pages.dev origins.
+function allowedOrigin(origin, request) {
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  const current = new URL(request.url);
+  return origin === current.origin && current.protocol === 'https:' &&
+    (current.hostname === 'digisciencetechsol-org-website.pages.dev' || current.hostname.endsWith('.digisciencetechsol-org-website.pages.dev'));
+}
+
+export async function onRequest(context) {
+  const response = await handleLead(context);
+  const request = context.request;
+  const native = request.method === 'POST' && (request.headers.get('accept') || '').includes('text/html') &&
+    !(request.headers.get('content-type') || '').includes('application/json');
+  if (!native) return response;
+  const body = await response.json();
+  const headers = {'cache-control': 'no-store', 'referrer-policy': 'no-referrer', 'x-robots-tag': 'noindex', 'content-type': 'text/html; charset=utf-8'};
+  if (response.ok && body.ok && body.delivery?.accepted) {
+    return new Response(null, {status: 303, headers: {...headers, location: '/thank-you?type=enquiry'}});
+  }
+  // Static message only: do not reflect submitted values, internal exceptions or credentials.
+  return new Response('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Enquiry not confirmed | DigiScience Techsol</title><main><h1>We could not confirm your enquiry</h1><p>Please use your browser Back button to review your details and try again later. A connection error can leave delivery uncertain; this page does not confirm receipt.</p><p><a href="/contact">Return to contact</a> · <a href="/privacy">Privacy notice</a></p></main></html>', {status: response.status, headers});
 }
