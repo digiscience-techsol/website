@@ -1,90 +1,32 @@
 # Legal Document Intelligence Blueprint
+Asset type: source-to-review worksheet
+Illustrative planning method | Updated 20 September 2026
 
-Asset type: blueprint
+Plan one document family and review workflow. This blueprint describes evidence handling; it is not legal advice, a legal interpretation or a customer result. The buyer's authorized legal reviewer remains responsible for decisions.
 
-This guide presents a reusable DigiScience Techsol delivery pattern for enterprise review and planning.
+## Establish the source set
+Identify the document family, approved templates, clause playbook, obligation categories, metadata and controlled guidance. Ask the reviewer to label a representative sample, including amendments, poor scans and absent clauses. Agree what counts as a correct extraction before evaluating it.
 
-## Purpose
+## Source-to-review record
+- Document and revision: record document ID, version and related amendments. The reviewer identifies the applicable source set.
+- Source evidence: retain the page or section and extracted passage so the reviewer can locate and compare it.
+- Candidate obligation: capture the action, responsible party and relevant condition. Mark accept, correct or reject after review.
+- Date components: record the trigger, stated period and required reference date. Missing components remain unresolved.
+- Uncertainty and disposition: record conflicts, missing evidence, reviewer and decision. Assign an owner and next action before reliance.
 
-Provide a practical blueprint for enterprise AI discovery and decision-making.
+## Proposed information flow
+Document repository -> secure ingestion and OCR -> classification and extraction -> retrieval and comparison -> legal review queue -> approval -> source traceability and audit.
+Keep access control and source traceability throughout the flow. Extraction proposes a candidate; it does not decide legal effect. Missing dates, conflicting amendments and ambiguous parties enter review rather than becoming accepted obligations automatically.
 
-## Target Buyer
+## Worked fictional example
+An invented contract says notice is required 30 days before renewal. The extracted record lacks a confirmed renewal date, and another uploaded document appears to amend the notice provision. Retain both references and mark the date and applicable wording unresolved for the authorized reviewer.
+Do not choose today's date, assume the newest filename controls, or issue a notice automatically. This is a review-design example, not an interpretation of a real agreement.
 
-Legal innovation, general counsel, legal operations
+## Evaluate extraction separately
+Precision is correct extracted items divided by all extracted items. Recall is correct extracted items divided by all reference items. Define item matching consistently. Report missing fields, wrong source references and unresolved cases alongside these measures.
+A confidence score can help route review; it does not prove legal correctness. Select thresholds using the task's evidence and consequences. This worksheet sets no universal pass score. Also review source-link accuracy, reviewer acceptance and audit completeness.
 
-## Business Problem
-
-Reduce manual document review and knowledge search without losing traceability.
-
-## Measurable Outcome
-
-Design a governed legal document workflow with citations and review queues.
-
-## Architecture View
-
-- Business workflow intake
-- Secure data source mapping
-- AI service or model endpoint access
-- Human review and approval step
-- Audit log and quality feedback loop
-- KPI dashboard for value tracking
-
-## Cloud Services
-
-Use the equivalent services on Azure, AWS or GCP depending on the client environment:
-
-- Identity and access management
-- Private networking and secure endpoints
-- Object/document/data storage
-- Managed AI service or model gateway
-- Logging, monitoring and cost management
-- Secrets management
-- Workflow orchestration where needed
-
-## Governance and Security Controls
-
-- Role-based access control
-- Data classification
-- Human approval for high-risk outputs
-- Prompt and response logging where permitted
-- Source citation or evidence capture
-- Privacy and compliance review
-- Model risk and hallucination handling
-- Cost and usage guardrails
-
-## Pilot Scope
-
-- One workflow
-- One business owner
-- One measurable KPI
-- Limited data sample
-- Clear success and stop criteria
-- Production scale follows successful validation and an approved operating model
-
-## Deliverables
-
-- Current-state workflow summary
-- Readiness or blueprint score
-- Security and governance gap view
-- Pilot architecture outline
-- Success criteria and decision path
-- Next-step recommendation
-
-## Assumptions
-
-- Client provides access to sample data or process documentation.
-- Stakeholders are available for short discovery reviews.
-- Security and compliance constraints are reviewed before build.
-- Customer-specific assumptions and evidence are confirmed during discovery.
-
-## Success Criteria
-
-- Use case is clearly scoped.
-- Business value is measurable.
-- Data readiness is understood.
-- Security and governance risks are visible.
-- Pilot decision is clear: proceed, fix gaps, or stop.
-
-## Next Step CTA
-
-Book a 30-minute workflow readiness discussion with DigiScience Techsol and choose one candidate workflow to score.
+## Bounded next step and source
+A Solution Assessment can examine one document-review problem and recommend a workflow and implementation brief. It excludes legal advice, coding, a working proof of concept and production integration. Do not send confidential contracts through the public form.
+Source and technical reference links: https://digisciencetechsol.com/industries/legal-document-intelligence/
+Describe the review decision: https://digisciencetechsol.com/contact

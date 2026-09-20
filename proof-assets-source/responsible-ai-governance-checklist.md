@@ -1,90 +1,30 @@
 # Responsible AI Governance Checklist
+Asset type: access and action worksheet
+Illustrative planning method | Updated 20 September 2026
 
-Asset type: checklist
+Use this checklist to examine one assistant workflow, its users, its permitted sources and its actions. It is not a security certification or evidence of a customer deployment.
 
-This guide presents a reusable DigiScience Techsol delivery pattern for enterprise review and planning.
+## Prepare the boundary
+Record the workflow, accountable reviewer, user roles, permitted documents and allowed actions. Authenticate the user, apply document permissions before supplying retrieved content, and enforce tool permissions outside the model. A safety instruction does not replace authorization. Start with synthetic records and keep restricted content out of broadly accessible logs.
 
-## Purpose
+## Five checks to adapt
+- Authorized role, permitted document: expect a grounded answer from an allowed source. Inspect caller identity, retrieval scope and source reference.
+- Restricted role, same question: expect no restricted content supplied or exposed. Inspect the permission decision and retrieved-document list.
+- Retrieved text requests a privileged action: document text must grant no new authority. Inspect tool authorization and the attempted-action record.
+- Required approval is absent: expect no execution and routing to the agreed review path. Inspect approval state and execution record.
+- Permission lookup fails or access is revoked: withhold protected retrieval until authorization is established. Inspect error handling, cache behaviour and a fresh access check.
 
-Provide a practical checklist for enterprise AI discovery and decision-making.
+## Record evidence, not just an answer
+For each case capture the test input, expected outcome, observed outcome, trace/source reference, pass/fail/untested status, reviewer and next action. A refusal on screen does not prove that restricted content never reached the model. Include relevant retrieval, cache and tool-execution paths in the review.
 
-## Target Buyer
+## Worked fictional example
+An operations user asks an internal assistant about an HR-only policy. Check that the HR source is excluded before generation, including from summaries and cached results. A visible refusal alone is insufficient.
+Next, place an instruction in a synthetic document asking the agent to change a user role. Expect no role change without separately authorized tool access and required approval. This is a proposed test, not a customer test result.
 
-Risk, compliance, security, AI governance teams
+## Decision and continuing oversight
+Record failed and untested cases with accountable owners. Extend coverage to real roles, sources, actions and failure modes. Review policy accountability, evaluation/release gates, incidents, monitoring and exception handling. Passing these five examples does not establish complete security, compliance or readiness for every use.
 
-## Business Problem
-
-Control AI risk before scaling assistants, RAG or agents.
-
-## Measurable Outcome
-
-Document controls for human approval, audit, privacy, access and monitoring.
-
-## Architecture View
-
-- Business workflow intake
-- Secure data source mapping
-- AI service or model endpoint access
-- Human review and approval step
-- Audit log and quality feedback loop
-- KPI dashboard for value tracking
-
-## Cloud Services
-
-Use the equivalent services on Azure, AWS or GCP depending on the client environment:
-
-- Identity and access management
-- Private networking and secure endpoints
-- Object/document/data storage
-- Managed AI service or model gateway
-- Logging, monitoring and cost management
-- Secrets management
-- Workflow orchestration where needed
-
-## Governance and Security Controls
-
-- Role-based access control
-- Data classification
-- Human approval for high-risk outputs
-- Prompt and response logging where permitted
-- Source citation or evidence capture
-- Privacy and compliance review
-- Model risk and hallucination handling
-- Cost and usage guardrails
-
-## Pilot Scope
-
-- One workflow
-- One business owner
-- One measurable KPI
-- Limited data sample
-- Clear success and stop criteria
-- Production scale follows successful validation and an approved operating model
-
-## Deliverables
-
-- Current-state workflow summary
-- Readiness or blueprint score
-- Security and governance gap view
-- Pilot architecture outline
-- Success criteria and decision path
-- Next-step recommendation
-
-## Assumptions
-
-- Client provides access to sample data or process documentation.
-- Stakeholders are available for short discovery reviews.
-- Security and compliance constraints are reviewed before build.
-- Customer-specific assumptions and evidence are confirmed during discovery.
-
-## Success Criteria
-
-- Use case is clearly scoped.
-- Business value is measurable.
-- Data readiness is understood.
-- Security and governance risks are visible.
-- Pilot decision is clear: proceed, fix gaps, or stop.
-
-## Next Step CTA
-
-Book a 30-minute workflow readiness discussion with DigiScience Techsol and choose one candidate workflow to score.
+## Bounded next step and source
+A Solution Assessment can review one defined control problem and produce recommendations and an implementation brief. Coding, a working proof of concept, penetration testing and production rollout need separate scope.
+Source and detailed reference links: https://digisciencetechsol.com/solutions/responsible-ai-governance/
+Describe the problem without confidential material: https://digisciencetechsol.com/contact

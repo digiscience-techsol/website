@@ -1,90 +1,38 @@
 # CXO AI Transformation Brief
+Asset type: leadership investment-decision worksheet
+Illustrative planning method | Updated 20 September 2026
 
-Asset type: reference guide
+For founders, CEOs, CTOs, CIOs, CFOs, COOs and transformation sponsors deciding the next bounded investment. This brief connects a business problem to evidence, readiness, governance and an accountable delivery path. It is not a customer case study or a forecast of guaranteed ROI.
 
-This document is a DigiScience Techsol reference guide. It is not a customer case study and does not claim delivered customer results.
+## Frame the investment question
+Record the workflow, stakeholder, current pain, baseline, desired result, data sources, constraints, urgency and decision path. Name the business owner and the decision the next engagement must support.
+Keep the proposed benefit separate from measured results. Where a baseline or cost is unknown, record the evidence needed before approval rather than inventing a return figure.
 
-## Purpose
+## Discover and assess
+Discover the actual workflow and its context. Assess business value, data and integration readiness, cloud posture, security, responsible AI risk and feasibility of a bounded proof.
+Value gate: is the workflow important, measurable, owned and suitable for AI assistance?
+Readiness gate: are the data, integration, platform, security and stakeholders ready for a controlled proof?
 
-Provide a practical reference guide for enterprise AI discovery and decision-making.
+## Prove before scale
+A controlled proof examines one workflow with success metrics, user review, architecture, monitoring and governance. Its purpose is to reduce uncertainty before broader investment.
+Pilot gate: did the solution meet the agreed quality, adoption, control, cost and business criteria?
+Record what the evidence supports, what failed, what remains unknown and who owns the next decision. A demonstration is not proof of enterprise-wide readiness.
 
-## Target Buyer
+## Review the operating model
+Scale work may include platform engineering, integrations, LLMOps/MLOps, controls, resilience, adoption and cost governance. Leadership should identify the accountable operating owner and unresolved production dependencies.
+Scale gate: is the operating model ready to support secure and reliable production use?
+Record a decision to proceed, revise or stop alongside its evidence and dependencies. Do not treat a successful build as proof of business benefit.
 
-CEO, COO, CIO, CFO
+## Choose the next engagement
+- Solution Assessment: one defined problem requiring a reasoned path before implementation. The assessment produces a decision package; it is not coding or a working proof of concept.
+- 45-Day AI Pilot: one promising workflow requiring practical evidence before production investment. Confirm scope, inputs, governance and adapted schedule.
+- Production Scale-Up: a validated solution requiring secure platforms, integrations, operations, rollout and handover. Confirm production readiness and accountable ownership.
 
-## Business Problem
+## Leadership decision record
+Capture: problem and owner; baseline and desired result; available evidence; readiness/risk gaps; bounded next scope; budget assumptions; acceptance criteria; operating responsibility; decision and next review point.
+Apply clear ownership, bounded scope, measurable acceptance, approved data paths, security by design, human accountability and evidence-linked decisions. Start with the smallest engagement that can produce a useful decision.
 
-Move from AI curiosity to business-prioritized execution.
-
-## Measurable Outcome
-
-Create an executive roadmap from readiness to pilot to scale decision.
-
-## Architecture View
-
-- Business workflow intake
-- Secure data source mapping
-- AI service or model endpoint access
-- Human review and approval step
-- Audit log and quality feedback loop
-- KPI dashboard for value tracking
-
-## Cloud Services
-
-Use the equivalent services on Azure, AWS or GCP depending on the client environment:
-
-- Identity and access management
-- Private networking and secure endpoints
-- Object/document/data storage
-- Managed AI service or model gateway
-- Logging, monitoring and cost management
-- Secrets management
-- Workflow orchestration where needed
-
-## Governance and Security Controls
-
-- Role-based access control
-- Data classification
-- Human approval for high-risk outputs
-- Prompt and response logging where permitted
-- Source citation or evidence capture
-- Privacy and compliance review
-- Model risk and hallucination handling
-- Cost and usage guardrails
-
-## Pilot Scope
-
-- One workflow
-- One business owner
-- One measurable KPI
-- Limited data sample
-- Clear success and stop criteria
-- Production scale follows successful validation and an approved operating model
-
-## Deliverables
-
-- Current-state workflow summary
-- Readiness or blueprint score
-- Security and governance gap view
-- Pilot architecture outline
-- Success criteria and decision path
-- Next-step recommendation
-
-## Assumptions
-
-- Client provides access to sample data or process documentation.
-- Stakeholders are available for short discovery reviews.
-- Security and compliance constraints are reviewed before build.
-- Customer-specific assumptions and evidence are confirmed during discovery.
-
-## Success Criteria
-
-- Use case is clearly scoped.
-- Business value is measurable.
-- Data readiness is understood.
-- Security and governance risks are visible.
-- Pilot decision is clear: proceed, fix gaps, or stop.
-
-## Next Step CTA
-
-Book a 30-minute workflow readiness discussion with DigiScience Techsol and choose one candidate workflow to score.
+## Sources and next step
+https://digisciencetechsol.com/proof-assets/cxo-ai-transformation-brief
+https://digisciencetechsol.com/how-we-deliver
+Describe the business decision: https://digisciencetechsol.com/contact
