@@ -39,6 +39,9 @@ initializeAnalytics();
 const serviceQuery = new URLSearchParams(window.location.search).get('service');
 const serviceOptions = {
   "solution-assessment": "DigiScience Solution Assessment",
+  "manufacturing-enquiry-workflow": "DigiScience Solution Assessment",
+  "ai-cloud-cost-control": "DigiScience Solution Assessment",
+  "ai-pilot-production-readiness": "DigiScience Solution Assessment",
   "ai-strategy-readiness": "AI Strategy and Readiness",
   "secure-ai-cloud-platform": "Secure AI Cloud Platform",
   "cloud-modernization-ai-readiness": "Cloud Modernization",
