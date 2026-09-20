@@ -56,6 +56,27 @@
     <p>AI-assisted extraction may be worth evaluating for varied documents, but engineering staff must verify critical specifications. Reading a drawing, assessing manufacturability and committing a quotation are different responsibilities. Do not let an unverified summary become an approved technical requirement.</p>
   </section>
 
+  <section id="synthetic-triage" aria-labelledby="synthetic-triage-title" style="scroll-margin-top: 100px">
+    <h2 id="synthetic-triage-title">Inspect a small enquiry-triage demonstration</h2>
+    <p><strong>Synthetic example, not a customer result.</strong> This local demonstration uses eight invented enquiry records to show how simple rules can separate requests ready for review from missing information, invalid inputs and repeated records. It sends no messages and does not use AI.</p>
+    <h3>Inputs and rules</h3>
+    <p>Each record has an enquiry ID, example business email, problem description and two yes/no fields: is a drawing required, and has it been received? The demonstration checks these fields and email format, then checks repeated IDs within that one run.</p>
+    <ul>
+      <li><strong>Complete input:</strong> DEMO-001 has buyer1@example.com, the problem “Review quote handoff,” and a required drawing marked received. It becomes ready_for_review in the technical_review queue.</li>
+      <li><strong>Missing required drawing:</strong> DEMO-002 has valid-format contact details and a problem description, but the drawing is marked missing. It becomes needs_information in the intake queue.</li>
+      <li><strong>Invalid input:</strong> DEMO-004 has “invalid-address”; DEMO-005 has no problem description. Both are rejected with an explicit reason.</li>
+      <li><strong>Exact repeat:</strong> the second DEMO-001 record repeats the same fields. One work item is retained. A changed record using the same ID is instead flagged for manual reconciliation.</li>
+    </ul>
+    <h3>Observed output from the synthetic run</h3>
+    <p>On 20 September 2026, the eight supplied records produced <strong>five retained work items, two rejected records and one exact duplicate</strong>. Three work items were labelled for technical review and two for intake. These counts describe this fixture, not real enquiries or business improvements.</p>
+    <p>Eight automated tests passed: complete/incomplete routing, exact duplicates, conflicting IDs, invalid email or missing description, invalid drawing flags, missing columns, recovery after an invalid first row, and an empty batch. Review the test source and inputs rather than treating a test count as broad delivery proof.</p>
+    <p><a href="/assets/downloads/synthetic-enquiry-triage-inputs.csv" download>Download the eight fictional input records (CSV)</a> · <a href="/assets/downloads/synthetic-enquiry-triage-results.json" download>Inspect the complete result (JSON)</a> · <a href="/assets/downloads/synthetic-enquiry-triage-demo.zip" download>Download source, tests and reproduction instructions (ZIP)</a></p>
+    <h3>What this example does not prove</h3>
+    <p>Email checks cover format, not deliverability or identity. No drawing is read, no quote is approved, and no CRM or production storage is connected. Duplicate handling is local to one run; it is not durable, concurrent or cross-request idempotency. A conflicting repeated ID retains the earlier item and flags the later one: a person must reconcile the conflict before any downstream action.</p>
+    <p>Queue names do not establish staff availability, response times or completed follow-up. No customer value, savings, revenue, security certification or manufacturing outcome was measured. An actual integration would need agreed access, persistence, permission checks, failure recovery and operational ownership.</p>
+    <p>Use the example to decide which intake rules and exceptions your own workflow needs. It is supporting proof of a small local method; coding, a working proof of concept and production integration remain outside the separate <a href="/solution-assessment">Solution Assessment</a>.</p>
+  </section>
+
   <section>
     <h2>Prepare for a bounded assessment</h2>
     <p>Bring a process description, a redacted tracker, a few representative examples and the actual decision owner. Keep confidential drawings and customer records out of an initial public enquiry. Agree controlled access separately if later work needs them.</p>

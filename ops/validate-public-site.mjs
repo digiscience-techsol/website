@@ -260,11 +260,17 @@ for (const phrase of requiredSampleDisclosures) {
 }
 
 const aboutSource = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
-if (!aboutSource.includes('more than 22 years of enterprise technology experience')) {
-  failures.push('about.html: missing the approved anonymous enterprise leadership experience statement');
+for (const phrase of ['Rajiv Gupta is the founder', 'mailto:subscription@digisciencetechsol.com', 'Synthetic example, not a customer result.']) {
+  const source = phrase.startsWith('Synthetic')
+    ? fs.readFileSync(path.join(root, 'guides/manufacturing-enquiry-workflow/index.html'), 'utf8')
+    : aboutSource;
+  if (!source.includes(phrase)) failures.push(`Founder/demo disclosure missing: ${phrase}`);
 }
 
 const publicText = htmlFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+if (/22\s*(?:\+|[- ]years?)/i.test(publicText)) {
+  failures.push('public HTML reintroduces the unsupported 22-year experience claim');
+}
 if (publicText.includes('PostalAddress') || publicText.includes('NSIC Metro, 94, Old Ishwar Nagar')) {
   failures.push('public HTML contains an unverified street address in entity markup');
 }
@@ -282,7 +288,7 @@ for (const retiredNavigationPhrase of ['Book an AI Strategy Call', '>Resources<'
 
 const llmsSource = fs.readFileSync(path.join(root, 'llms.txt'), 'utf8');
 for (const factualMachineReadableNote of [
-  'more than 22 years of enterprise experience',
+  'Founder and business contact: Rajiv Gupta',
   'not customer work',
   'not a testimonial',
   'not a claim of achieved results',
