@@ -1,0 +1,60 @@
+{
+  "workload": {
+    "workload_id": "distributed-training-urgent-001",
+    "owner": "research-team-a",
+    "cost_center": "CC-4100",
+    "data_classification": "internal",
+    "export_allowed": true,
+    "required_accelerator": "nvidia-a100",
+    "nodes": 2,
+    "runtime_hours": 2.0,
+    "deadline_minutes": 260.0,
+    "input_size_gb": 10.0,
+    "output_size_gb": 1.0,
+    "max_estimated_cost": 250.0,
+    "requires_high_bandwidth_network": true,
+    "prefer_owned_capacity": false,
+    "priority": "strategic"
+  },
+  "targets": [
+    {
+      "name": "onprem-hpc",
+      "platform": "hpc",
+      "location": "onprem",
+      "allowed_classifications": ["public", "internal", "restricted"],
+      "accelerators": ["cpu", "nvidia-a100"],
+      "high_bandwidth_network": true,
+      "queue_wait_minutes": 300.0,
+      "node_hour_rate": 8.0,
+      "data_transfer_rate_per_gb": 0.0,
+      "transfer_bandwidth_gbps": 100.0,
+      "reliability_score": 95.0
+    },
+    {
+      "name": "onprem-kubernetes",
+      "platform": "kubernetes",
+      "location": "onprem",
+      "allowed_classifications": ["public", "internal"],
+      "accelerators": ["cpu", "nvidia-l40s"],
+      "high_bandwidth_network": false,
+      "queue_wait_minutes": 20.0,
+      "node_hour_rate": 7.0,
+      "data_transfer_rate_per_gb": 0.0,
+      "transfer_bandwidth_gbps": 25.0,
+      "reliability_score": 92.0
+    },
+    {
+      "name": "approved-cloud-burst",
+      "platform": "cloud-burst",
+      "location": "cloud",
+      "allowed_classifications": ["public", "internal"],
+      "accelerators": ["cpu", "nvidia-a100"],
+      "high_bandwidth_network": true,
+      "queue_wait_minutes": 2.0,
+      "node_hour_rate": 15.0,
+      "data_transfer_rate_per_gb": 0.01,
+      "transfer_bandwidth_gbps": 100.0,
+      "reliability_score": 98.0
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: gpu-development
+  annotations:
+    evidence.digiscience.io/status: structurally-validated
+value: 10000
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "Preemptible interactive development and notebook workloads."
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: gpu-standard
+  annotations:
+    evidence.digiscience.io/status: structurally-validated
+value: 100000
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "Normal approved model-training workloads."
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: gpu-critical
+  annotations:
+    evidence.digiscience.io/status: structurally-validated
+value: 1000000
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "Time-sensitive strategic workloads requiring explicit approval."

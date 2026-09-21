@@ -1,0 +1,27 @@
+[project]
+name = "distributed-training-factory-evidence"
+version = "0.1.0"
+description = "Portable configuration and training examples for PyTorch DDP and TensorFlow multi-worker execution"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+pytorch = ["torch>=2.4"]
+tensorflow = ["tensorflow>=2.18"]
+kubeflow = ["kubeflow>=0.1"]
+
+[project.scripts]
+training-config = "training_factory.config:main"
+pytorch-evidence-train = "training_factory.pytorch_train:main"
+tensorflow-evidence-train = "training_factory.tensorflow_train:main"
+kubeflow-evidence-submit = "training_factory.kubeflow_submit:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

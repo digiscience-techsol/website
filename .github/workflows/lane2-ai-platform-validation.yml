@@ -1,0 +1,146 @@
+name: Lane 2 AI Platform Evidence Validation
+
+on:
+  pull_request:
+    paths:
+      - "portfolio/ai-platform-engineer/**"
+      - ".github/workflows/lane2-ai-platform-validation.yml"
+  push:
+    branches:
+      - main
+      - "agent/lane2-ai-platform-engineer"
+    paths:
+      - "portfolio/ai-platform-engineer/**"
+      - ".github/workflows/lane2-ai-platform-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lane2-ai-platform-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cs01-python-evidence:
+    name: CS01 Python tests and deterministic evidence
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio/ai-platform-engineer/cs01-kubernetes-gpu-platform
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: portfolio/ai-platform-engineer/cs01-kubernetes-gpu-platform/pyproject.toml
+
+      - name: Install package
+        run: python -m pip install --disable-pip-version-check -e .
+
+      - name: Compile Python sources
+        run: python -m compileall -q src
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate scheduler evidence
+        run: >-
+          gpu-platform-sim examples/scenario.json
+          --output evidence/ci-sample-report.json
+
+      - name: Validate generated JSON
+        run: python -m json.tool evidence/ci-sample-report.json >/dev/null
+
+      - name: Assert honest evidence label
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("evidence/ci-sample-report.json").read_text())
+          assert report["evidence_label"] == "simulated"
+          assert all(row["evidence_label"] == "simulated" for row in report["workloads"])
+          print("Evidence is explicitly labelled simulated.")
+          PY
+
+      - name: Upload generated evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs01-gpu-scheduler-evidence
+          path: portfolio/ai-platform-engineer/cs01-kubernetes-gpu-platform/evidence/ci-sample-report.json
+          if-no-files-found: error
+          retention-days: 14
+
+  manifest-and-document-validation:
+    name: YAML, JSON and portfolio integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.2
+
+      - name: Parse all Lane 2 YAML and JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import yaml
+
+          root = Path("portfolio/ai-platform-engineer")
+          yaml_files = sorted([*root.rglob("*.yaml"), *root.rglob("*.yml")])
+          json_files = sorted(root.rglob("*.json"))
+
+          if not yaml_files:
+              raise SystemExit("No YAML evidence files found")
+          if not json_files:
+              raise SystemExit("No JSON evidence files found")
+
+          for path in yaml_files:
+              with path.open(encoding="utf-8") as handle:
+                  documents = list(yaml.safe_load_all(handle))
+              if not documents or any(document is None for document in documents):
+                  raise ValueError(f"Empty YAML document in {path}")
+              print(f"YAML OK: {path} ({len(documents)} document(s))")
+
+          for path in json_files:
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"JSON OK: {path}")
+          PY
+
+      - name: Check required case-study entry points
+        run: |
+          test -f portfolio/ai-platform-engineer/README.md
+          for case_study in \
+            cs01-kubernetes-gpu-platform \
+            cs02-distributed-training-factory \
+            cs03-jupyter-mlops-platform \
+            cs04-nvidia-inference-platform \
+            cs05-hybrid-hpc-ai-platform
+          do
+            test -s "portfolio/ai-platform-engineer/${case_study}/README.md"
+          done
+
+      - name: Reject common secret material
+        run: |
+          if grep -RInE \
+            --exclude-dir=.git \
+            --exclude='*.md' \
+            '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|ghp_[0-9A-Za-z]{36})' \
+            portfolio/ai-platform-engineer; then
+            echo "Potential secret material detected"
+            exit 1
+          fi
+          echo "No selected high-confidence secret patterns detected."

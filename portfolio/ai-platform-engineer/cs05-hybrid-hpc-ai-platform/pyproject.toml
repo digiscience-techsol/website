@@ -1,0 +1,17 @@
+[project]
+name = "hybrid-hpc-placement-evidence"
+version = "0.1.0"
+description = "Explainable synthetic placement and cost engine for HPC, Kubernetes and cloud-burst workloads"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+hpc-placement = "placement_engine:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["placement_engine"]
