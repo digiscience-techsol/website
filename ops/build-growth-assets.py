@@ -2,6 +2,7 @@
 Run in a Python environment containing reportlab. No network calls.
 """
 from pathlib import Path
+import argparse
 from xml.sax.saxutils import escape
 from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
 from reportlab.lib.units import mm
@@ -25,13 +26,17 @@ def diagram():
   else:pts=[x2,y2,x2-4,y2+7,x2+4,y2+7]
   d.add(Polygon(pts,fillColor=colors.HexColor('#17233B')))
  return d
-for name in ['ai-readiness-assessment-scorecard','secure-ai-landing-zone-blueprint']:
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--asset', choices=['ai-readiness-assessment-scorecard','secure-ai-landing-zone-blueprint'], help='Regenerate only the selected asset; omit to regenerate both.')
+args=parser.parse_args()
+for name in [args.asset] if args.asset else ['ai-readiness-assessment-scorecard','secure-ai-landing-zone-blueprint']:
  path=ROOT/'assets/downloads'/f'{name}.md';story=[]
  for line in path.read_text().splitlines():
   if not line.strip():continue
-  if line=='DIAGRAM':story.append(diagram());continue
   style='Title' if line.startswith('# ') else 'AssetHeading' if line.startswith('## ') else 'AssetBody'
   story.append(Paragraph(escape(line.lstrip('# ')),styles[style]))
+  if name=='secure-ai-landing-zone-blueprint' and line=='## Boundary and data-flow diagram':
+   story.extend([diagram(), Spacer(1, 4*mm)])
  def footer(c,d):
   c.setFont('Helvetica',8);c.drawString(18*mm,12*mm,'DigiScience Techsol | Illustrative planning tool | 20 Sep 2026');c.drawRightString(192*mm,12*mm,str(d.page))
  SimpleDocTemplate(str(path.with_suffix('.pdf')),pagesize=(210*mm,297*mm),leftMargin=18*mm,rightMargin=18*mm,topMargin=18*mm,bottomMargin=22*mm).build(story,onFirstPage=footer,onLaterPages=footer)
