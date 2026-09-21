@@ -23,14 +23,16 @@
 /pricing.php /pricing 301
 /portfolio.php /proof-assets/ 301
 /portfolio /proof-assets/ 301
+/portfolio.html /proof-assets/ 301
 /trust-assets /proof-assets/ 301
+/trust-assets.html /proof-assets/ 301
 /privacy.php /privacy 301
 
 # Older cloud/FinOps pages consolidate into current AI-first buyer pages.
 /cloud-cost-governance-consultant-india /guides/ai-cloud-cost-control/ 301
-/ai-api-cost-governance /solutions/responsible-ai-governance/ 301
+/ai-api-cost-governance /guides/ai-cloud-cost-control/ 301
 /aws-azure-cost-optimization-startups /guides/ai-cloud-cost-control/ 301
-/finops-for-saas-startups-india /pricing 301
+/finops-for-saas-startups-india /guides/ai-cloud-cost-control/ 301
 
 # Buyer-friendly aliases for the revised information architecture.
 /resources /proof-assets/ 301
