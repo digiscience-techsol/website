@@ -8,7 +8,7 @@ Use case: employees ask questions about documents they are permitted to read. An
 Choose and record the cloud account/subscription, region, allowed data classifications, document owners, identity tenant, retrieval boundary, model endpoint and operations owner. Do not assume a model's answer is evidence of permission or correctness.
 
 ## Boundary and data-flow diagram
-DIAGRAM
+Text equivalent: The user signs in through the approved identity provider, then the gateway checks authorization and request limits before passing the question to the orchestrator. Approved source documents feed permission-filtered retrieval; only context the caller may read reaches the orchestrator and model endpoint. The application returns an answer with source references for human review. These components sit inside an agreed processing boundary; the actual region, access rules and service configuration must be validated before implementation.
 
 ## Flow and permission checks
 1. The application authenticates the user through the approved identity provider.
