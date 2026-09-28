@@ -1,0 +1,49 @@
+.cost-worksheet { scroll-margin-top: 6rem; }
+.cost-worksheet h3, .cost-worksheet fieldset, .cost-errors { scroll-margin-top: 6rem; }
+.cost-worksheet [hidden] { display: none !important; }
+.cost-worksheet-intro { max-width: 80ch; }
+.cost-example { border-left: 4px solid #2878a4; background: rgba(83,154,209,.08); padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.cost-input-periods { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; margin: 1rem 0; }
+.cost-controls fieldset { min-width: 0; border: 1px solid #a8b9ca; border-radius: .6rem; padding: 1rem; margin: 1rem 0; }
+.cost-controls legend { font-weight: 700; padding: 0 .4rem; }
+.cost-field { display: flex; flex-direction: column; margin: 1rem 0; gap: .35rem; }
+.cost-field label { font-weight: 700; }
+.cost-field input, .cost-field select { width: 100%; max-width: 30rem; min-height: 44px; padding: .7rem; border: 1px solid #a8b9ca; border-radius: .4rem; color: #091b2b; background: #fff; font: inherit; }
+.cost-field input[aria-invalid=true] { border: 3px solid #ffadad; }
+.cost-field-error { color: #ffb8b8; }
+.cost-confirmations label { display: flex; align-items: flex-start; gap: .7rem; margin: .7rem 0; padding: .5rem 0; }
+.cost-confirmations input { flex: 0 0 auto; width: 1.2rem; height: 1.2rem; margin: .2rem 0 0; accent-color: #1672a5; }
+.cost-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1rem 0; }
+.cost-actions button { min-height: 44px; cursor: pointer; white-space: normal; }
+.cost-worksheet :focus-visible { outline: 3px solid #78beff; outline-offset: 4px; }
+.cost-errors { border: 2px solid #ffb8b8; padding: 1rem; border-radius: .5rem; margin: 1rem 0; }
+.cost-errors a { text-decoration: underline; }
+.cost-status { min-height: 1.5em; }
+.cost-table-wrap { overflow-x: auto; border: 1px solid #a8b9ca; border-radius: .5rem; margin: 1rem 0; }
+.cost-table { width: 100%; border-collapse: collapse; }
+.cost-table caption { padding: 1rem; text-align: left; font-weight: 700; }
+.cost-table th, .cost-table td { text-align: left; vertical-align: top; padding: .8rem; border-bottom: 1px solid #6d849b; overflow-wrap: anywhere; }
+.cost-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.cost-metrics > div { border: 1px solid #6d849b; border-radius: .5rem; padding: 1rem; overflow-wrap: anywhere; }
+.cost-metrics dt { font-weight: 700; }
+.cost-metrics dd { margin: .4rem 0 0; font-size: 1.1rem; }
+.cost-limits { border-top: 1px solid #6d849b; padding-top: 1rem; }
+@media (max-width: 650px) {
+ .cost-input-periods, .cost-metrics { grid-template-columns: 1fr; }
+ .cost-actions .btn { width: 100%; justify-content: center; }
+ .cost-table { min-width: 720px; }
+}
+@media print {
+ @page { size: A4; margin: 15mm; }
+ body { background: #fff !important; color: #000 !important; font-size: 10pt !important; }
+ .topbar, .footer, .ai-assistant-toggle, .ai-assistant-panel, main > section:not(.cost-worksheet), .cost-controls, .cost-actions, .cost-status, .cost-next-step { display: none !important; }
+ .cost-worksheet, .cost-worksheet .container { display: block !important; padding: 0 !important; margin: 0 !important; max-width: none !important; width: auto !important; border: 0 !important; }
+ .cost-worksheet * { color: #000 !important; background: transparent !important; text-shadow: none !important; }
+ .cost-table-wrap { overflow: visible; break-inside: avoid; }
+ .cost-table { min-width: 0; table-layout: fixed; font-size: 8pt; }
+ .cost-table th, .cost-table td { padding: 5pt; }
+ .cost-metrics { display: grid; grid-template-columns: 1fr 1fr; }
+ .cost-metrics > div, .cost-example { break-inside: avoid; }
+ .cost-metrics dd { font-size: 10pt; }
+ .cost-worksheet h2, .cost-worksheet h3, .cost-worksheet h4 { break-after: avoid; }
+}
