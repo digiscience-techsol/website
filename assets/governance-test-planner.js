@@ -164,7 +164,7 @@
         ]) {
           const row = element('div', undefined, 'planner-detail');
           row.append(element('dt', label));
-          const valueNode = element('dd', value || '________________ (complete after review)');
+          const valueNode = element('dd', value || '________________ (complete in worksheet)');
           if (!value) valueNode.className = 'planner-blank';
           row.append(valueNode); details.append(row);
         }
