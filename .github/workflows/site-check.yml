@@ -24,3 +24,4 @@ jobs:
           node ops/test-growth-lead.mjs
           node ops/test-governance-test-planner.mjs
           node ops/test-cost-comparison.mjs
+          node assets/downloads/rag-access-boundary/test-access-boundary.mjs --check-recorded
