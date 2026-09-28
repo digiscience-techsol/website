@@ -1,0 +1,58 @@
+{
+  "cluster": {
+    "total_gpu_units": 2.0,
+    "hourly_rate_per_gpu_unit": 4.25
+  },
+  "teams": [
+    {
+      "team": "risk-ai",
+      "guaranteed_gpu_units": 1.0,
+      "borrow_limit_gpu_units": 1.0,
+      "max_workload_gpu_units": 1.0
+    },
+    {
+      "team": "retail-ai",
+      "guaranteed_gpu_units": 0.5,
+      "borrow_limit_gpu_units": 0.5,
+      "max_workload_gpu_units": 1.0
+    }
+  ],
+  "workloads": [
+    {
+      "workload_id": "notebook-risk-001",
+      "team": "risk-ai",
+      "owner": "data-scientist-a",
+      "cost_center": "CC-1001",
+      "profile": "time-slice-1of4",
+      "gpu_units": 0.25,
+      "duration_hours": 3.0,
+      "priority": "LOW",
+      "preemptible": true,
+      "submitted_order": 1
+    },
+    {
+      "workload_id": "training-retail-001",
+      "team": "retail-ai",
+      "owner": "ml-engineer-b",
+      "cost_center": "CC-2001",
+      "profile": "full-gpu",
+      "gpu_units": 1.0,
+      "duration_hours": 2.0,
+      "priority": "NORMAL",
+      "preemptible": true,
+      "submitted_order": 2
+    },
+    {
+      "workload_id": "fraud-critical-001",
+      "team": "risk-ai",
+      "owner": "ml-engineer-c",
+      "cost_center": "CC-1001",
+      "profile": "full-gpu",
+      "gpu_units": 1.0,
+      "duration_hours": 1.5,
+      "priority": "CRITICAL",
+      "preemptible": false,
+      "submitted_order": 3
+    }
+  ]
+}

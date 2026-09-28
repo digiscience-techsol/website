@@ -1,0 +1,115 @@
+name: Lane 2 CS03 Jupyter MLOps Validation
+
+on:
+  pull_request:
+    paths:
+      - "portfolio/ai-platform-engineer/cs03-jupyter-mlops-platform/**"
+      - ".github/workflows/lane2-cs03-mlops-validation.yml"
+  push:
+    branches:
+      - main
+      - "agent/lane2-ai-platform-engineer"
+    paths:
+      - "portfolio/ai-platform-engineer/cs03-jupyter-mlops-platform/**"
+      - ".github/workflows/lane2-cs03-mlops-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-lifecycle-and-source-validation:
+    name: Local lifecycle, notebook and integration source checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio/ai-platform-engineer/cs03-jupyter-mlops-platform
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: portfolio/ai-platform-engineer/cs03-jupyter-mlops-platform/pyproject.toml
+
+      - name: Install dependency-free core
+        run: python -m pip install --disable-pip-version-check -e .
+
+      - name: Compile all source without importing optional runtimes
+        run: python -m compileall -q src
+
+      - name: Run lifecycle and quality-gate tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Generate deterministic local lifecycle evidence
+        run: >-
+          mlops-local-evidence
+          --output-dir evidence/ci-local-lifecycle
+
+      - name: Validate lifecycle evidence and truthfulness boundaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("evidence/ci-local-lifecycle")
+          required = {
+              "dataset-metadata.json",
+              "model.json",
+              "metrics.json",
+              "quality-gate.json",
+              "registry-candidate.json",
+              "summary.json",
+          }
+          assert required == {path.name for path in root.iterdir()}
+
+          summary = json.loads((root / "summary.json").read_text())
+          gate = json.loads((root / "quality-gate.json").read_text())
+          registry = json.loads((root / "registry-candidate.json").read_text())
+          assert summary["evidence_label"] == "locally-tested-synthetic-lifecycle"
+          assert summary["gate_approved"] is True
+          assert gate["approved"] is True
+          assert registry["production_approval"] == "not-requested"
+          assert "not proof of an MLflow registry" in registry["warning"]
+          print("Local lifecycle passed with explicit synthetic and non-production labels.")
+          PY
+
+      - name: Validate notebook JSON and clean output state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("notebooks/01-synthetic-claims-experiment.ipynb")
+          notebook = json.loads(path.read_text())
+          assert notebook["nbformat"] == 4
+          assert notebook["metadata"]["portfolio"]["data"] == "synthetic"
+          assert notebook["metadata"]["portfolio"]["production_approval"] == "not-requested"
+          for cell in notebook["cells"]:
+              if cell["cell_type"] == "code":
+                  assert cell["execution_count"] is None
+                  assert cell["outputs"] == []
+          print("Notebook source is reproducible and contains no stale output claims.")
+          PY
+
+      - name: Verify MLflow and KFP implementation source
+        run: |
+          grep -q 'mlflow.start_run' src/mlops_evidence/mlflow_tracking.py
+          grep -q 'registered_model_name' src/mlops_evidence/mlflow_tracking.py
+          grep -q 'set_registered_model_alias' src/mlops_evidence/mlflow_tracking.py
+          grep -q '@dsl.component' src/mlops_evidence/kubeflow_pipeline.py
+          grep -q '@dsl.pipeline' src/mlops_evidence/kubeflow_pipeline.py
+          grep -q 'Compiler().compile' src/mlops_evidence/kubeflow_pipeline.py
+          grep -q 'production_approval.*not-requested' src/mlops_evidence/kubeflow_pipeline.py
+          echo "MLflow/KFP integrations are present; execution remains separately evidenced."
+
+      - name: Upload local lifecycle evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs03-local-mlops-lifecycle-evidence
+          path: portfolio/ai-platform-engineer/cs03-jupyter-mlops-platform/evidence/ci-local-lifecycle/
+          if-no-files-found: error
+          retention-days: 14
