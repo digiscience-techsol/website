@@ -1,0 +1,309 @@
+{
+  "label": "Executed local fictional authorization example; no cloud, login, vector search or model tested",
+  "version": "1.0",
+  "cases": [
+    {
+      "id": "ALLOW-01",
+      "scenario": "An engineering user receives only the permitted engineering document.",
+      "expected": {
+        "status": "context-ready",
+        "context_ids": [
+          "engineering-guide"
+        ],
+        "citation_ids": [
+          "engineering-guide"
+        ]
+      },
+      "actual": {
+        "status": "context-ready",
+        "context_ids": [
+          "engineering-guide"
+        ],
+        "citation_ids": [
+          "engineering-guide"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "id": "ALLOW-02",
+      "scenario": "A finance user receives the finance document, not engineering.",
+      "expected": {
+        "status": "context-ready",
+        "context_ids": [
+          "finance-plan"
+        ],
+        "citation_ids": [
+          "finance-plan"
+        ]
+      },
+      "actual": {
+        "status": "context-ready",
+        "context_ids": [
+          "finance-plan"
+        ],
+        "citation_ids": [
+          "finance-plan"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "id": "DENY-01",
+      "scenario": "An exact restricted document ID cannot bypass its ACL.",
+      "expected": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "TENANT-01",
+      "scenario": "The same group name in another tenant cannot cross the tenant boundary.",
+      "expected": {
+        "status": "context-ready",
+        "context_ids": [
+          "other-tenant-guide"
+        ],
+        "citation_ids": [
+          "other-tenant-guide"
+        ]
+      },
+      "actual": {
+        "status": "context-ready",
+        "context_ids": [
+          "other-tenant-guide"
+        ],
+        "citation_ids": [
+          "other-tenant-guide"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "id": "IDENTITY-01",
+      "scenario": "A missing identity is denied.",
+      "expected": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "IDENTITY-02",
+      "scenario": "An unknown identity is denied.",
+      "expected": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "POLICY-01",
+      "scenario": "Missing principal permissions deny the whole request.",
+      "expected": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "POLICY-02",
+      "scenario": "An empty document ACL grants no access.",
+      "expected": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "POLICY-03",
+      "scenario": "Malformed document permissions grant no access.",
+      "expected": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "REVOKE-01",
+      "scenario": "The next request uses an updated principal policy after group removal.",
+      "expected": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "REVOKE-02",
+      "scenario": "The next request denies a deactivated principal.",
+      "expected": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "REVOKE-03",
+      "scenario": "The next request respects an updated document ACL.",
+      "expected": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "SPOOF-01",
+      "scenario": "Extra client group and tenant fields do not change server policy.",
+      "expected": {
+        "status": "context-ready",
+        "context_ids": [
+          "engineering-guide"
+        ],
+        "citation_ids": [
+          "engineering-guide"
+        ]
+      },
+      "actual": {
+        "status": "context-ready",
+        "context_ids": [
+          "engineering-guide"
+        ],
+        "citation_ids": [
+          "engineering-guide"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "id": "CONTENT-01",
+      "scenario": "Instructions inside permitted text cannot change this deterministic ACL selection; no model is called.",
+      "expected": {
+        "status": "context-ready",
+        "context_ids": [
+          "engineering-guide"
+        ],
+        "citation_ids": [
+          "engineering-guide"
+        ]
+      },
+      "actual": {
+        "status": "context-ready",
+        "context_ids": [
+          "engineering-guide"
+        ],
+        "citation_ids": [
+          "engineering-guide"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "id": "SOURCE-01",
+      "scenario": "Duplicate source identifiers fail closed instead of creating ambiguous citations.",
+      "expected": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "denied",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    },
+    {
+      "id": "SOURCE-02",
+      "scenario": "An absent source is insufficient evidence.",
+      "expected": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "actual": {
+        "status": "insufficient-authorized-evidence",
+        "context_ids": [],
+        "citation_ids": []
+      },
+      "pass": true
+    }
+  ],
+  "negative_control": {
+    "scenario": "Intentionally omit all ACL checks in an isolated test expression.",
+    "observed_ids": [
+      "engineering-guide",
+      "finance-plan",
+      "other-tenant-guide",
+      "missing-permissions"
+    ],
+    "expected_allowed_ids": [
+      "engineering-guide"
+    ],
+    "unauthorized_context_detected": true
+  },
+  "summary": {
+    "passed": 16,
+    "failed": 0,
+    "negative_control_detected": true
+  },
+  "limits": [
+    "The principal ID is assumed already authenticated; no tokens, sessions or identity providers are verified.",
+    "The in-memory policy snapshot is trusted. Real policy synchronization, revocation latency, tamper resistance and cache isolation are not tested.",
+    "No cloud provider, private endpoint, vector ranking, generative model, prompt-injection defense, production system or customer record is exercised."
+  ]
+}

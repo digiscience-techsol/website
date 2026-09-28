@@ -1,0 +1,14 @@
+{
+  "label": "Entirely fictional public fixtures. No customer records or real identities.",
+  "policy": {"principals": {
+    "fictional-engineer": {"active": true, "tenant": "fictional-a", "groups": ["engineering"]},
+    "fictional-finance": {"active": true, "tenant": "fictional-a", "groups": ["finance"]},
+    "fictional-other-tenant": {"active": true, "tenant": "fictional-b", "groups": ["engineering"]}
+  }},
+  "documents": [
+    {"id":"engineering-guide", "tenant":"fictional-a", "allowedGroups":["engineering"], "text":"FICTIONAL_ENGINEERING: Service restart requires a recorded change."},
+    {"id":"finance-plan", "tenant":"fictional-a", "allowedGroups":["finance"], "text":"FICTIONAL_FINANCE: This invented plan is restricted to finance."},
+    {"id":"other-tenant-guide", "tenant":"fictional-b", "allowedGroups":["engineering"], "text":"FICTIONAL_OTHER_TENANT: This invented document belongs to tenant B."},
+    {"id":"missing-permissions", "tenant":"fictional-a", "text":"FICTIONAL_MISSING_ACL: This document has no approved access metadata."}
+  ]
+}
