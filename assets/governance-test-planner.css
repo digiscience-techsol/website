@@ -1,0 +1,49 @@
+.governance-planner { scroll-margin-top: 6rem; }
+.governance-planner [hidden] { display: none !important; }
+.planner-intro { max-width: 78ch; }
+.planner-method { padding-left: 1.5rem; }
+.planner-method li { margin-bottom: .65rem; }
+.planner-example { border-left: 4px solid #2878a4; padding: 1rem 1.25rem; margin: 1.5rem 0; background: rgba(83, 154, 209, .08); }
+.planner-example dl { margin-bottom: 0; }
+.planner-example dt, .planner-detail dt { font-weight: 700; }
+.planner-example dd { margin: .25rem 0 1rem; }
+.planner-controls { margin-top: 2rem; }
+.planner-controls fieldset { min-width: 0; padding: 1rem; border: 1px solid #a8b9ca; border-radius: .6rem; margin: 0 0 1rem; }
+.planner-controls legend { padding: 0 .35rem; font-weight: 700; }
+.planner-options { display: flex; gap: .75rem; flex-wrap: wrap; }
+.planner-options label { display: flex; align-items: center; gap: .55rem; padding: .65rem .85rem; min-height: 44px; border: 1px solid #a8b9ca; border-radius: .4rem; cursor: pointer; }
+.planner-options input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: #1672a5; }
+.planner-options label:has(input:checked) { outline: 2px solid #1672a5; outline-offset: 1px; }
+.governance-planner :focus-visible { outline: 3px solid #1672a5; outline-offset: 4px; }
+.planner-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
+.planner-actions button { cursor: pointer; min-height: 44px; white-space: normal; }
+.planner-announcement { min-height: 1.5em; margin: 1rem 0; }
+.planner-assumptions li { margin-bottom: .6rem; }
+.planner-test { border: 1px solid #a8b9ca; border-radius: .75rem; padding: 1.25rem; margin: 1.25rem 0; }
+.planner-test h4 { font-size: 1.15rem; margin: 0 0 .5rem; }
+.planner-state { font-weight: 700; }
+.planner-test dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; margin-bottom: 0; }
+.planner-detail dd { margin: .25rem 0 0; overflow-wrap: anywhere; }
+.planner-blank { font-size: .9em; }
+.planner-limits { border-top: 1px solid #a8b9ca; padding-top: 1rem; }
+@media (max-width: 600px) {
+  .planner-test dl { grid-template-columns: 1fr; }
+  .planner-test { padding: 1rem; }
+  .planner-actions .btn { width: 100%; justify-content: center; }
+}
+@media print {
+  @page { size: A4; margin: 15mm; }
+  body { background: #fff !important; color: #000 !important; font-size: 10pt !important; }
+  .topbar, .footer, .ai-assistant-toggle, .ai-assistant-panel, main > section:not(.governance-planner),
+  .planner-controls, .planner-actions, .planner-announcement, .planner-next-step { display: none !important; }
+  .governance-planner, .governance-planner .container, .governance-planner .asset-card { display: block !important; padding: 0 !important; margin: 0 !important; max-width: none !important; width: auto !important; box-shadow: none !important; border: 0 !important; background: #fff !important; color: #000 !important; }
+  .governance-planner * { color: #000 !important; background: transparent !important; text-shadow: none !important; }
+  .planner-test, .planner-example { break-inside: avoid; page-break-inside: avoid; }
+  .planner-test { padding: 8pt; margin: 10pt 0; }
+  .planner-test dl { gap: 7pt 14pt; }
+  .planner-test h4 { font-size: 12pt; }
+  .governance-planner h2 { font-size: 18pt; }
+  .governance-planner h3 { break-after: avoid; font-size: 14pt; }
+  .planner-detail dd { font-size: 9pt; }
+  .governance-planner a { text-decoration: underline; }
+}
