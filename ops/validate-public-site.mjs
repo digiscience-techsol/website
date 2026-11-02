@@ -260,7 +260,7 @@ for (const phrase of requiredSampleDisclosures) {
 }
 
 const aboutSource = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
-for (const phrase of ['Rajiv Gupta is the founder', 'mailto:subscription@digisciencetechsol.com', 'Synthetic example, not a customer result.']) {
+for (const phrase of ['Rajiv DG is the founder', 'mailto:subscription@digisciencetechsol.com', 'Synthetic example, not a customer result.']) {
   const source = phrase.startsWith('Synthetic')
     ? fs.readFileSync(path.join(root, 'guides/manufacturing-enquiry-workflow/index.html'), 'utf8')
     : aboutSource;
@@ -288,7 +288,7 @@ for (const retiredNavigationPhrase of ['Book an AI Strategy Call', '>Resources<'
 
 const llmsSource = fs.readFileSync(path.join(root, 'llms.txt'), 'utf8');
 for (const factualMachineReadableNote of [
-  'Founder and business contact: Rajiv Gupta',
+  'Founder and business contact: Rajiv DG',
   'not customer work',
   'not a testimonial',
   'not a claim of achieved results',
