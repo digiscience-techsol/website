@@ -260,7 +260,7 @@ for (const phrase of requiredSampleDisclosures) {
 }
 
 const aboutSource = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
-for (const phrase of ['Rajiv DG is the founder', 'mailto:subscription@digisciencetechsol.com', 'Synthetic example, not a customer result.']) {
+for (const phrase of ['Rajiv DG, Founder and CEO', 'mailto:subscription@digisciencetechsol.com', 'Synthetic example, not a customer result.']) {
   const source = phrase.startsWith('Synthetic')
     ? fs.readFileSync(path.join(root, 'guides/manufacturing-enquiry-workflow/index.html'), 'utf8')
     : aboutSource;
@@ -268,8 +268,8 @@ for (const phrase of ['Rajiv DG is the founder', 'mailto:subscription@digiscienc
 }
 
 const publicText = htmlFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
-if (/22\s*(?:\+|[- ]years?)/i.test(publicText)) {
-  failures.push('public HTML reintroduces the unsupported 22-year experience claim');
+if (/(?<!\d)(?!22\b)\d{2}\s*(?:\+|[- ]years?)/i.test(publicText)) {
+  failures.push('public HTML shows an experience claim other than the founder-confirmed 22 years');
 }
 if (publicText.includes('PostalAddress') || publicText.includes('NSIC Metro, 94, Old Ishwar Nagar')) {
   failures.push('public HTML contains an unverified street address in entity markup');
