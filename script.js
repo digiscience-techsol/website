@@ -744,6 +744,10 @@ document.querySelectorAll('a[href*="pricing"]:not([data-track]), [data-pricing-p
   }));
 });
 
+document.querySelectorAll('a[href*="wa.me"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_whatsapp', { event_label: link.getAttribute('href') }));
+});
+
 document.querySelectorAll('a[href^="/contact"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_contact', {
     event_label: link.textContent.trim() || link.getAttribute('href') || 'contact'
