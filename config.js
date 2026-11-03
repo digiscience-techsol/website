@@ -3,5 +3,5 @@ window.DIGISCIENCE_CONFIG = {
   // Downstream storage, email, and CRM delivery must use Cloudflare environment variables.
   leadEndpointUrl: '/api/lead',
   assistantEndpointUrl: 'https://digiscience-ai-assistant-source.gupta082013.workers.dev/assistant',
-  gaMeasurementId: 'G-LQLKDHL94N'
+  gaMeasurementId: 'G-PYYDT0M0X0'
 };
