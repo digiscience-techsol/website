@@ -712,6 +712,10 @@ document.querySelectorAll('a[href^="mailto:"]:not([data-track])').forEach((link)
   link.addEventListener('click', () => trackEvent('click_mailto', { event_label: link.getAttribute('href') }));
 });
 
+document.querySelectorAll('a[href^="tel:"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_phone', { event_label: link.getAttribute('href') }));
+});
+
 document.querySelectorAll('[data-track]').forEach((element) => {
   element.addEventListener('click', () => trackEvent(element.getAttribute('data-track'), {
     event_label: element.textContent.trim() || element.getAttribute('href') || 'tracked click'
