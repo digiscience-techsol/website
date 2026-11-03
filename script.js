@@ -753,3 +753,7 @@ document.querySelectorAll('a[href^="/contact"]:not([data-track])').forEach((link
     event_label: link.textContent.trim() || link.getAttribute('href') || 'contact'
   }));
 });
+
+document.querySelectorAll('a[href*="cal.com/digiscience"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_book_call', { event_label: link.getAttribute('href') }));
+});
