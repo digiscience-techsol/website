@@ -712,6 +712,10 @@ document.querySelectorAll('a[href^="mailto:"]:not([data-track])').forEach((link)
   link.addEventListener('click', () => trackEvent('click_mailto', { event_label: link.getAttribute('href') }));
 });
 
+document.querySelectorAll('a[href^="tel:"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_phone', { event_label: link.getAttribute('href') }));
+});
+
 document.querySelectorAll('[data-track]').forEach((element) => {
   element.addEventListener('click', () => trackEvent(element.getAttribute('data-track'), {
     event_label: element.textContent.trim() || element.getAttribute('href') || 'tracked click'
@@ -740,8 +744,16 @@ document.querySelectorAll('a[href*="pricing"]:not([data-track]), [data-pricing-p
   }));
 });
 
+document.querySelectorAll('a[href*="wa.me"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_whatsapp', { event_label: link.getAttribute('href') }));
+});
+
 document.querySelectorAll('a[href^="/contact"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_contact', {
     event_label: link.textContent.trim() || link.getAttribute('href') || 'contact'
   }));
+});
+
+document.querySelectorAll('a[href*="cal.com/digiscience"]:not([data-track])').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('click_book_call', { event_label: link.getAttribute('href') }));
 });
