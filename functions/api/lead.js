@@ -70,6 +70,27 @@ const validatePayloadSize = (payload) => {
   return '';
 };
 
+// Free spam shield (Cloudflare Turnstile). Active only when TURNSTILE_SECRET is set in the Pages settings, so the form keeps
+// working until the secret is added. The website's own contact and intake forms must carry a valid token; the assistant's
+// in-chat form (no widget) is allowed only with a real chat transcript.
+const verifyTurnstile = async (env, payload, request) => {
+  if (!env.TURNSTILE_SECRET) return '';
+  const formType = normalizeText(payload.formType);
+  if (formType === 'assistant' && normalizeText(payload.transcript).length > 20) return '';
+  const token = normalizeText(payload['cf-turnstile-response']);
+  if (!token || token.length > 2048) return 'Please complete the spam check and submit again.';
+  try {
+    const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token });
+    const ip = request.headers.get('cf-connecting-ip');
+    if (ip) body.set('remoteip', ip);
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
+    const result = await response.json();
+    return result && result.success === true ? '' : 'The spam check did not pass. Please reload the page and try again.';
+  } catch (error) {
+    return 'The spam check could not be completed. Please try again.';
+  }
+};
+
 const calculateLeadScore = (lead) => {
   let score = 0;
   if (lead.businessEmail) score += 10;
@@ -338,6 +359,9 @@ async function handleLead({ request, env }) {
     const payload = await parseRequestPayload(request);
     const sizeError = validatePayloadSize(payload);
     if (sizeError) return jsonResponse({ ok: false, error: sizeError }, 413, origin);
+
+    const shieldError = await verifyTurnstile(env, payload, request);
+    if (shieldError) return jsonResponse({ ok: false, error: shieldError }, 400, origin);
 
     const lead = toLead(payload, request);
     const validationError = validateLead(lead, payload);
