@@ -8,6 +8,9 @@ const jsonResponse = (body, status = 200) => new Response(JSON.stringify(body), 
 
 const FALLBACK_TOKEN_SHA256 = '51f999ac01aadb1d00ba5c532d137ea7625de455b5cc2515fb3c9c14ab99743f';
 
+// Read-only reader for the Company Agents product: only the hash is kept here; the product holds the token privately.
+const PRODUCT_READER_SHA256 = 'ec322303a7350b4089f64cb3c00dcb490ba20b4ffcd20c18203ef8c4b424caae';
+
 const getBearerToken = (request) => {
   const auth = request.headers.get('authorization') || '';
   const match = auth.match(/^Bearer\s+(.+)$/i);
@@ -24,7 +27,8 @@ const isAuthorized = async (request, env) => {
   const token = getBearerToken(request);
   if (!token) return false;
   if (env.LEAD_DASHBOARD_TOKEN && token === env.LEAD_DASHBOARD_TOKEN) return true;
-  return (await sha256Hex(token)) === FALLBACK_TOKEN_SHA256;
+  const hashed = await sha256Hex(token);
+  return hashed === FALLBACK_TOKEN_SHA256 || hashed === PRODUCT_READER_SHA256;
 };
 
 const sanitizeRecord = (record) => ({
