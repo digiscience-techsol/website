@@ -619,6 +619,7 @@ if (contactForm && formNote) {
       successMetrics: getField('successMetrics'),
       stakeholders: getField('stakeholders'),
       website: getField('website'),
+      'cf-turnstile-response': getField('cf-turnstile-response'),
       name: getField('name'),
       email: getField('email'),
       service: getField('service') || (formType === 'ai_readiness_intake' ? 'AI Readiness Intake' : ''),
@@ -704,6 +705,7 @@ if (contactForm && formNote) {
     } finally {
       submissionInFlight = false;
       setSubmitting(false);
+      if (window.turnstile && typeof window.turnstile.reset === 'function') { try { window.turnstile.reset(); } catch (error) { /* widget not on this page */ } }
     }
   });
 }
