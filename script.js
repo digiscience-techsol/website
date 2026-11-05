@@ -710,6 +710,70 @@ if (contactForm && formNote) {
   });
 }
 
+// One-line "tell us what you need" box: a lighter way to raise a hand than the full enquiry form.
+document.querySelectorAll('[data-quick-form]').forEach((quickForm) => {
+  const note = quickForm.querySelector('.form-note');
+  const button = quickForm.querySelector('button[type="submit"]');
+  const say = (message, kind = 'info') => {
+    note.textContent = message;
+    note.classList.remove('is-success', 'is-info');
+    note.classList.add(kind === 'success' ? 'is-success' : 'is-info', 'show');
+  };
+  quickForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const field = (name) => quickForm.elements[name] ? String(quickForm.elements[name].value || '').trim() : '';
+    const need = field('need');
+    const email = field('email');
+    if (!need || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      say('Please add what you need and a valid email so we can reply.');
+      return;
+    }
+    if (!(quickForm.elements.consent && quickForm.elements.consent.checked)) {
+      say('Please tick the box so we may reply to you.');
+      return;
+    }
+    const payload = {
+      formType: 'quick_need',
+      sourcePage: window.location.pathname,
+      fullName: field('name') || 'Website visitor',
+      businessEmail: email,
+      aiInterestArea: 'One-line question',
+      businessProblem: need,
+      consent: true,
+      website: field('website'),
+      'cf-turnstile-response': field('cf-turnstile-response'),
+      submittedAt: new Date().toISOString()
+    };
+    try {
+      button.disabled = true;
+      say('Sending...');
+      trackEvent('lead_submit_attempt', { form_name: 'quick_need', service: 'One-line question' });
+      const response = await fetch(appConfig.leadEndpointUrl || '/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok || result.delivery?.accepted !== true) {
+        trackEvent('lead_submit_error', { form_name: 'quick_need', failure_stage: 'request', http_status: response.status });
+        say((result.error || 'We could not send this right now.') + ' Your text is still here; please try again.');
+        if (window.turnstile && typeof window.turnstile.reset === 'function') { try { window.turnstile.reset(); } catch (error) { /* no widget */ } }
+        return;
+      }
+      trackEvent('lead_submit_success', { form_name: 'quick_need', service: 'One-line question' });
+      trackEvent('generate_lead', { form_name: 'quick_need', service: 'One-line question' });
+      quickForm.reset();
+      say('Thank you. We have your message and will reply by email.', 'success');
+    } catch (error) {
+      console.error(error);
+      trackEvent('lead_submit_error', { form_name: 'quick_need', failure_stage: 'network' });
+      say('We could not send this right now. Your text is still here; please try again.');
+    } finally {
+      button.disabled = false;
+    }
+  });
+});
+
 document.querySelectorAll('a[href^="mailto:"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_mailto', { event_label: link.getAttribute('href') }));
 });
