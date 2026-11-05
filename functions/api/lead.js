@@ -85,7 +85,11 @@ const verifyTurnstile = async (env, payload, request) => {
     if (ip) body.set('remoteip', ip);
     const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
     const result = await response.json();
-    return result && result.success === true ? '' : 'The spam check did not pass. Please reload the page and try again.';
+    if (result && result.success === true) return '';
+    // A wrong or mistyped TURNSTILE_SECRET is our setup mistake, not the visitor's: let them through rather than block real enquiries.
+    const codes = (result && result['error-codes']) || [];
+    if (codes.includes('invalid-input-secret') || codes.includes('missing-input-secret')) return '';
+    return 'The spam check did not pass. Please reload the page and try again.';
   } catch (error) {
     return 'The spam check could not be completed. Please try again.';
   }
