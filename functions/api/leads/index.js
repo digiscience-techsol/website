@@ -57,7 +57,14 @@ const sanitizeRecord = (record) => ({
     businessProblem: record.lead?.businessProblem,
     desiredOutcome: record.lead?.desiredOutcome,
     successMetrics: record.lead?.successMetrics,
-    stakeholders: record.lead?.stakeholders
+    stakeholders: record.lead?.stakeholders,
+    landingPage: record.lead?.landingPage,
+    referrer: record.lead?.referrer,
+    utmSource: record.lead?.utmSource,
+    utmMedium: record.lead?.utmMedium,
+    utmCampaign: record.lead?.utmCampaign,
+    utmTerm: record.lead?.utmTerm,
+    utmContent: record.lead?.utmContent
   }
 });
 

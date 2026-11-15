@@ -163,8 +163,14 @@ const toLead = (payload, request) => {
     complianceConstraints: getFirst(payload, ['complianceConstraints']),
     successMetrics: getFirst(payload, ['successMetrics']),
     stakeholders: getFirst(payload, ['stakeholders']),
+    landingPage: getFirst(payload, ['landingPage']).slice(0, 300),
+    utmSource: getFirst(payload, ['utmSource', 'utm_source']).slice(0, 120),
+    utmMedium: getFirst(payload, ['utmMedium', 'utm_medium']).slice(0, 120),
+    utmCampaign: getFirst(payload, ['utmCampaign', 'utm_campaign']).slice(0, 160),
+    utmTerm: getFirst(payload, ['utmTerm', 'utm_term']).slice(0, 160),
+    utmContent: getFirst(payload, ['utmContent', 'utm_content']).slice(0, 160),
     userAgent: normalizeText(request.headers.get('user-agent')).slice(0, 500),
-    referrer: (() => { try { return new URL(request.headers.get('referer')).origin; } catch { return ''; } })()
+    referrer: getFirst(payload, ['referrer', 'initialReferrer']).slice(0, 300) || (() => { try { return new URL(request.headers.get('referer')).origin; } catch { return ''; } })()
   };
 };
 
@@ -194,6 +200,9 @@ const buildEmailText = (lead, leadId, score, category, recommendedAction) => [
   `Timeline: ${lead.timeline}`,
   `Budget: ${lead.budgetRange}`,
   `Source page: ${lead.sourcePage}`,
+  `Landing page: ${lead.landingPage || ''}`,
+  `Referrer: ${lead.referrer || ''}`,
+  `UTM: ${[lead.utmSource, lead.utmMedium, lead.utmCampaign].filter(Boolean).join(' / ')}`,
   '',
   `Business problem: ${lead.businessProblem}`,
   `Desired outcome: ${lead.desiredOutcome}`,

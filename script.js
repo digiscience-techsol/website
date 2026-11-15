@@ -36,6 +36,61 @@ const initializeAnalytics = () => {
 
 initializeAnalytics();
 
+const ATTRIBUTION_STORAGE_KEY = 'digiscience_first_touch_v1';
+const captureFirstTouchAttribution = () => {
+  const params = new URLSearchParams(window.location.search);
+  const currentUtm = {
+    utmSource: String(params.get('utm_source') || '').trim().slice(0, 120),
+    utmMedium: String(params.get('utm_medium') || '').trim().slice(0, 120),
+    utmCampaign: String(params.get('utm_campaign') || '').trim().slice(0, 160),
+    utmTerm: String(params.get('utm_term') || '').trim().slice(0, 160),
+    utmContent: String(params.get('utm_content') || '').trim().slice(0, 160)
+  };
+  const externalReferrer = (() => {
+    try {
+      if (!document.referrer) return '';
+      const refUrl = new URL(document.referrer);
+      if (refUrl.hostname === window.location.hostname) return '';
+      return document.referrer.slice(0, 300);
+    } catch {
+      return '';
+    }
+  })();
+
+  let stored = null;
+  try {
+    const raw = window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY);
+    stored = raw ? JSON.parse(raw) : null;
+  } catch {
+    stored = null;
+  }
+
+  const hasNewUtm = Boolean(currentUtm.utmSource || currentUtm.utmMedium || currentUtm.utmCampaign);
+  if (!stored || (hasNewUtm && !stored.utmSource)) {
+    stored = {
+      landingPage: (window.location.pathname + window.location.search).slice(0, 300),
+      initialReferrer: (stored && stored.initialReferrer) || externalReferrer,
+      ...currentUtm
+    };
+    try {
+      window.sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(stored));
+    } catch {
+      // sessionStorage unavailable (private mode); keep in-memory fallback
+    }
+  }
+  return {
+    landingPage: (stored && stored.landingPage) || window.location.pathname.slice(0, 250),
+    referrer: (stored && stored.initialReferrer) || externalReferrer,
+    utmSource: (stored && stored.utmSource) || currentUtm.utmSource,
+    utmMedium: (stored && stored.utmMedium) || currentUtm.utmMedium,
+    utmCampaign: (stored && stored.utmCampaign) || currentUtm.utmCampaign,
+    utmTerm: (stored && stored.utmTerm) || currentUtm.utmTerm,
+    utmContent: (stored && stored.utmContent) || currentUtm.utmContent
+  };
+};
+
+const visitorAttribution = captureFirstTouchAttribution();
+
 const serviceQuery = new URLSearchParams(window.location.search).get('service');
 const serviceOptions = {
   "solution-assessment": "DigiScience Solution Assessment",
@@ -625,6 +680,13 @@ if (contactForm && formNote) {
       service: getField('service') || (formType === 'ai_readiness_intake' ? 'AI Readiness Intake' : ''),
       message: composedMessage,
       page: window.location.pathname,
+      landingPage: visitorAttribution.landingPage,
+      referrer: visitorAttribution.referrer,
+      utmSource: visitorAttribution.utmSource,
+      utmMedium: visitorAttribution.utmMedium,
+      utmCampaign: visitorAttribution.utmCampaign,
+      utmTerm: visitorAttribution.utmTerm,
+      utmContent: visitorAttribution.utmContent,
       submittedAt: new Date().toISOString()
     };
 
@@ -742,6 +804,13 @@ document.querySelectorAll('[data-quick-form]').forEach((quickForm) => {
       consent: true,
       website: field('website'),
       'cf-turnstile-response': field('cf-turnstile-response'),
+      landingPage: visitorAttribution.landingPage,
+      referrer: visitorAttribution.referrer,
+      utmSource: visitorAttribution.utmSource,
+      utmMedium: visitorAttribution.utmMedium,
+      utmCampaign: visitorAttribution.utmCampaign,
+      utmTerm: visitorAttribution.utmTerm,
+      utmContent: visitorAttribution.utmContent,
       submittedAt: new Date().toISOString()
     };
     try {
