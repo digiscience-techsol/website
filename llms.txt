@@ -82,5 +82,8 @@ These advisory guides explain diagnostic methods and illustrative examples, not 
 - How do we prepare enterprise AI workflows in India for the DPDP Act and Rules?: https://digisciencetechsol.com/guides/dpdp-ai-compliance-india/
 - What controls does a BFSI AI workflow need before internal risk and audit review?: https://digisciencetechsol.com/guides/bfsi-ai-governance-india/
 - Is your Azure or AWS cloud foundation ready to host production AI workloads safely?: https://digisciencetechsol.com/guides/azure-aws-ai-landing-zone-readiness/
+- Free AI governance checklist and test plan worksheet: https://digisciencetechsol.com/proof-assets/responsible-ai-governance-checklist
+- Secure AI landing zone blueprint and RAG permission test fixture: https://digisciencetechsol.com/proof-assets/secure-ai-landing-zone-blueprint
+- Complete machine-readable technical & commercial reference: https://digisciencetechsol.com/llms-full.txt
 - Privacy notice: https://digisciencetechsol.com/privacy
 - Terms of service: https://digisciencetechsol.com/terms

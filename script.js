@@ -70,6 +70,19 @@ const captureFirstTouchAttribution = () => {
     }
   })();
 
+  if (!currentUtm.utmSource && externalReferrer) {
+    try {
+      const refHost = new URL(externalReferrer).hostname.toLowerCase();
+      if (refHost.includes('chatgpt.com') || refHost.includes('openai.com')) { currentUtm.utmSource = 'chatgpt'; currentUtm.utmMedium = currentUtm.utmMedium || 'ai_referral'; }
+      else if (refHost.includes('perplexity.ai')) { currentUtm.utmSource = 'perplexity'; currentUtm.utmMedium = currentUtm.utmMedium || 'ai_referral'; }
+      else if (refHost.includes('claude.ai') || refHost.includes('anthropic.com')) { currentUtm.utmSource = 'claude'; currentUtm.utmMedium = currentUtm.utmMedium || 'ai_referral'; }
+      else if (refHost.includes('gemini.google.com')) { currentUtm.utmSource = 'gemini'; currentUtm.utmMedium = currentUtm.utmMedium || 'ai_referral'; }
+      else if (refHost.includes('copilot.microsoft.com')) { currentUtm.utmSource = 'copilot'; currentUtm.utmMedium = currentUtm.utmMedium || 'ai_referral'; }
+    } catch {
+      // ignore referrer parse errors
+    }
+  }
+
   let stored = null;
   try {
     const raw = window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY);
