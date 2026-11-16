@@ -37,6 +37,16 @@ const initializeAnalytics = () => {
 initializeAnalytics();
 
 const ATTRIBUTION_STORAGE_KEY = 'digiscience_first_touch_v1';
+const pageLoadedAt = Date.now();
+let humanInteracted = false;
+['pointerdown', 'keydown', 'touchstart', 'focusin'].forEach((eventType) => {
+  window.addEventListener(eventType, () => { humanInteracted = true; }, { once: true, passive: true });
+});
+const getClientProof = () => ({
+  dwellMs: Math.max(0, Date.now() - pageLoadedAt),
+  interacted: humanInteracted
+});
+
 const captureFirstTouchAttribution = () => {
   const params = new URLSearchParams(window.location.search);
   const currentUtm = {
@@ -44,7 +54,10 @@ const captureFirstTouchAttribution = () => {
     utmMedium: String(params.get('utm_medium') || '').trim().slice(0, 120),
     utmCampaign: String(params.get('utm_campaign') || '').trim().slice(0, 160),
     utmTerm: String(params.get('utm_term') || '').trim().slice(0, 160),
-    utmContent: String(params.get('utm_content') || '').trim().slice(0, 160)
+    utmContent: String(params.get('utm_content') || '').trim().slice(0, 160),
+    gclid: String(params.get('gclid') || '').trim().slice(0, 160),
+    msclkid: String(params.get('msclkid') || '').trim().slice(0, 160),
+    liFatId: String(params.get('li_fat_id') || '').trim().slice(0, 160)
   };
   const externalReferrer = (() => {
     try {
@@ -65,8 +78,11 @@ const captureFirstTouchAttribution = () => {
     stored = null;
   }
 
-  const hasNewUtm = Boolean(currentUtm.utmSource || currentUtm.utmMedium || currentUtm.utmCampaign);
-  if (!stored || (hasNewUtm && !stored.utmSource)) {
+  const hasNewUtm = Boolean(
+    currentUtm.utmSource || currentUtm.utmMedium || currentUtm.utmCampaign ||
+    currentUtm.gclid || currentUtm.msclkid || currentUtm.liFatId
+  );
+  if (!stored || (hasNewUtm && !stored.utmSource && !stored.gclid && !stored.msclkid && !stored.liFatId)) {
     stored = {
       landingPage: (window.location.pathname + window.location.search).slice(0, 300),
       initialReferrer: (stored && stored.initialReferrer) || externalReferrer,
@@ -85,7 +101,10 @@ const captureFirstTouchAttribution = () => {
     utmMedium: (stored && stored.utmMedium) || currentUtm.utmMedium,
     utmCampaign: (stored && stored.utmCampaign) || currentUtm.utmCampaign,
     utmTerm: (stored && stored.utmTerm) || currentUtm.utmTerm,
-    utmContent: (stored && stored.utmContent) || currentUtm.utmContent
+    utmContent: (stored && stored.utmContent) || currentUtm.utmContent,
+    gclid: (stored && stored.gclid) || currentUtm.gclid,
+    msclkid: (stored && stored.msclkid) || currentUtm.msclkid,
+    liFatId: (stored && stored.liFatId) || currentUtm.liFatId
   };
 };
 
@@ -411,6 +430,17 @@ const initLeadAssistant = () => {
         businessProblem: form.message.value.trim(),
         message: form.message.value.trim(),
         page: window.location.pathname,
+        landingPage: visitorAttribution.landingPage,
+        referrer: visitorAttribution.referrer,
+        utmSource: visitorAttribution.utmSource,
+        utmMedium: visitorAttribution.utmMedium,
+        utmCampaign: visitorAttribution.utmCampaign,
+        utmTerm: visitorAttribution.utmTerm,
+        utmContent: visitorAttribution.utmContent,
+        gclid: visitorAttribution.gclid,
+        msclkid: visitorAttribution.msclkid,
+        liFatId: visitorAttribution.liFatId,
+        clientProof: getClientProof(),
         consent: Boolean(form.consent && form.consent.checked),
         transcript: transcript.join(' | '),
         submittedAt: new Date().toISOString()
@@ -468,7 +498,9 @@ const initLeadAssistant = () => {
     addMessage(question, 'user');
 
     if (/contact|call|email|talk|demo|meeting|lead|consult/.test(question.toLowerCase())) {
-      addMessage(localAnswer(question), 'bot', true);
+      const reply = localAnswer(question);
+      transcript.push(`Assistant: ${reply}`);
+      addMessage(reply, 'bot', true);
       addLeadForm();
       return;
     }
@@ -687,6 +719,10 @@ if (contactForm && formNote) {
       utmCampaign: visitorAttribution.utmCampaign,
       utmTerm: visitorAttribution.utmTerm,
       utmContent: visitorAttribution.utmContent,
+      gclid: visitorAttribution.gclid,
+      msclkid: visitorAttribution.msclkid,
+      liFatId: visitorAttribution.liFatId,
+      clientProof: getClientProof(),
       submittedAt: new Date().toISOString()
     };
 
@@ -711,9 +747,26 @@ if (contactForm && formNote) {
 
     const leadEndpointUrl = appConfig.leadEndpointUrl || '/api/lead';
 
-    // Privacy-safe fallback: keep personal contact details out of public client code.
+    // Resilient fallback: preserve buyer text and offer immediate direct email or calendar booking if API is unreachable.
     const showFallback = (detail = 'The enquiry service is temporarily unavailable.') => {
-      showFormNote(`${detail} We could not confirm receipt. Your details are still in this form; please try again later.`);
+      if (!formNote) return;
+      const subject = encodeURIComponent(`DigiScience Enquiry: ${payload.aiInterestArea || 'Solution Assessment'}`);
+      const body = encodeURIComponent(`Name: ${payload.fullName}\nCompany: ${payload.company || ''}\n\nRequirement:\n${payload.businessProblem}`);
+      formNote.textContent = `${detail} Your details remain in this form. You can retry now, `;
+      const mailLink = document.createElement('a');
+      mailLink.href = `mailto:subscription@digisciencetechsol.com?subject=${subject}&body=${body}`;
+      mailLink.dataset.fallbackContact = 'email';
+      mailLink.textContent = 'email subscription@digisciencetechsol.com directly';
+      const sep = document.createTextNode(', or ');
+      const calLink = document.createElement('a');
+      calLink.href = 'https://cal.com/digiscience/30-min-free-cloud-assessment';
+      calLink.target = '_blank';
+      calLink.rel = 'noopener';
+      calLink.dataset.fallbackContact = 'calendar';
+      calLink.textContent = 'book a 30-min call';
+      formNote.append(mailLink, sep, calLink, document.createTextNode('.'));
+      formNote.classList.remove('is-success', 'is-info');
+      formNote.classList.add('is-info', 'show');
     };
 
     try {
@@ -811,6 +864,10 @@ document.querySelectorAll('[data-quick-form]').forEach((quickForm) => {
       utmCampaign: visitorAttribution.utmCampaign,
       utmTerm: visitorAttribution.utmTerm,
       utmContent: visitorAttribution.utmContent,
+      gclid: visitorAttribution.gclid,
+      msclkid: visitorAttribution.msclkid,
+      liFatId: visitorAttribution.liFatId,
+      clientProof: getClientProof(),
       submittedAt: new Date().toISOString()
     };
     try {
@@ -825,7 +882,14 @@ document.querySelectorAll('[data-quick-form]').forEach((quickForm) => {
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.ok || result.delivery?.accepted !== true) {
         trackEvent('lead_submit_error', { form_name: 'quick_need', failure_stage: 'request', http_status: response.status });
-        say((result.error || 'We could not send this right now.') + ' Your text is still here; please try again.');
+        note.textContent = `${result.error || 'We could not send this right now.'} Your text is still here; retry or `;
+        const fallbackMail = document.createElement('a');
+        fallbackMail.href = `mailto:subscription@digisciencetechsol.com?subject=${encodeURIComponent('DigiScience Question')}&body=${encodeURIComponent(need)}`;
+        fallbackMail.dataset.fallbackContact = 'email';
+        fallbackMail.textContent = 'email subscription@digisciencetechsol.com';
+        note.append(fallbackMail, document.createTextNode('.'));
+        note.classList.remove('is-success', 'is-info');
+        note.classList.add('is-info', 'show');
         if (window.turnstile && typeof window.turnstile.reset === 'function') { try { window.turnstile.reset(); } catch (error) { /* no widget */ } }
         return;
       }

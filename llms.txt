@@ -79,3 +79,8 @@ These advisory guides explain diagnostic methods and illustrative examples, not 
 - Manufacturing enquiries are arriving. Where does the handoff break?: https://digisciencetechsol.com/guides/manufacturing-enquiry-workflow/
 - Cloud or AI costs are rising. What should you check first?: https://digisciencetechsol.com/guides/ai-cloud-cost-control/
 - Your AI pilot works in a demo. Is it ready for production?: https://digisciencetechsol.com/guides/ai-pilot-production-readiness/
+- How do we prepare enterprise AI workflows in India for the DPDP Act and Rules?: https://digisciencetechsol.com/guides/dpdp-ai-compliance-india/
+- What controls does a BFSI AI workflow need before internal risk and audit review?: https://digisciencetechsol.com/guides/bfsi-ai-governance-india/
+- Is your Azure or AWS cloud foundation ready to host production AI workloads safely?: https://digisciencetechsol.com/guides/azure-aws-ai-landing-zone-readiness/
+- Privacy notice: https://digisciencetechsol.com/privacy
+- Terms of service: https://digisciencetechsol.com/terms

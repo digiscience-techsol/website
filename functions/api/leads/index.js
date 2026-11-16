@@ -64,9 +64,27 @@ const sanitizeRecord = (record) => ({
     utmMedium: record.lead?.utmMedium,
     utmCampaign: record.lead?.utmCampaign,
     utmTerm: record.lead?.utmTerm,
-    utmContent: record.lead?.utmContent
+    utmContent: record.lead?.utmContent,
+    gclid: record.lead?.gclid,
+    msclkid: record.lead?.msclkid,
+    liFatId: record.lead?.liFatId
   }
 });
+
+const listAllLeadKeys = async (kv) => {
+  const allKeys = [];
+  let cursor = undefined;
+  for (let page = 0; page < 10; page += 1) {
+    const listed = await kv.list(cursor ? { limit: 1000, cursor } : { limit: 1000 });
+    if (Array.isArray(listed?.keys)) allKeys.push(...listed.keys);
+    if (!listed?.list_complete && listed?.cursor) {
+      cursor = listed.cursor;
+    } else {
+      break;
+    }
+  }
+  return allKeys;
+};
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {
@@ -85,19 +103,26 @@ export async function onRequest({ request, env }) {
   if (!(await isAuthorized(request, env))) return jsonResponse({ ok: false, error: 'Unauthorized' }, 401);
 
   const url = new URL(request.url);
-  const limit = Math.min(Number(url.searchParams.get('limit') || 50), 100);
-  const listed = await env.LEADS_KV.list({ limit });
-  const records = await Promise.all((listed.keys || []).map(async (item) => {
+  const limit = Math.min(Math.max(Number(url.searchParams.get('limit') || 50), 1), 200);
+  const allKeys = await listAllLeadKeys(env.LEADS_KV);
+  allKeys.sort((a, b) => {
+    const aTime = String(a?.metadata?.submittedAt || a?.name || '');
+    const bTime = String(b?.metadata?.submittedAt || b?.name || '');
+    return bTime.localeCompare(aTime);
+  });
+  const newestKeys = allKeys.slice(0, limit);
+  const records = (await Promise.all(newestKeys.map(async (item) => {
     const value = await env.LEADS_KV.get(item.name, 'json');
     return value ? sanitizeRecord(value) : null;
-  }));
+  }))).filter(Boolean);
 
   records.sort((a, b) => String(b?.lead?.submittedAt || '').localeCompare(String(a?.lead?.submittedAt || '')));
 
   return jsonResponse({
     ok: true,
-    count: records.filter(Boolean).length,
-    cursor: listed.cursor || '',
-    leads: records.filter(Boolean)
+    count: records.length,
+    totalStored: allKeys.length,
+    cursor: '',
+    leads: records
   });
 }

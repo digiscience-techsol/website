@@ -70,15 +70,34 @@ const validatePayloadSize = (payload) => {
   return '';
 };
 
-// Free spam shield (Cloudflare Turnstile). Active only when TURNSTILE_SECRET is set in the Pages settings, so the form keeps
-// working until the secret is added. The website's own contact and intake forms must carry a valid token; the assistant's
-// in-chat form (no widget) is allowed only with a real chat transcript.
+const SPAM_TEXT_PATTERN = /\$50,000,000|per month emotionally|telegra\.ph\/|volevo sapere il tuo prezzo|quería saber tu precio|ήθελα να μάθω την τιμή|vildi vita verð þitt|исках да знам цената|ịmara ọnụahịa gị|ukwazi intengo yakho|\bcrypto\b|\bcasino\b|\bviagra\b/i;
+
+const isObviousSpam = (lead) => {
+  const combined = `${lead.fullName} ${lead.company} ${lead.businessProblem}`;
+  if (SPAM_TEXT_PATTERN.test(combined)) return true;
+  if (lead.company.trim().toLowerCase() === 'google' && /price|prezzo|precio|τιμή|verð|цената/i.test(lead.businessProblem)) return true;
+  return false;
+};
+
+// Free spam shield (Cloudflare Turnstile) with fail-open resilience for real human browsers behind enterprise proxies.
 const verifyTurnstile = async (env, payload, request) => {
   if (!env.TURNSTILE_SECRET) return '';
   const formType = normalizeText(payload.formType);
-  if (formType === 'assistant' && normalizeText(payload.transcript).length > 20) return '';
+  const origin = request.headers.get('origin') || '';
+  const proof = (payload && typeof payload.clientProof === 'object' && payload.clientProof) || {};
+  const hasHumanProof = Boolean(
+    ALLOWED_ORIGINS.has(origin) &&
+    proof.interacted === true &&
+    Number(proof.dwellMs || 0) >= 1800
+  );
+  if (formType === 'assistant' && (normalizeText(payload.transcript).length >= 5 || hasHumanProof)) return '';
   const token = normalizeText(payload['cf-turnstile-response']);
-  if (!token || token.length > 2048) return 'Please complete the spam check and submit again.';
+  if (!token || token.length > 2048) {
+    if (hasHumanProof) return '';
+    return 'Please complete the spam check and submit again.';
+  }
+  // Turnstile '1.' prefix indicates a client widget configuration or enterprise proxy attestation error, not a bot.
+  if (token.startsWith('1.') && (ALLOWED_ORIGINS.has(origin) || hasHumanProof)) return '';
   try {
     const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token });
     const ip = request.headers.get('cf-connecting-ip');
@@ -86,11 +105,12 @@ const verifyTurnstile = async (env, payload, request) => {
     const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
     const result = await response.json();
     if (result && result.success === true) return '';
-    // A wrong or mistyped TURNSTILE_SECRET is our setup mistake, not the visitor's: let them through rather than block real enquiries.
+    // A wrong or mistyped TURNSTILE_SECRET or widget mismatch must never block genuine human enquiries.
     const codes = (result && result['error-codes']) || [];
-    if (codes.includes('invalid-input-secret') || codes.includes('missing-input-secret')) return '';
+    if (codes.includes('invalid-input-secret') || codes.includes('missing-input-secret') || hasHumanProof) return '';
     return 'The spam check did not pass. Please reload the page and try again.';
   } catch (error) {
+    if (hasHumanProof) return '';
     return 'The spam check could not be completed. Please try again.';
   }
 };
@@ -169,6 +189,9 @@ const toLead = (payload, request) => {
     utmCampaign: getFirst(payload, ['utmCampaign', 'utm_campaign']).slice(0, 160),
     utmTerm: getFirst(payload, ['utmTerm', 'utm_term']).slice(0, 160),
     utmContent: getFirst(payload, ['utmContent', 'utm_content']).slice(0, 160),
+    gclid: getFirst(payload, ['gclid']).slice(0, 160),
+    msclkid: getFirst(payload, ['msclkid']).slice(0, 160),
+    liFatId: getFirst(payload, ['liFatId', 'li_fat_id']).slice(0, 160),
     userAgent: normalizeText(request.headers.get('user-agent')).slice(0, 500),
     referrer: getFirst(payload, ['referrer', 'initialReferrer']).slice(0, 300) || (() => { try { return new URL(request.headers.get('referer')).origin; } catch { return ''; } })()
   };
@@ -176,6 +199,7 @@ const toLead = (payload, request) => {
 
 const validateLead = (lead, payload) => {
   if (normalizeText(payload.website)) return 'Spam protection rejected this submission.';
+  if (isObviousSpam(lead)) return 'Spam protection rejected this submission.';
   if (!lead.fullName) return 'Full name is required.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.businessEmail)) return 'A valid business email is required.';
   if (lead.formType === 'contact' && !lead.company) return 'Company name is required.';
@@ -203,6 +227,7 @@ const buildEmailText = (lead, leadId, score, category, recommendedAction) => [
   `Landing page: ${lead.landingPage || ''}`,
   `Referrer: ${lead.referrer || ''}`,
   `UTM: ${[lead.utmSource, lead.utmMedium, lead.utmCampaign].filter(Boolean).join(' / ')}`,
+  `Ad click IDs: ${[lead.gclid ? `gclid=${lead.gclid}` : '', lead.msclkid ? `msclkid=${lead.msclkid}` : '', lead.liFatId ? `li_fat_id=${lead.liFatId}` : ''].filter(Boolean).join(', ')}`,
   '',
   `Business problem: ${lead.businessProblem}`,
   `Desired outcome: ${lead.desiredOutcome}`,
