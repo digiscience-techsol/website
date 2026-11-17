@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "portfolio_evidence": "synthetic"
+  },
+  "inputs": [
+    {
+      "name": "FEATURES",
+      "shape": [1, 4],
+      "datatype": "FP32",
+      "data": [0.1, 0.2, 0.3, 0.4]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "PROBABILITIES"
+    }
+  ]
+}

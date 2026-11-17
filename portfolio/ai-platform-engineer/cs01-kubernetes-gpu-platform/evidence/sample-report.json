@@ -1,0 +1,62 @@
+{
+  "assumption": "Cost uses a synthetic GPU-equivalent hourly rate.",
+  "evidence_label": "simulated",
+  "total_estimated_cost": 14.88,
+  "total_gpu_hours": 3.5,
+  "validation": {
+    "environment": "local CPU-safe Python 3.11+",
+    "tests_run": 5,
+    "tests_passed": 5,
+    "hardware_claim": "No GPU hardware was used for this scheduler simulation."
+  },
+  "workloads": [
+    {
+      "allocated_gpu_units": 0.25,
+      "borrowed_gpu_units": 0.0,
+      "cost_center": "CC-1001",
+      "duration_hours": 3.0,
+      "estimated_cost": 0.0,
+      "evidence_label": "simulated",
+      "gpu_hours": 0.0,
+      "owner": "data-scientist-a",
+      "preempted_by": "fraud-critical-001",
+      "profile": "time-slice-1of4",
+      "reason": "preempted for higher-priority workload fraud-critical-001",
+      "status": "preempted",
+      "team": "risk-ai",
+      "workload_id": "notebook-risk-001"
+    },
+    {
+      "allocated_gpu_units": 1.0,
+      "borrowed_gpu_units": 0.5,
+      "cost_center": "CC-2001",
+      "duration_hours": 2.0,
+      "estimated_cost": 8.5,
+      "evidence_label": "simulated",
+      "gpu_hours": 2.0,
+      "owner": "ml-engineer-b",
+      "preempted_by": null,
+      "profile": "full-gpu",
+      "reason": "admitted with 0.500 borrowed GPU units",
+      "status": "admitted",
+      "team": "retail-ai",
+      "workload_id": "training-retail-001"
+    },
+    {
+      "allocated_gpu_units": 1.0,
+      "borrowed_gpu_units": 0.0,
+      "cost_center": "CC-1001",
+      "duration_hours": 1.5,
+      "estimated_cost": 6.38,
+      "evidence_label": "simulated",
+      "gpu_hours": 1.5,
+      "owner": "ml-engineer-c",
+      "preempted_by": null,
+      "profile": "full-gpu",
+      "reason": "admitted within guaranteed quota",
+      "status": "admitted",
+      "team": "risk-ai",
+      "workload_id": "fraud-critical-001"
+    }
+  ]
+}

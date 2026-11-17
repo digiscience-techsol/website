@@ -1,0 +1,25 @@
+[project]
+name = "jupyter-mlops-evidence"
+version = "0.1.0"
+description = "Synthetic, dependency-light experiment-to-gate lifecycle with optional MLflow and Kubeflow integrations"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+mlflow = ["mlflow>=2.15"]
+kubeflow = ["kfp>=2.8"]
+notebook = ["jupyterlab>=4.2"]
+
+[project.scripts]
+mlops-local-evidence = "mlops_evidence.local_pipeline:main"
+mlops-kfp-compile = "mlops_evidence.kubeflow_pipeline:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

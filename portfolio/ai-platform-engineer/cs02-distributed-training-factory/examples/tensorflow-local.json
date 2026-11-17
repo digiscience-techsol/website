@@ -1,0 +1,16 @@
+{
+  "experiment": "synthetic-multiworker-classifier",
+  "framework": "tensorflow",
+  "epochs": 2,
+  "batch_size": 32,
+  "learning_rate": 0.01,
+  "samples": 512,
+  "features": 8,
+  "classes": 2,
+  "seed": 42,
+  "checkpoint_dir": "artifacts/checkpoints",
+  "output_dir": "artifacts/metrics",
+  "owner": "team-ai-platform",
+  "cost_center": "CC-SYNTHETIC",
+  "evidence_label": "requires-tensorflow-runtime"
+}

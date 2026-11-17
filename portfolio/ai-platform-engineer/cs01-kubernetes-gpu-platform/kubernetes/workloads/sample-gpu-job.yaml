@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: risk-ai-gpu-smoke-test
+  namespace: risk-ai
+  labels:
+    kueue.x-k8s.io/queue-name: risk-ai-gpu
+    app.kubernetes.io/name: gpu-smoke-test
+    app.kubernetes.io/part-of: multi-tenant-gpu-platform
+    workload.digiscience.io/owner: ml-engineer-c
+    workload.digiscience.io/team: risk-ai
+    workload.digiscience.io/cost-center: CC-1001
+    workload.digiscience.io/environment: sandbox
+  annotations:
+    evidence.digiscience.io/status: requires-gpu-hardware
+spec:
+  suspend: true
+  backoffLimit: 1
+  activeDeadlineSeconds: 600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gpu-smoke-test
+        workload.digiscience.io/team: risk-ai
+    spec:
+      serviceAccountName: gpu-workload-runner
+      restartPolicy: Never
+      priorityClassName: gpu-standard
+      nodeSelector:
+        gpu.platform.digiscience.io/pool: shared
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: cuda-validation
+          image: nvcr.io/nvidia/cuda:12.5.0-base-ubuntu22.04
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c"]
+          args:
+            - >-
+              nvidia-smi --query-gpu=name,uuid,memory.total --format=csv
+              && sleep 30
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            requests:
+              cpu: "500m"
+              memory: 512Mi
+              nvidia.com/gpu: "1"
+            limits:
+              cpu: "1"
+              memory: 1Gi
+              nvidia.com/gpu: "1"
