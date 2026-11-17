@@ -466,9 +466,8 @@ async function handleLead({ request, env, waitUntil }) {
     const [storage, webhook, email] = results.map(r => r.status === 'fulfilled' ? r.value : {configured: true, stored: false, sent: false});
     const accepted = Boolean(storage.stored || webhook.sent || email.sent);
     if (!accepted) return jsonResponse({ok: false, error: 'We could not confirm receipt. Please try again later.', delivery: {accepted: false}}, 503, origin);
-    if (env.LEADS_KV || env.LEAD_WEBHOOK_URL) {
-      const bg = pushMatomoAndInstantWake(lead, leadId, request);
-      if (typeof waitUntil === 'function') waitUntil(bg);
+    if (typeof waitUntil === 'function' && (env.LEADS_KV || env.LEAD_WEBHOOK_URL)) {
+      waitUntil(pushMatomoAndInstantWake(lead, leadId, request));
     }
 
     return jsonResponse({
