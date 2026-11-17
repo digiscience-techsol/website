@@ -119,3 +119,8 @@ These advisory guides explain diagnostic methods and illustrative examples, not 
 - [Cloud Cost Reduction Consulting](https://digisciencetechsol.com/cloud-cost-reduction-consulting)
 
 - [Cloud Waste Triage Quiz](https://digisciencetechsol.com/cloud-waste-triage)
+
+## Free FinOps capture tools
+- Cloud waste triage (result before contact)
+- FinOps diagnostic vs cost tools comparison
+- Gated PDF one-pagers via WhatsApp or email unlock
