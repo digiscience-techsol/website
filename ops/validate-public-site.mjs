@@ -37,7 +37,7 @@ for (const file of htmlFiles) {
   if (/<nav class="nav-links" id="navLinks"><\/nav>/.test(html)) failures.push(`${relative}: empty navigation`);
   if (/<div class="footer-links"><\/div>/.test(html)) failures.push(`${relative}: empty footer links`);
   if (isIndexable && !html.includes('config.js?v=lead2')) failures.push(`${relative}: missing current analytics configuration`);
-  if (isIndexable && !html.includes('script.js?v=formless1') && !html.includes('script.js?v=growth1')) {
+  if (isIndexable && !/script\.js\?v=(formless1|growth1|leadgen3)/.test(html)) {
     failures.push(`${relative}: missing current shared funnel measurement`);
   }
   if (/googletagmanager\.com\/gtag\/js/.test(html)) failures.push(`${relative}: contains a duplicate page-level Google tag loader`);

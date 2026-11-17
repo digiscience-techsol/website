@@ -155,14 +155,24 @@
   <p>Separate volume growth from unit-cost drift and test lower-cost options without degrading service quality.</p>
   <div class="hero-actions"><a class="btn btn-primary" href="/solution-assessment">Explore the Solution Assessment</a><a class="btn btn-secondary" href="https://cal.com/digiscience/30-min-free-cloud-assessment">Book a 30-min cloud cost call</a></div>
   <form class="contact-form quick-need" data-quick-form method="post" action="/api/lead" style="margin-top:24px"><h3>Or send a one-line FinOps question</h3><p>Tell us which workload or model bill spiked—no billing credentials needed.</p><input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden-field" /><label>What cloud or AI cost question are you investigating?<input type="text" name="need" maxlength="300" placeholder="For example: rising token and search index spend on an internal document assistant" required /></label><div class="form-grid two"><label>Your name (optional)<input type="text" name="name" maxlength="120" autocomplete="name" /></label><label>Your work email<input type="email" name="email" maxlength="160" autocomplete="email" placeholder="you@company.com" required /></label></div><label class="checkbox-line"><input type="checkbox" name="consent" value="yes" required /> <span>I agree to be contacted about this message. <a href="/privacy">How enquiry data is used</a>.</span></label><div class="cf-turnstile" data-sitekey="0x4AAAAAAFzbtNsBR--WYtOc" data-theme="light"></div><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><button class="btn btn-primary" type="submit">Send question</button><p class="form-note" role="status" aria-live="polite"></p></form>
-</div></section></main>
+</div></section>
+    <section class="finops-tools-callout" data-finops-tools style="margin-top:2rem;padding:1.25rem;border:1px solid rgba(120,190,255,.28);border-radius:12px">
+      <h2 style="margin-top:0">Free FinOps tools (no account needed)</h2>
+      <ul>
+        <li><a href="/cloud-waste-triage">Cloud waste triage</a>: 4 questions, your priority band first</li>
+        <li><a href="/get-finops-comparison-onepager">FinOps comparison PDF</a> and <a href="/get-cloud-cost-checklist-onepager">cost checklist PDF</a>: WhatsApp or email unlock</li>
+        <li><a href="/finops-diagnostic-vs-cost-explorer">Diagnostic vs Cost Explorer</a> · <a href="/cloudability-alternatives">Cloudability alternatives</a> · <a href="/savings-share-vs-fixed-fee-finops">Savings-share vs fixed fee</a></li>
+      </ul>
+      <p><a class="button" href="/cloud-waste-triage">Run the free triage</a> <a class="button" href="https://wa.me/918448160510?text=Hi%20DigiScience%2C%20I%20want%20the%20cloud%20waste%20checklist">WhatsApp</a></p>
+    </section>
+  </main>
 
   <footer class="footer"><div class="container footer-inner"><div>DigiScience Techsol • AI-first cloud transformation partner</div><div class="footer-links"><a href="/services">Solutions</a><a href="/industries">Industry Workflows</a><a href="/how-we-deliver">How We Deliver</a><a href="/solution-assessment">Solution Assessment</a><a href="/ai-readiness-assessment">AI Readiness</a><a href="/45-day-ai-pilot">45-Day Pilot</a><a href="/proof-assets/sample-solution-assessment">Sample Assessment</a><a href="/proof-assets/">Proof &amp; Blueprints</a><a href="/pricing">Engagement Models</a><a href="/about">About</a><a href="/contact">Contact</a></div></div><p class="container"><a href="/privacy">Privacy and enquiry data</a> · <a href="/terms">Terms of service</a></p></footer>
   <script src="/config.js?v=lead2"></script>
-  <script src="/script.js?v=formless1" defer></script>
+  <script src="/script.js?v=leadgen3" defer></script>
 <script src="/assets/cost-comparison.js?v=1" defer></script><script src="/config.js?v=lead2"></script>
-<script src="/script.js?v=formless1" defer></script>
-<script defer src="/assets/cloud-waste-triage.js?v=triage1"></script>
+<script src="/script.js?v=leadgen3" defer></script>
+<script defer src="/assets/cloud-waste-triage.js?v=triage2"></script>
 <script>
 document.addEventListener('click', (e) => {
   if (e.target && e.target.matches && e.target.matches('[data-cost-calculate]')) {

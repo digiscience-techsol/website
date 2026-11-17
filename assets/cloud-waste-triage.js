@@ -11,12 +11,12 @@
 
   const cfg = Object.assign(
     {
-      brand: "AICloudStrategist",
-      wa: "918796302608",
-      waText: "Hi AICloudStrategist, I completed the cloud waste triage and want the action checklist",
-      identify: typeof window.aicsIdentifyBeacon === "function" ? "aics" : "ds",
+      brand: "DigiScience",
+      wa: "918448160510",
+      waText: "Hi DigiScience, I completed the cloud waste triage and want the action checklist",
+      identify: "ds",
       privacy: "/privacy",
-      book: "/request-fit-review/",
+      book: "https://cal.com/digiscience/30-min-free-cloud-assessment",
     },
     (() => {
       try {
