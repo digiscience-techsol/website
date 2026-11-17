@@ -68,7 +68,10 @@ const sanitizeRecord = (record) => ({
     gclid: record.lead?.gclid,
     msclkid: record.lead?.msclkid,
     liFatId: record.lead?.liFatId,
-    country: record.lead?.country
+    country: record.lead?.country,
+    region: record.lead?.region,
+    city: record.lead?.city,
+    visitorId: record.lead?.visitorId
   }
 });
 
@@ -105,7 +108,8 @@ export async function onRequest({ request, env }) {
 
   const cache = caches.default;
   const cacheKey = new Request(new URL(request.url).toString(), { method: 'GET' });
-  const cached = await cache.match(cacheKey);
+  const bypassCache = new URL(request.url).searchParams.has('fresh');
+  const cached = bypassCache ? null : await cache.match(cacheKey);
   if (cached) return cached;
 
   const url = new URL(request.url);
