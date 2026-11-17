@@ -29,12 +29,74 @@ const initializeAnalytics = () => {
   window.gtag('js', new Date());
   window.gtag('config', gaMeasurementId, {
     send_page_view: true,
+    allow_google_signals: true,
     transport_type: 'beacon'
   });
   return true;
 };
 
 initializeAnalytics();
+
+// --- Persistent First-Party Visitor Cookie (ds_vid) & Matomo 5 Open-Source Profile Stitching ---
+const ensureVisitorCookie = () => {
+  const existing = (document.cookie.match(/(?:^|;\s*)ds_vid=([a-f0-9]{16})/i) || [])[1];
+  if (existing) return existing.toLowerCase();
+  const bytes = new Uint8Array(8);
+  if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
+  else for (let i = 0; i < 8; i += 1) bytes[i] = Math.floor(Math.random() * 256);
+  const vid = Array.from(bytes).map((b) => b.toString(16).padStart(2, '0')).join('');
+  document.cookie = `ds_vid=${vid}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`;
+  return vid;
+};
+const dsVisitorId = ensureVisitorCookie();
+
+const stitchVisitorIdentity = ({ name = '', email = '', phone = '', company = '' } = {}) => {
+  try {
+    const prev = JSON.parse(window.localStorage.getItem('dsVisitorIdentity') || '{}');
+    const merged = {
+      vid: dsVisitorId,
+      name: name || prev.name || '',
+      email: email || prev.email || '',
+      phone: phone || prev.phone || '',
+      company: company || prev.company || ''
+    };
+    window.localStorage.setItem('dsVisitorIdentity', JSON.stringify(merged));
+    window._paq = window._paq || [];
+    const uid = merged.email || merged.phone;
+    if (uid) window._paq.push(['setUserId', uid]);
+    if (merged.name) window._paq.push(['setCustomDimension', 1, merged.name]);
+    if (merged.email) window._paq.push(['setCustomDimension', 2, merged.email]);
+    if (merged.phone) window._paq.push(['setCustomDimension', 3, merged.phone]);
+    if (merged.company) window._paq.push(['setCustomDimension', 4, merged.company]);
+    if (uid && typeof window.gtag === 'function' && /^G-[A-Z0-9]+$/i.test(gaMeasurementId)) {
+      window.gtag('config', gaMeasurementId, { user_id: dsVisitorId, allow_google_signals: true });
+    }
+  } catch { /* ignore storage restrictions */ }
+};
+
+const initMatomoOpenSource = () => {
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
+  const _paq = (window._paq = window._paq || []);
+  _paq.push(['setVisitorId', dsVisitorId]);
+  try {
+    const saved = JSON.parse(window.localStorage.getItem('dsVisitorIdentity') || '{}');
+    if (saved.email || saved.phone) _paq.push(['setUserId', saved.email || saved.phone]);
+    if (saved.name) _paq.push(['setCustomDimension', 1, saved.name]);
+    if (saved.email) _paq.push(['setCustomDimension', 2, saved.email]);
+    if (saved.phone) _paq.push(['setCustomDimension', 3, saved.phone]);
+    if (saved.company) _paq.push(['setCustomDimension', 4, saved.company]);
+  } catch { /* ignore */ }
+  _paq.push(['enableLinkTracking']);
+  _paq.push(['trackPageView']);
+  _paq.push(['setTrackerUrl', '/api/tracker']);
+  _paq.push(['setSiteId', '1']);
+  const g = document.createElement('script');
+  g.async = true;
+  g.src = '/api/tracker?js=1';
+  document.head.appendChild(g);
+};
+initMatomoOpenSource();
+
 
 const ATTRIBUTION_STORAGE_KEY = 'digiscience_first_touch_v1';
 const pageLoadedAt = Date.now();
@@ -516,6 +578,11 @@ const initLeadAssistant = () => {
     const match = String(value || '').match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
     return match ? match[0].replace(/[.,;:!?)]+$/, '').trim() : '';
   };
+  const extractChatPhone = (value) => {
+    const m = String(value || '').match(/(?:\+\d{1,3}[\s-]?)?(?:\(?\d{3,5}\)?[\s-]?)?\d{5,10}/);
+    const digits = m ? m[0].replace(/\D/g, '') : '';
+    return digits.length >= 10 && digits.length <= 15 ? m[0].trim() : '';
+  };
   let emailAsked = false;
   let emailCaptured = false;
   let emailReminded = false;
@@ -525,7 +592,8 @@ const initLeadAssistant = () => {
     emailReminded = emailCaptured;
   } catch { /* private browsing */ }
 
-  const persistChatEmail = async (email, rawQuestion) => {
+  const persistChatEmail = async (email, rawQuestion, phone = '') => {
+    stitchVisitorIdentity({ email, phone });
     try {
       window.localStorage.setItem(EMAIL_STORAGE_KEY, email);
       window.localStorage.setItem(EMAIL_DONE_KEY, '1');
@@ -537,6 +605,8 @@ const initLeadAssistant = () => {
       sourcePage: window.location.pathname,
       fullName: localHandle.slice(0, 80),
       businessEmail: email,
+      phone,
+      visitorId: dsVisitorId,
       name: localHandle.slice(0, 80),
       email,
       aiInterestArea: 'Website AI assistant',
@@ -584,10 +654,11 @@ const initLeadAssistant = () => {
     addMessage(question, 'user');
 
     const detectedEmail = extractChatEmail(question);
-    if (detectedEmail && !emailCaptured) {
+    const detectedPhone = extractChatPhone(question);
+    if ((detectedEmail || detectedPhone) && !emailCaptured) {
       emailCaptured = true;
       emailAsked = true;
-      const savedOk = await persistChatEmail(detectedEmail, question);
+      const savedOk = await persistChatEmail(detectedEmail, question, detectedPhone);
       const confirmMsg = savedOk
         ? 'Thanks — your email is recorded and DigiScience will follow up within one business day. You can also pick a 30-minute time directly at cal.com/digiscience/30-min-free-cloud-assessment.'
         : 'Thanks — please also confirm via the short enquiry form below or email subscription@digisciencetechsol.com so nothing is missed.';
@@ -981,6 +1052,8 @@ document.querySelectorAll('[data-quick-form]').forEach((quickForm) => {
       sourcePage: window.location.pathname,
       fullName: field('name') || 'Website visitor',
       businessEmail: email,
+      phone: field('phone'),
+      visitorId: dsVisitorId,
       aiInterestArea: 'One-line question',
       businessProblem: need,
       consent: true,
@@ -1023,6 +1096,7 @@ document.querySelectorAll('[data-quick-form]').forEach((quickForm) => {
         return;
       }
       trackEvent('lead_submit_success', { form_name: 'quick_need', service: 'One-line question' });
+      stitchVisitorIdentity({ name: field('name'), email, phone: field('phone') });
       trackEvent('generate_lead', { form_name: 'quick_need', service: 'One-line question' });
       quickForm.reset();
       say('Thank you. We have your message and will reply by email.', 'success');
@@ -1073,7 +1147,7 @@ document.querySelectorAll('a[href*="pricing"]:not([data-track]), [data-pricing-p
 });
 
 document.querySelectorAll('a[href*="wa.me"]:not([data-track])').forEach((link) => {
-  link.addEventListener('click', () => trackEvent('click_whatsapp', { event_label: link.getAttribute('href') }));
+  link.addEventListener('click', () => (window._paq && window._paq.push(['trackEvent', 'Contact', 'WhatsAppClick', window.location.pathname]), trackEvent('click_whatsapp', { event_label: link.getAttribute('href') })));
 });
 
 document.querySelectorAll('a[href^="/contact"]:not([data-track])').forEach((link) => {
@@ -1289,6 +1363,7 @@ const initExitIntentCapture = () => {
         <div class="ds-email-capture-grid">
           <input name="name" type="text" maxlength="80" autocomplete="given-name" placeholder="First name (optional)" aria-label="First name (optional)" />
           <input name="email" type="email" maxlength="180" autocomplete="email" inputmode="email" required placeholder="Work email *" aria-label="Work email" />
+          <input name="phone" type="tel" maxlength="32" autocomplete="tel" inputmode="tel" placeholder="Phone / WhatsApp (optional)" aria-label="Phone or WhatsApp (optional)" />
         </div>
         <input name="need" type="text" maxlength="240" placeholder="Optional: workflow or question on your mind" aria-label="Optional workflow or question" />
         <label class="checkbox-line compact">
@@ -1371,6 +1446,7 @@ const initExitIntentCapture = () => {
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const email = String(emailInput.value || '').trim();
+    const phone = String((form.elements.phone && form.elements.phone.value) || '').trim();
     const givenName = String(nameInput.value || '').trim();
     const noteText = String(needInput.value || '').trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -1391,6 +1467,8 @@ const initExitIntentCapture = () => {
       sourcePage: window.location.pathname,
       fullName: givenName || email.split('@')[0].slice(0, 80) || 'Website visitor',
       businessEmail: email,
+      phone,
+      visitorId: dsVisitorId,
       name: givenName || email.split('@')[0].slice(0, 80),
       email,
       aiInterestArea: 'Governance & Architecture Notes Opt-In',
@@ -1424,6 +1502,7 @@ const initExitIntentCapture = () => {
         submitBtn.disabled = false;
         return;
       }
+      stitchVisitorIdentity({ name: givenName, email, phone });
       try { window.localStorage.setItem(STORAGE_DONE, '1'); } catch { /* ignore */ }
       if (timeTimer) window.clearTimeout(timeTimer);
       trackEvent('lead_submit_success', { form_name: 'exit_email_capture', trigger: triggerReason });

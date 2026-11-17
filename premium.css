@@ -479,9 +479,10 @@
   cursor: pointer;
 }
 .ds-email-capture-form { display: grid; gap: 11px; }
-.ds-email-capture-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 10px; }
+.ds-email-capture-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .ds-email-capture-form input[type="text"],
-.ds-email-capture-form input[type="email"] {
+.ds-email-capture-form input[type="email"],
+.ds-email-capture-form input[type="tel"] {
   width: 100%;
   padding: 11px 13px;
   border-radius: 12px;

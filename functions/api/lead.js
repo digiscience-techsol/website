@@ -152,8 +152,11 @@ const toLead = (payload, request) => {
   const sourcePage = getFirst(payload, ['sourcePage', 'page']) || '/contact';
   const formType = getFirst(payload, ['formType']) || (sourcePage.includes('ai-readiness-intake') ? 'ai_readiness_intake' : 'contact');
   const businessEmail = getFirst(payload, ['businessEmail', 'email']);
-  const derivedName = businessEmail.includes('@') ? businessEmail.split('@')[0].slice(0, 80) : '';
-  const fullName = getFirst(payload, ['fullName', 'name']) || (['email_capture', 'assistant_email', 'quick_need'].includes(formType) ? (derivedName || 'Website visitor') : '');
+  const phoneVal = getFirst(payload, ['phone', 'whatsapp']);
+  const derivedName = businessEmail.includes('@') ? businessEmail.split('@')[0].slice(0, 80) : (phoneVal ? `Caller ${phoneVal.slice(-4)}` : '');
+  const fullName = getFirst(payload, ['fullName', 'name']) || (['email_capture', 'assistant_email', 'quick_need', 'assistant'].includes(formType) ? (derivedName || 'Website visitor') : '');
+  const cookieVid = ((request.headers.get('cookie') || '').match(/(?:^|;\s*)ds_vid=([a-f0-9]{16})/i) || [])[1] || '';
+  const cfObj = request.cf || {};
   const company = getFirst(payload, ['company', 'companyName']);
   const consentValue = payload.consent === true || payload.consent === 'true' || payload.consent === 'yes' || payload.consent === 'on';
 
@@ -164,7 +167,10 @@ const toLead = (payload, request) => {
     submittedAt: getFirst(payload, ['submittedAt']) || new Date().toISOString(),
     fullName,
     businessEmail,
-    phone: getFirst(payload, ['phone']),
+    phone: phoneVal,
+    visitorId: (getFirst(payload, ['visitorId']) || cookieVid).slice(0, 36),
+    city: normalizeText(cfObj.city).slice(0, 80),
+    region: normalizeText(cfObj.region).slice(0, 80),
     company,
     websiteOrLinkedIn: getFirst(payload, ['websiteOrLinkedIn', 'profileUrl', 'linkedinUrl']),
     role: getFirst(payload, ['role', 'designation', 'industryRole']),
@@ -204,7 +210,8 @@ const validateLead = (lead, payload) => {
   if (normalizeText(payload.website)) return 'Spam protection rejected this submission.';
   if (isObviousSpam(lead)) return 'Spam protection rejected this submission.';
   if (!lead.fullName) return 'Full name is required.';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.businessEmail)) return 'A valid business email is required.';
+  const hasValidPhone = /^\+?[0-9][0-9\s()-]{7,18}$/.test(lead.phone || '');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.businessEmail) && !(hasValidPhone && ['assistant_email', 'email_capture', 'assistant'].includes(lead.formType))) return 'A valid business email or phone number is required.';
   if (lead.formType === 'contact' && !lead.company) return 'Company name is required.';
   if (!lead.consent) return 'Consent is required.';
   if (!lead.businessProblem && !lead.workflowPain && !lead.businessContext) return 'Business problem or workflow context is required.';
@@ -371,7 +378,40 @@ const storeInKv = async (env, leadId, record) => {
   return { configured: true, stored: true };
 };
 
-async function handleLead({ request, env }) {
+
+const pushMatomoAndInstantWake = async (lead, leadId, request) => {
+  const tasks = [];
+  const uid = lead.businessEmail || lead.phone || '';
+  if (uid) {
+    const mp = new URLSearchParams({
+      idsite: '1',
+      rec: '1',
+      action_name: `Lead Captured (${lead.formType})`,
+      url: `https://digisciencetechsol.com${lead.sourcePage || '/contact'}`,
+      uid,
+      e_c: 'LeadCapture',
+      e_a: lead.formType || 'contact',
+      e_n: leadId
+    });
+    if (/^[a-f0-9]{16}$/i.test(lead.visitorId || '')) mp.set('_id', lead.visitorId.toLowerCase());
+    if (lead.fullName) mp.set('dimension1', lead.fullName.slice(0, 120));
+    if (lead.businessEmail) mp.set('dimension2', lead.businessEmail.slice(0, 160));
+    if (lead.phone) mp.set('dimension3', lead.phone.slice(0, 40));
+    if (lead.company) mp.set('dimension4', lead.company.slice(0, 120));
+    const ip = request.headers.get('cf-connecting-ip') || '';
+    const hdrs = { 'User-Agent': lead.userAgent || 'Mozilla/5.0' };
+    if (ip) hdrs['X-Real-Visitor-IP'] = ip;
+    tasks.push(fetch(`https://app.aicloudstrategist.cloud/matomo-ds/matomo.php?${mp.toString()}`, { headers: hdrs }).catch(() => null));
+  }
+  tasks.push(fetch('https://app.aicloudstrategist.cloud/lead-alert-hook/site-digisciencetechsol-com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ wake: true, leadId })
+  }).catch(() => null));
+  await Promise.allSettled(tasks);
+};
+
+async function handleLead({ request, env, waitUntil }) {
   const origin = request.headers.get('origin') || '';
 
   if (request.method === 'OPTIONS') {
@@ -426,6 +466,10 @@ async function handleLead({ request, env }) {
     const [storage, webhook, email] = results.map(r => r.status === 'fulfilled' ? r.value : {configured: true, stored: false, sent: false});
     const accepted = Boolean(storage.stored || webhook.sent || email.sent);
     if (!accepted) return jsonResponse({ok: false, error: 'We could not confirm receipt. Please try again later.', delivery: {accepted: false}}, 503, origin);
+    if (env.LEADS_KV || env.LEAD_WEBHOOK_URL) {
+      const bg = pushMatomoAndInstantWake(lead, leadId, request);
+      if (typeof waitUntil === 'function') waitUntil(bg);
+    }
 
     return jsonResponse({
       ok: true,
