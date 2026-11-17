@@ -90,3 +90,6 @@
 
 /api/leads*
   X-Robots-Tag: noindex, nofollow, noarchive
+
+/assets/gated/*
+  X-Robots-Tag: noindex, nofollow, noarchive
