@@ -29,10 +29,8 @@
 /privacy.php /privacy 301
 
 # Older cloud/FinOps pages consolidate into current AI-first buyer pages.
-/cloud-cost-governance-consultant-india /guides/ai-cloud-cost-control/ 301
 /ai-api-cost-governance /guides/ai-cloud-cost-control/ 301
 /aws-azure-cost-optimization-startups /guides/ai-cloud-cost-control/ 301
-/finops-for-saas-startups-india /guides/ai-cloud-cost-control/ 301
 
 # Buyer-friendly aliases for the revised information architecture.
 /resources /proof-assets/ 301
@@ -43,5 +41,4 @@
 /first-offers/ /pricing 301
 /sales-execution /45-day-ai-pilot 301
 /sales-execution/ /45-day-ai-pilot 301
-/cloud-cost-governance-consultant-india/ /cloud-cost-governance-consultant-india 301
 /ai-governance-consulting-india/ /ai-governance-consulting-india 301
