@@ -1542,6 +1542,50 @@ const initGeoCurrency = () => {
 };
 initGeoCurrency();
 
+// --- WhatsApp click-to-chat attribution (visitorId + page + UTMs in prefilled text) ---
+const buildDsWhatsAppHref = (intent = 'Hi DigiScience, I want a next-step note') => {
+  const parts = [String(intent || '').trim() || 'Hi DigiScience, I want a next-step note'];
+  parts.push(`vid:${String(dsVisitorId || '').slice(0, 16)}`);
+  parts.push(`p:${(window.location.pathname || '/').slice(0, 80)}`);
+  if (visitorAttribution.utmSource) parts.push(`src:${String(visitorAttribution.utmSource).slice(0, 40)}`);
+  if (visitorAttribution.utmCampaign) parts.push(`cmp:${String(visitorAttribution.utmCampaign).slice(0, 40)}`);
+  if (visitorAttribution.gclid) parts.push('gclid:1');
+  return `https://wa.me/918448160510?text=${encodeURIComponent(parts.join(' | '))}`;
+};
+const decorateDsWhatsAppLinks = () => {
+  document.querySelectorAll('a[href*="wa.me/918448160510"]').forEach((link) => {
+    if (link.dataset.dsWaDecorated === '1') return;
+    const current = link.getAttribute('href') || '';
+    let intent = 'Hi DigiScience, I want a next-step note';
+    try {
+      const u = new URL(current, window.location.origin);
+      const existing = u.searchParams.get('text');
+      if (existing) intent = existing.split(' | vid:')[0].split(' | p:')[0].trim() || intent;
+    } catch { /* ignore */ }
+    link.setAttribute('href', buildDsWhatsAppHref(intent));
+    link.dataset.dsWaDecorated = '1';
+  });
+};
+decorateDsWhatsAppLinks();
+document.addEventListener('click', (ev) => {
+  const link = ev.target && ev.target.closest && ev.target.closest('a[href*="wa.me/918448160510"]');
+  if (!link) return;
+  const intent = (() => {
+    try {
+      const u = new URL(link.getAttribute('href') || '', window.location.origin);
+      const t = u.searchParams.get('text') || '';
+      return t.split(' | vid:')[0].split(' | p:')[0].trim() || 'Hi DigiScience, I want a next-step note';
+    } catch {
+      return 'Hi DigiScience, I want a next-step note';
+    }
+  })();
+  link.setAttribute('href', buildDsWhatsAppHref(intent));
+  if (typeof window.dsIdentifyBeacon === 'function') {
+    window.dsIdentifyBeacon({ contact_source: 'whatsapp_click', chatTurns: 0 });
+  }
+  trackEvent('click_whatsapp', { source: 'attributed_wa', page_path: window.location.pathname });
+}, true);
+
 // --- Sticky Scroll Quick-Action Bar on Content & Offer Pages ---
 const initStickyConversionBar = () => {
   const p = window.location.pathname.replace(/\/+$/, '') || '/';

@@ -6,7 +6,9 @@ User-agent: ChatGPT-User
 User-agent: ClaudeBot
 User-agent: Claude-User
 User-agent: Claude-Web
+User-agent: Claude-SearchBot
 User-agent: PerplexityBot
+User-agent: Perplexity-User
 User-agent: Google-Extended
 User-agent: Googlebot
 User-agent: Bingbot
