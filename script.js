@@ -39,13 +39,21 @@ initializeAnalytics();
 
 // --- Persistent First-Party Visitor Cookie (ds_vid) & Matomo 5 Open-Source Profile Stitching ---
 const ensureVisitorCookie = () => {
-  const existing = (document.cookie.match(/(?:^|;\s*)ds_vid=([a-f0-9]{16})/i) || [])[1];
-  if (existing) return existing.toLowerCase();
+  const fromCookie = (document.cookie.match(/(?:^|;\s*)ds_vid=([a-f0-9]{16})/i) || [])[1];
+  let fromStore = '';
+  try { fromStore = String(window.localStorage.getItem('ds_vid_ls') || ''); } catch { /* ignore */ }
+  const existing = (fromCookie || fromStore || '').toLowerCase();
+  if (/^[a-f0-9]{16}$/.test(existing)) {
+    document.cookie = `ds_vid=${existing}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`;
+    try { window.localStorage.setItem('ds_vid_ls', existing); } catch { /* ignore */ }
+    return existing;
+  }
   const bytes = new Uint8Array(8);
   if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
   else for (let i = 0; i < 8; i += 1) bytes[i] = Math.floor(Math.random() * 256);
   const vid = Array.from(bytes).map((b) => b.toString(16).padStart(2, '0')).join('');
   document.cookie = `ds_vid=${vid}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`;
+  try { window.localStorage.setItem('ds_vid_ls', vid); } catch { /* ignore */ }
   return vid;
 };
 const dsVisitorId = ensureVisitorCookie();
@@ -179,8 +187,10 @@ initMatomoOpenSource();
   const beacon = async (extra = {}) => {
     const id = savedIdentity();
     const payload = {
+      visitorId: dsVisitorId,
       fingerprint: window.__dsFingerprint || '',
       page: window.location.pathname,
+      path: window.location.pathname,
       url: window.location.href,
       referrer: document.referrer || '',
       deviceClass: deviceClass(),
@@ -208,6 +218,9 @@ initMatomoOpenSource();
       if (data && data.ok) {
         window.__dsIdentify = data;
         try {
+          if (data.vid) {
+            try { window.localStorage.setItem('ds_vid_ls', data.vid); } catch { /* ignore */ }
+          }
           window.localStorage.setItem('dsVisitorEnrichment', JSON.stringify({
             at: new Date().toISOString(),
             vid: data.vid,
