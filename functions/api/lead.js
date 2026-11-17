@@ -91,6 +91,7 @@ const verifyTurnstile = async (env, payload, request) => {
     Number(proof.dwellMs || 0) >= 1800
   );
   if (formType === 'assistant' && (normalizeText(payload.transcript).length >= 5 || hasHumanProof)) return '';
+  if ((formType === 'email_capture' || formType === 'assistant_email') && (hasHumanProof || normalizeText(payload.transcript).length >= 5)) return '';
   const token = normalizeText(payload['cf-turnstile-response']);
   if (!token || token.length > 2048) {
     if (hasHumanProof) return '';
@@ -150,8 +151,9 @@ const getRecommendedAction = (lead, scoreCategory) => {
 const toLead = (payload, request) => {
   const sourcePage = getFirst(payload, ['sourcePage', 'page']) || '/contact';
   const formType = getFirst(payload, ['formType']) || (sourcePage.includes('ai-readiness-intake') ? 'ai_readiness_intake' : 'contact');
-  const fullName = getFirst(payload, ['fullName', 'name']);
   const businessEmail = getFirst(payload, ['businessEmail', 'email']);
+  const derivedName = businessEmail.includes('@') ? businessEmail.split('@')[0].slice(0, 80) : '';
+  const fullName = getFirst(payload, ['fullName', 'name']) || (['email_capture', 'assistant_email', 'quick_need'].includes(formType) ? (derivedName || 'Website visitor') : '');
   const company = getFirst(payload, ['company', 'companyName']);
   const consentValue = payload.consent === true || payload.consent === 'true' || payload.consent === 'yes' || payload.consent === 'on';
 
