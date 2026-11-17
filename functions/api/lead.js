@@ -192,6 +192,7 @@ const toLead = (payload, request) => {
     gclid: getFirst(payload, ['gclid']).slice(0, 160),
     msclkid: getFirst(payload, ['msclkid']).slice(0, 160),
     liFatId: getFirst(payload, ['liFatId', 'li_fat_id']).slice(0, 160),
+    country: normalizeText(request.headers.get('cf-ipcountry')).toUpperCase().replace(/[^A-Z]/g, '').slice(0, 2),
     userAgent: normalizeText(request.headers.get('user-agent')).slice(0, 500),
     referrer: getFirst(payload, ['referrer', 'initialReferrer']).slice(0, 300) || (() => { try { return new URL(request.headers.get('referer')).origin; } catch { return ''; } })()
   };
