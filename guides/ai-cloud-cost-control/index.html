@@ -72,6 +72,15 @@
    <div class="cost-errors" data-cost-errors hidden tabindex="-1" role="alert"></div>
   </div>
   <p class="cost-status" data-cost-status role="status" aria-live="polite" aria-atomic="true"></p>
+  
+  <aside data-cost-capture-gate class="cost-capture-gate" hidden style="margin-top:1.25rem;padding:1rem 1.1rem;border:1px dashed rgba(0,0,0,.2);border-radius:10px">
+    <h3>Optional: send this worksheet summary + next-step checklist</h3>
+    <p>Your results above stay visible either way. WhatsApp is fastest in India — or leave WhatsApp / work email for a DigiScience checklist tied to cost-per-accepted-result decisions.</p>
+    <p><a class="btn btn-primary" href="https://wa.me/918448160510?text=Hi%20DigiScience%2C%20I%20ran%20the%20cloud%20cost%20worksheet%20and%20want%20the%20next-step%20checklist">WhatsApp the checklist</a>
+       <button type="button" class="btn btn-secondary" data-open-ds-capture>Leave WhatsApp / email</button>
+       <a class="btn btn-secondary" href="/cloud-waste-triage">Or run the waste triage quiz</a></p>
+  </aside>
+
   <section data-cost-results hidden aria-labelledby="cost-result-title">
    <h3 id="cost-result-title" tabindex="-1" data-cost-result-title>Your cost worksheet</h3>
    <p data-cost-source></p>
@@ -151,5 +160,22 @@
   <footer class="footer"><div class="container footer-inner"><div>DigiScience Techsol • AI-first cloud transformation partner</div><div class="footer-links"><a href="/services">Solutions</a><a href="/industries">Industry Workflows</a><a href="/how-we-deliver">How We Deliver</a><a href="/solution-assessment">Solution Assessment</a><a href="/ai-readiness-assessment">AI Readiness</a><a href="/45-day-ai-pilot">45-Day Pilot</a><a href="/proof-assets/sample-solution-assessment">Sample Assessment</a><a href="/proof-assets/">Proof &amp; Blueprints</a><a href="/pricing">Engagement Models</a><a href="/about">About</a><a href="/contact">Contact</a></div></div><p class="container"><a href="/privacy">Privacy and enquiry data</a> · <a href="/terms">Terms of service</a></p></footer>
   <script src="/config.js?v=lead2"></script>
   <script src="/script.js?v=formless1" defer></script>
-<script src="/assets/cost-comparison.js?v=1" defer></script></body>
+<script src="/assets/cost-comparison.js?v=1" defer></script><script src="/config.js?v=lead2"></script>
+<script src="/script.js?v=formless1" defer></script>
+<script defer src="/assets/cloud-waste-triage.js?v=triage1"></script>
+<script>
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.matches && e.target.matches('[data-cost-calculate]')) {
+    setTimeout(() => {
+      const gate = document.querySelector('[data-cost-capture-gate]');
+      const results = document.querySelector('[data-cost-results]');
+      if (gate && results && !results.hidden) gate.hidden = false;
+    }, 400);
+  }
+  if (e.target && e.target.matches && e.target.matches('[data-open-ds-capture]')) {
+    try { window.dispatchEvent(new CustomEvent('ds-open-email-capture', { detail: { trigger: 'cost_worksheet' } })); } catch (_) {}
+  }
+}, true);
+</script>
+</body>
 </html>

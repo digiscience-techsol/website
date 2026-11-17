@@ -1742,7 +1742,10 @@ const initExitIntentCapture = () => {
   emailInput.removeAttribute('required');
 
   const showModal = (reason) => {
-    if (isOpen || shownOnce || isSuppressed()) return;
+    // Allow programmatic reopen from value-first tools (worksheet / triage).
+    const force = reason === 'cost_worksheet' || reason === 'cloud_waste_triage';
+    if (isOpen || isSuppressed()) return;
+    if (!force && shownOnce) return;
     if (document.querySelector('.ai-assistant-panel.open')) return;
     triggerReason = reason || 'time';
     isOpen = true;
@@ -1754,6 +1757,11 @@ const initExitIntentCapture = () => {
       try { emailInput.focus({ preventScroll: true }); } catch { emailInput.focus(); }
     }, 50);
   };
+  window.addEventListener('ds-open-email-capture', (ev) => {
+    const reason = (ev && ev.detail && ev.detail.trigger) || 'manual';
+    showModal(reason);
+  });
+  window.dsOpenEmailCapture = showModal;
 
   const dismissModal = (via = 'button') => {
     if (!isOpen) return;
