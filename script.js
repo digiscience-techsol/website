@@ -226,12 +226,15 @@ initMatomoOpenSource();
             vid: data.vid,
             fingerprint: data.fingerprint,
             geo: data.geo,
-            identity: data.identity
+            enrichment: data.enrichment || null,
+            identity: data.identity,
+            limits: data.limits || null
           }));
         } catch { /* ignore */ }
-        if (data.geo && data.geo.asnOrg) {
+        if (data.geo) {
           const cur = savedIdentity();
-          if (!cur.company) stitchVisitorIdentity({ company: data.geo.asnOrg });
+          const orgHint = data.geo.companyCandidate || '';
+          if (!cur.company && orgHint) stitchVisitorIdentity({ company: orgHint });
         }
       }
       return data;
@@ -735,8 +738,25 @@ const initLeadAssistant = () => {
   const EMAIL_STORAGE_KEY = 'dsChatEmailCaptured';
   const EMAIL_DONE_KEY = 'dsEmailCaptureDone';
   const PROFILE_KEY = 'dsChatProfileV1';
+  const enrichHint = () => {
+    try {
+      const e = JSON.parse(window.localStorage.getItem('dsVisitorEnrichment') || '{}');
+      const company = (e.geo && e.geo.companyCandidate) || '';
+      const domain = (e.geo && e.geo.domainGuess) || (e.enrichment && e.enrichment.domainGuess) || '';
+      return { company, domain };
+    } catch { return { company: '', domain: '' }; }
+  };
   const NAME_ASK = 'Happy to help — what name should DigiScience use when we follow up?';
-  const CONTACT_ASK = 'I can send a one-page next-step note. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email (sharing it here consents to follow-up under our Privacy Notice).';
+  const CONTACT_ASK = (() => {
+    const { company, domain } = enrichHint();
+    if (company && domain) {
+      return `If you are with ${company}, WhatsApp or your work email (often @${domain}) is enough for a one-page next-step note — sharing it here consents to follow-up under our Privacy Notice.`;
+    }
+    if (company) {
+      return `If this visit is from ${company}, reply with WhatsApp or work email for a one-page next-step note (consent under our Privacy Notice).`;
+    }
+    return 'I can send a one-page next-step note. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email (sharing it here consents to follow-up under our Privacy Notice).';
+  })();
   const EMAIL_ASK = 'Want a concise 1-page architecture or governance view? Reply with your name and WhatsApp or work email (consent under our Privacy Notice), or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
   const EMAIL_REMIND = 'If useful, drop your WhatsApp or work email here and DigiScience will send a short next-step note — or book directly on Cal.com.';
   const extractChatEmail = (value) => {
