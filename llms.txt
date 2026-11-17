@@ -87,3 +87,7 @@ These advisory guides explain diagnostic methods and illustrative examples, not 
 - Complete machine-readable technical & commercial reference: https://digisciencetechsol.com/llms-full.txt
 - Privacy notice: https://digisciencetechsol.com/privacy
 - Terms of service: https://digisciencetechsol.com/terms
+
+- [Enterprise AI Governance Assessment, Legal & HR Checklist](https://digisciencetechsol.com/guides/ai-governance-assessment-and-enterprise-audit-checklist/)
+- [Enquiry Process Flow Chart & B2B RFQ Triage Guide](https://digisciencetechsol.com/guides/enquiry-process-flowchart-and-rfq-triage/)
+- [Healthcare AI Workflow Assistant Architecture & Governance Guide](https://digisciencetechsol.com/guides/healthcare-ai-workflow-assistant-and-clinical-governance/)

@@ -103,3 +103,7 @@
 - **Legal Document Intelligence Blueprint:** https://digisciencetechsol.com/proof-assets/legal-document-intelligence-blueprint
 - **Predictive Maintenance Blueprint:** https://digisciencetechsol.com/proof-assets/predictive-maintenance-blueprint
 - **CXO AI Transformation Brief:** https://digisciencetechsol.com/proof-assets/cxo-ai-transformation-brief
+
+- [Enterprise AI Governance Assessment, Legal & HR Checklist](https://digisciencetechsol.com/guides/ai-governance-assessment-and-enterprise-audit-checklist/)
+- [Enquiry Process Flow Chart & B2B RFQ Triage Guide](https://digisciencetechsol.com/guides/enquiry-process-flowchart-and-rfq-triage/)
+- [Healthcare AI Workflow Assistant Architecture & Governance Guide](https://digisciencetechsol.com/guides/healthcare-ai-workflow-assistant-and-clinical-governance/)
