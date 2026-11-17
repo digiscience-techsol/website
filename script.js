@@ -390,6 +390,135 @@ const trackEvent = (eventName, params = {}) => {
   }
 };
 
+// --- FinOps lead-gen context: page-specific offers (DigiScience only; WhatsApp 918448160510) ---
+const DS_BOOK_URL = 'https://cal.com/digiscience/30-min-free-cloud-assessment';
+const DS_TRIAGE_URL = '/cloud-waste-triage';
+const DS_PDF_URL = '/get-finops-comparison-onepager';
+const dsFinopsContext = (rawPath) => {
+  const p = String(rawPath || window.location.pathname || '/').replace(/\/+$/, '').replace(/\.html$/, '') || '/';
+  const compare = [
+    '/aws-cost-explorer-alternatives', '/azure-cost-management-alternatives', '/finops-diagnostic-vs-cost-explorer',
+    '/savings-share-vs-fixed-fee-finops', '/cloudability-alternatives'
+  ];
+  const commercial = [
+    '/aws-cost-optimization', '/azure-cost-optimization', '/gcp-cost-optimization', '/kubernetes-cost-allocation',
+    '/finops-services-india', '/cloud-cost-governance-consultant-india', '/cloud-cost-reduction-consulting',
+    '/finops-for-saas-startups-india', '/aws-azure-cost-optimization-startups', '/ai-api-cost-governance'
+  ];
+  const guides = ['/guides/ai-cloud-cost-control'];
+  const slug = p.replace(/^\//, '').replace(/-/g, ' ');
+  const triageNudge = (title, body) => ({
+    eyebrow: 'Free · 2 minutes · result before any ask',
+    title,
+    body,
+    primary: { label: 'Run the free waste triage', href: DS_TRIAGE_URL },
+    secondary: { label: 'FinOps comparison PDF', href: DS_PDF_URL },
+    waLabel: 'Ask on WhatsApp',
+    waText: `Hi DigiScience, I read the ${slug} page and want the cloud waste checklist`
+  });
+  if (compare.includes(p)) {
+    return {
+      kind: 'compare', path: p,
+      stickyLabel: 'Comparing FinOps options?',
+      stickyExtra: { label: 'Free PDF', href: DS_PDF_URL },
+      waText: `Hi DigiScience, I read the ${slug} comparison and want the one-pager PDF`,
+      nudge: {
+        eyebrow: 'Comparing options? Free one-pager',
+        title: 'Take the honest comparison with you',
+        body: 'Native consoles vs FinOps platforms vs savings-share vs a fixed-scope diagnostic: strengths, limits, when each fits. Preview is free; WhatsApp unlocks the PDF.',
+        primary: { label: 'Preview the comparison PDF', href: DS_PDF_URL },
+        secondary: { label: 'Free waste triage', href: DS_TRIAGE_URL },
+        waLabel: 'Ask on WhatsApp',
+        waText: `Hi DigiScience, please send the FinOps comparison one-pager PDF (from ${p})`
+      },
+      exit: {
+        eyebrow: 'Before you go',
+        title: 'Take the FinOps comparison with you',
+        lead: 'One page: Cost Explorer vs FinOps platforms vs savings-share vs a fixed-scope diagnostic. WhatsApp is fastest in India, or leave a work email. Opt-in only, and the <a href="/get-finops-comparison-onepager">preview</a> is free.',
+        waLabel: 'Get the PDF on WhatsApp',
+        waText: `Hi DigiScience, please send the FinOps comparison one-pager PDF (from ${p})`,
+        submitLabel: 'Send me the comparison PDF',
+        extra: { label: 'Or run the free waste triage', href: DS_TRIAGE_URL },
+        interest: 'FinOps comparison one-pager (exit/scroll capture)'
+      }
+    };
+  }
+  if (commercial.includes(p)) {
+    return {
+      kind: 'commercial', path: p,
+      stickyLabel: 'Cut cloud waste, fixed scope:',
+      stickyExtra: { label: 'Free triage', href: DS_TRIAGE_URL },
+      waText: `Hi DigiScience, I read the ${slug} page and want to discuss my cloud spend`,
+      nudge: triageNudge('Where is your cloud waste, really?', 'Answer 4 questions and see your priority band first. Want the 1-page checklist for your result? Ask on WhatsApp. No forms, no billing files.'),
+      exit: {
+        eyebrow: 'Before you go',
+        title: 'Get your cloud waste priority first',
+        lead: 'The free <a href="/cloud-waste-triage">4-question waste triage</a> shows your priority band before we ask for anything. Prefer a human? WhatsApp us “triage” and we reply with a 1-page checklist. Opt-in only.',
+        waLabel: 'WhatsApp “triage”',
+        waText: `Hi DigiScience, I want the cloud waste triage checklist (from ${p})`,
+        submitLabel: 'Send the waste checklist',
+        extra: { label: 'Run the 2-min triage', href: DS_TRIAGE_URL },
+        interest: 'Cloud waste triage checklist (exit/scroll capture)'
+      }
+    };
+  }
+  if (guides.includes(p)) {
+    return {
+      kind: 'guide', path: p,
+      stickyLabel: 'Apply this to your estate:',
+      stickyExtra: { label: 'Free triage', href: DS_TRIAGE_URL },
+      waText: `Hi DigiScience, I read the ${slug} guide and want a next-step note`,
+      nudge: triageNudge('Turn this guide into a result', 'Run the free waste triage (2 minutes) and see which of these levers to pull first. Then ask on WhatsApp for the matching 1-page checklist.'),
+      exit: {
+        eyebrow: 'Before you go',
+        title: 'Which lever should you pull first?',
+        lead: 'Run the free <a href="/cloud-waste-triage">cloud waste triage</a> (result first), or WhatsApp us your cloud and biggest cost pain and we reply with a 1-page checklist. Opt-in only.',
+        waLabel: 'WhatsApp your cost pain',
+        waText: `Hi DigiScience, I read the ${slug} guide and want the cloud waste checklist`,
+        submitLabel: 'Send the checklist',
+        extra: { label: 'Run the 2-min triage', href: DS_TRIAGE_URL },
+        interest: 'Cloud waste triage checklist (guide exit/scroll capture)'
+      }
+    };
+  }
+  if (p === '/cloud-waste-triage') {
+    return {
+      kind: 'triage', path: p, noNudge: true,
+      stickyLabel: 'Prefer to talk it through?',
+      waText: 'Hi DigiScience, I am doing the cloud waste triage and have a question',
+      exit: {
+        eyebrow: 'Before you go',
+        title: 'Want the checklist for your result?',
+        lead: 'Finish the triage to see your priority band first. Or WhatsApp us your cloud and biggest pain and we reply with a 1-page checklist. Opt-in only.',
+        waLabel: 'WhatsApp for the checklist',
+        waText: 'Hi DigiScience, I want the cloud waste triage checklist',
+        submitLabel: 'Send the waste checklist',
+        extra: { label: 'Compare FinOps options (PDF)', href: DS_PDF_URL },
+        interest: 'Cloud waste triage checklist (triage page exit capture)'
+      }
+    };
+  }
+  if (p === '/get-finops-comparison-onepager' || p === '/get-cloud-cost-checklist-onepager') {
+    return {
+      kind: 'pdf', path: p, noNudge: true,
+      stickyLabel: 'Prefer WhatsApp for the PDF?',
+      waText: 'Hi DigiScience, please send the one-pager PDF',
+      exit: {
+        eyebrow: 'Before you go',
+        title: 'Get the PDF on WhatsApp instead',
+        lead: 'Skip the form: WhatsApp us and we send the one-pager. Or run the free <a href="/cloud-waste-triage">waste triage</a> (result first). Opt-in only.',
+        waLabel: 'WhatsApp for the PDF',
+        waText: 'Hi DigiScience, please send the one-pager PDF',
+        submitLabel: 'Send the PDF details',
+        extra: { label: 'Run the 2-min triage', href: DS_TRIAGE_URL },
+        interest: 'FinOps one-pager PDF (exit capture)'
+      }
+    };
+  }
+  return null;
+};
+window.dsFinopsContext = dsFinopsContext;
+
 const funnelViewEvents = {
   '/solution-assessment': 'solution_assessment_view',
   '/pricing': 'pricing_view',
@@ -623,6 +752,13 @@ const initLeadAssistant = () => {
     message.className = `ai-msg ${type === 'user' ? 'ai-msg-user' : ''}`.trim();
     if (html) {
       message.innerHTML = content;
+    } else if (type !== 'user') {
+      // Bot copy: linkify known free-tool paths, Cal.com and DigiScience WhatsApp only.
+      const esc = String(content).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      message.innerHTML = esc.replace(
+        /(https:\/\/(?:cal\.com\/digiscience|wa\.me\/918448160510)[^\s)]*|\/(?:cloud-waste-triage|get-finops-comparison-onepager|get-cloud-cost-checklist-onepager)\b)/g,
+        (m) => `<a href="${m}" target="_blank" rel="noopener">${m.replace(/^https:\/\//, '')}</a>`
+      ).replace(/\n/g, '<br>');
     } else {
       message.textContent = content;
     }
@@ -755,10 +891,10 @@ const initLeadAssistant = () => {
     if (company) {
       return `If this visit is from ${company}, reply with WhatsApp or work email for a one-page next-step note (consent under our Privacy Notice).`;
     }
-    return 'I can unlock the FinOps comparison PDF one-pager. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email (sharing it here consents to follow-up under our Privacy Notice). Preview: /get-finops-comparison-onepager';
+    return 'Free first: try the 2-minute cloud waste triage at /cloud-waste-triage (result before any ask), or unlock the FinOps comparison PDF at /get-finops-comparison-onepager. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email and I will send the matching 1-page checklist (sharing it here consents to follow-up under our Privacy Notice).';
   })();
-  const EMAIL_ASK = 'Want the FinOps vs cost-tools PDF one-pager (or the cost decision checklist)? Reply with your name and WhatsApp or work email (consent under our Privacy Notice). Preview first at /get-finops-comparison-onepager — or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
-  const EMAIL_REMIND = 'Still useful: WhatsApp or work email unlocks the comparison PDF at /get-finops-comparison-onepager, or book directly on Cal.com.';
+  const EMAIL_ASK = 'Free tools first: the 2-minute cloud waste triage at /cloud-waste-triage, and the FinOps vs cost-tools PDF at /get-finops-comparison-onepager. Want either sent to you? Reply with your name and WhatsApp (fastest, https://wa.me/918448160510) or work email (consent under our Privacy Notice) — or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
+  const EMAIL_REMIND = 'Still useful: run the free waste triage at /cloud-waste-triage, or WhatsApp us at https://wa.me/918448160510 to get the comparison PDF (/get-finops-comparison-onepager). No billing files needed. You can also book directly on Cal.com.';
   const extractChatEmail = (value) => {
     const match = String(value || '').match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
     return match ? match[0].replace(/[.,;:!?)]+$/, '').trim() : '';
@@ -1024,7 +1160,7 @@ const initLeadAssistant = () => {
   };
   const tryBehaviorOpen = (reason) => {
     if (chatBehaviorDone() || panel.classList.contains('open')) return;
-    if (document.querySelector('.ds-email-capture.is-open')) return;
+    if (document.querySelector('.ds-email-capture.is-open, .ds-scroll-nudge.is-open')) return;
     try {
       if (window.localStorage.getItem('dsEmailCaptureDone') === '1') return;
       if (window.localStorage.getItem(EMAIL_STORAGE_KEY)) return;
@@ -1042,6 +1178,9 @@ const initLeadAssistant = () => {
     if (chatBehaviorDone()) return;
     const doc = document.documentElement;
     const ratio = (window.scrollY || doc.scrollTop || 0) / Math.max(doc.scrollHeight - window.innerHeight, 1);
+    // FinOps pages use the scroll nudge at 40%; the chat yields on scroll and still opens on dwell/exit.
+    const fctx = dsFinopsContext();
+    if (fctx && !fctx.noNudge) return;
     if (ratio >= 0.5) tryBehaviorOpen('scroll_50');
   }, { passive: true });
   document.addEventListener('mouseout', (ev) => {
@@ -1051,7 +1190,7 @@ const initLeadAssistant = () => {
     tryBehaviorOpen('exit_intent_chat');
   });
 
-  addMessage('Hello. I can help with the DigiScience Solution Assessment, services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot. WhatsApp or work email works best if you want a follow-up note.', 'bot');
+  addMessage('Hello. I can help with the DigiScience Solution Assessment, FinOps and cloud cost, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot. Free tool: the 2-minute cloud waste triage at /cloud-waste-triage. WhatsApp (https://wa.me/918448160510) or work email works best if you want a follow-up note.', 'bot');
 };
 
 if (window.matchMedia('(max-width: 820px)').matches) {
@@ -1625,16 +1764,28 @@ const initStickyConversionBar = () => {
   if (['/contact', '/ai-readiness-intake', '/thank-you', '/success', '/privacy', '/terms', '/lead-dashboard'].includes(p)) return;
   if (document.querySelector('.ds-sticky-cta')) return;
 
+  const ctx = dsFinopsContext(p);
   const bar = document.createElement('aside');
   bar.className = 'ds-sticky-cta';
   bar.setAttribute('aria-label', 'Quick booking and WhatsApp contact');
   bar.hidden = true;
+  const waIntent = (ctx && ctx.waText) || 'Hi DigiScience, I want to discuss one AI or cloud problem';
+  const extraBtn = ctx && ctx.stickyExtra
+    ? `<a class="ds-sticky-btn ds-sticky-secondary" data-ds-sticky-extra href="${ctx.stickyExtra.href}">${ctx.stickyExtra.label}</a>`
+    : '';
   bar.innerHTML = `
-    <span class="ds-sticky-label">Discuss one AI or cloud problem:</span>
-    <a class="ds-sticky-btn ds-sticky-primary" href="https://cal.com/digiscience/30-min-free-cloud-assessment">Book 30-min free call</a>
-    <a class="ds-sticky-btn ds-sticky-secondary" href="https://wa.me/918448160510">WhatsApp</a>
+    <span class="ds-sticky-label">${(ctx && ctx.stickyLabel) || 'Discuss one AI or cloud problem:'}</span>
+    <a class="ds-sticky-btn ds-sticky-primary" href="${DS_BOOK_URL}">Book 30-min free call</a>
+    <a class="ds-sticky-btn ds-sticky-secondary" href="https://wa.me/918448160510?text=${encodeURIComponent(waIntent)}">WhatsApp</a>
+    ${extraBtn}
   `;
   document.body.appendChild(bar);
+  const extraLink = bar.querySelector('[data-ds-sticky-extra]');
+  if (extraLink) {
+    extraLink.addEventListener('click', () => {
+      trackEvent('sticky_cta_click', { event_label: 'sticky_bar_extra', target: ctx.stickyExtra.href, page_path: p });
+    });
+  }
 
   bar.querySelector('a[href*="cal.com"]').addEventListener('click', () => {
     trackEvent('click_book_call', { event_label: 'sticky_bar_calcom' });
@@ -1648,7 +1799,7 @@ const initStickyConversionBar = () => {
     const doc = document.documentElement;
     const maxScroll = Math.max(doc.scrollHeight - window.innerHeight, 1);
     const ratio = (window.scrollY || doc.scrollTop || 0) / maxScroll;
-    const shouldShow = ratio >= 0.35 && maxScroll > 320;
+    const shouldShow = ratio >= (ctx ? 0.2 : 0.35) && maxScroll > 320;
     bar.hidden = !shouldShow;
     bar.classList.toggle('is-visible', shouldShow);
   };
@@ -1656,6 +1807,111 @@ const initStickyConversionBar = () => {
   toggleSticky();
 };
 initStickyConversionBar();
+
+// --- Scroll-triggered soft capture (non-modal, value-first): free triage / comparison PDF + WhatsApp path ---
+const initFinopsScrollNudge = () => {
+  const p = window.location.pathname.replace(/\/+$/, '').replace(/\.html$/, '') || '/';
+  const ctx = dsFinopsContext(p);
+  if (!ctx) return;
+  if (!document.getElementById('ds-finops-leadgen-style')) {
+    const st = document.createElement('style');
+    st.id = 'ds-finops-leadgen-style';
+    st.textContent = `
+      .ds-scroll-nudge{position:fixed;left:22px;bottom:84px;z-index:87;width:min(360px,calc(100vw - 44px));padding:16px 16px 14px;border-radius:16px;background:rgba(8,17,32,.97);border:1px solid rgba(120,190,255,.32);box-shadow:0 18px 44px rgba(0,0,0,.5);color:var(--text,#eaf2ff);transform:translateY(14px);opacity:0;transition:opacity .25s ease,transform .25s ease}
+      .ds-scroll-nudge[hidden]{display:none!important}
+      .ds-scroll-nudge.is-open{opacity:1;transform:none}
+      .ds-scroll-nudge .eyebrow{margin:0 0 4px;font-size:.72rem}
+      .ds-scroll-nudge h2{margin:0 24px 6px 0;font-size:1.05rem;line-height:1.3}
+      .ds-scroll-nudge p.ds-nudge-body{margin:0 0 12px;font-size:.88rem;line-height:1.5;color:var(--muted,#a9b8d0)}
+      .ds-scroll-nudge-close{position:absolute;top:8px;right:10px;background:none;border:0;color:inherit;font-size:1.3rem;line-height:1;cursor:pointer;opacity:.7}
+      .ds-scroll-nudge-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+      .ds-scroll-nudge-actions a{font-size:.84rem;font-weight:750;padding:8px 13px;border-radius:999px;text-decoration:none}
+      .ds-scroll-nudge-primary{background:var(--primary-2,#7fd6ff);color:#06111f}
+      .ds-scroll-nudge-secondary{border:1px solid rgba(255,255,255,.22);color:inherit}
+      .ds-scroll-nudge-wa{width:100%;text-align:left;font-size:.8rem;color:var(--primary-2,#7fd6ff);padding-top:2px}
+      @media (max-width:720px){
+        .ds-sticky-cta{left:10px;right:10px;bottom:10px;border-radius:14px;flex-wrap:wrap;justify-content:center;gap:8px;padding:9px 10px}
+        .ds-sticky-label{flex:1 0 100%;text-align:center;font-size:.8rem}
+        .ds-scroll-nudge{left:10px;right:10px;width:auto;bottom:112px}
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  if (ctx.noNudge || !ctx.nudge) return;
+  if (document.querySelector('.ds-scroll-nudge')) return;
+
+  const KEY_UNTIL = 'dsScrollNudgeDismissUntil';
+  const KEY_SESSION = 'dsScrollNudgeShown';
+  const NUDGE_SCROLL_RATIO = 0.4;
+  const NUDGE_MIN_MS = 8000;
+  const suppressed = () => {
+    try {
+      if (window.localStorage.getItem('dsEmailCaptureDone') === '1') return true;
+      const until = Number(window.localStorage.getItem(KEY_UNTIL) || '0');
+      if (until && Date.now() < until) return true;
+      if (window.sessionStorage.getItem(KEY_SESSION) === '1') return true;
+    } catch { /* ignore */ }
+    return false;
+  };
+  if (suppressed()) return;
+
+  const n = ctx.nudge;
+  const el = document.createElement('aside');
+  el.className = 'ds-scroll-nudge';
+  el.hidden = true;
+  el.setAttribute('role', 'complementary');
+  el.setAttribute('aria-label', 'Free FinOps tool');
+  el.innerHTML = `
+    <button type="button" class="ds-scroll-nudge-close" aria-label="Dismiss">×</button>
+    <p class="eyebrow">${n.eyebrow}</p>
+    <h2>${n.title}</h2>
+    <p class="ds-nudge-body">${n.body}</p>
+    <div class="ds-scroll-nudge-actions">
+      <a class="ds-scroll-nudge-primary" data-target="primary" href="${n.primary.href}">${n.primary.label}</a>
+      <a class="ds-scroll-nudge-secondary" data-target="secondary" href="${n.secondary.href}">${n.secondary.label}</a>
+      <a class="ds-scroll-nudge-wa" data-target="whatsapp" href="https://wa.me/918448160510?text=${encodeURIComponent(n.waText)}">${n.waLabel} →</a>
+    </div>
+  `;
+  document.body.appendChild(el);
+
+  let shown = false;
+  const hide = (via) => {
+    el.classList.remove('is-open');
+    el.hidden = true;
+    try { window.localStorage.setItem(KEY_UNTIL, String(Date.now() + 3 * 86400000)); } catch { /* ignore */ }
+    trackEvent('scroll_nudge_dismiss', { via, kind: ctx.kind, page_path: p });
+  };
+  el.querySelector('.ds-scroll-nudge-close').addEventListener('click', () => hide('close'));
+  el.querySelectorAll('a[data-target]').forEach((a) => {
+    a.addEventListener('click', () => {
+      trackEvent('scroll_nudge_click', { target: a.getAttribute('data-target'), kind: ctx.kind, page_path: p });
+      if (a.getAttribute('data-target') === 'whatsapp') trackEvent('click_whatsapp', { source: 'scroll_nudge', page_path: p });
+      try { window.localStorage.setItem(KEY_UNTIL, String(Date.now() + 7 * 86400000)); } catch { /* ignore */ }
+    });
+  });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && el.classList.contains('is-open')) hide('escape');
+  });
+
+  const check = () => {
+    if (shown || suppressed()) return;
+    if (Date.now() - pageLoadedAt < NUDGE_MIN_MS) return;
+    if (document.querySelector('.ds-email-capture.is-open, .ai-assistant-panel.open')) return;
+    const doc = document.documentElement;
+    const ratio = (window.scrollY || doc.scrollTop || 0) / Math.max(doc.scrollHeight - window.innerHeight, 1);
+    if (ratio < NUDGE_SCROLL_RATIO) return;
+    shown = true;
+    window.__DS_NUDGE_SHOWN__ = true;
+    try { window.sessionStorage.setItem(KEY_SESSION, '1'); } catch { /* ignore */ }
+    el.hidden = false;
+    window.requestAnimationFrame(() => el.classList.add('is-open'));
+    trackEvent('scroll_nudge_open', { kind: ctx.kind, page_path: p, trigger: 'scroll_40' });
+  };
+  window.addEventListener('scroll', check, { passive: true });
+  window.setTimeout(check, NUDGE_MIN_MS + 200);
+};
+initFinopsScrollNudge();
 
 // --- Sitewide Exit-Intent (45s + top mouseout), 60% Scroll, or 50s Timed Email Capture Modal ---
 const initExitIntentCapture = () => {
@@ -1670,7 +1926,10 @@ const initExitIntentCapture = () => {
   const SESSION_DISMISS = 'dsEmailCaptureSessionDismissed';
   const SCROLL_TRIGGER_RATIO = 0.6;
   const TIME_ON_PAGE_MS = 50000;
-  const EXIT_MIN_MS = 45000;
+  const ctx = dsFinopsContext(path);
+  const exitCopy = ctx && ctx.exit ? ctx.exit : null;
+  // Page-specific FinOps offers can use a shorter exit-intent dwell than the generic 45s.
+  const EXIT_MIN_MS = exitCopy ? 15000 : 45000;
   const DISMISS_DAYS = 7;
 
   const isSuppressed = () => {
@@ -1696,9 +1955,9 @@ const initExitIntentCapture = () => {
     <div class="ds-email-capture-backdrop" data-ds-capture-dismiss tabindex="-1" aria-hidden="true"></div>
     <div class="ds-email-capture-panel" role="dialog" aria-modal="true" aria-labelledby="ds-capture-title">
       <button type="button" class="ds-email-capture-close" data-ds-capture-dismiss aria-label="Close">×</button>
-      <p class="eyebrow">Practical Enterprise AI Notes</p>
-      <h2 id="ds-capture-title">Get AI Governance &amp; Architecture Checklists</h2>
-      <p class="ds-email-capture-lead">Fastest in India: WhatsApp us first. Or leave WhatsApp / work email for practical notes — and unlock the free <a href="/get-finops-comparison-onepager">FinOps comparison PDF</a> or <a href="/cloud-waste-triage">waste triage</a> (result before any ask). Opt-in only.</p>
+      <p class="eyebrow">${exitCopy ? exitCopy.eyebrow : 'Practical Enterprise AI Notes'}</p>
+      <h2 id="ds-capture-title">${exitCopy ? exitCopy.title : 'Get AI Governance &amp; Architecture Checklists'}</h2>
+      <p class="ds-email-capture-lead">${exitCopy ? exitCopy.lead : 'Fastest in India: WhatsApp us first. Or leave WhatsApp / work email for practical notes — and unlock the free <a href="/get-finops-comparison-onepager">FinOps comparison PDF</a> or <a href="/cloud-waste-triage">waste triage</a> (result before any ask). Opt-in only.'}</p>
       <form class="ds-email-capture-form" novalidate>
         <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden-field" />
         <div class="ds-email-capture-grid">
@@ -1712,8 +1971,9 @@ const initExitIntentCapture = () => {
           <span>I agree to receive this resource and follow-up under the <a href="/privacy">Privacy notice</a>.</span>
         </label>
         <div class="ds-email-capture-actions">
-          <a class="btn btn-primary" href="https://wa.me/918448160510?text=Hi%20DigiScience%2C%20I%20want%20AI%20governance%20%2F%20architecture%20notes" data-ds-wa-primary>Chat on WhatsApp</a>
-          <button type="submit" class="btn btn-secondary">Send checklist &amp; notes</button>
+          <a class="btn btn-primary" href="https://wa.me/918448160510?text=${encodeURIComponent(exitCopy ? exitCopy.waText : 'Hi DigiScience, I want AI governance / architecture notes')}" data-ds-wa-primary>${exitCopy ? exitCopy.waLabel : 'Chat on WhatsApp'}</a>
+          <button type="submit" class="btn btn-secondary">${exitCopy ? exitCopy.submitLabel : 'Send checklist &amp; notes'}</button>
+          ${exitCopy && exitCopy.extra ? `<a class="btn btn-secondary" data-ds-exit-extra href="${exitCopy.extra.href}">${exitCopy.extra.label}</a>` : ''}
           <a class="btn btn-secondary" href="https://cal.com/digiscience/30-min-free-cloud-assessment">Or book 30-min call</a>
         </div>
         <p class="ds-email-capture-status" role="status" aria-live="polite"></p>
@@ -1732,6 +1992,12 @@ const initExitIntentCapture = () => {
   const statusEl = modal.querySelector('.ds-email-capture-status');
   const submitBtn = form.querySelector('button[type="submit"]');
   const waPrimary = modal.querySelector('[data-ds-wa-primary]');
+  const exitExtra = modal.querySelector('[data-ds-exit-extra]');
+  if (exitExtra) {
+    exitExtra.addEventListener('click', () => {
+      trackEvent('email_capture_tool_click', { trigger: triggerReason, target: exitCopy.extra.href, page_path: path });
+    });
+  }
   if (waPrimary) {
     waPrimary.addEventListener('click', () => {
       trackEvent('click_whatsapp', { source: 'email_capture_primary', trigger: triggerReason, page_path: path });
@@ -1747,6 +2013,11 @@ const initExitIntentCapture = () => {
     if (isOpen || isSuppressed()) return;
     if (!force && shownOnce) return;
     if (document.querySelector('.ai-assistant-panel.open')) return;
+    // Do not stack the modal on top of the scroll nudge for time/scroll triggers; exit-intent may still fire.
+    if (!force && reason !== 'exit_intent' && document.querySelector('.ds-scroll-nudge.is-open')) return;
+    // The modal takes precedence over the soft nudge (exit-intent after the nudge was shown).
+    const openNudge = document.querySelector('.ds-scroll-nudge.is-open');
+    if (openNudge) { openNudge.classList.remove('is-open'); openNudge.hidden = true; }
     triggerReason = reason || 'time';
     isOpen = true;
     shownOnce = true;
@@ -1786,6 +2057,8 @@ const initExitIntentCapture = () => {
     if (isOpen || shownOnce || isSuppressed()) return;
     const doc = document.documentElement;
     const ratio = (window.scrollY || doc.scrollTop || 0) / Math.max(doc.scrollHeight - window.innerHeight, 1);
+    // On FinOps pages the 40% scroll nudge is the scroll capture; modal stays for exit-intent / time.
+    if (exitCopy && !ctx.noNudge) return;
     if (ratio >= SCROLL_TRIGGER_RATIO) showModal('scroll_60');
   };
   window.addEventListener('scroll', onScrollCheck, { passive: true });
@@ -1839,7 +2112,7 @@ const initExitIntentCapture = () => {
       visitorId: dsVisitorId,
       name: handle,
       email: emailOk ? email : '',
-      aiInterestArea: 'Governance & Architecture Notes Opt-In',
+      aiInterestArea: exitCopy ? exitCopy.interest : 'Governance & Architecture Notes Opt-In',
       businessProblem: noteText ? `${noteText} (via ${triggerReason} capture on ${path})` : `Email capture opt-in (${triggerReason}) on ${path}`,
       consent: true,
       website: String(form.elements.website.value || '').trim(),
@@ -1875,7 +2148,7 @@ const initExitIntentCapture = () => {
       if (timeTimer) window.clearTimeout(timeTimer);
       trackEvent('lead_submit_success', { form_name: 'exit_email_capture', trigger: triggerReason });
       trackEvent('generate_lead', { form_name: 'exit_email_capture', trigger: triggerReason });
-      statusEl.textContent = 'Thanks — you are on the list and we will share the checklist notes shortly.';
+      statusEl.textContent = exitCopy ? 'Thanks — we will send it shortly on the contact you shared.' : 'Thanks — you are on the list and we will share the checklist notes shortly.';
       window.setTimeout(() => {
         isOpen = false;
         modal.classList.remove('is-open');
