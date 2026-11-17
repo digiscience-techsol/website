@@ -117,3 +117,5 @@ These advisory guides explain diagnostic methods and illustrative examples, not 
 - [FinOps Services India](https://digisciencetechsol.com/finops-services-india)
 - [Kubernetes Cost Allocation](https://digisciencetechsol.com/kubernetes-cost-allocation)
 - [Cloud Cost Reduction Consulting](https://digisciencetechsol.com/cloud-cost-reduction-consulting)
+
+- [Cloud Waste Triage Quiz](https://digisciencetechsol.com/cloud-waste-triage)
