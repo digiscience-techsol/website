@@ -67,7 +67,8 @@ const sanitizeRecord = (record) => ({
     utmContent: record.lead?.utmContent,
     gclid: record.lead?.gclid,
     msclkid: record.lead?.msclkid,
-    liFatId: record.lead?.liFatId
+    liFatId: record.lead?.liFatId,
+    country: record.lead?.country
   }
 });
 
@@ -102,6 +103,11 @@ export async function onRequest({ request, env }) {
   if (!env.LEADS_KV || typeof env.LEADS_KV.list !== 'function') return jsonResponse({ ok: false, error: 'Lead storage is not configured' }, 503);
   if (!(await isAuthorized(request, env))) return jsonResponse({ ok: false, error: 'Unauthorized' }, 401);
 
+  const cache = caches.default;
+  const cacheKey = new Request(new URL(request.url).toString(), { method: 'GET' });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+
   const url = new URL(request.url);
   const limit = Math.min(Math.max(Number(url.searchParams.get('limit') || 50), 1), 200);
   const allKeys = await listAllLeadKeys(env.LEADS_KV);
@@ -118,11 +124,19 @@ export async function onRequest({ request, env }) {
 
   records.sort((a, b) => String(b?.lead?.submittedAt || '').localeCompare(String(a?.lead?.submittedAt || '')));
 
-  return jsonResponse({
+  const resp = new Response(JSON.stringify({
     ok: true,
     count: records.length,
     totalStored: allKeys.length,
     cursor: '',
     leads: records
+  }), {
+    status: 200,
+    headers: {
+      'content-type': 'application/json; charset=utf-8',
+      'cache-control': 'private, max-age=240'
+    }
   });
+  await cache.put(cacheKey, resp.clone());
+  return resp;
 }
