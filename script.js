@@ -755,10 +755,10 @@ const initLeadAssistant = () => {
     if (company) {
       return `If this visit is from ${company}, reply with WhatsApp or work email for a one-page next-step note (consent under our Privacy Notice).`;
     }
-    return 'I can send a one-page next-step note. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email (sharing it here consents to follow-up under our Privacy Notice).';
+    return 'I can unlock the FinOps comparison PDF one-pager. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email (sharing it here consents to follow-up under our Privacy Notice). Preview: /get-finops-comparison-onepager';
   })();
-  const EMAIL_ASK = 'Want a concise 1-page architecture or governance view? Reply with your name and WhatsApp or work email (consent under our Privacy Notice), or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
-  const EMAIL_REMIND = 'If useful, drop your WhatsApp or work email here and DigiScience will send a short next-step note — or book directly on Cal.com.';
+  const EMAIL_ASK = 'Want the FinOps vs cost-tools PDF one-pager (or the cost decision checklist)? Reply with your name and WhatsApp or work email (consent under our Privacy Notice). Preview first at /get-finops-comparison-onepager — or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
+  const EMAIL_REMIND = 'Still useful: WhatsApp or work email unlocks the comparison PDF at /get-finops-comparison-onepager, or book directly on Cal.com.';
   const extractChatEmail = (value) => {
     const match = String(value || '').match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
     return match ? match[0].replace(/[.,;:!?)]+$/, '').trim() : '';
@@ -1698,7 +1698,7 @@ const initExitIntentCapture = () => {
       <button type="button" class="ds-email-capture-close" data-ds-capture-dismiss aria-label="Close">×</button>
       <p class="eyebrow">Practical Enterprise AI Notes</p>
       <h2 id="ds-capture-title">Get AI Governance &amp; Architecture Checklists</h2>
-      <p class="ds-email-capture-lead">Fastest in India: WhatsApp us first. Or leave WhatsApp / work email for practical notes on RAG permission boundaries, 45-day AI pilot criteria, and cloud cost controls. Opt-in only.</p>
+      <p class="ds-email-capture-lead">Fastest in India: WhatsApp us first. Or leave WhatsApp / work email for practical notes — and unlock the free <a href="/get-finops-comparison-onepager">FinOps comparison PDF</a> or <a href="/cloud-waste-triage">waste triage</a> (result before any ask). Opt-in only.</p>
       <form class="ds-email-capture-form" novalidate>
         <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden-field" />
         <div class="ds-email-capture-grid">
