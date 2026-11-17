@@ -10,6 +10,10 @@ User-agent: PerplexityBot
 User-agent: Google-Extended
 User-agent: Googlebot
 User-agent: Bingbot
+User-agent: BingPreview
+User-agent: CopilotBot
+User-agent: DuckAssistBot
+User-agent: YouBot
 User-agent: CCBot
 User-agent: Amazonbot
 User-agent: Applebot

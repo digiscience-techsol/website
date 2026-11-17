@@ -969,16 +969,56 @@ const initLeadAssistant = () => {
     answerQuestion(question);
   });
 
-  const setOpen = (open) => {
+  const setOpen = (open, source = 'launcher') => {
     panel.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    if (open) window.setTimeout(() => questionInput.focus(), 120);
+    if (open) {
+      trackEvent('chat_open', { source, page_path: window.location.pathname });
+      window.setTimeout(() => questionInput.focus(), 120);
+    }
   };
 
-  toggle.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
-  closeButton.addEventListener('click', () => setOpen(false));
+  toggle.addEventListener('click', () => setOpen(!panel.classList.contains('open'), 'launcher'));
+  closeButton.addEventListener('click', () => setOpen(false, 'close'));
 
-  addMessage('Hello. I can help with the DigiScience Solution Assessment, services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot.', 'bot');
+  // Behavioral progressive capture: open chat after dwell or deep scroll (once/session).
+  const CHAT_BEHAVIOR_KEY = 'dsChatBehaviorOpened';
+  const chatBehaviorDone = () => {
+    try { return sessionStorage.getItem(CHAT_BEHAVIOR_KEY) === '1'; } catch { return false; }
+  };
+  const markChatBehavior = () => {
+    try { sessionStorage.setItem(CHAT_BEHAVIOR_KEY, '1'); } catch { /* ignore */ }
+  };
+  const tryBehaviorOpen = (reason) => {
+    if (chatBehaviorDone() || panel.classList.contains('open')) return;
+    if (document.querySelector('.ds-email-capture.is-open')) return;
+    try {
+      if (window.localStorage.getItem('dsEmailCaptureDone') === '1') return;
+      if (window.localStorage.getItem(EMAIL_STORAGE_KEY)) return;
+    } catch { /* ignore */ }
+    markChatBehavior();
+    setOpen(true, reason);
+    if (!emailCaptured && !nameAsked) {
+      nameAsked = true;
+      emailAsked = true;
+      addMessage(NAME_ASK, 'bot');
+    }
+  };
+  window.setTimeout(() => tryBehaviorOpen('dwell_40s'), 40000);
+  window.addEventListener('scroll', () => {
+    if (chatBehaviorDone()) return;
+    const doc = document.documentElement;
+    const ratio = (window.scrollY || doc.scrollTop || 0) / Math.max(doc.scrollHeight - window.innerHeight, 1);
+    if (ratio >= 0.5) tryBehaviorOpen('scroll_50');
+  }, { passive: true });
+  document.addEventListener('mouseout', (ev) => {
+    if (chatBehaviorDone()) return;
+    if (Date.now() - pageLoadedAt < 35000) return;
+    if (ev.clientY > 12 || ev.relatedTarget) return;
+    tryBehaviorOpen('exit_intent_chat');
+  });
+
+  addMessage('Hello. I can help with the DigiScience Solution Assessment, services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot. WhatsApp or work email works best if you want a follow-up note.', 'bot');
 };
 
 if (window.matchMedia('(max-width: 820px)').matches) {
@@ -1581,13 +1621,13 @@ const initExitIntentCapture = () => {
       <button type="button" class="ds-email-capture-close" data-ds-capture-dismiss aria-label="Close">×</button>
       <p class="eyebrow">Practical Enterprise AI Notes</p>
       <h2 id="ds-capture-title">Get AI Governance &amp; Architecture Checklists</h2>
-      <p class="ds-email-capture-lead">Leave your work email for practical notes on RAG permission boundaries, 45-day AI pilot acceptance criteria, and cloud cost controls — or book a 30-minute call directly. Opt-in only.</p>
+      <p class="ds-email-capture-lead">Fastest in India: WhatsApp us first. Or leave WhatsApp / work email for practical notes on RAG permission boundaries, 45-day AI pilot criteria, and cloud cost controls. Opt-in only.</p>
       <form class="ds-email-capture-form" novalidate>
         <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden-field" />
         <div class="ds-email-capture-grid">
           <input name="name" type="text" maxlength="80" autocomplete="given-name" placeholder="First name (optional)" aria-label="First name (optional)" />
+          <input name="phone" type="tel" maxlength="32" autocomplete="tel" inputmode="tel" placeholder="WhatsApp number (preferred)" aria-label="WhatsApp number (preferred)" />
           <input name="email" type="email" maxlength="180" autocomplete="email" inputmode="email" required placeholder="Work email *" aria-label="Work email" />
-          <input name="phone" type="tel" maxlength="32" autocomplete="tel" inputmode="tel" placeholder="Phone / WhatsApp (optional)" aria-label="Phone or WhatsApp (optional)" />
         </div>
         <input name="need" type="text" maxlength="240" placeholder="Optional: workflow or question on your mind" aria-label="Optional workflow or question" />
         <label class="checkbox-line compact">
@@ -1595,7 +1635,8 @@ const initExitIntentCapture = () => {
           <span>I agree to receive this resource and follow-up under the <a href="/privacy">Privacy notice</a>.</span>
         </label>
         <div class="ds-email-capture-actions">
-          <button type="submit" class="btn btn-primary">Send checklist &amp; notes</button>
+          <a class="btn btn-primary" href="https://wa.me/918448160510?text=Hi%20DigiScience%2C%20I%20want%20AI%20governance%20%2F%20architecture%20notes" data-ds-wa-primary>Chat on WhatsApp</a>
+          <button type="submit" class="btn btn-secondary">Send checklist &amp; notes</button>
           <a class="btn btn-secondary" href="https://cal.com/digiscience/30-min-free-cloud-assessment">Or book 30-min call</a>
         </div>
         <p class="ds-email-capture-status" role="status" aria-live="polite"></p>
@@ -1613,6 +1654,15 @@ const initExitIntentCapture = () => {
   const needInput = form.elements.need;
   const statusEl = modal.querySelector('.ds-email-capture-status');
   const submitBtn = form.querySelector('button[type="submit"]');
+  const waPrimary = modal.querySelector('[data-ds-wa-primary]');
+  if (waPrimary) {
+    waPrimary.addEventListener('click', () => {
+      trackEvent('click_whatsapp', { source: 'email_capture_primary', trigger: triggerReason, page_path: path });
+      try { window.localStorage.setItem(STORAGE_DONE, '1'); } catch { /* ignore */ }
+    });
+  }
+  // WhatsApp-first: email required attribute softens when phone is present
+  emailInput.removeAttribute('required');
 
   const showModal = (reason) => {
     if (isOpen || shownOnce || isSuppressed()) return;
@@ -1673,8 +1723,16 @@ const initExitIntentCapture = () => {
     const phone = String((form.elements.phone && form.elements.phone.value) || '').trim();
     const givenName = String(nameInput.value || '').trim();
     const noteText = String(needInput.value || '').trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      statusEl.textContent = 'Please enter a valid work email.';
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const phoneDigits = phone.replace(/\D/g, '');
+    const phoneOk = phoneDigits.length >= 10 && phoneDigits.length <= 15;
+    if (!emailOk && !phoneOk) {
+      statusEl.textContent = 'Enter WhatsApp number or work email (WhatsApp preferred).';
+      (form.elements.phone || emailInput).focus();
+      return;
+    }
+    if (email && !emailOk) {
+      statusEl.textContent = 'Please enter a valid work email, or leave email blank and use WhatsApp.';
       emailInput.focus();
       return;
     }
@@ -1686,15 +1744,16 @@ const initExitIntentCapture = () => {
     statusEl.textContent = 'Sending...';
     trackEvent('lead_submit_attempt', { form_name: 'exit_email_capture', trigger: triggerReason });
 
+    const handle = givenName || (emailOk ? email.split('@')[0].slice(0, 80) : phone.slice(0, 24)) || 'Website visitor';
     const payload = {
       formType: 'email_capture',
       sourcePage: window.location.pathname,
-      fullName: givenName || email.split('@')[0].slice(0, 80) || 'Website visitor',
-      businessEmail: email,
+      fullName: handle,
+      businessEmail: emailOk ? email : '',
       phone,
       visitorId: dsVisitorId,
-      name: givenName || email.split('@')[0].slice(0, 80),
-      email,
+      name: handle,
+      email: emailOk ? email : '',
       aiInterestArea: 'Governance & Architecture Notes Opt-In',
       businessProblem: noteText ? `${noteText} (via ${triggerReason} capture on ${path})` : `Email capture opt-in (${triggerReason}) on ${path}`,
       consent: true,
