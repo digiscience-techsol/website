@@ -723,9 +723,9 @@ const initLeadAssistant = () => {
   const EMAIL_DONE_KEY = 'dsEmailCaptureDone';
   const PROFILE_KEY = 'dsChatProfileV1';
   const NAME_ASK = 'Happy to help — what name should DigiScience use when we follow up?';
-  const CONTACT_ASK = 'Thanks. What is the best work email or WhatsApp number to reach you on? (Sharing it here consents to a follow-up under our Privacy Notice.)';
-  const EMAIL_ASK = 'Want a concise 1-page architecture or governance view for your workflow? Reply here with your name and work email or WhatsApp (sharing contact details consents to follow-up under our Privacy Notice), or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
-  const EMAIL_REMIND = 'Whenever helpful, drop your name plus work email or WhatsApp right here in chat and Rajiv DG\'s team can send a tailored next-step note.';
+  const CONTACT_ASK = 'I can send a one-page next-step note. WhatsApp is usually fastest in India — reply with your WhatsApp number or work email (sharing it here consents to follow-up under our Privacy Notice).';
+  const EMAIL_ASK = 'Want a concise 1-page architecture or governance view? Reply with your name and WhatsApp or work email (consent under our Privacy Notice), or book 30 mins at https://cal.com/digiscience/30-min-free-cloud-assessment';
+  const EMAIL_REMIND = 'If useful, drop your WhatsApp or work email here and DigiScience will send a short next-step note — or book directly on Cal.com.';
   const extractChatEmail = (value) => {
     const match = String(value || '').match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
     return match ? match[0].replace(/[.,;:!?)]+$/, '').trim() : '';

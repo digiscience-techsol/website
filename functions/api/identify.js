@@ -51,8 +51,18 @@ async function reverseDns(ip) {
   }
 }
 
+const ISP_HOSTING_RE = /\b(isp|telecom|mobile|broadband|communications|comcast|verizon|at&t|jio|airtel|bsnl|vodafone|idea|reliance jio|hostinger|amazon\.com|google llc|microsoft corporation|digitalocean|hetzner|ovh|cloudflare|akamai|fastly|linode|vultr|contabo|godaddy|aws|azure|gcp)\b/i;
+
+function classifyAsnOrg(asnOrg) {
+  const org = clean(asnOrg, 160);
+  if (!org) return { asnOrg: '', companyCandidate: '', networkType: 'unknown' };
+  if (ISP_HOSTING_RE.test(org)) return { asnOrg: org, companyCandidate: '', networkType: 'isp_or_hosting' };
+  return { asnOrg: org, companyCandidate: org, networkType: 'possible_business' };
+}
+
 function geoFromRequest(request) {
   const cf = request.cf || {};
+  const asn = classifyAsnOrg(cf.asOrganization || '');
   return {
     ip: clean(request.headers.get('cf-connecting-ip'), 64),
     country: clean(cf.country || request.headers.get('cf-ipcountry'), 2).toUpperCase(),
@@ -62,7 +72,9 @@ function geoFromRequest(request) {
     timezone: clean(cf.timezone, 64),
     latitude: typeof cf.latitude === 'string' || typeof cf.latitude === 'number' ? String(cf.latitude).slice(0, 16) : '',
     longitude: typeof cf.longitude === 'string' || typeof cf.longitude === 'number' ? String(cf.longitude).slice(0, 16) : '',
-    asnOrg: clean(cf.asOrganization, 160),
+    asnOrg: asn.asnOrg,
+    companyCandidate: asn.companyCandidate,
+    networkType: asn.networkType,
     colo: clean(cf.colo, 16)
   };
 }
@@ -180,18 +192,21 @@ export async function onRequest({ request, waitUntil }) {
       country: geo.country,
       timezone: geo.timezone,
       asnOrg: geo.asnOrg,
-      ptrHost: ptr
+      ptrHost: ptr,
+      networkType: geo.networkType,
+      companyCandidate: geo.companyCandidate || null
     },
     fingerprint: profile.fingerprint || null,
     identity: {
       name: profile.name || null,
       email: profile.email || null,
       phone: profile.phone || null,
-      company: profile.company || geo.asnOrg || null
+      company: profile.company || geo.companyCandidate || null
     },
     limits: {
-      anonymous_browse_yields: ['visitor_id', 'fingerprint', 'city', 'region', 'country', 'asn_org', 'ptr_host', 'behavior'],
-      requires_visitor_disclosure: ['personal_name', 'email', 'phone']
+      anonymous_browse_yields: ['visitor_id', 'fingerprint', 'city', 'region', 'country', 'asn_org', 'ptr_host', 'behavior', 'possible_business_org'],
+      requires_visitor_disclosure: ['personal_name', 'email', 'phone'],
+      person_level_from_ip: false
     }
   }), {
     status: 200,
