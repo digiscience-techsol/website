@@ -506,17 +506,117 @@ const initLeadAssistant = () => {
     });
   };
 
+  const history = [];
+  let userTurns = 0;
+  const EMAIL_STORAGE_KEY = 'dsChatEmailCaptured';
+  const EMAIL_DONE_KEY = 'dsEmailCaptureDone';
+  const EMAIL_ASK = 'Want a concise 1-page architecture or governance view for your workflow? Reply here with your work email (sharing your email consents to follow-up under our Privacy Notice), or book 30 mins directly at https://cal.com/digiscience/30-min-free-cloud-assessment';
+  const EMAIL_REMIND = 'Whenever helpful, drop your work email right here in chat and Rajiv DG\'s team can send a tailored next-step note.';
+  const extractChatEmail = (value) => {
+    const match = String(value || '').match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
+    return match ? match[0].replace(/[.,;:!?)]+$/, '').trim() : '';
+  };
+  let emailAsked = false;
+  let emailCaptured = false;
+  let emailReminded = false;
+  try {
+    emailCaptured = Boolean(window.localStorage.getItem(EMAIL_STORAGE_KEY) || window.localStorage.getItem(EMAIL_DONE_KEY) === '1');
+    emailAsked = emailCaptured;
+    emailReminded = emailCaptured;
+  } catch { /* private browsing */ }
+
+  const persistChatEmail = async (email, rawQuestion) => {
+    try {
+      window.localStorage.setItem(EMAIL_STORAGE_KEY, email);
+      window.localStorage.setItem(EMAIL_DONE_KEY, '1');
+    } catch { /* ignore */ }
+    const localHandle = email.split('@')[0] || 'Website visitor';
+    const leadEndpointUrl = appConfig.leadEndpointUrl || '/api/lead';
+    const payload = {
+      formType: 'assistant_email',
+      sourcePage: window.location.pathname,
+      fullName: localHandle.slice(0, 80),
+      businessEmail: email,
+      name: localHandle.slice(0, 80),
+      email,
+      aiInterestArea: 'Website AI assistant',
+      service: 'Website AI assistant',
+      businessProblem: `Chat email capture: ${rawQuestion.slice(0, 300)}`,
+      message: `Chat email capture on ${window.location.pathname}`,
+      consent: true,
+      landingPage: visitorAttribution.landingPage,
+      referrer: visitorAttribution.referrer,
+      utmSource: visitorAttribution.utmSource,
+      utmMedium: visitorAttribution.utmMedium,
+      utmCampaign: visitorAttribution.utmCampaign,
+      utmTerm: visitorAttribution.utmTerm,
+      utmContent: visitorAttribution.utmContent,
+      gclid: visitorAttribution.gclid,
+      msclkid: visitorAttribution.msclkid,
+      liFatId: visitorAttribution.liFatId,
+      clientProof: { interacted: true, dwellMs: Math.max(2500, Date.now() - pageLoadedAt) },
+      transcript: transcript.slice(-6).join(' | ') || `Visitor shared email: ${email}`,
+      submittedAt: new Date().toISOString()
+    };
+    trackEvent('lead_submit_attempt', { form_name: 'assistant_email_capture', service: 'Website AI assistant' });
+    try {
+      const response = await fetch(leadEndpointUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (response.ok && result.ok && result.delivery?.accepted === true) {
+        trackEvent('lead_submit_success', { form_name: 'assistant_email_capture', service: 'Website AI assistant' });
+        trackEvent('generate_lead', { form_name: 'assistant_email_capture', service: 'Website AI assistant' });
+        return true;
+      }
+      trackEvent('lead_submit_error', { form_name: 'assistant_email_capture', failure_stage: 'request', http_status: response.status });
+    } catch {
+      trackEvent('lead_submit_error', { form_name: 'assistant_email_capture', failure_stage: 'network' });
+    }
+    return false;
+  };
+
   const answerQuestion = async (question) => {
+    userTurns += 1;
     transcript.push(`Visitor: ${question}`);
     addMessage(question, 'user');
 
-    if (/contact|call|email|talk|demo|meeting|lead|consult/.test(question.toLowerCase())) {
+    const detectedEmail = extractChatEmail(question);
+    if (detectedEmail && !emailCaptured) {
+      emailCaptured = true;
+      emailAsked = true;
+      const savedOk = await persistChatEmail(detectedEmail, question);
+      const confirmMsg = savedOk
+        ? 'Thanks — your email is recorded and DigiScience will follow up within one business day. You can also pick a 30-minute time directly at cal.com/digiscience/30-min-free-cloud-assessment.'
+        : 'Thanks — please also confirm via the short enquiry form below or email subscription@digisciencetechsol.com so nothing is missed.';
+      transcript.push(`Assistant: ${confirmMsg}`);
+      addMessage(confirmMsg, 'bot');
+      if (!savedOk) addLeadForm();
+      if (question.replace(detectedEmail, '').trim().length < 6) return;
+    }
+
+    if (/contact|call|email|talk|demo|meeting|lead|consult/.test(question.toLowerCase()) && !detectedEmail) {
       const reply = localAnswer(question);
       transcript.push(`Assistant: ${reply}`);
       addMessage(reply, 'bot', true);
       addLeadForm();
       return;
     }
+
+    const appendEmailPrompt = (baseText) => {
+      if (!emailAsked && !emailCaptured && userTurns === 1) {
+        emailAsked = true;
+        trackEvent('form_start', { form_name: 'assistant_email_capture', service: 'Website AI assistant' });
+        return `${baseText}\n\n${EMAIL_ASK}`;
+      }
+      if (emailAsked && !emailCaptured && !emailReminded && userTurns >= 3) {
+        emailReminded = true;
+        return `${baseText}\n\n${EMAIL_REMIND}`;
+      }
+      return baseText;
+    };
 
     if (appConfig.assistantEndpointUrl) {
       try {
@@ -534,10 +634,10 @@ const initLeadAssistant = () => {
         thinking.remove();
         if (response.ok) {
           const data = await response.json();
-          const answer = data.answer || localAnswer(question);
+          const answer = appendEmailPrompt(data.answer || localAnswer(question));
           transcript.push(`Assistant: ${answer}`);
           addMessage(answer);
-          if (data.captureLead) addLeadForm();
+          if (data.captureLead && !emailCaptured) addLeadForm();
           return;
         }
       } catch (error) {
@@ -548,6 +648,14 @@ const initLeadAssistant = () => {
     const answer = localAnswer(question);
     transcript.push(`Assistant: ${answer.replace(/<[^>]+>/g, '')}`);
     addMessage(answer, 'bot', true);
+    if (!emailAsked && !emailCaptured && userTurns === 1) {
+      emailAsked = true;
+      trackEvent('form_start', { form_name: 'assistant_email_capture', service: 'Website AI assistant' });
+      addMessage(EMAIL_ASK, 'bot');
+    } else if (emailAsked && !emailCaptured && !emailReminded && userTurns >= 3) {
+      emailReminded = true;
+      addMessage(EMAIL_REMIND, 'bot');
+    }
   };
 
   quickPrompts.forEach(([label, prompt]) => {
@@ -578,7 +686,15 @@ const initLeadAssistant = () => {
   addMessage('Hello. I can help with the DigiScience Solution Assessment, services, pricing guidance, AI readiness, governance, industry use cases, and the 45-day pilot.', 'bot');
 };
 
-initLeadAssistant();
+if (window.matchMedia('(max-width: 820px)').matches) {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => initLeadAssistant(), { timeout: 2400 });
+  } else {
+    window.setTimeout(initLeadAssistant, 1200);
+  }
+} else {
+  initLeadAssistant();
+}
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
@@ -969,3 +1085,361 @@ document.querySelectorAll('a[href^="/contact"]:not([data-track])').forEach((link
 document.querySelectorAll('a[href*="cal.com/digiscience"]:not([data-track])').forEach((link) => {
   link.addEventListener('click', () => trackEvent('click_book_call', { event_label: link.getAttribute('href') }));
 });
+
+
+// --- GA4 Scroll-Depth (25/50/75/100%) & Dwell-Time (30/60/120/180s) Engagement Telemetry ---
+const initEngagementTracking = () => {
+  const marks = { 25: false, 50: false, 75: false, 100: false };
+  let dwellSeconds = 0;
+  const scrollRatio = () => {
+    const doc = document.documentElement;
+    const top = window.scrollY || doc.scrollTop || 0;
+    const height = Math.max(doc.scrollHeight - window.innerHeight, 1);
+    return top / height;
+  };
+  const onScroll = () => {
+    const ratio = scrollRatio();
+    [25, 50, 75, 100].forEach((mark) => {
+      if (!marks[mark] && ratio * 100 >= mark) {
+        marks[mark] = true;
+        trackEvent('scroll_depth', { percent_scrolled: mark, page_path: window.location.pathname });
+      }
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const dwellTimer = window.setInterval(() => {
+    if (document.visibilityState !== 'visible') return;
+    dwellSeconds += 15;
+    if (dwellSeconds === 30 || dwellSeconds === 60 || dwellSeconds === 120 || dwellSeconds % 180 === 0) {
+      trackEvent('dwell_tick', { engagement_seconds: dwellSeconds, page_path: window.location.pathname });
+    }
+  }, 15000);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && dwellSeconds > 0) {
+      trackEvent('dwell_tick', { engagement_seconds: dwellSeconds, trigger: 'visibility_hide', page_path: window.location.pathname });
+    }
+  });
+  window.addEventListener('beforeunload', () => window.clearInterval(dwellTimer));
+};
+initEngagementTracking();
+
+// --- Geo-Aware INR / USD Pricing Display & Interactive Currency Toggle ---
+const initGeoCurrency = () => {
+  const COOKIE_NAME = 'ds_currency';
+  const readQueryCurrency = () => {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const cur = (p.get('currency') || '').toUpperCase();
+      if (cur === 'INR' || cur === 'USD') return cur;
+      const geo = (p.get('geo') || '').toUpperCase();
+      if (geo === 'IN') return 'INR';
+      if (geo && geo.length === 2) return 'USD';
+    } catch { /* ignore */ }
+    return '';
+  };
+  const readCookieCurrency = () => {
+    const m = document.cookie.match(/(?:^|;\s*)ds_currency=(INR|USD)/);
+    return m ? m[1] : '';
+  };
+  const writeCookieCurrency = (cur) => {
+    document.cookie = `${COOKIE_NAME}=${cur}; Path=/; Max-Age=86400; SameSite=Lax`;
+  };
+  const detectInitialCurrency = () => {
+    const q = readQueryCurrency();
+    if (q) { writeCookieCurrency(q); return q; }
+    const c = readCookieCurrency();
+    if (c) return c;
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      const langs = (navigator.languages || [navigator.language || '']).join(',');
+      if (tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta' || /-IN\b/i.test(langs)) return 'INR';
+    } catch { /* ignore */ }
+    return 'USD';
+  };
+
+  let activeCurrency = detectInitialCurrency();
+  const applyCurrency = (cur) => {
+    activeCurrency = cur;
+    writeCookieCurrency(cur);
+    document.documentElement.setAttribute('data-ds-currency', cur);
+    document.querySelectorAll('[data-ds-inr][data-ds-usd]').forEach((el) => {
+      el.textContent = cur === 'INR' ? el.getAttribute('data-ds-inr') : el.getAttribute('data-ds-usd');
+    });
+    document.querySelectorAll('[data-ds-currency-btn]').forEach((btn) => {
+      const isSelected = btn.getAttribute('data-ds-currency-btn') === cur;
+      btn.classList.toggle('is-active', isSelected);
+      btn.setAttribute('aria-pressed', String(isSelected));
+    });
+  };
+
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (['/pricing', '/solution-assessment', '/45-day-ai-pilot'].includes(path)) {
+    const targetHero = document.querySelector('.pricing-hero .container, .page-hero .container');
+    if (targetHero && !targetHero.querySelector('.ds-currency-bar')) {
+      const bar = document.createElement('div');
+      bar.className = 'ds-currency-bar';
+      bar.setAttribute('role', 'group');
+      bar.setAttribute('aria-label', 'Display fee band currency');
+      bar.innerHTML = `
+        <span class="ds-currency-note">7-Day Solution Assessment Founding Offer: <strong data-ds-inr="INR 29,000 (Standard INR 49,000)" data-ds-usd="USD 349 (Standard USD 599)"></strong></span>
+        <span class="ds-currency-toggle">
+          <button type="button" data-ds-currency-btn="INR">INR ₹</button>
+          <button type="button" data-ds-currency-btn="USD">USD $</button>
+        </span>
+      `;
+      bar.querySelectorAll('[data-ds-currency-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const next = btn.getAttribute('data-ds-currency-btn');
+          applyCurrency(next);
+          trackEvent('currency_toggle', { currency: next, page_path: path });
+        });
+      });
+      targetHero.appendChild(bar);
+    }
+  }
+  applyCurrency(activeCurrency);
+};
+initGeoCurrency();
+
+// --- Sticky Scroll Quick-Action Bar on Content & Offer Pages ---
+const initStickyConversionBar = () => {
+  const p = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (['/contact', '/ai-readiness-intake', '/thank-you', '/success', '/privacy', '/terms', '/lead-dashboard'].includes(p)) return;
+  if (document.querySelector('.ds-sticky-cta')) return;
+
+  const bar = document.createElement('aside');
+  bar.className = 'ds-sticky-cta';
+  bar.setAttribute('aria-label', 'Quick booking and WhatsApp contact');
+  bar.hidden = true;
+  bar.innerHTML = `
+    <span class="ds-sticky-label">Discuss one AI or cloud problem:</span>
+    <a class="ds-sticky-btn ds-sticky-primary" href="https://cal.com/digiscience/30-min-free-cloud-assessment">Book 30-min free call</a>
+    <a class="ds-sticky-btn ds-sticky-secondary" href="https://wa.me/918448160510">WhatsApp</a>
+  `;
+  document.body.appendChild(bar);
+
+  bar.querySelector('a[href*="cal.com"]').addEventListener('click', () => {
+    trackEvent('click_book_call', { event_label: 'sticky_bar_calcom' });
+    trackEvent('click_booking', { event_label: 'sticky_bar_calcom' });
+  });
+  bar.querySelector('a[href*="wa.me"]').addEventListener('click', () => {
+    trackEvent('click_whatsapp', { event_label: 'sticky_bar_whatsapp' });
+  });
+
+  const toggleSticky = () => {
+    const doc = document.documentElement;
+    const maxScroll = Math.max(doc.scrollHeight - window.innerHeight, 1);
+    const ratio = (window.scrollY || doc.scrollTop || 0) / maxScroll;
+    const shouldShow = ratio >= 0.35 && maxScroll > 320;
+    bar.hidden = !shouldShow;
+    bar.classList.toggle('is-visible', shouldShow);
+  };
+  window.addEventListener('scroll', toggleSticky, { passive: true });
+  toggleSticky();
+};
+initStickyConversionBar();
+
+// --- Sitewide Exit-Intent (45s + top mouseout), 60% Scroll, or 50s Timed Email Capture Modal ---
+const initExitIntentCapture = () => {
+  if (window.__DS_EMAIL_CAPTURE__) return;
+  window.__DS_EMAIL_CAPTURE__ = true;
+
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (['/contact', '/ai-readiness-intake', '/thank-you', '/success', '/privacy', '/terms', '/lead-dashboard'].includes(path)) return;
+
+  const STORAGE_DONE = 'dsEmailCaptureDone';
+  const STORAGE_DISMISS_UNTIL = 'dsEmailCaptureDismissUntil';
+  const SESSION_DISMISS = 'dsEmailCaptureSessionDismissed';
+  const SCROLL_TRIGGER_RATIO = 0.6;
+  const TIME_ON_PAGE_MS = 50000;
+  const EXIT_MIN_MS = 45000;
+  const DISMISS_DAYS = 7;
+
+  const isSuppressed = () => {
+    try {
+      if (window.localStorage.getItem(STORAGE_DONE) === '1') return true;
+      const until = Number(window.localStorage.getItem(STORAGE_DISMISS_UNTIL) || '0');
+      if (until && Date.now() < until) return true;
+      if (window.sessionStorage.getItem(SESSION_DISMISS) === '1') return true;
+    } catch { /* ignore */ }
+    return false;
+  };
+  if (isSuppressed()) return;
+
+  let isOpen = false;
+  let shownOnce = false;
+  let triggerReason = 'time';
+  let timeTimer = null;
+
+  const modal = document.createElement('div');
+  modal.className = 'ds-email-capture';
+  modal.hidden = true;
+  modal.innerHTML = `
+    <div class="ds-email-capture-backdrop" data-ds-capture-dismiss tabindex="-1" aria-hidden="true"></div>
+    <div class="ds-email-capture-panel" role="dialog" aria-modal="true" aria-labelledby="ds-capture-title">
+      <button type="button" class="ds-email-capture-close" data-ds-capture-dismiss aria-label="Close">×</button>
+      <p class="eyebrow">Practical Enterprise AI Notes</p>
+      <h2 id="ds-capture-title">Get AI Governance &amp; Architecture Checklists</h2>
+      <p class="ds-email-capture-lead">Leave your work email for practical notes on RAG permission boundaries, 45-day AI pilot acceptance criteria, and cloud cost controls — or book a 30-minute call directly. Opt-in only.</p>
+      <form class="ds-email-capture-form" novalidate>
+        <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" class="hidden-field" />
+        <div class="ds-email-capture-grid">
+          <input name="name" type="text" maxlength="80" autocomplete="given-name" placeholder="First name (optional)" aria-label="First name (optional)" />
+          <input name="email" type="email" maxlength="180" autocomplete="email" inputmode="email" required placeholder="Work email *" aria-label="Work email" />
+        </div>
+        <input name="need" type="text" maxlength="240" placeholder="Optional: workflow or question on your mind" aria-label="Optional workflow or question" />
+        <label class="checkbox-line compact">
+          <input type="checkbox" name="consent" value="yes" required />
+          <span>I agree to receive this resource and follow-up under the <a href="/privacy">Privacy notice</a>.</span>
+        </label>
+        <div class="ds-email-capture-actions">
+          <button type="submit" class="btn btn-primary">Send checklist &amp; notes</button>
+          <a class="btn btn-secondary" href="https://cal.com/digiscience/30-min-free-cloud-assessment">Or book 30-min call</a>
+        </div>
+        <p class="ds-email-capture-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  `;
+  if (window.matchMedia('(max-width: 720px)').matches) {
+    modal.classList.add('is-mobile-sheet');
+  }
+  document.body.appendChild(modal);
+
+  const form = modal.querySelector('.ds-email-capture-form');
+  const emailInput = form.elements.email;
+  const nameInput = form.elements.name;
+  const needInput = form.elements.need;
+  const statusEl = modal.querySelector('.ds-email-capture-status');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  const showModal = (reason) => {
+    if (isOpen || shownOnce || isSuppressed()) return;
+    if (document.querySelector('.ai-assistant-panel.open')) return;
+    triggerReason = reason || 'time';
+    isOpen = true;
+    shownOnce = true;
+    modal.hidden = false;
+    modal.classList.add('is-open');
+    trackEvent('email_capture_open', { trigger: triggerReason, page_path: path });
+    window.setTimeout(() => {
+      try { emailInput.focus({ preventScroll: true }); } catch { emailInput.focus(); }
+    }, 50);
+  };
+
+  const dismissModal = (via = 'button') => {
+    if (!isOpen) return;
+    isOpen = false;
+    modal.classList.remove('is-open');
+    modal.hidden = true;
+    try {
+      window.sessionStorage.setItem(SESSION_DISMISS, '1');
+      window.localStorage.setItem(STORAGE_DISMISS_UNTIL, String(Date.now() + DISMISS_DAYS * 86400000));
+    } catch { /* ignore */ }
+    trackEvent('email_capture_dismiss', { trigger: triggerReason, via, page_path: path });
+  };
+
+  modal.querySelectorAll('[data-ds-capture-dismiss]').forEach((el) => {
+    el.addEventListener('click', () => dismissModal('close_click'));
+  });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && isOpen) dismissModal('escape');
+  });
+
+  const onScrollCheck = () => {
+    if (isOpen || shownOnce || isSuppressed()) return;
+    const doc = document.documentElement;
+    const ratio = (window.scrollY || doc.scrollTop || 0) / Math.max(doc.scrollHeight - window.innerHeight, 1);
+    if (ratio >= SCROLL_TRIGGER_RATIO) showModal('scroll_60');
+  };
+  window.addEventListener('scroll', onScrollCheck, { passive: true });
+
+  document.addEventListener('mouseout', (ev) => {
+    if (isOpen || shownOnce || isSuppressed()) return;
+    if (Date.now() - pageLoadedAt < EXIT_MIN_MS) return;
+    if (ev.clientY > 12 || ev.relatedTarget) return;
+    showModal('exit_intent');
+  });
+
+  timeTimer = window.setTimeout(() => {
+    timeTimer = null;
+    showModal('time_50s');
+  }, TIME_ON_PAGE_MS);
+
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const email = String(emailInput.value || '').trim();
+    const givenName = String(nameInput.value || '').trim();
+    const noteText = String(needInput.value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      statusEl.textContent = 'Please enter a valid work email.';
+      emailInput.focus();
+      return;
+    }
+    if (!form.elements.consent.checked) {
+      statusEl.textContent = 'Please tick the privacy consent box.';
+      return;
+    }
+    submitBtn.disabled = true;
+    statusEl.textContent = 'Sending...';
+    trackEvent('lead_submit_attempt', { form_name: 'exit_email_capture', trigger: triggerReason });
+
+    const payload = {
+      formType: 'email_capture',
+      sourcePage: window.location.pathname,
+      fullName: givenName || email.split('@')[0].slice(0, 80) || 'Website visitor',
+      businessEmail: email,
+      name: givenName || email.split('@')[0].slice(0, 80),
+      email,
+      aiInterestArea: 'Governance & Architecture Notes Opt-In',
+      businessProblem: noteText ? `${noteText} (via ${triggerReason} capture on ${path})` : `Email capture opt-in (${triggerReason}) on ${path}`,
+      consent: true,
+      website: String(form.elements.website.value || '').trim(),
+      landingPage: visitorAttribution.landingPage,
+      referrer: visitorAttribution.referrer,
+      utmSource: visitorAttribution.utmSource,
+      utmMedium: visitorAttribution.utmMedium,
+      utmCampaign: visitorAttribution.utmCampaign,
+      utmTerm: visitorAttribution.utmTerm,
+      utmContent: visitorAttribution.utmContent,
+      gclid: visitorAttribution.gclid,
+      msclkid: visitorAttribution.msclkid,
+      liFatId: visitorAttribution.liFatId,
+      clientProof: { interacted: true, dwellMs: Math.max(2500, Date.now() - pageLoadedAt) },
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      const response = await fetch(appConfig.leadEndpointUrl || '/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok || result.delivery?.accepted !== true) {
+        trackEvent('lead_submit_error', { form_name: 'exit_email_capture', failure_stage: 'request', http_status: response.status });
+        statusEl.textContent = result.error || 'Could not confirm right now — please try the 30-min call button.';
+        submitBtn.disabled = false;
+        return;
+      }
+      try { window.localStorage.setItem(STORAGE_DONE, '1'); } catch { /* ignore */ }
+      if (timeTimer) window.clearTimeout(timeTimer);
+      trackEvent('lead_submit_success', { form_name: 'exit_email_capture', trigger: triggerReason });
+      trackEvent('generate_lead', { form_name: 'exit_email_capture', trigger: triggerReason });
+      statusEl.textContent = 'Thanks — you are on the list and we will share the checklist notes shortly.';
+      window.setTimeout(() => {
+        isOpen = false;
+        modal.classList.remove('is-open');
+        modal.hidden = true;
+      }, 1100);
+    } catch {
+      trackEvent('lead_submit_error', { form_name: 'exit_email_capture', failure_stage: 'network' });
+      statusEl.textContent = 'Connection error — please retry or book a 30-min call directly.';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+};
+initExitIntentCapture();
