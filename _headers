@@ -85,6 +85,9 @@
 /gtm/*
   X-Robots-Tag: noindex, nofollow, noarchive
 
+/.claude/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
 /lead-dashboard*
   X-Robots-Tag: noindex, nofollow, noarchive
 
@@ -93,3 +96,21 @@
 
 /assets/gated/*
   X-Robots-Tag: noindex, nofollow, noarchive
+
+
+# Static assets — longer browser/edge cache
+/assets/*
+  Cache-Control: public, max-age=86400, immutable
+
+/*.css
+  Cache-Control: public, max-age=3600
+
+/*.js
+  Cache-Control: public, max-age=3600
+
+# HTML pages — short cache to allow SEO updates without max-age=0 forever
+/
+  Cache-Control: public, max-age=300, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate

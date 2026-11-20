@@ -50,6 +50,8 @@ Disallow: /thank-you
 Disallow: /assets/templates/
 Disallow: /ops/
 Disallow: /gtm/
+Disallow: /.claude/
+Disallow: /.cursor/
 
 Sitemap: https://digisciencetechsol.com/sitemap.xml
 # AI & LLM citation indexes:

@@ -1,0 +1,25 @@
+---
+description: Verify before confirming — never claim done/working/connected without testing first
+alwaysApply: true
+---
+
+# Verify before confirming
+
+Before telling Rajiv that anything is **done**, **working**, **connected**, **available**, **deployed**, or **ready**, **ALWAYS verify it yourself first** by actually testing or checking the current state.
+
+## Applies to
+- Tokens, credentials, OAuth scopes, API access
+- Deployments and live site content
+- Commands, tools, and integrations
+- Any status claim (connected, indexed, pushed, fixed, available)
+
+## Required behavior
+1. **Test or inspect now** — do not rely on assumption, a partial result, an earlier turn, or “it should work”.
+2. If verification **fails** or is **incomplete**, say so honestly. Do **not** confirm.
+3. Prefer concrete evidence in the reply (e.g. HTTP status, `git status`, scope list, live title check) without exposing secrets.
+4. DigiScience and company-agents work: same standard — no unverified “yes it’s connected/done”.
+
+## Forbidden
+- Confirming from memory of a prior successful step without re-checking
+- Confirming after a partial success (e.g. auth worked but push failed)
+- Soft-confirm language that implies success when verification did not pass
