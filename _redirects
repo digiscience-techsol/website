@@ -2,9 +2,16 @@
 # Pages _redirects supports path rules, not source-domain rules.
 
 # Keep local Claude/agent notes off the public site.
-/.claude /404.html 404
-/.claude/ /404.html 404
-/.claude/* /404.html 404
+# Force (!) so these win over static files Cloudflare Pages would otherwise serve.
+/.claude /404.html 404!
+/.claude/ /404.html 404!
+/.claude/* /404.html 404!
+/.cursor /404.html 404!
+/.cursor/ /404.html 404!
+/.cursor/* /404.html 404!
+/lead-dashboard /404.html 404!
+/lead-dashboard/ /404.html 404!
+/lead-dashboard/* /404.html 404!
 
 # Legacy PHP URLs.
 /index.php / 301
@@ -49,7 +56,3 @@
 /finops-for-saas-startups-india.html /finops-services-india 301
 /ai-api-cost-governance.html /guides/ai-cloud-cost-control/ 301
 /aws-azure-cost-optimization-startups.html /guides/ai-cloud-cost-control/ 301
-
-/.cursor /404.html 404
-/.cursor/ /404.html 404
-/.cursor/* /404.html 404
