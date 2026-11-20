@@ -1,0 +1,47 @@
+DIGISCIENCE SETUP — COPY THIS
+
+Site: https://digisciencetechsol.com/
+Repo: /Users/rajiv.gupta/Documents/Company/site-digisciencetechsol-com/repo
+Skills order: seo-audit -> aeo -> schema-markup
+Folder map: /Users/rajiv.gupta/Documents/Company/00-FOLDER-MAP.txt
+Archive: /Users/rajiv.gupta/Documents/Company/Archive/
+
+=== 1) VS Code ===
+File -> Open Folder ->
+/Users/rajiv.gupta/Documents/Company/site-digisciencetechsol-com/repo
+
+=== 2) Clone mega pack ===
+cd /tmp
+git clone --depth 1 https://github.com/alirezarezvani/claude-skills.git
+
+=== 3) Copy three skills only ===
+DS_REPO="/Users/rajiv.gupta/Documents/Company/site-digisciencetechsol-com/repo"
+mkdir -p "$DS_REPO/.claude/skills"
+cp -R /tmp/claude-skills/marketing-skill/skills/seo-audit "$DS_REPO/.claude/skills/"
+cp -R /tmp/claude-skills/marketing-skill/skills/aeo "$DS_REPO/.claude/skills/"
+cp -R /tmp/claude-skills/marketing-skill/skills/schema-markup "$DS_REPO/.claude/skills/"
+ls "$DS_REPO/.claude/skills"
+
+=== 4) Start Claude Code ===
+cd /Users/rajiv.gupta/Documents/Company/site-digisciencetechsol-com/repo
+claude
+
+=== 5) Prompts (one at a time; review report before next) ===
+
+PROMPT 1 — seo-audit:
+Use the seo-audit skill on DigiScience only (https://digisciencetechsol.com/).
+Audit the live site and the local HTML in this repo.
+Give a short prioritized issue list with concrete fixes.
+Do not touch any other company.
+
+PROMPT 2 — aeo:
+Use the aeo skill on DigiScience only (https://digisciencetechsol.com/).
+Check how well key pages can be cited by ChatGPT, Perplexity, Claude, and Gemini.
+Suggest concrete content and structure changes.
+DigiScience site only — no other companies.
+
+PROMPT 3 — schema-markup:
+Use the schema-markup skill on DigiScience only (https://digisciencetechsol.com/).
+Audit existing JSON-LD (Organization, FAQPage, and related types).
+Validate and propose exact fixes for missing or invalid schema.
+DigiScience site only — no other companies.

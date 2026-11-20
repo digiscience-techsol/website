@@ -1,0 +1,22 @@
+DigiScience Search Console — ready for you to run from VS Code
+==============================================================
+Property already configured in company.yaml:
+  search_console_site: sc-domain:digisciencetechsol.com
+  ga4_property: 561684216
+  ga4_measurement_id: G-PYYDT0M0X0
+
+From Company folder (not this website repo), after Google OAuth is granted to DigiScience:
+  /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com status
+  /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com test
+
+If not connected yet:
+  ... google site-digisciencetechsol-com save-client
+  ... google site-digisciencetechsol-com connect
+  ... google site-digisciencetechsol-com configure --site sc-domain:digisciencetechsol.com --ga4-property 561684216
+
+Claude Code prompts (this repo only), after you grant access — you run these yourself:
+  1) Use seo-audit skill on DigiScience only; include Search Console if connected.
+  2) Use aeo skill on DigiScience only.
+  3) Use schema-markup skill on DigiScience only.
+
+Do not mix AICloudStrategist credentials or properties.
