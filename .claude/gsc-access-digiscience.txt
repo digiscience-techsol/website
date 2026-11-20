@@ -13,19 +13,22 @@ ga4_measurement_id: G-PYYDT0M0X0
 website: https://digisciencetechsol.com/
 
 --- OAuth credential (EXISTS — private, outside this website repo) ---
-status: connected (company-agents google status = ok as of last check)
-connected_at: 2026-11-01T12:10:10+0530
+status: connected
+connected_at: 2026-11-20T21:13:19+0530
 scopes:
+  - https://www.googleapis.com/auth/webmasters
   - https://www.googleapis.com/auth/webmasters.readonly
+  - https://www.googleapis.com/auth/indexing
   - https://www.googleapis.com/auth/analytics.readonly
 private_credential_file: /Users/rajiv.gupta/Documents/Company/.credentials/0e5d7f6d-300b-4408-b71e-db264507dfde/google.json
 credential_ref: local:0e5d7f6d-300b-4408-b71e-db264507dfde/google
 keys_present_in_private_file: client_id, client_secret, refresh_token (values NOT copied here)
 
-How Claude Code / company-agents should authenticate:
+How Claude Code / company-agents should authenticate (reads private file; no secrets in this repo):
   /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com status
   /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com test
-This uses the private google.json refresh token — do not re-paste secrets into the website repo.
+For Indexing API URL_UPDATED, use the same private google.json (scope auth/indexing already granted).
+Do not re-paste secrets into the website repo.
 
 --- PLACEHOLDER (fill ONLY if private file is missing / you want a one-off paste) ---
 # Rajiv: paste below only for local Claude Code; then DELETE before any git commit/push.

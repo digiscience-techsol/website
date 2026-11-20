@@ -5,7 +5,12 @@ Property already configured in company.yaml:
   ga4_property: 561684216
   ga4_measurement_id: G-PYYDT0M0X0
 
-From Company folder (not this website repo), after Google OAuth is granted to DigiScience:
+Private credential (outside this repo — do not copy secrets here):
+  /Users/rajiv.gupta/Documents/Company/.credentials/0e5d7f6d-300b-4408-b71e-db264507dfde/google.json
+  credential_ref: local:0e5d7f6d-300b-4408-b71e-db264507dfde/google
+  scopes include webmasters (write), indexing, analytics.readonly
+
+From Company folder (not this website repo):
   /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com status
   /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com test
 
@@ -14,9 +19,7 @@ If not connected yet:
   ... google site-digisciencetechsol-com connect
   ... google site-digisciencetechsol-com configure --site sc-domain:digisciencetechsol.com --ga4-property 561684216
 
-Claude Code prompts (this repo only), after you grant access — you run these yourself:
-  1) Use seo-audit skill on DigiScience only; include Search Console if connected.
-  2) Use aeo skill on DigiScience only.
-  3) Use schema-markup skill on DigiScience only.
+Claude Code: use seo-audit / aeo / schema-markup skills on DigiScience only; authenticate via company-agents + the private path above. Never paste tokens into this repo.
 
 Do not mix AICloudStrategist credentials or properties.
+Also see: .claude/gsc-access-digiscience.txt
