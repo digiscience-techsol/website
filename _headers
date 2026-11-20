@@ -108,9 +108,13 @@
 /*.js
   Cache-Control: public, max-age=3600
 
-# HTML pages — short cache to allow SEO updates without max-age=0 forever
+# HTML pages — short cache to allow SEO updates without max-age=0 forever.
+# Pretty URLs (no .html) need the catch-all; /assets/* above stays more specific.
 /
   Cache-Control: public, max-age=300, must-revalidate
 
 /*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+/*
   Cache-Control: public, max-age=300, must-revalidate
