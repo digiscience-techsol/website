@@ -1,0 +1,16 @@
+---
+description: DigiScience Google admin account is the correct GSC/Indexing account
+alwaysApply: true
+---
+
+# DigiScience Google account (permanent)
+
+The DigiScience **Google admin account** (browser avatar **"A"** / admin login currently used in Search Console) is the **correct** account for all DigiScience Google work:
+
+- Google Search Console (`sc-domain:digisciencetechsol.com`)
+- Indexing API
+- Related Google API access via DigiScience private `google.json`
+
+**Do NOT** tell Rajiv to switch to `subscription@digisciencetechsol.com` (or any other mailbox) for Search Console or indexing. That mailbox is for business email / git author identity, not the GSC admin login.
+
+Private OAuth for agents: `/Users/rajiv.gupta/Documents/Company/.credentials/0e5d7f6d-300b-4408-b71e-db264507dfde/google.json` (credential_ref `local:0e5d7f6d-300b-4408-b71e-db264507dfde/google`). DigiScience only — never AICloudStrategist credentials.

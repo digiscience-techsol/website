@@ -1,5 +1,8 @@
 DigiScience Search Console — ready for you to run from VS Code
 ==============================================================
+Google account: DigiScience Google ADMIN (browser avatar "A") is correct for GSC/Indexing.
+Do NOT switch to subscription@ for Search Console. subscription@ is business email only.
+
 Property already configured in company.yaml:
   search_console_site: sc-domain:digisciencetechsol.com
   ga4_property: 561684216

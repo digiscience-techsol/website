@@ -6,6 +6,12 @@ WARNING: This website repo deploys to Cloudflare Pages. NEVER put real client_se
 refresh_token, or API keys in this file if it will be committed/pushed. Prefer the
 private credential path below. If you paste a secret for local Claude Code, do not commit.
 
+--- Google account (PERMANENT — correct) ---
+DigiScience Google ADMIN account (Search Console browser avatar "A") is the correct
+account for Search Console, Indexing API, and related DigiScience Google work.
+Do NOT instruct anyone to switch to subscription@digisciencetechsol.com for GSC/indexing.
+(subscription@ is business email / git author only.)
+
 --- Property (configured) ---
 search_console_site: sc-domain:digisciencetechsol.com
 ga4_property: 561684216
@@ -13,7 +19,7 @@ ga4_measurement_id: G-PYYDT0M0X0
 website: https://digisciencetechsol.com/
 
 --- OAuth credential (EXISTS — private, outside this website repo) ---
-status: connected
+status: connected (admin OAuth for DigiScience)
 connected_at: 2026-11-20T21:13:19+0530
 scopes:
   - https://www.googleapis.com/auth/webmasters
