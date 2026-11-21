@@ -539,7 +539,7 @@ const ensurePremiumVisuals = () => {
   if (!document.querySelector('link[href*="premium.css"]')) {
     const premiumStyles = document.createElement('link');
     premiumStyles.rel = 'stylesheet';
-    premiumStyles.href = '/premium.css?v=premium5';
+    premiumStyles.href = '/premium.css?v=premium6';
     document.head.appendChild(premiumStyles);
   }
 
