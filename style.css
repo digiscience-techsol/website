@@ -885,10 +885,7 @@ a {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 10%, #b2d7ff 50%, #92f2df 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #9cf5e3;
 }
 
 .hero p {
