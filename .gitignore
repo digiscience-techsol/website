@@ -1,2 +1,6 @@
 .wrangler/
 .claude/settings.local.json
+
+.claude/OWNER-DECISIONS-LOCAL.txt
+
+.claude/pagespeed-key-for-claude.txt
