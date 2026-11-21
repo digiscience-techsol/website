@@ -34,6 +34,7 @@ How Claude Code / company-agents should authenticate (reads private file; no sec
   /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com status
   /Users/rajiv.gupta/Documents/Company/shared/.venv/bin/company-agents --root /Users/rajiv.gupta/Documents/Company google site-digisciencetechsol-com test
 For Indexing API URL_UPDATED, use the same private google.json (scope auth/indexing already granted).
+Do NOT ask Rajiv for Search Console UI "Request indexing" clicks — Indexing API is the approved path (verified HTTP 200).
 Do not re-paste secrets into the website repo.
 
 --- PLACEHOLDER (fill ONLY if private file is missing / you want a one-off paste) ---
