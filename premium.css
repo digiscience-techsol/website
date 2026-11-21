@@ -529,3 +529,8 @@ a { text-underline-offset: 0.18em; }
   .ai-assistant-toggle { max-width: none; width: 52px; height: 52px; min-height: 0; padding: 0; justify-content: center; }
   .ai-assistant-toggle span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
+
+/* Readability: small text roles at >=1.3 line height; service strip inset */
+.nav-dropdown a, .industry-card h3, .ai-assistant-header strong, .proof-card h2, .price, .asset-card h2, .pricing-plan h3, .pricing-note-panel strong { line-height: 1.3; }
+.service-strip { padding-block: 10px; }
+.service-strip-inner { border-radius: 12px; overflow: hidden; }
